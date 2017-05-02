@@ -15,14 +15,14 @@
 <meta property="og:url" content="https://seawaylee.github.io/2017/03/28/大数据/大数据基础/ZooKeeper/index.html">
 <meta property="og:site_name" content="SeawayLee">
 <meta property="og:description" content="1 概念简介 Zookeeper是一个分布式协调服务；就是为用户的分布式应用程序提供协调服务 zookeeper是为别的分布式程序服务的 Zookeeper本身就是一个分布式程序（只要有半数以上节点存活，zk就能正常服务） Zookeeper所提供的服务涵盖：主从协调、服务器节点动态上下线、统一配置管理、分布式共享锁、统一名称服务…… 虽然说可以提供各种服务，但是zookeeper在底层其实只提供">
-<meta property="og:image" content="https://seawaylee.github.io/2017/03/28/大数据/大数据基础/ZooKeeper/ZooKeeper/struct.jpeg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/03/28/大数据/大数据基础/ZooKeeper/ZooKeeper/help.jpeg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/03/28/大数据/大数据基础/ZooKeeper/ZooKeeper/ha.jpeg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/03/28/大数据/大数据基础/ZooKeeper/struct.jpeg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/03/28/大数据/大数据基础/ZooKeeper/help.jpeg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/03/28/大数据/大数据基础/ZooKeeper/ha.jpeg">
 <meta property="og:updated_time" content="2017-04-10T04:32:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ZooKeeper学习笔记">
 <meta name="twitter:description" content="1 概念简介 Zookeeper是一个分布式协调服务；就是为用户的分布式应用程序提供协调服务 zookeeper是为别的分布式程序服务的 Zookeeper本身就是一个分布式程序（只要有半数以上节点存活，zk就能正常服务） Zookeeper所提供的服务涵盖：主从协调、服务器节点动态上下线、统一配置管理、分布式共享锁、统一名称服务…… 虽然说可以提供各种服务，但是zookeeper在底层其实只提供">
-<meta name="twitter:image" content="https://seawaylee.github.io/2017/03/28/大数据/大数据基础/ZooKeeper/ZooKeeper/struct.jpeg">
+<meta name="twitter:image" content="https://seawaylee.github.io/2017/03/28/大数据/大数据基础/ZooKeeper/struct.jpeg">
   
     <link rel="alternative" href="/atom.xml" title="SeawayLee" type="application/atom+xml">
   
@@ -231,7 +231,7 @@
 <li>节点Znode可以包含数据和子节点（但是EPHEMERAL类型的节点不能有子节点，下一页详细讲解）</li>
 <li>客户端应用可以在节点上设置监视器（后续详细讲解）    </li>
 </ol>
-<p><img src="ZooKeeper/struct.jpeg" alt=""></p>
+<p><img src="/2017/03/28/大数据/大数据基础/ZooKeeper/struct.jpeg" alt=""></p>
 <h3 id="3-3-节点类型"><a href="#3-3-节点类型" class="headerlink" title="3.3 节点类型"></a>3.3 节点类型</h3><ol>
 <li>Znode有两种类型：</li>
 </ol>
@@ -252,7 +252,7 @@
 <li>创建znode时设置顺序标识，znode名称后会附加一个值，顺序号是一个单调递增的计数器，由父节点维护</li>
 <li>在分布式系统中，顺序号可以被用于为所有的事件进行全局排序，这样客户端可以通过顺序号推断事件的顺序</li>
 </ol>
-<h3 id="3-4-ZK命令行操作"><a href="#3-4-ZK命令行操作" class="headerlink" title="3.4 ZK命令行操作"></a>3.4 ZK命令行操作</h3><p><img src="ZooKeeper/help.jpeg" alt=""></p>
+<h3 id="3-4-ZK命令行操作"><a href="#3-4-ZK命令行操作" class="headerlink" title="3.4 ZK命令行操作"></a>3.4 ZK命令行操作</h3><p><img src="/2017/03/28/大数据/大数据基础/ZooKeeper/help.jpeg" alt=""></p>
 <ol>
 <li><code>ls /</code> 使用 ls 命令来查看当前 ZooKeeper 中所包含的内容</li>
 <li><code>create /zk &quot;myData“</code> 创建一个新的 znode ，使用 create /zk myData 。这个命令创建了一个新的 znode 节点“ zk ”以及与它关联的字符串：</li>
@@ -312,7 +312,7 @@
 <h2 id="5-实现分布式应用的（主节点HA）客户端动态更新主节点状态"><a href="#5-实现分布式应用的（主节点HA）客户端动态更新主节点状态" class="headerlink" title="5 实现分布式应用的（主节点HA）客户端动态更新主节点状态"></a>5 实现分布式应用的（主节点HA）客户端动态更新主节点状态</h2><h3 id="5-1-需求"><a href="#5-1-需求" class="headerlink" title="5.1 需求"></a>5.1 需求</h3><blockquote>
 <p>某分布式系统中，主节点可以有多台，可以动态上下线<br> 任意一台客户端都能实时感知到主节点服务器的上下线</p>
 </blockquote>
-<p><img src="ZooKeeper/ha.jpeg" alt=""></p>
+<p><img src="/2017/03/28/大数据/大数据基础/ZooKeeper/ha.jpeg" alt=""></p>
 <h3 id="5-2-代码实现"><a href="#5-2-代码实现" class="headerlink" title="5.2 代码实现"></a>5.2 代码实现</h3><p><strong>服务端</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 分布式应用服务端主节点注册</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span> NikoBelic</div><div class="line"> * <span class="doctag">@create</span> 2017/3/30 17:21</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DistributedServer</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String connStr = <span class="string">"hadoop1:8571,hadoop2:8572,hadoop3:8573"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String parentNode = <span class="string">"/servers"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> ZooKeeper zkClient = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">connectToZk</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span></div><div class="line">    &#123;</div><div class="line">        zkClient = <span class="keyword">new</span> ZooKeeper(connStr, <span class="number">5000</span>, (watchedEvent) -&gt;</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">try</span></div><div class="line">            &#123;</div><div class="line">                zkClient.getChildren(parentNode, <span class="keyword">false</span>, <span class="keyword">null</span>);</div><div class="line">            &#125; <span class="keyword">catch</span> (KeeperException e)</div><div class="line">            &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e)</div><div class="line">            &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">registServer</span><span class="params">(String serverName)</span> <span class="keyword">throws</span> KeeperException, InterruptedException</span></div><div class="line">    &#123;</div><div class="line">        String created = zkClient.create(parentNode + <span class="string">"/"</span> + serverName, serverName.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);</div><div class="line">        System.out.println(serverName + <span class="string">" is online.."</span> + created);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">handleBussiness</span><span class="params">(String serverName)</span> <span class="keyword">throws</span> InterruptedException</span></div><div class="line">    &#123;</div><div class="line">        System.out.println(serverName + <span class="string">"start working..."</span>);</div><div class="line">        TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, KeeperException, InterruptedException</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 获取zk连接</span></div><div class="line">        DistributedServer distributedServer = <span class="keyword">new</span> DistributedServer();</div><div class="line">        String serverName = <span class="string">"server03"</span>;</div><div class="line">        distributedServer.connectToZk();</div><div class="line">        <span class="comment">// 当一台服务器连接，则创建一个临时节点</span></div><div class="line">        distributedServer.registServer(serverName );</div><div class="line">        <span class="comment">// 服务端开始处理业务</span></div><div class="line">        distributedServer.handleBussiness(serverName );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>客户端</strong></p>
@@ -675,15 +675,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">大数据</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">

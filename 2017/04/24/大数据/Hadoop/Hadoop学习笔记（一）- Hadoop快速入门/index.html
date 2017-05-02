@@ -15,13 +15,13 @@
 <meta property="og:url" content="https://seawaylee.github.io/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/index.html">
 <meta property="og:site_name" content="SeawayLee">
 <meta property="og:description" content="1 Hadoop生态圈简介 重点组件：  HDFS：分布式文件系统 MAPREDUCE：分布式运算程序开发框架 HIVE：基于大数据技术（文件系统+运算框架）的SQL数据仓库工具 HBASE：基于HADOOP的分布式海量数据库 ZOOKEEPER：分布式协调服务基础组件 Mahout：基于mapreduce/spark/flink等分布式运算框架的机器学习算法库 Oozie：工作流调度框架 Sqo">
-<meta property="og:image" content="https://seawaylee.github.io/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）-%20Hadoop快速入门/Hadoop学习笔记（一）-%20Hadoop快速入门/hadoop_sys.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）-%20Hadoop快速入门/Hadoop学习笔记（一）-%20Hadoop快速入门/hdfs.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）-%20Hadoop快速入门/hadoop_sys.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）-%20Hadoop快速入门/hdfs.jpg">
 <meta property="og:updated_time" content="2017-04-27T15:40:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop学习笔记（一）- Hadoop快速入门">
 <meta name="twitter:description" content="1 Hadoop生态圈简介 重点组件：  HDFS：分布式文件系统 MAPREDUCE：分布式运算程序开发框架 HIVE：基于大数据技术（文件系统+运算框架）的SQL数据仓库工具 HBASE：基于HADOOP的分布式海量数据库 ZOOKEEPER：分布式协调服务基础组件 Mahout：基于mapreduce/spark/flink等分布式运算框架的机器学习算法库 Oozie：工作流调度框架 Sqo">
-<meta name="twitter:image" content="https://seawaylee.github.io/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）-%20Hadoop快速入门/Hadoop学习笔记（一）-%20Hadoop快速入门/hadoop_sys.jpg">
+<meta name="twitter:image" content="https://seawaylee.github.io/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）-%20Hadoop快速入门/hadoop_sys.jpg">
   
     <link rel="alternative" href="/atom.xml" title="SeawayLee" type="application/atom+xml">
   
@@ -187,7 +187,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-Hadoop生态圈简介"><a href="#1-Hadoop生态圈简介" class="headerlink" title="1 Hadoop生态圈简介"></a>1 Hadoop生态圈简介</h1><p><img src="Hadoop学习笔记（一）-%20Hadoop快速入门/hadoop_sys.jpg" alt=""></p>
+        <h1 id="1-Hadoop生态圈简介"><a href="#1-Hadoop生态圈简介" class="headerlink" title="1 Hadoop生态圈简介"></a>1 Hadoop生态圈简介</h1><p><img src="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/hadoop_sys.jpg" alt=""></p>
 <p><strong>重点组件：</strong></p>
 <ul>
 <li>HDFS：分布式文件系统</li>
@@ -373,7 +373,7 @@
 </table>
 <h1 id="4-使用Hadoop集群"><a href="#4-使用Hadoop集群" class="headerlink" title="4 使用Hadoop集群"></a>4 使用Hadoop集群</h1><h2 id="4-1-查看集群状态"><a href="#4-1-查看集群状态" class="headerlink" title="4.1 查看集群状态"></a>4.1 查看集群状态</h2><p><strong><code>hdfs dfsadmin -report</code></strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">Configured Capacity: 64389906432 (59.97 GB)</div><div class="line">Present Capacity: 38095904768 (35.48 GB)</div><div class="line">DFS Remaining: 38095818752 (35.48 GB)</div><div class="line">DFS Used: 86016 (84 KB)</div><div class="line">DFS Used%: 0.00%</div><div class="line">Under replicated blocks: 0</div><div class="line">Blocks with corrupt replicas: 0</div><div class="line">Missing blocks: 0</div><div class="line"></div><div class="line">-------------------------------------------------</div><div class="line">Live datanodes (3):</div><div class="line"></div><div class="line">Name: 10.5.151.242:50010 (hadoop2)</div><div class="line">Hostname: localhost</div><div class="line">Decommission Status : Normal</div><div class="line">Configured Capacity: 21463302144 (19.99 GB)</div><div class="line">DFS Used: 28672 (28 KB)</div><div class="line">Non DFS Used: 8654106624 (8.06 GB)</div><div class="line">DFS Remaining: 12809166848 (11.93 GB)</div><div class="line">DFS Used%: 0.00%</div><div class="line">DFS Remaining%: 59.68%</div><div class="line">Configured Cache Capacity: 0 (0 B)</div><div class="line">Cache Used: 0 (0 B)</div><div class="line">Cache Remaining: 0 (0 B)</div><div class="line">Cache Used%: 100.00%</div><div class="line">Cache Remaining%: 0.00%</div><div class="line">Xceivers: 1</div><div class="line">Last contact: Tue Apr 25 19:30:28 CST 2017</div><div class="line"></div><div class="line"></div><div class="line">Name: 10.5.151.241:50010 (hadoop1)</div><div class="line">Hostname: localhost</div><div class="line">Decommission Status : Normal</div><div class="line">Configured Capacity: 21463302144 (19.99 GB)</div><div class="line">DFS Used: 28672 (28 KB)</div><div class="line">Non DFS Used: 9653018624 (8.99 GB)</div><div class="line">DFS Remaining: 11810254848 (11.00 GB)</div><div class="line">DFS Used%: 0.00%</div><div class="line">DFS Remaining%: 55.03%</div><div class="line">Configured Cache Capacity: 0 (0 B)</div><div class="line">Cache Used: 0 (0 B)</div><div class="line">Cache Remaining: 0 (0 B)</div><div class="line">Cache Used%: 100.00%</div><div class="line">Cache Remaining%: 0.00%</div><div class="line">Xceivers: 1</div><div class="line">Last contact: Tue Apr 25 19:30:28 CST 2017</div><div class="line"></div><div class="line"></div><div class="line">Name: 10.5.151.243:50010 (hadoop3)</div><div class="line">Hostname: localhost</div><div class="line">Decommission Status : Normal</div><div class="line">Configured Capacity: 21463302144 (19.99 GB)</div><div class="line">DFS Used: 28672 (28 KB)</div><div class="line">Non DFS Used: 7986876416 (7.44 GB)</div><div class="line">DFS Remaining: 13476397056 (12.55 GB)</div><div class="line">DFS Used%: 0.00%</div><div class="line">DFS Remaining%: 62.79%</div><div class="line">Configured Cache Capacity: 0 (0 B)</div><div class="line">Cache Used: 0 (0 B)</div><div class="line">Cache Remaining: 0 (0 B)</div><div class="line">Cache Used%: 100.00%</div><div class="line">Cache Remaining%: 0.00%</div><div class="line">Xceivers: 1</div><div class="line">Last contact: Tue Apr 25 19:30:27 CST 2017</div></pre></td></tr></table></figure>
-<p>或者打开 <a href="http://hadoop1:50070查看" target="_blank" rel="external">http://hadoop1:50070查看</a><br><img src="Hadoop学习笔记（一）-%20Hadoop快速入门/hdfs.jpg" alt=""></p>
+<p>或者打开 <a href="http://hadoop1:50070查看" target="_blank" rel="external">http://hadoop1:50070查看</a><br><img src="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/hdfs.jpg" alt=""></p>
 <h2 id="4-2-上传、下载文件"><a href="#4-2-上传、下载文件" class="headerlink" title="4.2 上传、下载文件"></a>4.2 上传、下载文件</h2><p>HDFS默认文件大小块为128MB，若文件大于128MB，HDFS将会对文件进行切割后存储。<br>HDFS对文件执行的切割非常简单，我们可以将下载后的多个切块使用cat block1 &gt;&gt; tmp.txt ,cat block2 &gt;&gt; tmp.txt 命令将完整的文件拼接出来。</p>
 <p>HDFS文件的增删改查可以使用Hadoop的Shell命令进行操作。</p>
 <h2 id="4-3-测试MapReduce"><a href="#4-3-测试MapReduce" class="headerlink" title="4.3 测试MapReduce"></a>4.3 测试MapReduce</h2><ul>
@@ -743,15 +743,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">大数据</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">

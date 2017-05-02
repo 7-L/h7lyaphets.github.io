@@ -15,13 +15,13 @@
 <meta property="og:url" content="https://seawaylee.github.io/2017/03/09/JavaWeb/Spring/Spring_8/index.html">
 <meta property="og:site_name" content="SeawayLee">
 <meta property="og:description" content="9.1 Spring Security简介Spring Security 是为基于Spring的应用程序提供声明式安全保护的安全性框架。SpringSecurity充分利用了DI和AOP技术。本章将使用SpringSecurity保证Web安全性。 9.1.1 SpringSecurity模块SpringSecurity被分成了11个模块     ACL AccessControlList访问控制">
-<meta property="og:image" content="https://seawaylee.github.io/2017/03/09/JavaWeb/Spring/Spring_8/Spring_8/14841268654628.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/03/09/JavaWeb/Spring/Spring_8/Spring_8/14842242386953.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/03/09/JavaWeb/Spring/Spring_8/14841268654628.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/03/09/JavaWeb/Spring/Spring_8/14842242386953.jpg">
 <meta property="og:updated_time" content="2017-03-09T15:48:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter09 Spring Security">
 <meta name="twitter:description" content="9.1 Spring Security简介Spring Security 是为基于Spring的应用程序提供声明式安全保护的安全性框架。SpringSecurity充分利用了DI和AOP技术。本章将使用SpringSecurity保证Web安全性。 9.1.1 SpringSecurity模块SpringSecurity被分成了11个模块     ACL AccessControlList访问控制">
-<meta name="twitter:image" content="https://seawaylee.github.io/2017/03/09/JavaWeb/Spring/Spring_8/Spring_8/14841268654628.jpg">
+<meta name="twitter:image" content="https://seawaylee.github.io/2017/03/09/JavaWeb/Spring/Spring_8/14841268654628.jpg">
   
     <link rel="alternative" href="/atom.xml" title="SeawayLee" type="application/atom+xml">
   
@@ -249,7 +249,7 @@
 <p>不管我们使用web.xml配置还是AbstractSecurityWebApplicationInitializer得子类来配置DelegatingFilterProxy，它都会拦截发往应用中的请求，并将请求委托给ID为springSecurityFilterChain的bean。</p>
 <p>配置Security安全细节</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 配置Web安全的细节</div><div class="line"> * <span class="doctag">@author</span> NikoBelic</div><div class="line"> * <span class="doctag">@create</span> 11/01/2017 15:32</div><div class="line"> */</div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableWebSecurity</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SecurityConfig</span> <span class="keyword">extends</span> <span class="title">WebSecurityConfigurerAdapter</span></span></div><div class="line">&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        http.authorizeRequests().anyRequest().authenticated().and().formLogin().and().httpBasic();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个简单的默认配置指定了该如何保护HTTP请求，以及客户端认证用户的方案。通过调用authorizeRequest()和anyRequest().authenticated()就会要求所有进入应用的HTTP请求都要进行认证。他也配置SpringSecurity支持基于表单的登陆以及HTTPBasic方式的认证。<br>由于没有配置configure(AuthenticationManagerBuilder)方法，所以没有用户存储支撑认证过程。没有人能够登陆成功。<br><img src="Spring_8/14841268654628.jpg" alt=""><br>TODO：</p>
+<p>这个简单的默认配置指定了该如何保护HTTP请求，以及客户端认证用户的方案。通过调用authorizeRequest()和anyRequest().authenticated()就会要求所有进入应用的HTTP请求都要进行认证。他也配置SpringSecurity支持基于表单的登陆以及HTTPBasic方式的认证。<br>由于没有配置configure(AuthenticationManagerBuilder)方法，所以没有用户存储支撑认证过程。没有人能够登陆成功。<br><img src="/2017/03/09/JavaWeb/Spring/Spring_8/14841268654628.jpg" alt=""><br>TODO：</p>
 <ul>
 <li>配置用户存储</li>
 <li>指定哪些请求需要认证，哪些请求不需要认证，以及所需要的权限</li>
@@ -350,7 +350,7 @@
 <p>Controller<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * 跳转登陆页面</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 12/01/2017 19:46</div><div class="line">     */</div><div class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/showLogin"</span>,method = RequestMethod.GET)</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">showLogin</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"/weibo/login"</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
 <h3 id="9-4-2-启用HTTP-Basic认证"><a href="#9-4-2-启用HTTP-Basic认证" class="headerlink" title="9.4.2 启用HTTP Basic认证"></a>9.4.2 启用HTTP Basic认证</h3><p>对于普通用户来说，展现一个login表单还可以，但是对于应用程序来说就需要另外一种验证方式了。<br>启用HTTP Basic认证的方式很简单。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 按照URL路径设置安全校验</span></div><div class="line">        http.csrf().disable().formLogin()</div><div class="line">                .loginPage(<span class="string">"/weibo/showLogin"</span>)<span class="comment">// 登陆表单</span></div><div class="line">                .and()</div><div class="line">                .httpBasic()</div><div class="line">                .and()</div><div class="line">                .authorizeRequests()<span class="comment">// 授权通过以后</span></div><div class="line">                .antMatchers(<span class="string">"/weibo/profile/*"</span>).hasRole(<span class="string">"USER"</span>) <span class="comment">// 访问指定路径必须拥有USER角色权限</span></div><div class="line">                .antMatchers(HttpMethod.GET,<span class="string">"/weibo/testSecurity"</span>).authenticated() <span class="comment">// 指定url只允许GET请求</span></div><div class="line">                .anyRequest().permitAll(); <span class="comment">//其他请求均可通过</span></div></pre></td></tr></table></figure>
-<p>模拟Basic认证请求<br><img src="Spring_8/14842242386953.jpg" alt=""></p>
+<p>模拟Basic认证请求<br><img src="/2017/03/09/JavaWeb/Spring/Spring_8/14842242386953.jpg" alt=""></p>
 <h3 id="9-4-3-RememberMe功能和注销功能"><a href="#9-4-3-RememberMe功能和注销功能" class="headerlink" title="9.4.3 RememberMe功能和注销功能"></a>9.4.3 RememberMe功能和注销功能</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">http.csrf().disable().formLogin()</div><div class="line">                .loginPage(<span class="string">"/weibo/showLogin"</span>)<span class="comment">// 登陆表单</span></div><div class="line">                .and()</div><div class="line">                .logout() <span class="comment">// 注销  清楚remember-me的token</span></div><div class="line">                .logoutSuccessUrl(<span class="string">"/weibo/register"</span>)</div><div class="line">                .and()</div><div class="line">                .httpBasic()<span class="comment">//启动服务器认证功能</span></div><div class="line">                .and()</div><div class="line">                .rememberMe() <span class="comment">// 启动记住我功能</span></div><div class="line">                .tokenValiditySeconds(<span class="number">10</span>) <span class="comment">// 只保存10s的token</span></div><div class="line">                .key(<span class="string">"weiboKey"</span>)</div><div class="line">                .and()</div><div class="line">                .authorizeRequests()<span class="comment">// 授权通过以后</span></div><div class="line">                .antMatchers(<span class="string">"/weibo/profile/*"</span>).hasRole(<span class="string">"USER"</span>) <span class="comment">// 访问指定路径必须拥有USER角色权限</span></div><div class="line">                .antMatchers(HttpMethod.GET,<span class="string">"/weibo/testSecurity"</span>).authenticated() <span class="comment">// 指定url只允许GET请求</span></div><div class="line">                .anyRequest().permitAll(); <span class="comment">//其他请求均可通过</span></div></pre></td></tr></table></figure>
 <h2 id="9-5-小结"><a href="#9-5-小结" class="headerlink" title="9.5 小结"></a>9.5 小结</h2><p>Spring Security提供了一种简单、灵活且强大的机制来保护Web应用程序。借助一系列Servlet Filter能够控制对Web资源的访问，包括MVC控制器。借助于Java配置模型，能够简洁的声明Web安全性功能。<br>当认证用户是，可以使用基于内存用户库、关系型数据库、LDAP目录服务器来配置认证功能。</p>
 
@@ -693,15 +693,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">大数据</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">
