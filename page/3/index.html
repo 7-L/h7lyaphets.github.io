@@ -164,72 +164,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-面试/剑指Offer/Q_3_二维数组查找元素" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/14/面试/剑指Offer/Q_3_二维数组查找元素/">剑指Offer_3_二维数组中的查找</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/14/面试/剑指Offer/Q_3_二维数组查找元素/" class="archive-article-date">
-  	<time datetime="2017-03-14T11:47:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>题目描述</strong></p>
-<blockquote>
-<p>在一个二位数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下的递增顺序排序。请完成一个函数，<br>输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
-</blockquote>
-<p><strong>解题思路</strong><br>发现规律：</p>
-<p>1.首先选取数组中右上角的数字。如果该数字等于key，查找过程结束<br>2.如果该数字大于key，则删除这个数字所在的列（因为该列所有元素都比key大）<br>3.如果该数字小于key，则删除这个数字所在的行（因为该行所有元素都比key小）</p>
-<p>也就是说如果要查找的数字不在数组的右上角，则每一次都在数组的查找范围中删除一行或一列，<br>这样每一步都可以缩小查找范围，知道找到要查找的数字，或者查找范围为空。</p>
-        
-          <a class="article-more-a" href="/2017/03/14/面试/剑指Offer/Q_3_二维数组查找元素/#more">阅读全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指Offer</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
     <article id="post-面试/剑指Offer/Q_2_单例模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -806,6 +740,69 @@
 
 
   
+    <article id="post-Python基础/json与dict转换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/10/Python基础/json与dict转换/">json.loads&amp;json.dumps的使用</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/10/Python基础/json与dict转换/" class="archive-article-date">
+  	<time datetime="2017-03-09T16:34:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>每次遇到json loads/dumps始终搞不清方向，写段代码试下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> json  </div><div class="line"></div><div class="line">dict_ = &#123;<span class="number">1</span>:<span class="number">2</span>, <span class="number">3</span>:<span class="number">4</span>, <span class="string">"55"</span>:<span class="string">"66"</span>&#125;  </div><div class="line"></div><div class="line"><span class="comment"># test json.dumps  </span></div><div class="line"></div><div class="line"><span class="keyword">print</span> type(dict_), dict_  </div><div class="line">json_str = json.dumps(dict_)  </div><div class="line"><span class="keyword">print</span> <span class="string">"json.dumps(dict) return:"</span>  </div><div class="line"><span class="keyword">print</span> type(json_str), json_str  </div><div class="line"></div><div class="line"><span class="comment"># test json.loads  </span></div><div class="line"><span class="keyword">print</span> <span class="string">"\njson.loads(str) return"</span>  </div><div class="line">dict_2 = json.loads(json_str)  </div><div class="line"><span class="keyword">print</span> type(dict_2), dict_2</div><div class="line"></div><div class="line"><span class="comment"># 程序结果：</span></div><div class="line"></div><div class="line">&lt;type <span class="string">'dict'</span>&gt; &#123;<span class="string">'55'</span>: <span class="string">'66'</span>, <span class="number">1</span>: <span class="number">2</span>, <span class="number">3</span>: <span class="number">4</span>&#125;</div><div class="line">json.dump(dict) <span class="keyword">return</span>:</div><div class="line">&lt;type <span class="string">'str'</span>&gt; &#123;<span class="string">"55"</span>: <span class="string">"66"</span>, <span class="string">"1"</span>: <span class="number">2</span>, <span class="string">"3"</span>: <span class="number">4</span>&#125;</div><div class="line"></div><div class="line"></div><div class="line">json.loads(str) <span class="keyword">return</span></div><div class="line">&lt;type <span class="string">'dict'</span>&gt; &#123;<span class="string">u'55'</span>: <span class="string">u'66'</span>, <span class="string">u'1'</span>: <span class="number">2</span>, <span class="string">u'3'</span>: <span class="number">4</span>&#125;</div></pre></td></tr></table></figure>
+<p>总结：</p>
+<p>json.dumps : dict转成str</p>
+<p>json.loads:str转成dict</p>
+<p>如此简单。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Python基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -922,6 +919,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
@@ -938,10 +939,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
@@ -954,11 +951,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -970,11 +967,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -986,15 +987,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">大数据</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">
