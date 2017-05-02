@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Redis学习（四） 数据安全与性能 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="4.1 持久化选项持久化有两种方式：  快照 snapshot：将某一时刻的所有数据都写入到硬盘里面 只追加文件 append-only file：执行写命令时，将写命令复制到硬盘里面。  两种持久化方式可以同时或单独或都不使用。">
+<meta name="keywords" content="Nosql,Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis学习（四） 数据安全与性能">
+<meta property="og:url" content="http://yoursite.com/2017/03/09/Nosql/Redis/Redis_4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="4.1 持久化选项持久化有两种方式：  快照 snapshot：将某一时刻的所有数据都写入到硬盘里面 只追加文件 append-only file：执行写命令时，将写命令复制到硬盘里面。  两种持久化方式可以同时或单独或都不使用。">
+<meta property="og:updated_time" content="2017-03-09T14:52:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis学习（四） 数据安全与性能">
+<meta name="twitter:description" content="4.1 持久化选项持久化有两种方式：  快照 snapshot：将某一时刻的所有数据都写入到硬盘里面 只追加文件 append-only file：执行写命令时，将写命令复制到硬盘里面。  两种持久化方式可以同时或单独或都不使用。">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Nosql/Redis/Redis_4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/09/Nosql/Redis/Redis_4/" class="article-date">
+  <time datetime="2017-03-09T13:50:00.000Z" itemprop="datePublished">2017-03-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Redis学习（四） 数据安全与性能
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="4-1-持久化选项"><a href="#4-1-持久化选项" class="headerlink" title="4.1 持久化选项"></a>4.1 持久化选项</h2><p>持久化有两种方式：</p>
+<ul>
+<li>快照 snapshot：将某一时刻的所有数据都写入到硬盘里面</li>
+<li>只追加文件 append-only file：执行写命令时，将写命令复制到硬盘里面。</li>
+</ul>
+<p>两种持久化方式可以同时或单独或都不使用。</p>
+<a id="more"></a>
+<p><strong>基本命令</strong></p>
+<ul>
+<li><p>Snapshot</p>
+<ul>
+<li>save 60 1000</li>
+<li>stop-writes-on-bgsave-error no</li>
+<li>rdbcompression yes</li>
+<li>dbfilename dump.rdb</li>
+</ul>
+</li>
+<li><p>append-only file</p>
+<ul>
+<li>appendonly no</li>
+<li>appendsync everysec</li>
+<li>no-appendfsync-on-rewrite no</li>
+<li>auto-aof-rewrite-percentage 100</li>
+<li>auto-aof-rewrite-min-size 64mb</li>
+</ul>
+</li>
+<li><p>dir ./ 共享选项，决定了snapshot和AOF文件的保存位置。</p>
+</li>
+</ul>
+<h3 id="4-1-1-快照持久化"><a href="#4-1-1-快照持久化" class="headerlink" title="4.1.1 快照持久化"></a>4.1.1 快照持久化</h3><p>创建snapshot的方法</p>
+<ul>
+<li>BGSAVE命令创建快照。Redis会调用fork来创建一个子进程来将快照写入硬盘。</li>
+<li>SAVE命令创建快照，阻塞式写入硬盘。</li>
+<li>save 60 1000 从Redis最近一次创建快照之后算起，“60秒内有1000次写入”条件满足时自动触发BGSAVE。如果有多个save配置，当任意一个配置满足时将触发BGSAVE。</li>
+<li>Redis收到系统SHUTDOWN命令时，或标准TERM信号时，自动执行SAVE，阻塞所有客户端。完成后关闭服务器。</li>
+<li>当一个Redis连接另一个Redis，并向对方发送SYNC命令开始复制时，如果主服务器目前没有BGSAVE执行，或并非刚刚完成BGSAVE，则主服务器自动执行BGSAVE。</li>
+</ul>
+<h3 id="4-1-2-AOF持久化"><a href="#4-1-2-AOF持久化" class="headerlink" title="4.1.2 AOF持久化"></a>4.1.2 AOF持久化</h3><p>AOP持久化会将被执行的写命令写到AOF文件的末尾，以此来记录数据发生的变化。</p>
+<ul>
+<li>使用aooendonly yes配置选项打开AOF持久化</li>
+<li>参数<ul>
+<li>always: 每个Redis写命令都同步到硬盘，严重降低性能。</li>
+<li>everysec：每秒执行以此同步，显示地将多个写命令同步到硬盘</li>
+<li>no：让操作系统来决定该合适进行同步</li>
+</ul>
+</li>
+<li>使用auto-aof-rewrite-percentage 100 配置AOF文件体积达到指定百分比时进行重写（子进程）</li>
+<li>使用auto-aof-rewrite-min-size 64mb 配置AOF文件大于64MB时进行重写（子进程）</li>
+</ul>
+<h2 id="4-2-复制"><a href="#4-2-复制" class="headerlink" title="4.2 复制"></a>4.2 复制</h2><p>A：主服务器，B：从服务器</p>
+<ul>
+<li>A:Server Start</li>
+<li>B:Server Start,Cli Start,slaveof IP(A) PORT(A)</li>
+</ul>
+<p>主从复制时步骤</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>主服务器操作</th>
+<th>从服务器操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>等待命令</td>
+<td>连接主服务器，发送SYNC命令</td>
+</tr>
+<tr>
+<td>2</td>
+<td>执行BGSAVE，使用缓冲区记录BGSAVE之后执行的所有写命令</td>
+<td>根据config来决定继续使用现有数据来返回给客户端请求，还是返回错误</td>
+</tr>
+<tr>
+<td>3</td>
+<td>BGSAVE执行完毕，向从服务器发送snapshot,使用缓冲区记录期间的写命令</td>
+<td>丢弃旧数据，载入收到的snapshot文件</td>
+</tr>
+<tr>
+<td>4</td>
+<td>snapshot发送完毕，向从服务器发送缓冲区中的写命令</td>
+<td>正常接受命令请求</td>
+</tr>
+<tr>
+<td>5</td>
+<td>缓冲区命令发送完毕，每执行一个写命令，就向从服务器发送相同的写命令</td>
+<td>执行主服务器发来的缓冲区写命令，并从现在开始接收并执行主服务器传来的每个写命令</td>
+</tr>
+</tbody>
+</table>
+<p>当需要更换主服务器时，可以直接将主服务器的dump文件复制到新的主服务器，从服务器重新指定新的主服务器。</p>
+<h2 id="4-3-Redis事务"><a href="#4-3-Redis事务" class="headerlink" title="4.3 Redis事务"></a>4.3 Redis事务</h2><p>通过使用WATCH、MULTI/EXEC、UNWACH/DISCARD等命令，程序可以在执行某些重要操作的时候，通过确保自己正在使用的数据没有发生变化来避免数据出错。</p>
+<p>一般执行流程如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">conn.pipeline()</div><div class="line">pipe.watch(item)</div><div class="line">pipe.multi()</div><div class="line">pipe.zadd()</div><div class="line">pipe.srem()</div><div class="line">pipe.execute()</div></pre></td></tr></table></figure>
+<h2 id="4-4-非事务型流水线"><a href="#4-4-非事务型流水线" class="headerlink" title="4.4 非事务型流水线"></a>4.4 非事务型流水线</h2><p>MULTI和EXEC可以让程序拥有事务性，有些情况下，我们不需要事务来将操作回滚，只是想减少应用和Redis之间的通讯次数。创建pipe的时候，传入False参数即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">conn.pipeline(False)</div><div class="line">pipe.multi()</div><div class="line">pipe.zadd()</div><div class="line">pipe.srem()</div><div class="line">pipe.execute()</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/09/Nosql/Redis/Redis_4/" data-id="cj27jtjt4003fa7fy9mwrhgn0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nosql/">Nosql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/09/Linux/Curl/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Curl实现Get、Post
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/09/Nosql/Redis/Redis_3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Redis学习（三）Java实现基于Jedis+Spring的通用工具类</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java爬虫/">Java爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac工具/">Mac工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nosql/">Nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PythonWeb/">PythonWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python基础/">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指offer/">剑指offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据基础/">大数据基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面经/">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高并发/">高并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 11.43px;">Hadoop</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 20px;">JavaWeb</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Java爬虫/" style="font-size: 10px;">Java爬虫</a> <a href="/tags/Linux/" style="font-size: 11.43px;">Linux</a> <a href="/tags/Mac工具/" style="font-size: 12.86px;">Mac工具</a> <a href="/tags/Nosql/" style="font-size: 14.29px;">Nosql</a> <a href="/tags/Oracle/" style="font-size: 14.29px;">Oracle</a> <a href="/tags/PythonWeb/" style="font-size: 10px;">PythonWeb</a> <a href="/tags/Python基础/" style="font-size: 14.29px;">Python基础</a> <a href="/tags/Redis/" style="font-size: 14.29px;">Redis</a> <a href="/tags/Spring/" style="font-size: 18.57px;">Spring</a> <a href="/tags/剑指Offer/" style="font-size: 17.14px;">剑指Offer</a> <a href="/tags/剑指offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/大数据/" style="font-size: 12.86px;">大数据</a> <a href="/tags/大数据基础/" style="font-size: 12.86px;">大数据基础</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/搜索/" style="font-size: 12.86px;">搜索</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/面经/" style="font-size: 11.43px;">面经</a> <a href="/tags/高并发/" style="font-size: 14.29px;">高并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/">Hadoop学习笔记（二） - HDFS详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/">Hadoop学习笔记（一）- Hadoop快速入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/">JVM学习笔记（基础知识）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/大数据/大数据基础/Netty学习笔记（一）/">Netty学习笔记（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

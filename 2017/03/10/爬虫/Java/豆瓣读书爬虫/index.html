@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>豆瓣读书论坛-大规模数据爬取与分析-Java版 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1 前言前些天看到了@Brian Way 同学做了一个知乎的用户信息爬虫，想到了自己很久以前也做过类似的知乎爬虫，在今年后半年写了一个豆瓣读书论坛爬虫，爬了很多数据，各种加起来大概有1亿1000万左右。@路人甲 等大牛经常发布一些Python爬虫，也让我学习了不少，就此篇文章向各位大神致敬。 因为最近在写小论文，相关的算法需要预先将数据转换才能用，所以代码中可能有些东西与爬虫无关。如果大家有需要（">
+<meta name="keywords" content="爬虫,Java爬虫">
+<meta property="og:type" content="article">
+<meta property="og:title" content="豆瓣读书论坛-大规模数据爬取与分析-Java版">
+<meta property="og:url" content="http://yoursite.com/2017/03/10/爬虫/Java/豆瓣读书爬虫/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1 前言前些天看到了@Brian Way 同学做了一个知乎的用户信息爬虫，想到了自己很久以前也做过类似的知乎爬虫，在今年后半年写了一个豆瓣读书论坛爬虫，爬了很多数据，各种加起来大概有1亿1000万左右。@路人甲 等大牛经常发布一些Python爬虫，也让我学习了不少，就此篇文章向各位大神致敬。 因为最近在写小论文，相关的算法需要预先将数据转换才能用，所以代码中可能有些东西与爬虫无关。如果大家有需要（">
+<meta property="og:image" content="http://yoursite.com/2017/03/10/爬虫/Java/豆瓣读书爬虫/豆瓣读书爬虫/1.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/10/爬虫/Java/豆瓣读书爬虫/豆瓣读书爬虫/2.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/10/爬虫/Java/豆瓣读书爬虫/豆瓣读书爬虫/3.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/10/爬虫/Java/豆瓣读书爬虫/豆瓣读书爬虫/4.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/10/爬虫/Java/豆瓣读书爬虫/豆瓣读书爬虫/5.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/10/爬虫/Java/豆瓣读书爬虫/豆瓣读书爬虫/6.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/10/爬虫/Java/豆瓣读书爬虫/豆瓣读书爬虫/7.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/10/爬虫/Java/豆瓣读书爬虫/豆瓣读书爬虫/8.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/10/爬虫/Java/豆瓣读书爬虫/豆瓣读书爬虫/9.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/10/爬虫/Java/豆瓣读书爬虫/豆瓣读书爬虫/10.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/10/爬虫/Java/豆瓣读书爬虫/豆瓣读书爬虫/11.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/10/爬虫/Java/豆瓣读书爬虫/豆瓣读书爬虫/12.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/10/爬虫/Java/豆瓣读书爬虫/豆瓣读书爬虫/13.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/03/10/爬虫/Java/豆瓣读书爬虫/豆瓣读书爬虫/14.png">
+<meta property="og:updated_time" content="2017-04-10T04:53:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="豆瓣读书论坛-大规模数据爬取与分析-Java版">
+<meta name="twitter:description" content="1 前言前些天看到了@Brian Way 同学做了一个知乎的用户信息爬虫，想到了自己很久以前也做过类似的知乎爬虫，在今年后半年写了一个豆瓣读书论坛爬虫，爬了很多数据，各种加起来大概有1亿1000万左右。@路人甲 等大牛经常发布一些Python爬虫，也让我学习了不少，就此篇文章向各位大神致敬。 因为最近在写小论文，相关的算法需要预先将数据转换才能用，所以代码中可能有些东西与爬虫无关。如果大家有需要（">
+<meta name="twitter:image" content="http://yoursite.com/2017/03/10/爬虫/Java/豆瓣读书爬虫/豆瓣读书爬虫/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-爬虫/Java/豆瓣读书爬虫" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/10/爬虫/Java/豆瓣读书爬虫/" class="article-date">
+  <time datetime="2017-03-09T17:06:02.000Z" itemprop="datePublished">2017-03-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      豆瓣读书论坛-大规模数据爬取与分析-Java版
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>前些天看到了@Brian Way 同学做了一个知乎的用户信息爬虫，想到了自己很久以前也做过类似的知乎爬虫，在今年后半年写了一个豆瓣读书论坛爬虫，爬了很多数据，各种加起来大概有1亿1000万左右。@路人甲 等大牛经常发布一些Python爬虫，也让我学习了不少，就此篇文章向各位大神致敬。</p>
+<p>因为最近在写小论文，相关的算法需要预先将数据转换才能用，所以代码中可能有些东西与爬虫无关。如果大家有需要（请用赞告诉我！哈哈哈哈），我后续会将 朴素贝叶斯分类器 对数据的处理，和基于Spark的协同过滤推荐系统 相关介绍和代码整理后公布出来，并详细介绍自己的研究思路。</p>
+<a id="more"></a>
+<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h2><ul>
+<li><p>通过 <a href="https://link.zhihu.com/?target=https%3A//book.douban.com/tag/%3Fview%3Dcloud" target="_blank" rel="external">豆瓣图书标签</a> 获取所有标签的地址，将所有标签记录<br><img src="豆瓣读书爬虫/1.png" alt=""></p>
+</li>
+<li><p>通过将标签拼接到图书列表的url地址，获取某个标签下的图书信息，通过这个页面可以获得当前页的图书基本信息。</p>
+</li>
+</ul>
+<p><a href="https://link.zhihu.com/?target=https%3A//book.douban.com/tag/%25E5%25B0%258F%25E8%25AF%25B4" target="_blank" rel="external">豆瓣图书标签: 小说</a><br><img src="豆瓣读书爬虫/2.png" alt=""></p>
+<ul>
+<li>进入到某个图书详情页面，爬取更详细的图书信息（如果有需求的话）</li>
+</ul>
+<p><a href="https://link.zhihu.com/?target=https%3A//book.douban.com/subject/25862578/" target="_blank" rel="external">解忧杂货店 (豆瓣)</a></p>
+<ul>
+<li>通过获取到的所有图书的bookno可以爬取所有图书的短评、书评等信息。</li>
+</ul>
+<p><a href="https://link.zhihu.com/?target=https%3A//book.douban.com/subject/25862578/comments/" target="_blank" rel="external">解忧杂货店 短评</a></p>
+<p><img src="豆瓣读书爬虫/3.png" alt=""></p>
+<ul>
+<li>通过这个评论列表我们可以进入到每个用户的个人主页，爬取他们的个人信息</li>
+</ul>
+<p><img src="豆瓣读书爬虫/4.png" alt=""></p>
+<ul>
+<li>通过这个页面我还获取到了用户 想读、在读、读过的 UserNo - BookNo 对应关系，以后做推荐系统有大用处！</li>
+</ul>
+<p><img src="豆瓣读书爬虫/5.png" alt=""></p>
+<p>3 爬虫架构</p>
+<p>爬虫架构采用国产开源Java爬虫框架WebMagic，为了能够分布式爬取，项目中还使用了Redis作为统一URL队列管理器，使用Mysql持久化数据，Velocity + Echarts做的数据可视化，整体项目架构是Spring+SpringMVC+Mybatis。</p>
+<p>4 数据分析</p>
+<ul>
+<li>热门标签下的图书数量 Top10</li>
+</ul>
+<p><img src="豆瓣读书爬虫/6.png" alt=""></p>
+<ul>
+<li>发表评论最多的用户Top10</li>
+</ul>
+<p><img src="豆瓣读书爬虫/7.png" alt=""></p>
+<p>大家看看有没有自己认识的人啊哈哈哈，第一名评论了3000本书，真牛逼。</p>
+<ul>
+<li>用户发表的评分值分布</li>
+</ul>
+<p><img src="豆瓣读书爬虫/8.png" alt=""></p>
+<p>其中-1分表示没有给出评价星级，但是做了评论。看来还是好评比较多啊有250万5星！</p>
+<ul>
+<li>用户地域分布，看来北上广相信读书啊！</li>
+</ul>
+<p>其中有28W左右用户在个人信息中没有写长居地址，所以没放进来展示。</p>
+<p><img src="豆瓣读书爬虫/9.png" alt=""></p>
+<ul>
+<li>每年书评数量分布</li>
+</ul>
+<p>1970乱入什么鬼。。2016年大概是半年多一点的数据，其实肯定要比2015高的。</p>
+<p><img src="豆瓣读书爬虫/10.png" alt=""></p>
+<ul>
+<li>最后看一下评论数大于5W的评分值Top50的图书吧 大家是不是都读过</li>
+</ul>
+<p><img src="豆瓣读书爬虫/11.png" alt=""><br><img src="豆瓣读书爬虫/12.png" alt=""><br>5 总结</p>
+<p>爬一些数据做分析挺有意思的，虽然我做的这些分析都非常辣鸡吧（我TM也想做牛逼的分析啊，我不会啊）。最后的数据图书短评大概有不到800W，用户信息130W，图书信息4W5，用户想读、在读、读过 这类的用户-图书关系大概有9000W+（大数据推荐系统用，所以爬了好多）。豆瓣反爬虫机制几乎没有，所以我爬的也很爽。。。。</p>
+<p>国际惯例，附上源码</p>
+<p>项目地址</p>
+<p><a href="https://link.zhihu.com/?target=https%3A//github.com/seawaylee/doubanWebSpider" target="_blank" rel="external">Github - doubanWebSpider</a></p>
+<p>代码写的不规范，非常乱，还请各位见谅。</p>
+<p>后续如果大家需要（赞我赞我赞我），我会将基于朴素贝叶斯分类器的中文文本情感分析相关程序和基于Spark的分布式协同过滤推荐算法相关程序陆续发布出来（起这么长的名字是不是听起来很傻b…可是做论文评审的人可不这么觉得…）。其实如果大家懂机器学习和Spark就能知道，我这俩东西很low的，纯粹为了骗论文。。。。</p>
+<p><img src="豆瓣读书爬虫/13.jpg" alt=""></p>
+<p>2016-12-23 更新，数据可视化地址和查询图书功能</p>
+<p>图书查询功能是模糊查询，结果会按照评分由高到低显示结果。<br><img src="豆瓣读书爬虫/14.png" alt=""></p>
+<p>地址</p>
+<p><a href="http://119.90.53.137:8099/douban" target="_blank" rel="external">豆瓣超级无敌爬虫^.^</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/10/爬虫/Java/豆瓣读书爬虫/" data-id="cj27jtjtg003xa7fyatxatb6i" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java爬虫/">Java爬虫</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/10/面经/阿里面经_1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          阿里巴巴-软件工程师面经（一）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/10/PythonWeb/Django静态文件问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Django1.10静态文件不能成功读取解决方案</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java爬虫/">Java爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac工具/">Mac工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nosql/">Nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PythonWeb/">PythonWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python基础/">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指offer/">剑指offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据基础/">大数据基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面经/">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高并发/">高并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 11.43px;">Hadoop</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 20px;">JavaWeb</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Java爬虫/" style="font-size: 10px;">Java爬虫</a> <a href="/tags/Linux/" style="font-size: 11.43px;">Linux</a> <a href="/tags/Mac工具/" style="font-size: 12.86px;">Mac工具</a> <a href="/tags/Nosql/" style="font-size: 14.29px;">Nosql</a> <a href="/tags/Oracle/" style="font-size: 14.29px;">Oracle</a> <a href="/tags/PythonWeb/" style="font-size: 10px;">PythonWeb</a> <a href="/tags/Python基础/" style="font-size: 14.29px;">Python基础</a> <a href="/tags/Redis/" style="font-size: 14.29px;">Redis</a> <a href="/tags/Spring/" style="font-size: 18.57px;">Spring</a> <a href="/tags/剑指Offer/" style="font-size: 17.14px;">剑指Offer</a> <a href="/tags/剑指offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/大数据/" style="font-size: 12.86px;">大数据</a> <a href="/tags/大数据基础/" style="font-size: 12.86px;">大数据基础</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/搜索/" style="font-size: 12.86px;">搜索</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/面经/" style="font-size: 11.43px;">面经</a> <a href="/tags/高并发/" style="font-size: 14.29px;">高并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/">Hadoop学习笔记（二） - HDFS详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/">Hadoop学习笔记（一）- Hadoop快速入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/">JVM学习笔记（基础知识）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/大数据/大数据基础/Netty学习笔记（一）/">Netty学习笔记（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

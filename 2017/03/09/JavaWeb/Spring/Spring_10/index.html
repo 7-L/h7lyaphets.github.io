@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Chapter13 Spring Cache | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="缓存对于某些不要求实时获取最新数据的请求非常好用，如果再高并发环境下，数据库成为系统的性能瓶颈，使用缓存能够大幅度提升系统性能。本文以Redis作为缓存容器，结合Spring来模拟一个缓存系统。个人认为，如果你会使用Redis，则完全没有必要将其与Spring整合来实现缓存，自己使用Jedis工具来实现缓存更加灵活。但是如果你不懂Redis，那么使用SpringCache+Redis就可以了。">
+<meta name="keywords" content="JavaWeb,Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter13 Spring Cache">
+<meta property="og:url" content="http://yoursite.com/2017/03/09/JavaWeb/Spring/Spring_10/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="缓存对于某些不要求实时获取最新数据的请求非常好用，如果再高并发环境下，数据库成为系统的性能瓶颈，使用缓存能够大幅度提升系统性能。本文以Redis作为缓存容器，结合Spring来模拟一个缓存系统。个人认为，如果你会使用Redis，则完全没有必要将其与Spring整合来实现缓存，自己使用Jedis工具来实现缓存更加灵活。但是如果你不懂Redis，那么使用SpringCache+Redis就可以了。">
+<meta property="og:updated_time" content="2017-03-09T15:51:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter13 Spring Cache">
+<meta name="twitter:description" content="缓存对于某些不要求实时获取最新数据的请求非常好用，如果再高并发环境下，数据库成为系统的性能瓶颈，使用缓存能够大幅度提升系统性能。本文以Redis作为缓存容器，结合Spring来模拟一个缓存系统。个人认为，如果你会使用Redis，则完全没有必要将其与Spring整合来实现缓存，自己使用Jedis工具来实现缓存更加灵活。但是如果你不懂Redis，那么使用SpringCache+Redis就可以了。">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JavaWeb/Spring/Spring_10" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/09/JavaWeb/Spring/Spring_10/" class="article-date">
+  <time datetime="2017-03-09T15:50:48.000Z" itemprop="datePublished">2017-03-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Chapter13 Spring Cache
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>缓存对于某些不要求实时获取最新数据的请求非常好用，如果再高并发环境下，数据库成为系统的性能瓶颈，使用缓存能够大幅度提升系统性能。<br>本文以Redis作为缓存容器，结合Spring来模拟一个缓存系统。<br>个人认为，如果你会使用Redis，则完全没有必要将其与Spring整合来实现缓存，自己使用Jedis工具来实现缓存更加灵活。但是如果你不懂Redis，那么使用SpringCache+Redis就可以了。</p>
+<a id="more"></a>
+<h2 id="13-1-Redis配置文件读取配置"><a href="#13-1-Redis配置文件读取配置" class="headerlink" title="13.1 Redis配置文件读取配置"></a>13.1 Redis配置文件读取配置</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@PropertySource</span>(<span class="string">"classpath:redis.properties"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PropertyConfig</span></span></div><div class="line">&#123;</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> PropertySourcesPlaceholderConfigurer <span class="title">propertySourcesPlaceholderConfigurer</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> PropertySourcesPlaceholderConfigurer();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="13-2-SpringCache配置类"><a href="#13-2-SpringCache配置类" class="headerlink" title="13.2 SpringCache配置类"></a>13.2 SpringCache配置类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> data_persistent.config;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</div><div class="line"><span class="keyword">import</span> org.springframework.cache.CacheManager;</div><div class="line"><span class="keyword">import</span> org.springframework.cache.annotation.EnableCaching;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.data.redis.cache.RedisCacheManager;</div><div class="line"><span class="keyword">import</span> org.springframework.data.redis.connection.RedisConnectionFactory;</div><div class="line"><span class="keyword">import</span> org.springframework.data.redis.connection.jedis.JedisConnectionFactory;</div><div class="line"><span class="keyword">import</span> org.springframework.data.redis.core.RedisTemplate;</div><div class="line"><span class="keyword">import</span> redis.clients.jedis.Jedis;</div><div class="line"><span class="keyword">import</span> redis.clients.jedis.JedisPool;</div><div class="line"><span class="keyword">import</span> redis.clients.jedis.JedisPoolConfig;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 缓存配置</div><div class="line"> * <span class="doctag">@author</span> NikoBelic</div><div class="line"> * <span class="doctag">@create</span> 24/01/2017 15:47</div><div class="line"> */</div><div class="line"><span class="meta">@EnableCaching</span></div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CacheConfig</span></span></div><div class="line">&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Value</span>(value = <span class="string">"$&#123;host&#125;"</span>)</div><div class="line">    <span class="keyword">private</span> String host;</div><div class="line">    <span class="meta">@Value</span>(value = <span class="string">"$&#123;port&#125;"</span>)</div><div class="line">    <span class="keyword">private</span> Integer port;</div><div class="line">    <span class="meta">@Value</span>(value = <span class="string">"$&#123;keynum&#125;"</span>)</div><div class="line">    <span class="keyword">private</span> Integer keynum;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 注入CacheManager</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 24/01/2017 16:05</div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> CacheManager <span class="title">cacheManager</span><span class="params">(RedisTemplate redisTemplate)</span></span></div><div class="line">    &#123;</div><div class="line">        RedisCacheManager cacheManager = <span class="keyword">new</span> RedisCacheManager(redisTemplate);</div><div class="line">        cacheManager.setDefaultExpiration(<span class="number">10</span>);</div><div class="line">        <span class="keyword">return</span> cacheManager;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 注入JedisConnectionFactory</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 24/01/2017 16:03</div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> JedisConnectionFactory <span class="title">redisConnectionFactory</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        JedisConnectionFactory factory = <span class="keyword">new</span> JedisConnectionFactory();</div><div class="line">        factory.setHostName(host);</div><div class="line">        factory.setPort(port);</div><div class="line">        factory.setDatabase(keynum);</div><div class="line">        <span class="comment">//factory.afterPropertiesSet();</span></div><div class="line">        <span class="keyword">return</span> factory;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 注入RedisTemplate</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 24/01/2017 16:02</div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> RedisTemplate&lt;String,String&gt; <span class="title">redisTemplate</span><span class="params">(RedisConnectionFactory redisCF)</span></span></div><div class="line">    &#123;</div><div class="line">        RedisTemplate&lt;String,String&gt; redisTemplate = <span class="keyword">new</span> RedisTemplate&lt;&gt;();</div><div class="line">        redisTemplate.setConnectionFactory(redisCF);</div><div class="line">        redisTemplate.afterPropertiesSet();</div><div class="line">        <span class="keyword">return</span> redisTemplate;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// *********************** Jedis 配置 ***************************</span></div><div class="line"></div><div class="line">    <span class="comment">// 以下配置与缓存无关,在本例中可有可无</span></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> JedisPoolConfig <span class="title">jedisPoolConfig</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        JedisPoolConfig jedisPoolConfig = <span class="keyword">new</span> JedisPoolConfig();</div><div class="line">        jedisPoolConfig.setMaxWaitMillis(<span class="number">60</span> * <span class="number">1000</span>);</div><div class="line">        jedisPoolConfig.setMaxTotal(<span class="number">1000</span>);</div><div class="line">        jedisPoolConfig.setMaxIdle(<span class="number">100</span>);</div><div class="line">        <span class="keyword">return</span> jedisPoolConfig;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> JedisPool <span class="title">jedisPool</span><span class="params">(JedisPoolConfig jedisPoolConfig)</span></span></div><div class="line">    &#123;</div><div class="line">        JedisPool jedisPool = <span class="keyword">new</span> JedisPool(jedisPoolConfig,host,port,<span class="number">999999999</span>);</div><div class="line">        <span class="keyword">return</span> jedisPool;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Jedis <span class="title">jedis</span><span class="params">(JedisPool jedisPool)</span></span></div><div class="line">    &#123;</div><div class="line">        Jedis jedis = jedisPool.getResource();</div><div class="line">        jedis.select(keynum);</div><div class="line">        <span class="keyword">return</span> jedis;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="13-3-Dao层使用注解将结果缓存"><a href="#13-3-Dao层使用注解将结果缓存" class="headerlink" title="13.3 Dao层使用注解将结果缓存"></a>13.3 Dao层使用注解将结果缓存</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserDao</span></span></div><div class="line">&#123;</div><div class="line">    <span class="meta">@CachePut</span>(value = <span class="string">"UserCaching"</span>,key = <span class="string">"#result.id"</span>)</div><div class="line">    <span class="function">UserObj <span class="title">addUser</span><span class="params">(UserObj userObj)</span></span>;</div><div class="line"></div><div class="line">    <span class="meta">@Cacheable</span>(<span class="string">"UserCaching"</span>)</div><div class="line">    <span class="function">UserObj <span class="title">findUserById</span><span class="params">(Integer id)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">updateUserById</span><span class="params">(Integer id,UserObj userObj)</span></span>;</div><div class="line"></div><div class="line">    <span class="meta">@CacheEvict</span>(<span class="string">"UserCaaching"</span>)</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">deleteUserById</span><span class="params">(Integer id)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> data_persistent.dao;</div><div class="line"></div><div class="line"><span class="keyword">import</span> data_persistent.model.UserObj;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.jdbc.core.JdbcOperations;</div><div class="line"><span class="keyword">import</span> org.springframework.jdbc.core.PreparedStatementCreator;</div><div class="line"><span class="keyword">import</span> org.springframework.jdbc.support.GeneratedKeyHolder;</div><div class="line"><span class="keyword">import</span> org.springframework.jdbc.support.KeyHolder;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Repository;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.inject.Inject;</div><div class="line"><span class="keyword">import</span> java.sql.Connection;</div><div class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</div><div class="line"><span class="keyword">import</span> java.sql.SQLException;</div><div class="line"><span class="keyword">import</span> java.sql.Statement;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@author</span> NikoBelic</div><div class="line"> * <span class="doctag">@create</span> 22/01/2017 16:01</div><div class="line"> */</div><div class="line"><span class="meta">@Repository</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDaoImpl</span> <span class="keyword">implements</span> <span class="title">UserDao</span></span></div><div class="line">&#123;</div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> JdbcOperations jdbcOperations;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 使用JDBCTemplate添加数据</div><div class="line">     *</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 22/01/2017 16:25</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> UserObj <span class="title">addUser</span><span class="params">(UserObj user)</span></span></div><div class="line">    &#123;</div><div class="line">        KeyHolder holder = <span class="keyword">new</span> GeneratedKeyHolder();</div><div class="line">        <span class="keyword">int</span> id = jdbcOperations.update(connection -&gt; &#123;</div><div class="line">            PreparedStatement ps = connection.prepareStatement(<span class="string">"insert into tb_user(username,password,role) values(?,?,?)"</span>, Statement.RETURN_GENERATED_KEYS);</div><div class="line">            ps.setString(<span class="number">1</span>, user.getUsername());</div><div class="line">            ps.setString(<span class="number">2</span>, user.getPassword());</div><div class="line">            ps.setString(<span class="number">3</span>, user.getRole());</div><div class="line">            <span class="keyword">return</span> ps;</div><div class="line">        &#125;, holder);</div><div class="line">        user.setId(holder.getKey().intValue());</div><div class="line">        <span class="keyword">return</span> user;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> UserObj <span class="title">findUserById</span><span class="params">(Integer id)</span></span></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"findUserById si called..."</span>);</div><div class="line">        <span class="keyword">return</span> jdbcOperations.queryForObject(<span class="string">"select * from tb_user t where t.id = ?"</span>,</div><div class="line">                (rs, rowNum) -&gt; &#123;</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> UserObj(rs.getInt(<span class="string">"id"</span>), rs.getString(<span class="string">"username"</span>), rs.getString(<span class="string">"password"</span>), rs.getString(<span class="string">"role"</span>));</div><div class="line">                &#125;, id);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateUserById</span><span class="params">(Integer id, UserObj userObj)</span></span></div><div class="line">    &#123;</div><div class="line">        jdbcOperations.update(<span class="string">"update tb_user t set t.username = ? ,t.password = ?,t.role = ? where t.id = ?"</span>,</div><div class="line">                userObj.getUsername(), userObj.getPassword(), userObj.getRole(), id);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteUserById</span><span class="params">(Integer id)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//jdbcOperations.update("delete from tb_user where id = ?",id);</span></div><div class="line">        System.out.println(<span class="string">"删除数据库中的用户"</span> + id);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="10-4-测试"><a href="#10-4-测试" class="headerlink" title="10.4 测试"></a>10.4 测试</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</div><div class="line"><span class="meta">@ContextConfiguration</span>(classes = RootConfig.class)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersistentTest</span></span></div><div class="line">&#123;</div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> UserDao userDao;</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    MongoOperations mongo;</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    CompanyRepo companyRepo;</div><div class="line"></div><div class="line">    <span class="comment">//@Autowired</span></div><div class="line">    <span class="comment">//Jedis jedis;</span></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    KVDao kvDao;</div><div class="line"></div><div class="line">    <span class="comment">// ***************** JDBCTemplate *******************/</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addUser</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        UserObj user = <span class="keyword">new</span> UserObj();</div><div class="line">        user.setUsername(<span class="string">"蛤蟆皮"</span>);</div><div class="line">        user.setPassword(<span class="string">"123456"</span>);</div><div class="line">        user.setRole(<span class="string">"ADMIN"</span>);</div><div class="line">        System.out.println(userDao.addUser(user));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findUser</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span></div><div class="line">    &#123;</div><div class="line">        System.out.println(userDao.findUserById(<span class="number">12</span>));</div><div class="line">        Thread.sleep(<span class="number">11</span> * <span class="number">1000</span>);</div><div class="line">        System.out.println(userDao.findUserById(<span class="number">12</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateUser</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        UserObj userObj = <span class="keyword">new</span> UserObj(<span class="number">1</span>,<span class="string">"阿西吧"</span>,<span class="string">"password"</span>,<span class="string">"ABC"</span>);</div><div class="line">        userDao.updateUserById(<span class="number">1</span>,userObj);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line">    <span class="comment">// ***************** Redis Caching *******************/</span></div><div class="line"></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">redis_conn</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        System.out.println(kvDao.get(<span class="string">"chinese"</span>));</div><div class="line">        kvDao.set(<span class="string">""</span>, <span class="string">""</span>);</div><div class="line">        System.out.println(kvDao.get(<span class="string">"chinese"</span>));</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test_cache</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"Before Update..."</span>);</div><div class="line">        System.out.println(userDao.findUserById(<span class="number">1</span>));</div><div class="line">        UserObj userObj = <span class="keyword">new</span> UserObj(<span class="number">1</span>,<span class="string">"Hey"</span>,<span class="string">"密码"</span>,<span class="string">"管理员"</span>);</div><div class="line">        userDao.updateUserById(userObj.getId(),userObj);</div><div class="line">        System.out.println(<span class="string">"After Update..."</span>);</div><div class="line">        System.out.println(userDao.findUserById(<span class="number">1</span>));</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test_del_cache</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        UserObj userObj = <span class="keyword">new</span> UserObj(<span class="number">9</span>,<span class="string">"Cache"</span>,<span class="string">"密码"</span>,<span class="string">"管理员"</span>);</div><div class="line">        userObj = userDao.addUser(userObj);</div><div class="line">        System.out.println(userDao.findUserById(userObj.getId()));</div><div class="line">        userDao.deleteUserById(userObj.getId());</div><div class="line">        System.out.println(userDao.findUserById(userObj.getId()));</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="10-5-Redis数据库缓存结果"><a href="#10-5-Redis数据库缓存结果" class="headerlink" title="10.5 Redis数据库缓存结果"></a>10.5 Redis数据库缓存结果</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379[4]&gt; keys *</div><div class="line">1) &quot;\xac\xed\x00\x05sr\x00\x11java.lang.Integer\x12\xe2\xa0\xa4\xf7\x81\x878\x02\x00\x01I\x00\x05valuexr\x00\x10java.lang.Number\x86\xac\x95\x1d\x0b\x94\xe0\x8b\x02\x00\x00xp\x00\x00\x00\x0b&quot;</div><div class="line">2) &quot;\xac\xed\x00\x05sr\x00\x11java.lang.Integer\x12\xe2\xa0\xa4\xf7\x81\x878\x02\x00\x01I\x00\x05valuexr\x00\x10java.lang.Number\x86\xac\x95\x1d\x0b\x94\xe0\x8b\x02\x00\x00xp\x00\x00\x00\b&quot;</div><div class="line">3) &quot;UserCaching~keys&quot;</div></pre></td></tr></table></figure>
+<p>UserCaching~keys 是一个ZSet结构，是一个有序集合。</p>
+<h2 id="10-6-注解"><a href="#10-6-注解" class="headerlink" title="10.6 注解"></a>10.6 注解</h2><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@Cacheable</td>
+<td>表明Spring在调用方法之前，首先应该在缓存中查找方法的返回值，如果这个值能够找到，就会返回缓存的值，否则的话，这个方法就会被调用，返回值会放到缓存之中。</td>
+</tr>
+<tr>
+<td>@CachePut</td>
+<td>表明Spring应该将方法的返回值放到缓存中，在方法的调用前并不会检查缓存，方法始终都会被调用。</td>
+</tr>
+<tr>
+<td>@CacheEvict</td>
+<td>表明Spring应该在缓存中清楚一个或多个条目</td>
+</tr>
+<tr>
+<td>@Caching</td>
+<td>这事一个分组的注解，能够同时应用多个其他的缓存注解</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/09/JavaWeb/Spring/Spring_10/" data-id="cj27jtjs8002ha7fyb97uxp8g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/09/JavaWeb/Spring/Spring_11/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Spring 远程调用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/09/JavaWeb/Spring/Spring_9/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Chapter10 Spring Data</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java爬虫/">Java爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac工具/">Mac工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nosql/">Nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PythonWeb/">PythonWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python基础/">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指offer/">剑指offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据基础/">大数据基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面经/">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高并发/">高并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 11.43px;">Hadoop</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 20px;">JavaWeb</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Java爬虫/" style="font-size: 10px;">Java爬虫</a> <a href="/tags/Linux/" style="font-size: 11.43px;">Linux</a> <a href="/tags/Mac工具/" style="font-size: 12.86px;">Mac工具</a> <a href="/tags/Nosql/" style="font-size: 14.29px;">Nosql</a> <a href="/tags/Oracle/" style="font-size: 14.29px;">Oracle</a> <a href="/tags/PythonWeb/" style="font-size: 10px;">PythonWeb</a> <a href="/tags/Python基础/" style="font-size: 14.29px;">Python基础</a> <a href="/tags/Redis/" style="font-size: 14.29px;">Redis</a> <a href="/tags/Spring/" style="font-size: 18.57px;">Spring</a> <a href="/tags/剑指Offer/" style="font-size: 17.14px;">剑指Offer</a> <a href="/tags/剑指offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/大数据/" style="font-size: 12.86px;">大数据</a> <a href="/tags/大数据基础/" style="font-size: 12.86px;">大数据基础</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/搜索/" style="font-size: 12.86px;">搜索</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/面经/" style="font-size: 11.43px;">面经</a> <a href="/tags/高并发/" style="font-size: 14.29px;">高并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/">Hadoop学习笔记（二） - HDFS详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/">Hadoop学习笔记（一）- Hadoop快速入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/">JVM学习笔记（基础知识）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/大数据/大数据基础/Netty学习笔记（一）/">Netty学习笔记（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hadoop学习笔记（一）- Hadoop快速入门 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1 Hadoop生态圈简介 重点组件：  HDFS：分布式文件系统 MAPREDUCE：分布式运算程序开发框架 HIVE：基于大数据技术（文件系统+运算框架）的SQL数据仓库工具 HBASE：基于HADOOP的分布式海量数据库 ZOOKEEPER：分布式协调服务基础组件 Mahout：基于mapreduce/spark/flink等分布式运算框架的机器学习算法库 Oozie：工作流调度框架 Sqo">
+<meta name="keywords" content="大数据,Hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop学习笔记（一）- Hadoop快速入门">
+<meta property="og:url" content="http://yoursite.com/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1 Hadoop生态圈简介 重点组件：  HDFS：分布式文件系统 MAPREDUCE：分布式运算程序开发框架 HIVE：基于大数据技术（文件系统+运算框架）的SQL数据仓库工具 HBASE：基于HADOOP的分布式海量数据库 ZOOKEEPER：分布式协调服务基础组件 Mahout：基于mapreduce/spark/flink等分布式运算框架的机器学习算法库 Oozie：工作流调度框架 Sqo">
+<meta property="og:image" content="http://yoursite.com/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）-%20Hadoop快速入门/Hadoop学习笔记（一）-%20Hadoop快速入门/hadoop_sys.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）-%20Hadoop快速入门/Hadoop学习笔记（一）-%20Hadoop快速入门/hdfs.jpg">
+<meta property="og:updated_time" content="2017-04-27T15:40:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hadoop学习笔记（一）- Hadoop快速入门">
+<meta name="twitter:description" content="1 Hadoop生态圈简介 重点组件：  HDFS：分布式文件系统 MAPREDUCE：分布式运算程序开发框架 HIVE：基于大数据技术（文件系统+运算框架）的SQL数据仓库工具 HBASE：基于HADOOP的分布式海量数据库 ZOOKEEPER：分布式协调服务基础组件 Mahout：基于mapreduce/spark/flink等分布式运算框架的机器学习算法库 Oozie：工作流调度框架 Sqo">
+<meta name="twitter:image" content="http://yoursite.com/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）-%20Hadoop快速入门/Hadoop学习笔记（一）-%20Hadoop快速入门/hadoop_sys.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/" class="article-date">
+  <time datetime="2017-04-24T07:08:31.000Z" itemprop="datePublished">2017-04-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hadoop学习笔记（一）- Hadoop快速入门
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Hadoop生态圈简介"><a href="#1-Hadoop生态圈简介" class="headerlink" title="1 Hadoop生态圈简介"></a>1 Hadoop生态圈简介</h1><p><img src="Hadoop学习笔记（一）-%20Hadoop快速入门/hadoop_sys.jpg" alt=""></p>
+<p><strong>重点组件：</strong></p>
+<ul>
+<li>HDFS：分布式文件系统</li>
+<li>MAPREDUCE：分布式运算程序开发框架</li>
+<li>HIVE：基于大数据技术（文件系统+运算框架）的SQL数据仓库工具</li>
+<li>HBASE：基于HADOOP的分布式海量数据库</li>
+<li>ZOOKEEPER：分布式协调服务基础组件</li>
+<li>Mahout：基于mapreduce/spark/flink等分布式运算框架的机器学习算法库</li>
+<li>Oozie：工作流调度框架</li>
+<li>Sqoop：数据导入导出工具</li>
+<li>Flume：日志数据采集框架</li>
+</ul>
+<a id="more"></a>
+<h1 id="2-搭建Hadoop集群"><a href="#2-搭建Hadoop集群" class="headerlink" title="2 搭建Hadoop集群"></a>2 搭建Hadoop集群</h1><h2 id="2-1-下载、解压、配置环境变量"><a href="#2-1-下载、解压、配置环境变量" class="headerlink" title="2.1 下载、解压、配置环境变量"></a>2.1 下载、解压、配置环境变量</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-2.6.4/hadoop-2.6.4.tar.gz</div></pre></td></tr></table></figure>
+<p><a href="https://seawaylee.github.io/2017/03/22/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%9F%BA%E7%A1%80/Linux%E7%8E%AF%E5%A2%83%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" target="_blank" rel="external">配置免密登陆</a></p>
+<h2 id="2-2-Hadoop配置"><a href="#2-2-Hadoop配置" class="headerlink" title="2.2 Hadoop配置"></a>2.2 Hadoop配置</h2><p><strong>hadoop-env.sh</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export JAVA_HOME=/home/hadoop/apps/jdk1.7.0_51</div></pre></td></tr></table></figure>
+<p><strong>core-site.xml</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;property&gt;</div><div class="line">    &lt;name&gt;fs.defaultFS&lt;/name&gt;</div><div class="line">    &lt;value&gt;hdfs://hadoop1:9000&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div><div class="line"></div><div class="line">&lt;property&gt;</div><div class="line">    &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</div><div class="line">    &lt;value&gt;/opt/app/data/hadoop_data&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div></pre></td></tr></table></figure>
+<p><strong>hdfs-site.xml</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;property&gt;</div><div class="line">    &lt;name&gt;dfs.replication&lt;/name&gt;</div><div class="line">    &lt;value&gt;3&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div></pre></td></tr></table></figure>
+<p><strong>mapred-site.xml</strong>   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;property&gt;</div><div class="line">    &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</div><div class="line">    &lt;value&gt;yarn&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div></pre></td></tr></table></figure>
+<p><strong>yarn-site.xml</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;property&gt;</div><div class="line">    &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</div><div class="line">    &lt;value&gt;hadoop1&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div><div class="line"></div><div class="line">&lt;property&gt;</div><div class="line">    &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</div><div class="line">    &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div></pre></td></tr></table></figure>
+<p><strong>slaves</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hadoop1</div><div class="line">hadoop2</div><div class="line">hadoop3</div></pre></td></tr></table></figure>
+<h1 id="3-Hadoop-Shell-命令"><a href="#3-Hadoop-Shell-命令" class="headerlink" title="3 Hadoop Shell 命令"></a>3 Hadoop Shell 命令</h1><h2 id="3-1-集群相关"><a href="#3-1-集群相关" class="headerlink" title="3.1 集群相关"></a>3.1 集群相关</h2><ul>
+<li>start-dfs.sh 启动hdfs</li>
+<li>start-yarn.sh 启动yarn</li>
+<li>start-all.sh 直接启动hdfs + yarn</li>
+<li>stop-all.sh 停止 hdfs + yarn</li>
+<li>hadoop namenode -format </li>
+</ul>
+<h2 id="3-2-HDFS"><a href="#3-2-HDFS" class="headerlink" title="3.2 HDFS"></a>3.2 HDFS</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-help</td>
+<td>输出命令参数手册</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-ls</td>
+<td>显示目录信息</td>
+<td>hadoop fs -ls /</td>
+<td></td>
+</tr>
+<tr>
+<td>-mkdir</td>
+<td>创建目录</td>
+<td>hadoop fs -mkdir -p /aaa/bb/cc/dd</td>
+<td></td>
+</tr>
+<tr>
+<td>-moveFromLocal</td>
+<td>从本地剪切到hdfs</td>
+<td>hadoop fs -moveFromLocal /home/hadoop/1.txt /aaa/bb/cc/dd</td>
+<td></td>
+</tr>
+<tr>
+<td>-moveToLocal</td>
+<td>从hdfs剪切到本地</td>
+<td>hadoop fs -moveToLocal /aaa/bb/cc/dd /home/hadoop/1.txt</td>
+<td></td>
+</tr>
+<tr>
+<td>-appendToFile</td>
+<td>追加一个文件到已经存在的文件末尾</td>
+<td>hadoop fs -appendToFile ./hello.txt /hello.txt</td>
+<td></td>
+</tr>
+<tr>
+<td>-cat</td>
+<td>查看文件内容</td>
+<td>hadoop fs -cat /hello.txt</td>
+<td></td>
+</tr>
+<tr>
+<td>-tail</td>
+<td>显示一个文件的末尾</td>
+<td>hadoop fs -tail /access_log.1</td>
+<td></td>
+</tr>
+<tr>
+<td>-text</td>
+<td>以字符形式打印一个文件的内容</td>
+<td>hadoop fs -text /access_log.1</td>
+<td></td>
+</tr>
+<tr>
+<td>-chgrp/-chmod/-chown</td>
+<td>修改文件权限</td>
+<td>hadoop fs -chmod 755 /hello.txt</td>
+<td></td>
+</tr>
+<tr>
+<td>-copyFromLocal</td>
+<td>从本地文件系统中拷贝文件到hdfs路径去</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-copyToLocal</td>
+<td>从hdfs拷贝到本地</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-cp</td>
+<td>从hdfs的一个路径拷贝到hdfs另一个路径</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-mv</td>
+<td>在hdfs中移动文件</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-get</td>
+<td>等同于copyToLocal</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-put</td>
+<td>等同于copyFromLocal</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-getmerge</td>
+<td>合并下载多个文件</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-rm</td>
+<td>删除文件或文件夹</td>
+<td>hadoop fs -rm -r /aaa/bbb</td>
+<td></td>
+</tr>
+<tr>
+<td>-rmdir</td>
+<td>删除空目录</td>
+<td>hadoop fs -rmdir /aaa/bbb/ccc</td>
+<td></td>
+</tr>
+<tr>
+<td>-df</td>
+<td>统计问价那系统的可用空间信息</td>
+<td>hadoop fs -df -h /</td>
+<td></td>
+</tr>
+<tr>
+<td>-du</td>
+<td>统计文件夹的大小信息</td>
+<td>hadoop fs -du -s -h /aaa/*</td>
+<td></td>
+</tr>
+<tr>
+<td>-count</td>
+<td>统计一个指定目录下的文件节点数量</td>
+<td>hadoop fs -count /aaa/</td>
+<td></td>
+</tr>
+<tr>
+<td>-setrep</td>
+<td>设置hdfs中文件的副本数量</td>
+<td>hadoop fs -setrep 3 /aaa/jdk.tar</td>
+</tr>
+</tbody>
+</table>
+<h1 id="4-使用Hadoop集群"><a href="#4-使用Hadoop集群" class="headerlink" title="4 使用Hadoop集群"></a>4 使用Hadoop集群</h1><h2 id="4-1-查看集群状态"><a href="#4-1-查看集群状态" class="headerlink" title="4.1 查看集群状态"></a>4.1 查看集群状态</h2><p><strong><code>hdfs dfsadmin -report</code></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">Configured Capacity: 64389906432 (59.97 GB)</div><div class="line">Present Capacity: 38095904768 (35.48 GB)</div><div class="line">DFS Remaining: 38095818752 (35.48 GB)</div><div class="line">DFS Used: 86016 (84 KB)</div><div class="line">DFS Used%: 0.00%</div><div class="line">Under replicated blocks: 0</div><div class="line">Blocks with corrupt replicas: 0</div><div class="line">Missing blocks: 0</div><div class="line"></div><div class="line">-------------------------------------------------</div><div class="line">Live datanodes (3):</div><div class="line"></div><div class="line">Name: 10.5.151.242:50010 (hadoop2)</div><div class="line">Hostname: localhost</div><div class="line">Decommission Status : Normal</div><div class="line">Configured Capacity: 21463302144 (19.99 GB)</div><div class="line">DFS Used: 28672 (28 KB)</div><div class="line">Non DFS Used: 8654106624 (8.06 GB)</div><div class="line">DFS Remaining: 12809166848 (11.93 GB)</div><div class="line">DFS Used%: 0.00%</div><div class="line">DFS Remaining%: 59.68%</div><div class="line">Configured Cache Capacity: 0 (0 B)</div><div class="line">Cache Used: 0 (0 B)</div><div class="line">Cache Remaining: 0 (0 B)</div><div class="line">Cache Used%: 100.00%</div><div class="line">Cache Remaining%: 0.00%</div><div class="line">Xceivers: 1</div><div class="line">Last contact: Tue Apr 25 19:30:28 CST 2017</div><div class="line"></div><div class="line"></div><div class="line">Name: 10.5.151.241:50010 (hadoop1)</div><div class="line">Hostname: localhost</div><div class="line">Decommission Status : Normal</div><div class="line">Configured Capacity: 21463302144 (19.99 GB)</div><div class="line">DFS Used: 28672 (28 KB)</div><div class="line">Non DFS Used: 9653018624 (8.99 GB)</div><div class="line">DFS Remaining: 11810254848 (11.00 GB)</div><div class="line">DFS Used%: 0.00%</div><div class="line">DFS Remaining%: 55.03%</div><div class="line">Configured Cache Capacity: 0 (0 B)</div><div class="line">Cache Used: 0 (0 B)</div><div class="line">Cache Remaining: 0 (0 B)</div><div class="line">Cache Used%: 100.00%</div><div class="line">Cache Remaining%: 0.00%</div><div class="line">Xceivers: 1</div><div class="line">Last contact: Tue Apr 25 19:30:28 CST 2017</div><div class="line"></div><div class="line"></div><div class="line">Name: 10.5.151.243:50010 (hadoop3)</div><div class="line">Hostname: localhost</div><div class="line">Decommission Status : Normal</div><div class="line">Configured Capacity: 21463302144 (19.99 GB)</div><div class="line">DFS Used: 28672 (28 KB)</div><div class="line">Non DFS Used: 7986876416 (7.44 GB)</div><div class="line">DFS Remaining: 13476397056 (12.55 GB)</div><div class="line">DFS Used%: 0.00%</div><div class="line">DFS Remaining%: 62.79%</div><div class="line">Configured Cache Capacity: 0 (0 B)</div><div class="line">Cache Used: 0 (0 B)</div><div class="line">Cache Remaining: 0 (0 B)</div><div class="line">Cache Used%: 100.00%</div><div class="line">Cache Remaining%: 0.00%</div><div class="line">Xceivers: 1</div><div class="line">Last contact: Tue Apr 25 19:30:27 CST 2017</div></pre></td></tr></table></figure>
+<p>或者打开 <a href="http://hadoop1:50070查看" target="_blank" rel="external">http://hadoop1:50070查看</a><br><img src="Hadoop学习笔记（一）-%20Hadoop快速入门/hdfs.jpg" alt=""></p>
+<h2 id="4-2-上传、下载文件"><a href="#4-2-上传、下载文件" class="headerlink" title="4.2 上传、下载文件"></a>4.2 上传、下载文件</h2><p>HDFS默认文件大小块为128MB，若文件大于128MB，HDFS将会对文件进行切割后存储。<br>HDFS对文件执行的切割非常简单，我们可以将下载后的多个切块使用cat block1 &gt;&gt; tmp.txt ,cat block2 &gt;&gt; tmp.txt 命令将完整的文件拼接出来。</p>
+<p>HDFS文件的增删改查可以使用Hadoop的Shell命令进行操作。</p>
+<h2 id="4-3-测试MapReduce"><a href="#4-3-测试MapReduce" class="headerlink" title="4.3 测试MapReduce"></a>4.3 测试MapReduce</h2><ul>
+<li>上传文本文件到hdfs  /paper.txt</li>
+<li>cd /opt/app/hadoop-2.6.4/share/hadoop/mapreduce</li>
+<li>hadoop jar hadoop-mapreduce-examples-2.6.4.jar wordcount /paper.txt /wordcount/output </li>
+<li>到 <a href="http://hadoop1:8088" target="_blank" rel="external">http://hadoop1:8088</a> 查看job执行流程</li>
+<li>到HDFS查看统计结果  hadoop fs -cat /wordcount/output/part-r-00000</li>
+</ul>
+<h1 id="5-问题解决记录"><a href="#5-问题解决记录" class="headerlink" title="5 问题解决记录"></a>5 问题解决记录</h1><h2 id="5-1-CentOS7-64位系统问题"><a href="#5-1-CentOS7-64位系统问题" class="headerlink" title="5.1 CentOS7 64位系统问题"></a>5.1 CentOS7 64位系统问题</h2><p><strong>启动报错</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</div></pre></td></tr></table></figure>
+<p><strong>解决</strong></p>
+<p>vim /etc/profile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">JAVA_HOME=/usr/java/jdk1.7.0_79</div><div class="line">CLASSPATH=.:$JAVA_HOME/lib.tools.jar</div><div class="line">ZOOKEEPER_HOME=/opt/app/zookeeper-3.4.5</div><div class="line">HADOOP_HOME=/opt/app/hadoop-2.6.4</div><div class="line">PATH=$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$ZOOKEEPER_HOME/bin:$JAVA_HOME/bin:$PATH</div><div class="line">export HADOOP_COMMON_LIB_NATIVE_DIR=&quot;$HADOOP_HOME/lib/native/&quot;</div><div class="line">export HADOOP_OPTS=&quot;-Djava.library.path=$HADOOP_HOME/lib/&quot;</div><div class="line">export HADOOP_HOME  ZOOKEEPER_HOME JAVA_HOME CLASSPATH PATH</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="5-2-格式化DFS"><a href="#5-2-格式化DFS" class="headerlink" title="5.2 格式化DFS"></a>5.2 格式化DFS</h2><p><strong>报错</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UnknownHostException - Formatting HDFS on Mac OSX Mavericks</div></pre></td></tr></table></figure>
+<p><strong>解决</strong></p>
+<p>vim /etc/host<br>添加主机名 10-5-151-241</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 10-5-151-241</div></pre></td></tr></table></figure>
+<h2 id="5-3-启动DataNode失败"><a href="#5-3-启动DataNode失败" class="headerlink" title="5.3 启动DataNode失败"></a>5.3 启动DataNode失败</h2><p><strong>报错</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">org.apache.hadoop.hdfs.server.common.Storage: DataNode version: -56 and NameNode layout version: -60</div></pre></td></tr></table></figure>
+<p><strong>解决</strong></p>
+<p>根据日志中的路径，cd /home/hadoop/tmp/dfs</p>
+<p>能看到 data和name两个文件夹，</p>
+<p>将name/current下的VERSION中的clusterID复制到data/current下的VERSION中，覆盖掉原来的clusterID</p>
+<p>让两个保持一致</p>
+<p>然后重启，启动后执行jps，查看进程</p>
+<p><strong>或 直接删除data文件夹</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/" data-id="cj27jtjt5003ia7fyyuogcli9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hadoop学习笔记（二） - HDFS详解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JVM学习笔记（基础知识）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java爬虫/">Java爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac工具/">Mac工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nosql/">Nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PythonWeb/">PythonWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python基础/">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指offer/">剑指offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据基础/">大数据基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面经/">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高并发/">高并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 11.43px;">Hadoop</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 20px;">JavaWeb</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Java爬虫/" style="font-size: 10px;">Java爬虫</a> <a href="/tags/Linux/" style="font-size: 11.43px;">Linux</a> <a href="/tags/Mac工具/" style="font-size: 12.86px;">Mac工具</a> <a href="/tags/Nosql/" style="font-size: 14.29px;">Nosql</a> <a href="/tags/Oracle/" style="font-size: 14.29px;">Oracle</a> <a href="/tags/PythonWeb/" style="font-size: 10px;">PythonWeb</a> <a href="/tags/Python基础/" style="font-size: 14.29px;">Python基础</a> <a href="/tags/Redis/" style="font-size: 14.29px;">Redis</a> <a href="/tags/Spring/" style="font-size: 18.57px;">Spring</a> <a href="/tags/剑指Offer/" style="font-size: 17.14px;">剑指Offer</a> <a href="/tags/剑指offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/大数据/" style="font-size: 12.86px;">大数据</a> <a href="/tags/大数据基础/" style="font-size: 12.86px;">大数据基础</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/搜索/" style="font-size: 12.86px;">搜索</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/面经/" style="font-size: 11.43px;">面经</a> <a href="/tags/高并发/" style="font-size: 14.29px;">高并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/">Hadoop学习笔记（二） - HDFS详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/">Hadoop学习笔记（一）- Hadoop快速入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/">JVM学习笔记（基础知识）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/大数据/大数据基础/Netty学习笔记（一）/">Netty学习笔记（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

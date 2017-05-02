@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ElasticSearch学习笔记 - 概览 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1 IntroductionElasticsearch也使用Java开发并使用Lucene作为其核心来实现所有索引和搜索的功能，但是它的目的是通过简单的RESTful API来隐藏Lucene的复杂性，从而让全文搜索变得简单。不过，Elasticsearch不仅仅是Lucene和全文搜索，我们还能这样去描述它：  分布式的实时文件存储，每个字段都被索引并可被搜索 分布式的实时分析搜索引擎 可以扩展">
+<meta name="keywords" content="搜索">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ElasticSearch学习笔记 - 概览">
+<meta property="og:url" content="http://yoursite.com/2017/03/09/搜索/ElasticSearch学习笔记-概览/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1 IntroductionElasticsearch也使用Java开发并使用Lucene作为其核心来实现所有索引和搜索的功能，但是它的目的是通过简单的RESTful API来隐藏Lucene的复杂性，从而让全文搜索变得简单。不过，Elasticsearch不仅仅是Lucene和全文搜索，我们还能这样去描述它：  分布式的实时文件存储，每个字段都被索引并可被搜索 分布式的实时分析搜索引擎 可以扩展">
+<meta property="og:updated_time" content="2017-03-09T14:52:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ElasticSearch学习笔记 - 概览">
+<meta name="twitter:description" content="1 IntroductionElasticsearch也使用Java开发并使用Lucene作为其核心来实现所有索引和搜索的功能，但是它的目的是通过简单的RESTful API来隐藏Lucene的复杂性，从而让全文搜索变得简单。不过，Elasticsearch不仅仅是Lucene和全文搜索，我们还能这样去描述它：  分布式的实时文件存储，每个字段都被索引并可被搜索 分布式的实时分析搜索引擎 可以扩展">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-搜索/ElasticSearch学习笔记-概览" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/09/搜索/ElasticSearch学习笔记-概览/" class="article-date">
+  <time datetime="2017-03-09T03:59:15.000Z" itemprop="datePublished">2017-03-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ElasticSearch学习笔记 - 概览
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h2><p>Elasticsearch也使用Java开发并使用Lucene作为其核心来实现所有索引和搜索的功能，但是它的目的是通过简单的RESTful API来隐藏Lucene的复杂性，从而让全文搜索变得简单。<br>不过，Elasticsearch不仅仅是Lucene和全文搜索，我们还能这样去描述它：</p>
+<ul>
+<li>分布式的实时文件存储，每个字段都被索引并可被搜索</li>
+<li>分布式的实时分析搜索引擎</li>
+<li>可以扩展到上百台服务器，处理PB级结构化或非结构化数据</li>
+</ul>
+<a id="more"></a>
+<h2 id="2-Installation"><a href="#2-Installation" class="headerlink" title="2 Installation"></a>2 Installation</h2><p>安装ES<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">curl -L -O http://download.elasticsearch.org/PATH/TO/VERSION.zip &lt;1&gt;</div><div class="line">unzip elasticsearch-$VERSION.zip</div><div class="line">cd  elasticsearch-$VERSION</div></pre></td></tr></table></figure></p>
+<p>安装Mavel<br>Marvel是Elasticsearch的管理和监控工具，在开发环境下免费使用。它包含了一个叫做Sense的交互式控制台，使用户方便的通过浏览器直接与Elasticsearch进行交互。</p>
+<p>安装Kibana</p>
+<h2 id="3-API"><a href="#3-API" class="headerlink" title="3 API"></a>3 API</h2><p><strong>Java API</strong></p>
+<p>Elasticsearch为Java用户提供了两种内置客户端：<br><strong>节点客户端(node client)：</strong></p>
+<p>节点客户端以无数据节点(none data node)身份加入集群，换言之，它自己不存储任何数据，但是它知道数据在集群中的具体位置，并且能够直接转发请求到对应的节点上。<br><strong>传输客户端(Transport client)：</strong></p>
+<p>这个更轻量的传输客户端能够发送请求到远程集群。它自己不加入集群，只是简单转发请求给集群中的节点。<br>两个Java客户端都通过9300端口与集群交互，使用Elasticsearch传输协议(Elasticsearch Transport Protocol)。集群中的节点之间也通过9300端口进行通信。如果此端口未开放，你的节点将不能组成集群。</p>
+<p><strong>基于HTTP协议，以JSON为数据交互格式的RESTful API</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -X&lt;VERB&gt; '&lt;PROTOCOL&gt;://&lt;HOST&gt;:&lt;PORT&gt;/&lt;PATH&gt;?&lt;QUERY_STRING&gt;' -d '&lt;BODY&gt;'</div></pre></td></tr></table></figure>
+<ul>
+<li>VERB HTTP方法：GET, POST, PUT, HEAD, DELETE</li>
+<li>PROTOCOL http或者https协议（只有在Elasticsearch前面有https代理的时候可用）</li>
+<li>HOST Elasticsearch集群中的任何一个节点的主机名，如果是在本地的节点，那么就叫localhost</li>
+<li>PORT Elasticsearch HTTP服务所在的端口，默认为9200</li>
+<li>PATH API路径（例如_count将返回集群中文档的数量），PATH可以包含多个组件，例如_cluster/stats或者_nodes/stats/jvm</li>
+<li>QUERY_STRING 一些可选的查询请求参数，例如?pretty参数将使请求返回更加美观易读的JSON数据</li>
+<li>BODY 一个JSON格式的请求主体（如果请求需要的话）</li>
+</ul>
+<p><code>$ curl http://localhost:9200/_count\?pretty</code><br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"count"</span> : <span class="number">1</span>,</div><div class="line">  <span class="attr">"_shards"</span> : &#123;</div><div class="line">    <span class="attr">"total"</span> : <span class="number">1</span>,</div><div class="line">    <span class="attr">"successful"</span> : <span class="number">1</span>,</div><div class="line">    <span class="attr">"failed"</span> : <span class="number">0</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>$ curl http://localhost:9200\?pretty</code><br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"name"</span> : <span class="string">"Fb_2umy"</span>,</div><div class="line">  <span class="attr">"cluster_name"</span> : <span class="string">"rhino-application"</span>,</div><div class="line">  <span class="attr">"cluster_uuid"</span> : <span class="string">"E1E1h5v5SNGkuMn--DgcPQ"</span>,</div><div class="line">  <span class="attr">"version"</span> : &#123;</div><div class="line">    <span class="attr">"number"</span> : <span class="string">"5.2.0"</span>,</div><div class="line">    <span class="attr">"build_hash"</span> : <span class="string">"24e05b9"</span>,</div><div class="line">    <span class="attr">"build_date"</span> : <span class="string">"2017-01-24T19:52:35.800Z"</span>,</div><div class="line">    <span class="attr">"build_snapshot"</span> : <span class="literal">false</span>,</div><div class="line">    <span class="attr">"lucene_version"</span> : <span class="string">"6.4.0"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"tagline"</span> : <span class="string">"You Know, for Search"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="4-文档"><a href="#4-文档" class="headerlink" title="4 文档"></a>4 文档</h2><p>Elasticsearch是面向文档(document oriented)的，这意味着它可以存储整个对象或文档(document)。然而它不仅仅是存储，还会索引(index)每个文档的内容使之可以被搜索。在Elasticsearch中，你可以对文档（而非成行成列的数据）进行索引、搜索、排序、过滤。这种理解数据的方式与以往完全不同，这也是Elasticsearch能够执行复杂的全文搜索的原因之一。</p>
+<p><strong>开始第一步</strong></p>
+<p>我们现在开始进行一个简单教程，它涵盖了一些基本的概念介绍，比如<strong>索引(indexing)、搜索(search)以及聚合(aggregations)</strong>。通过这个教程，我们可以让你对Elasticsearch能做的事以及其易用程度有一个大致的感觉。<br>我们接下来将陆续介绍一些术语和基本的概念，但就算你没有马上完全理解也没有关系。我们将在本书的各个章节中更加深入的探讨这些内容。<br>所以，坐下来，开始以旋风般的速度来感受Elasticsearch的能力吧！<br>让我们建立一个员工目录</p>
+<p>假设我们刚好在<strong>Megacorp</strong>工作，这时人力资源部门出于某种目的需要让我们创建一个<strong>员工目录</strong>，这个目录用于促进人文关怀和用于实时协同工作，所以它有以下不同的需求：</p>
+<ul>
+<li>数据能够包含多个值的标签、数字和纯文本。</li>
+<li>检索任何员工的所有信息。</li>
+<li>支持结构化搜索，例如查找30岁以上的员工。</li>
+<li>支持简单的全文搜索和更复杂的短语(phrase)搜索</li>
+<li>高亮搜索结果中的关键字</li>
+<li>能够利用图表管理分析这些数据</li>
+<li>索引员工文档</li>
+</ul>
+<p>我们首先要做的是存储员工数据，每个文档代表一个员工。在Elasticsearch中存储数据的行为就叫做索引(indexing)，不过在索引之前，我们需要明确数据应该存储在哪里。<br>在Elasticsearch中，文档归属于一种类型(type),而这些类型存在于索引(index)中，我们可以画一些简单的对比图来类比传统关系型数据库：</p>
+<p><strong>Relational DB -&gt; Databases -&gt; Tables -&gt; Rows -&gt; Columns<br>Elasticsearch -&gt; Indices   -&gt; Types  -&gt; Documents -&gt; Fields</strong><br>Elasticsearch集群可以包含多个索引(indices)（数据库），每一个索引可以包含多个类型(types)（表），每一个类型包含多个文档(documents)（行），然后每个文档包含多个字段(Fields)（列）。<br>「索引」含义的区分</p>
+<p><code>你可能已经注意到索引(index)这个词在Elasticsearch中有着不同的含义，所以有必要在此做一下区分:
+索引（名词） 如上文所述，一个索引(index)就像是传统关系数据库中的数据库，它是相关文档存储的地方，index的复数是indices 或indexes。
+索引（动词） 「索引一个文档」表示把一个文档存储到索引（名词）里，以便它可以被检索或者查询。这很像SQL中的INSERT关键字，差别是，如果文档已经存在，新的文档将覆盖旧的文档。
+倒排索引 传统数据库为特定列增加一个索引，例如B-Tree索引来加速检索。Elasticsearch和Lucene使用一种叫做倒排索引(inverted index)的数据结构来达到相同目的。</code></p>
+<p>默认情况下，文档中的所有字段都会被索引（拥有一个倒排索引），只有这样他们才是可被搜索的。<br>我们将会在倒排索引章节中更详细的讨论。<br>所以为了创建员工目录，我们将进行如下操作：<br>为每个员工的文档(document)建立索引，每个文档包含了相应员工的所有信息。<br>每个文档的类型为employee。<br>employee类型归属于索引megacorp。<br>megacorp索引存储在Elasticsearch集群中。<br>实际上这些都是很容易的（尽管看起来有许多步骤）。我们能通过一个命令执行完成的操作：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">PUT /megacorp/employee/1</div><div class="line">&#123;</div><div class="line">    "first_name" : "John",</div><div class="line">    "last_name" :  "Smith",</div><div class="line">    "age" :        25,</div><div class="line">    "about" :      "I love to go rock climbing",</div><div class="line">    "interests": [ "sports", "music" ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>请求实体（JSON文档），包含了这个员工的所有信息。他的名字叫“John Smith”，25岁，喜欢攀岩。<br>很简单吧！它不需要你做额外的管理操作，比如创建索引或者定义每个字段的数据类型。我们能够直接索引文档，Elasticsearch已经内置所有的缺省设置，所有管理操作都是透明的。<br>接下来，让我们在目录中加入更多员工信息：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">PUT /megacorp/employee/2</div><div class="line">&#123;</div><div class="line">    "first_name" :  "Jane",</div><div class="line">    "last_name" :   "Smith",</div><div class="line">    "age" :         32,</div><div class="line">    "about" :       "I like to collect rock albums",</div><div class="line">    "interests":  [ "music" ]</div><div class="line">&#125;</div><div class="line"></div><div class="line">PUT /megacorp/employee/3</div><div class="line">&#123;</div><div class="line">    "first_name" :  "Douglas",</div><div class="line">    "last_name" :   "Fir",</div><div class="line">    "age" :         35,</div><div class="line">    "about":        "I like to build cabinets",</div><div class="line">    "interests":  [ "forestry" ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="5-检索文档"><a href="#5-检索文档" class="headerlink" title="5 检索文档"></a>5 检索文档</h2><p>我们通过HTTP方法GET来检索文档，同样的，我们可以使用DELETE方法删除文档，使用HEAD方法检查某文档是否存在。如果想更新已存在的文档，我们只需再PUT一次。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">GET /megacorp/employee/3</div><div class="line">&#123;</div><div class="line">  "_index": "megacrop",</div><div class="line">  "_type": "employee",</div><div class="line">  "_id": "3",</div><div class="line">  "_version": 1,</div><div class="line">  "found": true,</div><div class="line">  "_source": &#123;</div><div class="line">    "first_name": "Douglas",</div><div class="line">    "last_name": "Fir",</div><div class="line">    "age": 35,</div><div class="line">    "about": "I like to build cabinets",</div><div class="line">    "interests": [</div><div class="line">      "forestry"</div><div class="line">    ]</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>简单搜索</strong></p>
+<p>GET请求非常简单——你能轻松获取你想要的文档。让我们来进一步尝试一些东西，比如简单的搜索！<br>我们尝试一个最简单的搜索全部员工的请求：<br>GET /megacorp/employee/_search<br>你可以看到我们依然使用megacorp索引和employee类型，但是我们在结尾使用关键字_search来取代原来的文档ID。响应内容的hits数组中包含了我们所有的三个文档。默认情况下搜索会返回前10个结果。+</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line">GET /megacorp/employee/_search</div><div class="line"></div><div class="line">&#123;</div><div class="line">  "took": 20,</div><div class="line">  "timed_out": false,</div><div class="line">  "_shards": &#123;</div><div class="line">    "total": 5,</div><div class="line">    "successful": 5,</div><div class="line">    "failed": 0</div><div class="line">  &#125;,</div><div class="line">  "hits": &#123;</div><div class="line">    "total": 3,</div><div class="line">    "max_score": 1.0,</div><div class="line">    "hits": [</div><div class="line">      &#123;</div><div class="line">        "_index": "megacrop",</div><div class="line">        "_type": "employee",</div><div class="line">        "_id": "2",</div><div class="line">        "_score": 1.0,</div><div class="line">        "_source": &#123;</div><div class="line">          "first_name": "Jane",</div><div class="line">          "last_name": "Smith",</div><div class="line">          "age": 32,</div><div class="line">          "about": "I like to collect rock albums",</div><div class="line">          "interests": [</div><div class="line">            "music"</div><div class="line">          ]</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        "_index": "megacrop",</div><div class="line">        "_type": "employee",</div><div class="line">        "_id": "1",</div><div class="line">        "_score": 1.0,</div><div class="line">        "_source": &#123;</div><div class="line">          "first_name": "John",</div><div class="line">          "last_name": "Smith",</div><div class="line">          "age": 25,</div><div class="line">          "about": "I love to go rock climbing",</div><div class="line">          "interests": [</div><div class="line">            "sports",</div><div class="line">            "music"</div><div class="line">          ]</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        "_index": "megacrop",</div><div class="line">        "_type": "employee",</div><div class="line">        "_id": "3",</div><div class="line">        "_score": 1.0,</div><div class="line">        "_source": &#123;</div><div class="line">          "first_name": "Douglas",</div><div class="line">          "last_name": "Fir",</div><div class="line">          "age": 35,</div><div class="line">          "about": "I like to build cabinets",</div><div class="line">          "interests": [</div><div class="line">            "forestry"</div><div class="line">          ]</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    ]</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>加入检索条件</strong><br>我们在请求中依旧使用_search关键字，然后将查询语句传递给参数q=。这样就可以得到所有姓氏为Smith的结果：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">GET /megacorp/employee/_search?q=last_name:Smith</div><div class="line">&#123;</div><div class="line">  "took": 4,</div><div class="line">  "timed_out": false,</div><div class="line">  "_shards": &#123;</div><div class="line">    "total": 5,</div><div class="line">    "successful": 5,</div><div class="line">    "failed": 0</div><div class="line">  &#125;,</div><div class="line">  "hits": &#123;</div><div class="line">    "total": 2,</div><div class="line">    "max_score": 0.2876821,</div><div class="line">    "hits": [</div><div class="line">      &#123;</div><div class="line">        "_index": "megacrop",</div><div class="line">        "_type": "employee",</div><div class="line">        "_id": "2",</div><div class="line">        "_score": 0.2876821,</div><div class="line">        "_source": &#123;</div><div class="line">          "first_name": "Jane",</div><div class="line">          "last_name": "Smith",</div><div class="line">          "age": 32,</div><div class="line">          "about": "I like to collect rock albums",</div><div class="line">          "interests": [</div><div class="line">            "music"</div><div class="line">          ]</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        "_index": "megacrop",</div><div class="line">        "_type": "employee",</div><div class="line">        "_id": "1",</div><div class="line">        "_score": 0.2876821,</div><div class="line">        "_source": &#123;</div><div class="line">          "first_name": "John",</div><div class="line">          "last_name": "Smith",</div><div class="line">          "age": 25,</div><div class="line">          "about": "I love to go rock climbing",</div><div class="line">          "interests": [</div><div class="line">            "sports",</div><div class="line">            "music"</div><div class="line">          ]</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    ]</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>使用DSL语句查询</strong><br>查询字符串搜索便于通过命令行完成特定(ad hoc)的搜索，但是它也有局限性（参阅简单搜索章节）。Elasticsearch提供丰富且灵活的查询语言叫做DSL查询(Query DSL),它允许你构建更加复杂、强大的查询。<br>DSL(Domain Specific Language特定领域语言)以JSON请求体的形式出现。我们可以这样表示之前关于“Smith”的查询:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">POST /megacorp/employee/_search</div><div class="line">&#123;</div><div class="line">  "query": &#123;</div><div class="line">    "match": &#123;</div><div class="line">      "last_name": "Smith"</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>更复杂的搜索</strong><br>我们让搜索稍微再变的复杂一些。我们依旧想要找到姓氏为“Smith”的员工，但是我们只想得到年龄大于30岁的员工。我们的语句将添加过滤器(filter),它使得我们高效率的执行一个结构化搜索：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">POST /megacorp/employee/_search</div><div class="line"></div><div class="line">&#123;</div><div class="line">  "query": &#123;</div><div class="line">    "bool": &#123;</div><div class="line">      "must": [</div><div class="line">        &#123;</div><div class="line">          "match": &#123;</div><div class="line">            "last_name": "smith"</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      ],</div><div class="line">      "filter": [</div><div class="line">        &#123;</div><div class="line">          "range": &#123;</div><div class="line">            "age": &#123;</div><div class="line">              "gte": "30"</div><div class="line">            &#125;</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      ]</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>全文搜索</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">POST /megacorp/employee/_search</div><div class="line">&#123;</div><div class="line">    "query" : &#123;</div><div class="line">        "match" : &#123;</div><div class="line">            "about" : "rock climbing"</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;took&quot;: 7,</div><div class="line">  &quot;timed_out&quot;: false,</div><div class="line">  &quot;_shards&quot;: &#123;</div><div class="line">    &quot;total&quot;: 5,</div><div class="line">    &quot;successful&quot;: 5,</div><div class="line">    &quot;failed&quot;: 0</div><div class="line">  &#125;,</div><div class="line">  &quot;hits&quot;: &#123;</div><div class="line">    &quot;total&quot;: 2,</div><div class="line">    &quot;max_score&quot;: 0.53484553,</div><div class="line">    &quot;hits&quot;: [</div><div class="line">      &#123;</div><div class="line">        &quot;_index&quot;: &quot;megacrop&quot;,</div><div class="line">        &quot;_type&quot;: &quot;employee&quot;,</div><div class="line">        &quot;_id&quot;: &quot;1&quot;,</div><div class="line">        &quot;_score&quot;: 0.53484553,</div><div class="line">        &quot;_source&quot;: &#123;</div><div class="line">          &quot;first_name&quot;: &quot;John&quot;,</div><div class="line">          &quot;last_name&quot;: &quot;Smith&quot;,</div><div class="line">          &quot;age&quot;: 25,</div><div class="line">          &quot;about&quot;: &quot;I love to go rock climbing&quot;,</div><div class="line">          &quot;interests&quot;: [</div><div class="line">            &quot;sports&quot;,</div><div class="line">            &quot;music&quot;</div><div class="line">          ]</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        &quot;_index&quot;: &quot;megacrop&quot;,</div><div class="line">        &quot;_type&quot;: &quot;employee&quot;,</div><div class="line">        &quot;_id&quot;: &quot;2&quot;,</div><div class="line">        &quot;_score&quot;: 0.26742277,</div><div class="line">        &quot;_source&quot;: &#123;</div><div class="line">          &quot;first_name&quot;: &quot;Jane&quot;,</div><div class="line">          &quot;last_name&quot;: &quot;Smith&quot;,</div><div class="line">          &quot;age&quot;: 32,</div><div class="line">          &quot;about&quot;: &quot;I like to collect rock albums&quot;,</div><div class="line">          &quot;interests&quot;: [</div><div class="line">            &quot;music&quot;</div><div class="line">          ]</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    ]</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>默认情况下，Elasticsearch根据结果相关性评分来对结果集进行排序，所谓的「结果相关性评分」就是文档与查询条件的匹配程度。很显然，排名第一的John Smith的about字段明确的写到“rock climbing”。<br>但是为什么Jane Smith也会出现在结果里呢？原因是“rock”在她的abuot字段中被提及了。因为只有“rock”被提及而“climbing”没有，所以她的_score要低于John。3<br>这个例子很好的解释了Elasticsearch如何在各种文本字段中进行全文搜索，并且返回相关性最大的结果集。相关性(relevance)的概念在Elasticsearch中非常重要，而这个概念在传统关系型数据库中是不可想象的，因为传统数据库对记录的查询只有匹配或者不匹配。</p>
+<p><strong>短语搜索</strong></p>
+<p>目前我们可以在字段中搜索单独的一个词，这挺好的，但是有时候你想要确切的匹配若干个单词或者短语(phrases)。例如我们想要查询同时包含”rock”和”climbing”（并且是相邻的）的员工记录。<br>要做到这个，我们只要将match查询变更为match_phrase查询即可:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">POST /megacorp/employee/_search</div><div class="line">&#123;</div><div class="line">    "query" : &#123;</div><div class="line">        "match_phrase" : &#123;</div><div class="line">            "about" : "rock climbing"</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>高亮搜搜</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">POST /megacorp/employee/_search</div><div class="line">&#123;</div><div class="line">    "query" : &#123;</div><div class="line">        "match_phrase" : &#123;</div><div class="line">            "about" : "rock climbing"</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    "highlight": &#123;</div><div class="line">        "fields" : &#123;</div><div class="line">            "about" : &#123;&#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;took&quot;: 4,</div><div class="line">  &quot;timed_out&quot;: false,</div><div class="line">  &quot;_shards&quot;: &#123;</div><div class="line">    &quot;total&quot;: 5,</div><div class="line">    &quot;successful&quot;: 5,</div><div class="line">    &quot;failed&quot;: 0</div><div class="line">  &#125;,</div><div class="line">  &quot;hits&quot;: &#123;</div><div class="line">    &quot;total&quot;: 1,</div><div class="line">    &quot;max_score&quot;: 0.53484553,</div><div class="line">    &quot;hits&quot;: [</div><div class="line">      &#123;</div><div class="line">        &quot;_index&quot;: &quot;megacrop&quot;,</div><div class="line">        &quot;_type&quot;: &quot;employee&quot;,</div><div class="line">        &quot;_id&quot;: &quot;1&quot;,</div><div class="line">        &quot;_score&quot;: 0.53484553,</div><div class="line">        &quot;_source&quot;: &#123;</div><div class="line">          &quot;first_name&quot;: &quot;John&quot;,</div><div class="line">          &quot;last_name&quot;: &quot;Smith&quot;,</div><div class="line">          &quot;age&quot;: 25,</div><div class="line">          &quot;about&quot;: &quot;I love to go rock climbing&quot;,</div><div class="line">          &quot;interests&quot;: [</div><div class="line">            &quot;sports&quot;,</div><div class="line">            &quot;music&quot;</div><div class="line">          ]</div><div class="line">        &#125;,</div><div class="line">        &quot;highlight&quot;: &#123;</div><div class="line">          &quot;about&quot;: [</div><div class="line">            &quot;I love to go &lt;em&gt;rock&lt;/em&gt; &lt;em&gt;climbing&lt;/em&gt;&quot;</div><div class="line">          ]</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    ]</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="6-聚合"><a href="#6-聚合" class="headerlink" title="6 聚合"></a>6 聚合</h2><p>最后，我们还有一个需求需要完成：允许管理者在职员目录中进行一些分析。 Elasticsearch有一个功能叫做聚合(aggregations)，它允许你在数据上生成复杂的分析统计。它很像SQL中的GROUP BY但是功能更强大。<br>举个例子，让我们找到所有职员中最大的共同点（兴趣爱好）是什么：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">POST megacrop/employee/_search</div><div class="line">&#123;</div><div class="line">  "aggregations": &#123;</div><div class="line">    "all_interests": &#123;</div><div class="line">      "terms": &#123; "field": "interests" &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果报错</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"type"</span>: <span class="string">"illegal_argument_exception"</span>,</div><div class="line">  <span class="attr">"reason"</span>: <span class="string">"Fielddata is disabled on text fields by default. Set fielddata=true on [interests] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory."</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>则配置属性</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">POST megacrop/_mapping/employee</div><div class="line">&#123;</div><div class="line">  "properties": &#123;</div><div class="line">    "interests": &#123; </div><div class="line">      "type":     "text",</div><div class="line">      "fielddata": true</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>返回聚合结果</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">"aggregations": &#123;</div><div class="line">  "all_interests": &#123;</div><div class="line">    "doc_count_error_upper_bound": 0,</div><div class="line">    "sum_other_doc_count": 0,</div><div class="line">    "buckets": [</div><div class="line">      &#123;</div><div class="line">        "key": "music",</div><div class="line">        "doc_count": 2</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        "key": "forestry",</div><div class="line">        "doc_count": 1</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        "key": "sports",</div><div class="line">        "doc_count": 1</div><div class="line">      &#125;</div><div class="line">    ]</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>嵌套聚合查询</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">POST /megacorp/employee/_search</div><div class="line">&#123;</div><div class="line">    "aggs" : &#123;</div><div class="line">        "all_interests" : &#123;</div><div class="line">            "terms" : &#123; "field" : "interests" &#125;,</div><div class="line">            "aggs" : &#123;</div><div class="line">                "avg_age" : &#123;</div><div class="line">                    "avg" : &#123; "field" : "age" &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">"aggregations": &#123;</div><div class="line">   "all_interests": &#123;</div><div class="line">     "doc_count_error_upper_bound": 0,</div><div class="line">     "sum_other_doc_count": 0,</div><div class="line">     "buckets": [</div><div class="line">       &#123;</div><div class="line">         "key": "music",</div><div class="line">         "doc_count": 2,</div><div class="line">         "avg_age": &#123;</div><div class="line">           "value": 28.5</div><div class="line">         &#125;</div><div class="line">       &#125;,</div><div class="line">       &#123;</div><div class="line">         "key": "forestry",</div><div class="line">         "doc_count": 1,</div><div class="line">         "avg_age": &#123;</div><div class="line">           "value": 35.0</div><div class="line">         &#125;</div><div class="line">       &#125;,</div><div class="line">       &#123;</div><div class="line">         "key": "sports",</div><div class="line">         "doc_count": 1,</div><div class="line">         "avg_age": &#123;</div><div class="line">           "value": 25.0</div><div class="line">         &#125;</div><div class="line">       &#125;</div><div class="line">     ]</div><div class="line">   &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h2 id="7-分布式特性简介"><a href="#7-分布式特性简介" class="headerlink" title="7 分布式特性简介"></a>7 分布式特性简介</h2><p>在章节的开始我们提到Elasticsearch可以扩展到上百（甚至上千）的服务器来处理PB级的数据。然而我们的教程只是给出了一些使用Elasticsearch的例子，并未涉及相关机制。Elasticsearch为分布式而生，而且它的设计隐藏了分布式本身的复杂性。<br>Elasticsearch在分布式概念上做了很大程度上的透明化，在教程中你不需要知道任何关于分布式系统、分片、集群发现或者其他大量的分布式概念。所有的教程你既可以运行在你的笔记本上，也可以运行在拥有100个节点的集群上，其工作方式是一样的。<br>Elasticsearch致力于隐藏分布式系统的复杂性。以下这些操作都是在底层自动完成的：<br>将你的文档分区到不同的容器或者分片(shards)中，它们可以存在于一个或多个节点中。<br>将分片均匀的分配到各个节点，对索引和搜索做负载均衡。<br>冗余每一个分片，防止硬件故障造成的数据丢失。<br>将集群中任意一个节点上的请求路由到相应数据所在的节点。<br>无论是增加节点，还是移除节点，分片都可以做到无缝的扩展和迁移。</p>
+<h2 id="8-小结"><a href="#8-小结" class="headerlink" title="8 小结"></a>8 小结</h2><p>现在你对Elasticsearch可以做些什么以及其易用程度有了大概的了解。Elasticsearch致力于降低学习成本和轻松配置。学习Elasticsearch最好的方式就是开始使用它：开始索引和检索吧！<br>当然，你越是了解Elasticsearch，你的生产力就越高。你越是详细告诉Elasticsearch你的应用的数据特点，你就越能得到准确的输出。<br>本书其余部分将帮助你从新手晋级到专家。每一个章节都会阐述一个要点，并且会包含专家级别的技巧。如果你只是刚起步，那么这些技巧可能暂时和你无关。Elasticsearch有合理的默认配置而且可以在没有用户干预的情况下做正确的事情。当需要提升性能时你可以随时回顾这些章节。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/09/搜索/ElasticSearch学习笔记-概览/" data-id="cj27jtjqy0016a7fyjn17ngxg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/搜索/">搜索</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/09/高并发/Ngxin学习笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Ngxin学习笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/09/搜索/Lucene学习笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Lucene学籍笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java爬虫/">Java爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac工具/">Mac工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nosql/">Nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PythonWeb/">PythonWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python基础/">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指offer/">剑指offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据基础/">大数据基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面经/">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高并发/">高并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 11.43px;">Hadoop</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 20px;">JavaWeb</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Java爬虫/" style="font-size: 10px;">Java爬虫</a> <a href="/tags/Linux/" style="font-size: 11.43px;">Linux</a> <a href="/tags/Mac工具/" style="font-size: 12.86px;">Mac工具</a> <a href="/tags/Nosql/" style="font-size: 14.29px;">Nosql</a> <a href="/tags/Oracle/" style="font-size: 14.29px;">Oracle</a> <a href="/tags/PythonWeb/" style="font-size: 10px;">PythonWeb</a> <a href="/tags/Python基础/" style="font-size: 14.29px;">Python基础</a> <a href="/tags/Redis/" style="font-size: 14.29px;">Redis</a> <a href="/tags/Spring/" style="font-size: 18.57px;">Spring</a> <a href="/tags/剑指Offer/" style="font-size: 17.14px;">剑指Offer</a> <a href="/tags/剑指offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/大数据/" style="font-size: 12.86px;">大数据</a> <a href="/tags/大数据基础/" style="font-size: 12.86px;">大数据基础</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/搜索/" style="font-size: 12.86px;">搜索</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/面经/" style="font-size: 11.43px;">面经</a> <a href="/tags/高并发/" style="font-size: 14.29px;">高并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/">Hadoop学习笔记（二） - HDFS详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/">Hadoop学习笔记（一）- Hadoop快速入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/">JVM学习笔记（基础知识）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/大数据/大数据基础/Netty学习笔记（一）/">Netty学习笔记（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

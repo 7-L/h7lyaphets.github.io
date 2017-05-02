@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Django1.10静态文件不能成功读取解决方案 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="问题：初学Django，按照官网配置settings.py中static相关部分后不能成功读取到配置文件。使用Chrome调试工具查看后发现没有报404错误，而是返回200.Console  提示信息Resource interpreted as Stylesheet but transferred with MIME type text/html: &amp;quot;http://localhost:">
+<meta name="keywords" content="PythonWeb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django1.10静态文件不能成功读取解决方案">
+<meta property="og:url" content="http://yoursite.com/2017/03/10/PythonWeb/Django静态文件问题/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="问题：初学Django，按照官网配置settings.py中static相关部分后不能成功读取到配置文件。使用Chrome调试工具查看后发现没有报404错误，而是返回200.Console  提示信息Resource interpreted as Stylesheet but transferred with MIME type text/html: &amp;quot;http://localhost:">
+<meta property="og:updated_time" content="2017-03-09T17:10:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django1.10静态文件不能成功读取解决方案">
+<meta name="twitter:description" content="问题：初学Django，按照官网配置settings.py中static相关部分后不能成功读取到配置文件。使用Chrome调试工具查看后发现没有报404错误，而是返回200.Console  提示信息Resource interpreted as Stylesheet but transferred with MIME type text/html: &amp;quot;http://localhost:">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-PythonWeb/Django静态文件问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/10/PythonWeb/Django静态文件问题/" class="article-date">
+  <time datetime="2017-03-09T16:50:53.000Z" itemprop="datePublished">2017-03-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Django1.10静态文件不能成功读取解决方案
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>问题：<br>初学Django，按照官网配置settings.py中static相关部分后不能成功读取到配置文件。<br>使用Chrome调试工具查看后发现没有报404错误，而是返回200.<br>Console  提示信息<br><code>Resource interpreted as Stylesheet but transferred with MIME type text/html: &quot;http://localhost:8000/bbs/index/static/css/common.css&quot;.</code></p>
+<a id="more"></a>
+<p><strong>解决方案</strong></p>
+<h3 id="1-settings中静态文件配置部分如下"><a href="#1-settings中静态文件配置部分如下" class="headerlink" title="1.settings中静态文件配置部分如下"></a>1.settings中静态文件配置部分如下</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">SITE_ROOT = os.path.join(os.path.abspath(os.path.dirname(__file__)),<span class="string">'..'</span>)  </div><div class="line">STATIC_URL = <span class="string">'/static/'</span>  </div><div class="line">STATIC_ROOT = os.path.join(SITE_ROOT,<span class="string">'static'</span>)  </div><div class="line">STATICFILES_DIRS = (  </div><div class="line">    <span class="comment"># os.path.join(BASE_DIR,STATIC_URL),  </span></div><div class="line">    (<span class="string">'css'</span>,os.path.join(STATIC_ROOT,<span class="string">'css'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),  </div><div class="line">    (<span class="string">'js'</span>,os.path.join(STATIC_ROOT,<span class="string">'js'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),  </div><div class="line">    (<span class="string">'images'</span>,os.path.join(STATIC_ROOT,<span class="string">'images'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),  </div><div class="line">    (<span class="string">'upload'</span>,os.path.join(STATIC_ROOT,<span class="string">'upload'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),  </div><div class="line">)</div></pre></td></tr></table></figure>
+<h3 id="2-目录结构"><a href="#2-目录结构" class="headerlink" title="2.目录结构"></a>2.目录结构</h3><h3 id="3-HTML引用静态文件"><a href="#3-HTML引用静态文件" class="headerlink" title="3.HTML引用静态文件"></a>3.HTML引用静态文件</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span>  </div><div class="line">&#123;% load static %&#125;  </div><div class="line">&#123;#&#123;% load staticfiles %&#125;#&#125;  </div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> &gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>BBS社区<span class="tag">&lt;/<span class="name">title</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"&#123;% static 'css/common.css' %&#125;"</span> &gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pg-header"</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"header-menu"</span>&gt;</span>  </div><div class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"/static/images/logo.png"</span> <span class="attr">href</span>=<span class="string">"/bbs/index/"</span> <span class="attr">class</span>=<span class="string">"digg-logo"</span>&gt;</span><span class="tag">&lt;/<span class="name">img</span>&gt;</span>  </div><div class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/bbs/index/"</span> <span class="attr">class</span>=<span class="string">"tb active"</span>&gt;</span>全部<span class="tag">&lt;/<span class="name">a</span>&gt;</span>  </div><div class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/bbs/index/"</span> <span class="attr">class</span>=<span class="string">"tb"</span>&gt;</span>TabA<span class="tag">&lt;/<span class="name">a</span>&gt;</span>  </div><div class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/bbs/index/"</span> <span class="attr">class</span>=<span class="string">"tb"</span>&gt;</span>TabB<span class="tag">&lt;/<span class="name">a</span>&gt;</span>  </div><div class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/bbs/index/"</span> <span class="attr">class</span>=<span class="string">"tb"</span>&gt;</span>TabC<span class="tag">&lt;/<span class="name">a</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"header-search"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pg-body"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pg-bottom"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>  </div><div class="line">&#123;#    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"&#123;% static 'images/test.png' %&#125;"</span>&gt;</span>#&#125;  </div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="4-重启server再试试吧，good-luck"><a href="#4-重启server再试试吧，good-luck" class="headerlink" title="4.重启server再试试吧，good luck."></a>4.重启server再试试吧，good luck.</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/10/PythonWeb/Django静态文件问题/" data-id="cj27jtjqh000ua7fy17q9ifz2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PythonWeb/">PythonWeb</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/10/爬虫/Java/豆瓣读书爬虫/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          豆瓣读书论坛-大规模数据爬取与分析-Java版
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/10/Oracle/PLSQL快速入门/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">数据库编程入门(一)-PL/SQL快速入门</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java爬虫/">Java爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac工具/">Mac工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nosql/">Nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PythonWeb/">PythonWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python基础/">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指offer/">剑指offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据基础/">大数据基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面经/">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高并发/">高并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 11.43px;">Hadoop</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 20px;">JavaWeb</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Java爬虫/" style="font-size: 10px;">Java爬虫</a> <a href="/tags/Linux/" style="font-size: 11.43px;">Linux</a> <a href="/tags/Mac工具/" style="font-size: 12.86px;">Mac工具</a> <a href="/tags/Nosql/" style="font-size: 14.29px;">Nosql</a> <a href="/tags/Oracle/" style="font-size: 14.29px;">Oracle</a> <a href="/tags/PythonWeb/" style="font-size: 10px;">PythonWeb</a> <a href="/tags/Python基础/" style="font-size: 14.29px;">Python基础</a> <a href="/tags/Redis/" style="font-size: 14.29px;">Redis</a> <a href="/tags/Spring/" style="font-size: 18.57px;">Spring</a> <a href="/tags/剑指Offer/" style="font-size: 17.14px;">剑指Offer</a> <a href="/tags/剑指offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/大数据/" style="font-size: 12.86px;">大数据</a> <a href="/tags/大数据基础/" style="font-size: 12.86px;">大数据基础</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/搜索/" style="font-size: 12.86px;">搜索</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/面经/" style="font-size: 11.43px;">面经</a> <a href="/tags/高并发/" style="font-size: 14.29px;">高并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/">Hadoop学习笔记（二） - HDFS详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/">Hadoop学习笔记（一）- Hadoop快速入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/">JVM学习笔记（基础知识）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/大数据/大数据基础/Netty学习笔记（一）/">Netty学习笔记（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

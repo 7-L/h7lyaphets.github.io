@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux基本操作 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="配置三台Linux服务器，为Hadoop集群准备硬件资源。 1 设备条件 性能: 由一台32G的8Core服务器虚拟出3台(4G 4Core)CentOS7服务器,内存固定分配，Core根据使用状态动态调节  查看CPU信息 cat /proc/cpuinfo 查看内存信息 free -h   IP地址: 10.5.151.241 10.5.151.242 10.5.151.243  VM网络配置">
+<meta name="keywords" content="Linux,大数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux基本操作">
+<meta property="og:url" content="http://yoursite.com/2017/03/22/大数据/大数据基础/Linux环境基本操作/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="配置三台Linux服务器，为Hadoop集群准备硬件资源。 1 设备条件 性能: 由一台32G的8Core服务器虚拟出3台(4G 4Core)CentOS7服务器,内存固定分配，Core根据使用状态动态调节  查看CPU信息 cat /proc/cpuinfo 查看内存信息 free -h   IP地址: 10.5.151.241 10.5.151.242 10.5.151.243  VM网络配置">
+<meta property="og:updated_time" content="2017-03-28T06:32:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux基本操作">
+<meta name="twitter:description" content="配置三台Linux服务器，为Hadoop集群准备硬件资源。 1 设备条件 性能: 由一台32G的8Core服务器虚拟出3台(4G 4Core)CentOS7服务器,内存固定分配，Core根据使用状态动态调节  查看CPU信息 cat /proc/cpuinfo 查看内存信息 free -h   IP地址: 10.5.151.241 10.5.151.242 10.5.151.243  VM网络配置">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-大数据/大数据基础/Linux环境基本操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/22/大数据/大数据基础/Linux环境基本操作/" class="article-date">
+  <time datetime="2017-03-22T12:09:06.000Z" itemprop="datePublished">2017-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux基本操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>配置三台Linux服务器，为Hadoop集群准备硬件资源。</p>
+<h2 id="1-设备条件"><a href="#1-设备条件" class="headerlink" title="1 设备条件"></a>1 设备条件</h2><ul>
+<li>性能: 由一台32G的8Core服务器虚拟出3台(4G 4Core)CentOS7服务器,内存固定分配，Core根据使用状态动态调节 <ul>
+<li>查看CPU信息 <code>cat /proc/cpuinfo</code></li>
+<li>查看内存信息 <code>free -h</code></li>
+</ul>
+</li>
+<li>IP地址: 10.5.151.241 10.5.151.242 10.5.151.243 </li>
+<li>VM网络配置使用的桥接模式，使用真实的网络地址，Bridge适合远程操作；而NAT模式适合将虚拟机装在本机，使用虚拟网关，如果是在笔记本电脑中虚拟机器可以使用此方式。</li>
+</ul>
+<h2 id="2-操作"><a href="#2-操作" class="headerlink" title="2 操作"></a>2 操作</h2><h3 id="2-1-Vim基本操作"><a href="#2-1-Vim基本操作" class="headerlink" title="2.1 Vim基本操作"></a>2.1 Vim基本操作</h3><p><strong>一般模式</strong></p>
+<ul>
+<li>a  在光标后一位开始插入</li>
+<li>A   在该行的最后插入</li>
+<li>I   在该行的最前面插入</li>
+<li>gg   直接跳到文件的首行</li>
+<li>G    直接跳到文件的末行</li>
+<li>dd   删除行，如果  5dd   ，则一次性删除光标后的5行</li>
+<li>yy  复制当前行,  复制多行，则  3yy，则复制当前行附近的3行</li>
+<li>p   粘贴</li>
+<li>v  进入字符选择模式，选择完成后，按y复制，按p粘贴</li>
+<li>ctrl+v  进入块选择模式，选择完成后，按y复制，按p粘贴</li>
+<li>shift+v  进入行选择模式，选择完成后，按y复制，按p粘贴</li>
+</ul>
+<a id="more"></a>
+<p><strong>命令模式</strong></p>
+<p>查找并替换（在底行中输入）</p>
+<ul>
+<li>%s/sad/666     查找文件中所有sad，666</li>
+<li>/you       查找文件中出现的you，并定位到第一个找到的地方，按n可以定位到下一个匹配位置（按N定位到上一个）</li>
+</ul>
+<h3 id="2-2-日常操作"><a href="#2-2-日常操作" class="headerlink" title="2.2 日常操作"></a>2.2 日常操作</h3><ul>
+<li>pwd 显示当前目录</li>
+<li>date 查看当前时间</li>
+<li>who 查看当前登录到服务器的人</li>
+<li>last 查看最近的登陆历史记录</li>
+</ul>
+<h3 id="2-3-文件权限操作"><a href="#2-3-文件权限操作" class="headerlink" title="2.3 文件权限操作"></a>2.3 文件权限操作</h3><ul>
+<li>chmod g-rw haha.dat    表示将haha.dat对所属组的rw权限取消</li>
+<li>chmod o-rw haha.dat     表示将haha.dat对其他人的rw权限取消</li>
+<li>chmod u+x haha.dat      表示将haha.dat对所属用户的权限增加x</li>
+</ul>
+<p><strong>也可以用数字的方式来修改权限</strong></p>
+<ul>
+<li>chmod 664 haha.dat 就会修改成   rw-rw-r–   </li>
+</ul>
+<p><strong>如果要将一个文件夹的所有内容权限统一修改，则可以-R参数</strong></p>
+<ul>
+<li>chmod -R 770 aaa/</li>
+<li>chown angela:angela aaa/    &lt;只有root能执行&gt;</li>
+</ul>
+<blockquote>
+<p>目录没有执行权限的时候普通用户不能进入<br>文件只有读写权限的时候普通用户是可以删除的(删除文件不是修改它,是操作父及目录),只要父级目录有执行和修改的权限</p>
+</blockquote>
+<h3 id="2-4-用户管理"><a href="#2-4-用户管理" class="headerlink" title="2.4 用户管理"></a>2.4 用户管理</h3><ul>
+<li>useradd hadoop   添加用户hadoop</li>
+<li>passwd hadoop   修改用户密码</li>
+<li>为hadoo用户配置sudo的使用权限<ul>
+<li>vim /etc/sudoers</li>
+<li>hadoop ALL=(ALL)  ALL</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-5-系统管理操作"><a href="#2-5-系统管理操作" class="headerlink" title="2.5 系统管理操作"></a>2.5 系统管理操作</h3><ul>
+<li>hostname 查看主机名</li>
+<li>hostname hadoop 修改主机名,重启后无效</li>
+<li>vim /etc/sysconfig/network 修改主机名，重启后永久生效</li>
+<li>ifconfig eth0 192.168.1.100 修改IP，重启后无效</li>
+<li>vim /etc/sysconfig/network-scripts/ifcfg-eth0 修改IP 重启网卡后永久生效</li>
+<li>挂载外置磁盘<ul>
+<li>mkdir /mnt/udisk 创建一个目录用来挂载</li>
+<li>mount -t iso1234 ro /dev/sd4 /mnt/udisk   将设备/dev/sd4挂在到/mnt/udisk中</li>
+<li>umount /mnt/udisk 解除挂载</li>
+</ul>
+</li>
+<li>du -sh /var 查看文件夹大小sh run</li>
+<li>df -h 查看磁盘空间</li>
+<li>halt 关机</li>
+<li>reboot 重启</li>
+<li>uname -a 查看系统信息</li>
+</ul>
+<h3 id="2-6-查看文件操作"><a href="#2-6-查看文件操作" class="headerlink" title="2.6 查看文件操作"></a>2.6 查看文件操作</h3><ul>
+<li>cat    somefile    一次性将文件内容全部输出（控制台）</li>
+<li>more   somefile     可以翻页查看, 下翻一页(空格)    上翻一页（b）   退出（q）</li>
+<li>less   somefile      可以翻页查看,下翻一页(空格)    上翻一页（b），上翻一行(↑)  下翻一行（↓）  可以搜索关键字（/keyword）</li>
+<li>tail -10  install.log   查看文件尾部的10行</li>
+<li>tail -f install.log    小f跟踪文件的唯一inode号，就算文件改名后，还是跟踪原来这个inode表示的文件</li>
+<li>tail -F install.log    大F按照文件名来跟踪</li>
+<li>head -10  install.log   查看文件头部的10行</li>
+</ul>
+<h3 id="2-7-后台服务管理"><a href="#2-7-后台服务管理" class="headerlink" title="2.7 后台服务管理"></a>2.7 后台服务管理</h3><ul>
+<li>service network status   查看指定服务的状态</li>
+<li>service network stop     停止指定服务</li>
+<li>service network start    启动指定服务</li>
+<li>service network restart  重启指定服务</li>
+<li>service –status-all  查看系统中所有的后台服务</li>
+</ul>
+<h3 id="2-8-系统启动级别管理"><a href="#2-8-系统启动级别管理" class="headerlink" title="2.8 系统启动级别管理"></a>2.8 系统启动级别管理</h3><p>vi  /etc/inittab</p>
+<h3 id="2-9-设置后台服务的自启配置"><a href="#2-9-设置后台服务的自启配置" class="headerlink" title="2.9 设置后台服务的自启配置"></a>2.9 设置后台服务的自启配置</h3><ul>
+<li>chkconfig   查看所有服务器自启配置</li>
+<li>chkconfig iptables off   关掉指定服务的自动启动</li>
+<li>chkconfig iptables on   开启指定服务的自动启动</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># Default runlevel. The runlevels used are:</div><div class="line">#   0 - halt (Do NOT set initdefault to this)</div><div class="line">#   1 - Single user mode</div><div class="line">#   2 - Multiuser, without NFS (The same as 3, if you do not have networking)</div><div class="line">#   3 - Full multiuser mode</div><div class="line">#   4 - unused</div><div class="line">#   5 - X11</div><div class="line">#   6 - reboot (Do NOT set initdefault to this)</div><div class="line">#</div><div class="line">id:3:initdefault:</div></pre></td></tr></table></figure>
+<h3 id="2-10-压缩解压缩-打包解包"><a href="#2-10-压缩解压缩-打包解包" class="headerlink" title="2.10 压缩解压缩 打包解包"></a>2.10 压缩解压缩 打包解包</h3><ul>
+<li>gzip access.log 压缩文件</li>
+<li>gzip -d access.log.gz</li>
+<li>tar -cvf mytarball.tar aaa/ 打包aaa文件夹</li>
+<li>tar -xvf mytarball.tar 解包</li>
+<li>tar -zcvf my.tar.gz  aaa/ 压缩并打包</li>
+<li>tar -zxvf my.tar.gz 解包解压缩</li>
+</ul>
+<h3 id="2-11-wget-使用"><a href="#2-11-wget-使用" class="headerlink" title="2.11 wget 使用"></a>2.11 wget 使用</h3><p>wget –no-check-certificate https:xxxx/mysql-5.7.17-linux-glibc2.5-x86_64.tar.gz  下载https路径的文件</p>
+<h3 id="2-12-rpm-使用"><a href="#2-12-rpm-使用" class="headerlink" title="2.12 rpm 使用"></a>2.12 rpm 使用</h3><ul>
+<li>rpm -qa | grep mysql 查看系统中安装的rpm包</li>
+<li>rpm -ivh perl*  安装perl依赖  《可能会提示有包冲突，解决： rpm -e 冲突包名 –nodeps 》</li>
+<li>rpm -ivh MySQL-server-5.5.48-1.linux2.6.x86_64.rpm 安装server</li>
+<li>rpm -ivh MySQL-client-5.5.48-1.linux2.6.x86_64.rpm 安装clent </li>
+</ul>
+<h3 id="2-13-后台服务管理"><a href="#2-13-后台服务管理" class="headerlink" title="2.13 后台服务管理"></a>2.13 后台服务管理</h3><ul>
+<li>chkconfig   查看所有服务器自启配置</li>
+<li>chkconfig iptables off   关掉指定服务的自动启动</li>
+<li>chkconfig iptables on   开启指定服务的自动启动</li>
+</ul>
+<h2 id="3-配置"><a href="#3-配置" class="headerlink" title="3 配置"></a>3 配置</h2><h3 id="3-1-配置hostname"><a href="#3-1-配置hostname" class="headerlink" title="3.1 配置hostname"></a>3.1 配置hostname</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">vim /etc/hosts</div><div class="line"></div><div class="line">10.5.151.241 hadoop1</div><div class="line">10.5.151.242 hadoop2</div><div class="line">10.5.151.241 hadoop3</div></pre></td></tr></table></figure>
+<h3 id="3-2-配置SSH免密登陆"><a href="#3-2-配置SSH免密登陆" class="headerlink" title="3.2 配置SSH免密登陆"></a>3.2 配置SSH免密登陆</h3><p>若 A 需要登录 B</p>
+<p><strong>A上操作</strong></p>
+<ul>
+<li>ssh-keygen  生成密钥对</li>
+<li>ssh-copy-id B 将A的公钥复制并追加到B的授权列表文件 authorized_keys 中 </li>
+</ul>
+<h3 id="3-3-Clone-Linux-遇到的问题"><a href="#3-3-Clone-Linux-遇到的问题" class="headerlink" title="3.3 Clone Linux 遇到的问题"></a>3.3 Clone Linux 遇到的问题</h3><ol>
+<li><p>从一台配置好的linux克隆多个系统时，由于物理网卡地址重复，因此生成了一块新的网卡eth1，原来了eth0不见了</p>
+<ul>
+<li>直接修改ifcfg-eth0 、删除UUID和HWARE、配置静态地址</li>
+<li>rm -rf /etc/udev/rules.d/70-persisitent-net.rules 或 将eth1的无礼地址复制给eth0</li>
+<li>reboot </li>
+</ul>
+</li>
+</ol>
+<h2 id="4-安装Mysql"><a href="#4-安装Mysql" class="headerlink" title="4 安装Mysql"></a>4 安装Mysql</h2><ul>
+<li><p>卸载自带mysql</p>
+<ul>
+<li>rpm -qa | grep mysql*</li>
+<li>rpm -qa | grep maria*</li>
+<li>rpm -e 以上查询结果</li>
+<li>yum list installed mysql* </li>
+<li>yum erase 以上查询结果</li>
+<li>find / -name mysql  逐一删除</li>
+</ul>
+</li>
+<li><p>下载mysql</p>
+<ul>
+<li>wget  –no-check-certificate <a href="https://cdn.mysql.com//Downloads/MySQL-5.6/MySQL-5.6.35-1.linux_glibc2.5.x86_64.rpm-bundle.tar" target="_blank" rel="external">https://cdn.mysql.com//Downloads/MySQL-5.6/MySQL-5.6.35-1.linux_glibc2.5.x86_64.rpm-bundle.tar</a> </li>
+<li>tar -xvf 下载结果</li>
+<li>rpm -ivh mysql-server 和 mysql-client</li>
+</ul>
+</li>
+<li><p>启动、连接 </p>
+<ul>
+<li>systemctl start mysql 启动服务</li>
+<li>cat /root/.mysql_secret  查找默认密码</li>
+<li>mysql_secure_installation  修改默认密码</li>
+<li>mysql -uroot -pxxxxxx 连接mysql</li>
+<li>use mysql; select host,user from user; 查看用户</li>
+<li>update user set host = ‘%’ where user = ‘root’; 设置允许远程登录</li>
+<li>flush privileges; 刷新</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-iptables防火墙设置"><a href="#5-iptables防火墙设置" class="headerlink" title="5 iptables防火墙设置"></a>5 iptables防火墙设置</h2><ul>
+<li>systemctl status/start/stop/restart firewalld 查看/启动/关闭/重启防火墙服务</li>
+</ul>
+<p><strong>查看</strong></p>
+<ul>
+<li>iptables -L -n –line-numbers 查看所有规则</li>
+<li>iptables -L -n -t nat  列出iptables nat表规则（默认是filter表）</li>
+</ul>
+<p><strong>防火墙规则</strong></p>
+<ul>
+<li>-A, –append chain    追加到规则的最后一条</li>
+<li>-D, –delete chain [rulenum]    Delete rule rulenum (1 = first) from chain</li>
+<li>-I, –insert chain [rulenum]    Insert in chain as rulenum (default 1=first) 添加到规则的第一条</li>
+<li>-p, –proto  proto    protocol: by number or name, eg. ‘tcp’,常用协议有tcp、udp、icmp、all</li>
+<li>-j, –jump target 常见的行为有ACCEPT、DROP和REJECT三种，但一般不用REJECT，会带来安全隐患</li>
+</ul>
+<p><strong>修改</strong></p>
+<ul>
+<li>iptables -F    清除默认规则（注意默认是filter表，如果对nat表操作要加-t nat）</li>
+<li>service iptables save 保存配置</li>
+</ul>
+<p><strong>实例</strong></p>
+<ul>
+<li>iptables -A INPUT -p tcp –dport 22 -j DROP   禁止ssh登陆（若果服务器在机房，一定要小心）</li>
+<li><p>iptables -D INPUT -p tcp –dport 22 -j DROP   删除规则</p>
+</li>
+<li><p>iptables -A INPUT -p tcp -i eth0 -s 192.168.33.0 -j DROP  禁止192.168.33.0网段从eth0网卡接入</p>
+</li>
+<li>iptables -A INPUT -p tcp –dport 22 -i eth0 -s 192.168.33.61  -j ACCEPT</li>
+<li>iptables -A INPUT ! -s 192.168.10.10 -j DROP   禁止ip地址非192.168.10.10的所有类型数据接入</li>
+<li>iptables -I INPUT -p icmp –icmp-type 8 -s 192.168.50.100 -j DROP   禁止ip地址非192.168.10.100的ping请求</li>
+<li>iptables -I INPUT -p tcp –dport 22:80 -j DROP   匹配端口范围</li>
+<li>iptables -I INPUT -p tcp -m multiport –dport 22,80,3306 -j ACCEPT   匹配多个端口</li>
+<li>iptables -I OUTPUT -p tcp –sport 80 -j DROP 不允许源端口为80的数据流出</li>
+</ul>
+<p><strong>扩展匹配：1.隐式扩展 2.显示扩展</strong><br><strong>隐式扩展</strong></p>
+<ul>
+<li>-p tcp<ul>
+<li>–sport PORT 源端口</li>
+<li>–dport PORT 目标端口</li>
+</ul>
+</li>
+</ul>
+<p><strong>显示扩展：使用额外的匹配规则</strong></p>
+<ul>
+<li>-m EXTENSTION –SUB-OPT</li>
+<li>-p tcp –dport 22 与 -p tcp -m tcp –dport 22功能相同</li>
+</ul>
+<p><strong>state：状态扩展，接口ip_contrack追踪会话状态</strong></p>
+<ul>
+<li>NEW：新的连接请求</li>
+<li>ESTABLISHED：已建立的连接请求</li>
+<li>INVALID：非法连接</li>
+<li>RELATED：相关联的连接</li>
+</ul>
+<h2 id="6-自动化shell脚本"><a href="#6-自动化shell脚本" class="headerlink" title="6 自动化shell脚本"></a>6 自动化shell脚本</h2><h3 id="6-1-自动配置免密登陆"><a href="#6-1-自动配置免密登陆" class="headerlink" title="6.1 自动配置免密登陆"></a>6.1 自动配置免密登陆</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">SERVERS=&quot;node-3.itcast.cn node-4.itcast.cn&quot;</div><div class="line">PASSWORD=123456</div><div class="line">BASE_SERVER=172.16.203.100</div><div class="line"></div><div class="line">auto_ssh_copy_id() &#123;</div><div class="line">    expect -c &quot;set timeout -1;</div><div class="line">        spawn ssh-copy-id $1;</div><div class="line">        expect &#123;</div><div class="line">            *(yes/no)* &#123;send -- yes\r;exp_continue;&#125;</div><div class="line">            *assword:* &#123;send -- $2\r;exp_continue;&#125;</div><div class="line">            eof        &#123;exit 0;&#125;</div><div class="line">        &#125;&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ssh_copy_id_to_all() &#123;</div><div class="line">    for SERVER in $SERVERS</div><div class="line">    do</div><div class="line">        auto_ssh_copy_id $SERVER $PASSWORD</div><div class="line">    done</div><div class="line">&#125;</div><div class="line"></div><div class="line">ssh_copy_id_to_all</div><div class="line"></div><div class="line"></div><div class="line">for SERVER in $SERVERS</div><div class="line">do</div><div class="line">    scp install.sh root@$SERVER:/root</div><div class="line">    ssh root@$SERVER /root/install.sh</div><div class="line">done</div></pre></td></tr></table></figure>
+<h3 id="6-2-自动下载部署tomcat脚本"><a href="#6-2-自动下载部署tomcat脚本" class="headerlink" title="6.2 自动下载部署tomcat脚本"></a>6.2 自动下载部署tomcat脚本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">BASE_SERVER=mini4</div><div class="line">yum install -y wget</div><div class="line">wget $BASE_SERVER/soft/jdk-7u45-linux-x64.tar.gz</div><div class="line">tar -zxvf jdk-7u45-linux-x64.tar.gz -C /usr/local</div><div class="line">cat &gt;&gt; /etc/profile &lt;&lt; EOF</div><div class="line">export JAVA_HOME=/usr/local/jdk1.7.0_45</div><div class="line">export PATH=\$PATH:\$JAVA_HOME/bin</div><div class="line">EOF</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/22/大数据/大数据基础/Linux环境基本操作/" data-id="cj27jtjta003pa7fyg1awzphc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/28/大数据/大数据基础/ZooKeeper/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ZooKeeper学习笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/22/Java基础/Java Collections Framework - ArrayList/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java Collections Framework - ArrayList</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java爬虫/">Java爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac工具/">Mac工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nosql/">Nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PythonWeb/">PythonWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python基础/">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指offer/">剑指offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据基础/">大数据基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面经/">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高并发/">高并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 11.43px;">Hadoop</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 20px;">JavaWeb</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Java爬虫/" style="font-size: 10px;">Java爬虫</a> <a href="/tags/Linux/" style="font-size: 11.43px;">Linux</a> <a href="/tags/Mac工具/" style="font-size: 12.86px;">Mac工具</a> <a href="/tags/Nosql/" style="font-size: 14.29px;">Nosql</a> <a href="/tags/Oracle/" style="font-size: 14.29px;">Oracle</a> <a href="/tags/PythonWeb/" style="font-size: 10px;">PythonWeb</a> <a href="/tags/Python基础/" style="font-size: 14.29px;">Python基础</a> <a href="/tags/Redis/" style="font-size: 14.29px;">Redis</a> <a href="/tags/Spring/" style="font-size: 18.57px;">Spring</a> <a href="/tags/剑指Offer/" style="font-size: 17.14px;">剑指Offer</a> <a href="/tags/剑指offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/大数据/" style="font-size: 12.86px;">大数据</a> <a href="/tags/大数据基础/" style="font-size: 12.86px;">大数据基础</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/搜索/" style="font-size: 12.86px;">搜索</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/面经/" style="font-size: 11.43px;">面经</a> <a href="/tags/高并发/" style="font-size: 14.29px;">高并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/">Hadoop学习笔记（二） - HDFS详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/">Hadoop学习笔记（一）- Hadoop快速入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/">JVM学习笔记（基础知识）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/大数据/大数据基础/Netty学习笔记（一）/">Netty学习笔记（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

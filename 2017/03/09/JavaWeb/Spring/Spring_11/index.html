@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Spring 远程调用 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Spring 可以与RMI、Hessian、Burlap、HTTP invoker 等远程调用整合，但是都太麻烦了，在实际中应用很少，本文主要介绍如何使用Spring与WebService整合实现远程调用。几个名词:  SOAP:简单对象访问协议 WSDL：WebService描述语言">
+<meta name="keywords" content="JavaWeb,Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring 远程调用">
+<meta property="og:url" content="http://yoursite.com/2017/03/09/JavaWeb/Spring/Spring_11/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Spring 可以与RMI、Hessian、Burlap、HTTP invoker 等远程调用整合，但是都太麻烦了，在实际中应用很少，本文主要介绍如何使用Spring与WebService整合实现远程调用。几个名词:  SOAP:简单对象访问协议 WSDL：WebService描述语言">
+<meta property="og:updated_time" content="2017-03-09T15:53:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring 远程调用">
+<meta name="twitter:description" content="Spring 可以与RMI、Hessian、Burlap、HTTP invoker 等远程调用整合，但是都太麻烦了，在实际中应用很少，本文主要介绍如何使用Spring与WebService整合实现远程调用。几个名词:  SOAP:简单对象访问协议 WSDL：WebService描述语言">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JavaWeb/Spring/Spring_11" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/09/JavaWeb/Spring/Spring_11/" class="article-date">
+  <time datetime="2017-03-09T15:51:58.000Z" itemprop="datePublished">2017-03-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Spring 远程调用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Spring 可以与RMI、Hessian、Burlap、HTTP invoker 等远程调用整合，但是都太麻烦了，在实际中应用很少，本文主要介绍如何使用Spring与WebService整合实现远程调用。<br>几个名词:</p>
+<ul>
+<li>SOAP:简单对象访问协议</li>
+<li>WSDL：WebService描述语言</li>
+</ul>
+<a id="more"></a>
+<h2 id="JaxWs配置"><a href="#JaxWs配置" class="headerlink" title="JaxWs配置"></a>JaxWs配置</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> data_persistent.config;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * JAX-WS配置</div><div class="line"> * <span class="doctag">@author</span> NikoBelic</div><div class="line"> * <span class="doctag">@create</span> 27/01/2017 16:33</div><div class="line"> */</div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RMIConfig</span></span></div><div class="line">&#123;</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> SimpleJaxWsServiceExporter <span class="title">jaxWsServiceExporter</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"RMI配置文件初始化"</span>);</div><div class="line">        SimpleJaxWsServiceExporter exporter = <span class="keyword">new</span> SimpleJaxWsServiceExporter();</div><div class="line">        exporter.setBaseAddress(<span class="string">"http://localhost:8088/services/"</span>);</div><div class="line">        <span class="keyword">return</span> exporter;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="WebService层"><a href="#WebService层" class="headerlink" title="WebService层"></a>WebService层</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> data_persistent.webservice;</div><div class="line"></div><div class="line"><span class="keyword">import</span> data_persistent.dao.UserDao;</div><div class="line"><span class="keyword">import</span> data_persistent.model.UserObj;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.jws.WebMethod;</div><div class="line"><span class="keyword">import</span> javax.jws.WebService;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@author</span> NikoBelic</div><div class="line"> * <span class="doctag">@create</span> 25/01/2017 22:44</div><div class="line"> */</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="meta">@WebService</span>(serviceName = <span class="string">"userService"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserWebService</span></span></div><div class="line">&#123;</div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> UserDao userDao;</div><div class="line"></div><div class="line">    <span class="comment">//@WebMethod</span></div><div class="line">    <span class="function"><span class="keyword">public</span> UserObj <span class="title">addUser</span><span class="params">(UserObj userObj)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> userDao.addUser(userObj);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//@WebMethod</span></div><div class="line">    <span class="function"><span class="keyword">public</span> UserObj <span class="title">findUserById</span><span class="params">(Integer id)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> userDao.findUserById(id);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//@WebMethod</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateUserById</span><span class="params">(Integer id, UserObj userObj)</span></span></div><div class="line">    &#123;</div><div class="line">        userDao.updateUserById(id, userObj);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//@WebMethod</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteUserById</span><span class="params">(Integer id)</span></span></div><div class="line">    &#123;</div><div class="line">        userDao.deleteUserById(id);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="发布结果"><a href="#发布结果" class="headerlink" title="发布结果"></a>发布结果</h2><p>访问<code>http://localhost:8088/services/userService?wsdl</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div></pre></td><td class="code"><pre><div class="line">This XML file does not appear to have any style information associated with it. The document tree is shown below.</div><div class="line">&lt;!--</div><div class="line"> Published by JAX-WS RI (http://jax-ws.java.net). RI's version is JAX-WS RI 2.2.9-b130926.1035 svn-revision#5f6196f2b90e9460065a4c2f4e30e065b245e51e. </div><div class="line">--&gt;</div><div class="line">&lt;!--</div><div class="line"> Generated by JAX-WS RI (http://jax-ws.java.net). RI's version is JAX-WS RI 2.2.9-b130926.1035 svn-revision#5f6196f2b90e9460065a4c2f4e30e065b245e51e. </div><div class="line">--&gt;</div><div class="line">&lt;definitions xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://webservice.data_persistent/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://webservice.data_persistent/" name="userService"&gt;</div><div class="line">&lt;types&gt;</div><div class="line">&lt;xsd:schema&gt;</div><div class="line">&lt;xsd:import namespace="http://webservice.data_persistent/" schemaLocation="http://localhost:8088/services/userService?xsd=1"/&gt;</div><div class="line">&lt;/xsd:schema&gt;</div><div class="line">&lt;/types&gt;</div><div class="line">&lt;message name="addUser"&gt;</div><div class="line">&lt;part name="parameters" element="tns:addUser"/&gt;</div><div class="line">&lt;/message&gt;</div><div class="line">&lt;message name="addUserResponse"&gt;</div><div class="line">&lt;part name="parameters" element="tns:addUserResponse"/&gt;</div><div class="line">&lt;/message&gt;</div><div class="line">&lt;message name="findUserById"&gt;</div><div class="line">&lt;part name="parameters" element="tns:findUserById"/&gt;</div><div class="line">&lt;/message&gt;</div><div class="line">&lt;message name="findUserByIdResponse"&gt;</div><div class="line">&lt;part name="parameters" element="tns:findUserByIdResponse"/&gt;</div><div class="line">&lt;/message&gt;</div><div class="line">&lt;message name="updateUserById"&gt;</div><div class="line">&lt;part name="parameters" element="tns:updateUserById"/&gt;</div><div class="line">&lt;/message&gt;</div><div class="line">&lt;message name="updateUserByIdResponse"&gt;</div><div class="line">&lt;part name="parameters" element="tns:updateUserByIdResponse"/&gt;</div><div class="line">&lt;/message&gt;</div><div class="line">&lt;message name="deleteUserById"&gt;</div><div class="line">&lt;part name="parameters" element="tns:deleteUserById"/&gt;</div><div class="line">&lt;/message&gt;</div><div class="line">&lt;message name="deleteUserByIdResponse"&gt;</div><div class="line">&lt;part name="parameters" element="tns:deleteUserByIdResponse"/&gt;</div><div class="line">&lt;/message&gt;</div><div class="line">&lt;portType name="UserWebService"&gt;</div><div class="line">&lt;operation name="addUser"&gt;</div><div class="line">&lt;input wsam:Action="http://webservice.data_persistent/UserWebService/addUserRequest" message="tns:addUser"/</div><div class="line">&lt;output wsam:Action="http://webservice.data_persistent/UserWebService/addUserResponse" message="tns:addUserResponse"/&gt;</div><div class="line">&lt;/operation&gt;</div><div class="line">&lt;operation name="findUserById"&gt;</div><div class="line">&lt;input wsam:Action="http://webservice.data_persistent/UserWebService/findUserByIdRequest" message="tns:findUserById"/&gt;</div><div class="line">&lt;output wsam:Action="http://webservice.data_persistent/UserWebService/findUserByIdResponse" message="tns:findUserByIdResponse"/&gt;</div><div class="line">&lt;/operation&gt;</div><div class="line">&lt;operation name="updateUserById"&gt;</div><div class="line">&lt;input wsam:Action="http://webservice.data_persistent/UserWebService/updateUserByIdRequest" message="tns:updateUserById"/&gt;</div><div class="line">&lt;output wsam:Action="http://webservice.data_persistent/UserWebService/updateUserByIdResponse" message="tns:updateUserByIdResponse"/&gt;</div><div class="line">&lt;/operation&gt;</div><div class="line">&lt;operation name="deleteUserById"&gt;</div><div class="line">&lt;input wsam:Action="http://webservice.data_persistent/UserWebService/deleteUserByIdRequest" message="tns:deleteUserById"/&gt;</div><div class="line">&lt;output wsam:Action="http://webservice.data_persistent/UserWebService/deleteUserByIdResponse" message="tns:deleteUserByIdResponse"/&gt;</div><div class="line">&lt;/operation&gt;</div><div class="line">&lt;/portType&gt;</div><div class="line">&lt;binding name="UserWebServicePortBinding" type="tns:UserWebService"&gt;</div><div class="line">&lt;soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/&gt;</div><div class="line">&lt;operation name="addUser"&gt;</div><div class="line">&lt;soap:operation soapAction=""/&gt;</div><div class="line">&lt;input&gt;</div><div class="line">&lt;soap:body use="literal"/&gt;</div><div class="line">&lt;/input&gt;</div><div class="line">&lt;output&gt;</div><div class="line">&lt;soap:body use="literal"/&gt;</div><div class="line">&lt;/output&gt;</div><div class="line">&lt;/operation&gt;</div><div class="line">&lt;operation name="findUserById"&gt;</div><div class="line">&lt;soap:operation soapAction=""/&gt;</div><div class="line">&lt;input&gt;</div><div class="line">&lt;soap:body use="literal"/&gt;</div><div class="line">&lt;/input&gt;</div><div class="line">&lt;output&gt;</div><div class="line">&lt;soap:body use="literal"/&gt;</div><div class="line">&lt;/output&gt;</div><div class="line">&lt;/operation&gt;</div><div class="line">&lt;operation name="updateUserById"&gt;</div><div class="line">&lt;soap:operation soapAction=""/&gt;</div><div class="line">&lt;input&gt;</div><div class="line">&lt;soap:body use="literal"/&gt;</div><div class="line">&lt;/input&gt;</div><div class="line">&lt;output&gt;</div><div class="line">&lt;soap:body use="literal"/&gt;</div><div class="line">&lt;/output&gt;</div><div class="line">&lt;/operation&gt;</div><div class="line">&lt;operation name="deleteUserById"&gt;</div><div class="line">&lt;soap:operation soapAction=""/&gt;</div><div class="line">&lt;input&gt;</div><div class="line">&lt;soap:body use="literal"/&gt;</div><div class="line">&lt;/input&gt;</div><div class="line">&lt;output&gt;</div><div class="line">&lt;soap:body use="literal"/&gt;</div><div class="line">&lt;/output&gt;</div><div class="line">&lt;/operation&gt;</div><div class="line">&lt;/binding&gt;</div><div class="line">&lt;service name="userService"&gt;</div><div class="line">&lt;port name="UserWebServicePort" binding="tns:UserWebServicePortBinding"&gt;</div><div class="line">&lt;soap:address location="http://localhost:8088/services/userService"/&gt;</div><div class="line">&lt;/port&gt;</div><div class="line">&lt;/service&gt;</div><div class="line">&lt;/definitions&gt;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/09/JavaWeb/Spring/Spring_11/" data-id="cj27jtjs4002ea7fysm0mrn2m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/09/JavaWeb/Spring/Spring_12/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Spring Boot
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/09/JavaWeb/Spring/Spring_10/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Chapter13 Spring Cache</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java爬虫/">Java爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac工具/">Mac工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nosql/">Nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PythonWeb/">PythonWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python基础/">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指offer/">剑指offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据基础/">大数据基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面经/">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高并发/">高并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 11.43px;">Hadoop</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 20px;">JavaWeb</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Java爬虫/" style="font-size: 10px;">Java爬虫</a> <a href="/tags/Linux/" style="font-size: 11.43px;">Linux</a> <a href="/tags/Mac工具/" style="font-size: 12.86px;">Mac工具</a> <a href="/tags/Nosql/" style="font-size: 14.29px;">Nosql</a> <a href="/tags/Oracle/" style="font-size: 14.29px;">Oracle</a> <a href="/tags/PythonWeb/" style="font-size: 10px;">PythonWeb</a> <a href="/tags/Python基础/" style="font-size: 14.29px;">Python基础</a> <a href="/tags/Redis/" style="font-size: 14.29px;">Redis</a> <a href="/tags/Spring/" style="font-size: 18.57px;">Spring</a> <a href="/tags/剑指Offer/" style="font-size: 17.14px;">剑指Offer</a> <a href="/tags/剑指offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/大数据/" style="font-size: 12.86px;">大数据</a> <a href="/tags/大数据基础/" style="font-size: 12.86px;">大数据基础</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/搜索/" style="font-size: 12.86px;">搜索</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/面经/" style="font-size: 11.43px;">面经</a> <a href="/tags/高并发/" style="font-size: 14.29px;">高并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/">Hadoop学习笔记（二） - HDFS详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/">Hadoop学习笔记（一）- Hadoop快速入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/">JVM学习笔记（基础知识）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/大数据/大数据基础/Netty学习笔记（一）/">Netty学习笔记（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

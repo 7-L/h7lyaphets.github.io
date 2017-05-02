@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>String类深入解析 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="众所周知，String是由字符组成的串，在程序中使用频率很高。Java中的String是一个类，而并非基本数据类型。 不过她却不是普通的类哦！！！  1 String对象的创建 关于类对象的创建，很普通的一种方式就是利用构造器，String类也不例外：String s=new String(&amp;quot;Hello world&amp;quot;);问题是参数”Hello world”是什么东西，也是字符">
+<meta name="keywords" content="Java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="String类深入解析">
+<meta property="og:url" content="http://yoursite.com/2017/03/15/Java基础/String类深入解析/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="众所周知，String是由字符组成的串，在程序中使用频率很高。Java中的String是一个类，而并非基本数据类型。 不过她却不是普通的类哦！！！  1 String对象的创建 关于类对象的创建，很普通的一种方式就是利用构造器，String类也不例外：String s=new String(&amp;quot;Hello world&amp;quot;);问题是参数”Hello world”是什么东西，也是字符">
+<meta property="og:image" content="http://yoursite.com/2017/03/15/Java基础/String类深入解析/String类深入解析/jclass.gif">
+<meta property="og:updated_time" content="2017-03-15T10:55:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="String类深入解析">
+<meta name="twitter:description" content="众所周知，String是由字符组成的串，在程序中使用频率很高。Java中的String是一个类，而并非基本数据类型。 不过她却不是普通的类哦！！！  1 String对象的创建 关于类对象的创建，很普通的一种方式就是利用构造器，String类也不例外：String s=new String(&amp;quot;Hello world&amp;quot;);问题是参数”Hello world”是什么东西，也是字符">
+<meta name="twitter:image" content="http://yoursite.com/2017/03/15/Java基础/String类深入解析/String类深入解析/jclass.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java基础/String类深入解析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/15/Java基础/String类深入解析/" class="article-date">
+  <time datetime="2017-03-15T08:54:15.000Z" itemprop="datePublished">2017-03-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      String类深入解析
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>众所周知，String是由字符组成的串，在程序中使用频率很高。Java中的String是一个类，而并非基本数据类型。 不过她却不是普通的类哦！！！</p>
+</blockquote>
+<h2 id="1-String对象的创建"><a href="#1-String对象的创建" class="headerlink" title="1 String对象的创建"></a>1 String对象的创建</h2><ul>
+<li>关于类对象的创建，很普通的一种方式就是利用构造器，String类也不例外：<br><code>String s=new String(&quot;Hello world&quot;);</code><br>问题是参数”Hello world”是什么东西，也是字符串对象吗?莫非用字符串对象创建一个字符串对象?</li>
+<li>当然，String类对象还有一种大家都很喜欢的创建方式：<br><code>String s=&quot;Hello world&quot;;</code><br>但是有点怪呀，怎么与基本数据类型的赋值操作（int i=1）很像呀?</li>
+</ul>
+<a id="more"></a>
+<p><strong>在开始解释这些问题之前，我们先引入一些必要的知识</strong></p>
+<h3 id="1-1-Java-class文件结构-和常量池"><a href="#1-1-Java-class文件结构-和常量池" class="headerlink" title="1.1 Java class文件结构 和常量池"></a>1.1 Java class文件结构 和常量池</h3><p>我们都知道，Java程序要运行，首先需要编译器将源代码文件编译成字节码文件(也就是.class文件)。然后在由JVM解释执行。</p>
+<p>class文件是8位字节的二进制流 。这些二进制流的涵义由一些紧凑的有意义的项 组成。比如class字节流中最开始的4个字节组成的项叫做魔数 (magic)，<br>其意义在于分辨class文件(值为0xCAFEBABE)与非class文件。class字节流大致结构如下图左侧。</p>
+<p><img src="String类深入解析/jclass.gif" alt=""></p>
+<p>其中，在class文件中有一个非常重要的项——<strong>常量池</strong>。<br>这个常量池专门放置源代码中的符号信息(并且不同的符号信息放置在不同标志的常量表中)。<br>如上图右侧是HelloWorld代码中的常量表（HelloWorld代码如下），<br>其中有四个不同类型的常量表(四个不同的常量池入口)。<br>关于常量池的具体细节，请参照我的博客<a href="http://hxraid.iteye.com/blog/687660" target="_blank" rel="external">《Class文件内容及常量池 》</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span></span>&#123;  </div><div class="line">        System.out.println(<span class="string">"Hello world"</span>);  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过上图可见，代码中的”Hello world”字符串字面值被编译之后，<br>可以清楚的看到存放在了class常量池中的字符串常量表中(上图右侧红框区域)。</p>
+<h3 id="1-2-JVM运行class文件"><a href="#1-2-JVM运行class文件" class="headerlink" title="1.2 JVM运行class文件"></a>1.2 JVM运行class文件</h3><p>源代码编译成class文件之后，JVM就要运行这个class文件。它首先会用类装载器加载进class文件。<br>然后需要创建许多内存数据结构来存放class文件中的字节数据。<br>比如class文件对应的类信息数据、常量池结构、方法中的二进制指令序列、类方法与字段的描述信息等等。<br>当然，在运行的时候，还需要为方法创建栈帧等。这么多的内存结构当然需要管理，JVM会把这些东西都组织到几个<strong>“运行时数据区”</strong>中。这里面就有我们经常说的“方法区”、“堆”、“Java栈”等。<br>详细请参见我的博客<a href="http://hxraid.iteye.com/blog/676235" target="_blank" rel="external">《Java 虚拟机体系结构》</a>。</p>
+<p>上面我们提到了，在Java源代码中的每一个字面值字符串，都会在编译成class文件阶段，形成标志号 为8(CONSTANT_String_info)的常量表 。<br>当JVM加载 class文件的时候，会为对应的常量池建立一个内存数据结构，并存放在方法区中。同时JVM会自动为CONSTANT_String_info常量表中 的字符串常量字面值 在堆中 创建 新的String对象(intern字符串 对象 ，又叫拘留字符串对象)。<br>然后把CONSTANT_String_info常量表的入口地址转变成这个堆中String对象的直接地址(常量池解 析)。 </p>
+<p>这里很关键的就是这个拘留字符串对象 。源代码中所有相同字面值的字符串常量只可能建立唯一一个拘留字符串对象。<br>实际上JVM是通过一个记录了拘留字符串引用的内部数据结构来维持这一特性的。<br>在Java程序中，可以调用String的intern()方法来使得一个常规字符串对象成为拘留字符串对象。我们会在后面介绍这个方法的。</p>
+<h3 id="1-3-操作码助忆符指令"><a href="#1-3-操作码助忆符指令" class="headerlink" title="1.3 操作码助忆符指令"></a>1.3 操作码助忆符指令</h3><p>有了上面阐述的两个知识前提，下面我们将根据二进制指令来区别两种字符串对象的创建方式：<br>(1) String s=new String(“Hello world”);编译成class文件后的指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">0  new java.lang.String [15]  //在堆中分配一个String类对象的空间，并将该对象的地址堆入操作数栈。  </div><div class="line">3  dup //复制操作数栈顶数据，并压入操作数栈。该指令使得操作数栈中有两个String对象的引用值。  </div><div class="line">4  ldc &lt;String &quot;Hello world&quot;&gt; [17] //将常量池中的字符串常量&quot;Hello world&quot;指向的堆中拘留String对象的地址压入操作数栈  </div><div class="line">6  invokespecial java.lang.String(java.lang.String) [19] //调用String的初始化方法，弹出操作数栈栈顶的两个对象地址，用拘留String对象的值初始化new指令创建的String对象，然后将这个对象的引用压入操作数栈  </div><div class="line">9  astore_1 [s] // 弹出操作数栈顶数据存放在局部变量区的第一个位置上。此时存放的是new指令创建出的，已经被初始化的String对象的地址。</div></pre></td></tr></table></figure></p>
+<p>事实上，在运行这段指令之前，JVM就已经为”Hello world”在堆中创建了一个拘留字符串( 值得注意的是：如果源程序中还有一个”Hello world”字符串常量，那么他们都对应了同一个堆中的拘留字符串)。<br>然后用这个拘留字符串的值来初始化堆中用new指令创建出来的新的String对象，局部变量s实际上存储的是new出来的堆对象地址。<br>大家注意了，此时在JVM管理的堆中，有两个相同字符串值的String对象：一个是拘留字符串对象，一个是new新建的字符串对象。<br>如果还有一条创建语句String s1=new String(“Hello world”)；堆中有几个值为”Hello world”的字符串呢? 答案是3个，大家好好想想为什么吧！</p>
+<p>(2)将String s=”Hello world”;编译成class文件后的指令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">0  ldc &lt;String &quot;Hello world&quot;&gt; [15]//将常量池中的字符串常量&quot;Hello world&quot;指向的堆中拘留String对象的地址压入操作数栈  </div><div class="line">2  astore_1 [str] // 弹出操作数栈顶数据存放在局部变量区的第一个位置上。此时存放的是拘留字符串对象在堆中的地址</div></pre></td></tr></table></figure>
+<p>和上面的创建指令有很大的不同，局部变量s存储的是早已创建好的拘留字符串的堆地址。<br>大家好好想想，如果还有一条穿件语句String s1=”Hello word”；此时堆中有几个值为”Hello world”的字符串呢?答案是1个。<br>那么局部变量s与s1存储的地址是否相同呢？  呵呵, 这个你应该知道了吧。</p>
+<h3 id="1-4-小结"><a href="#1-4-小结" class="headerlink" title="1.4 小结"></a>1.4 小结</h3><ol>
+<li>String类型脱光了其实也很普通。真正让她神秘的原因就在于<strong>CONSTANT_String_info常量表</strong> 和 <strong>拘留字符串对象</strong> 的存在。现在我们可以解决江湖上的许多纷争了。</li>
+</ol>
+<p><strong>【 纷争1】关于字符串相等关系的争论</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//代码1  </div><div class="line">String sa=new String(&quot;Hello world&quot;);            </div><div class="line">String sb=new String(&quot;Hello world&quot;);      </div><div class="line">System.out.println(sa==sb);  // false       </div><div class="line">//代码2    </div><div class="line">String sc=&quot;Hello world&quot;;    </div><div class="line">String sd=&quot;Hello world&quot;;  </div><div class="line">System.out.println(sc==sd);  // true</div></pre></td></tr></table></figure>
+<p>代码1中局部变量sa,sb中存储的是JVM在堆中new出来的两个String对象的内存地址。<br>虽然这两个String对象的值(char[]存放的字符序列)都是”Hello world”。<br>因此”==”比较的是两个不同的堆地址。代码2中局部变量sc,sd中存储的也是地址，但却都是常量池中”Hello world”指向的堆的唯一的那个拘留字符串对象的地址 。自然相等了。</p>
+<p><strong>【纷争2】 字符串“+”操作的内幕</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//代码1  </div><div class="line">String sa = &quot;ab&quot;;                                          </div><div class="line">String sb = &quot;cd&quot;;                                       </div><div class="line">String sab=sa+sb;                                      </div><div class="line">String s=&quot;abcd&quot;;  </div><div class="line">System.out.println(sab==s); // false  </div><div class="line">//代码2  </div><div class="line">String sc=&quot;ab&quot;+&quot;cd&quot;;  </div><div class="line">String sd=&quot;abcd&quot;;  </div><div class="line">System.out.println(sc==sd); //true</div></pre></td></tr></table></figure></p>
+<p>代码1中局部变量sa,sb存储的是堆中两个拘留字符串对象的地址。而当执行sa+sb时，JVM首先会在堆中创建一个StringBuilder类，<br>同时用sa指向的拘留字符串对象完成初始化，然后调用append方法完成对sb所指向的拘留字符串的合并操作，<br>接着调用StringBuilder的toString()方法在堆中创建一个String对象，最后将刚生成的String对象的堆地址存放在局部变量sab中。<br>而局部变量s存储的是常量池中”abcd”所对应的拘留字符串对象的地址。 sab与s地址当然不一样了。这里要注意了，<br>代码1的堆中实际上有五个字符串对象：三个拘留字符串对象、一个String对象和一个StringBuilder对象。<br>代码2中”ab”+”cd”会直接在编译期就合并成常量”abcd”， 因此相同字面值常量”abcd”所对应的是同一个拘留字符串对象，自然地址也就相同。</p>
+<h2 id="2-String三姐妹-String-StringBuffer-StringBuilder"><a href="#2-String三姐妹-String-StringBuffer-StringBuilder" class="headerlink" title="2 String三姐妹(String,StringBuffer,StringBuilder)"></a>2 String三姐妹(String,StringBuffer,StringBuilder)</h2><p>String扒的差不多了。但他还有两个妹妹StringBuffer,StringBuilder长的也不错哦！我们也要下手了：</p>
+<ul>
+<li>String(大姐，出生于JDK1.0时代)          不可变字符序列</li>
+<li>StringBuffer(二姐，出生于JDK1.0时代)    线程安全的可变字符序列</li>
+<li>StringBuilder(小妹，出生于JDK1.5时代)   非线程安全的可变字符序列 </li>
+</ul>
+<h3 id="2-1-StringBuffer与String的可变性问题"><a href="#2-1-StringBuffer与String的可变性问题" class="headerlink" title="2.1 StringBuffer与String的可变性问题"></a>2.1 StringBuffer与String的可变性问题</h3><p>我们先看看这两个类的部分源代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//String   </span></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">String</span>  </span></div><div class="line">&#123;  </div><div class="line">        <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">char</span> value[];  </div><div class="line">  </div><div class="line">         <span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(String original)</span> </span>&#123;  </div><div class="line">              <span class="comment">// 把原字符串original切分成字符数组并赋给value[];  </span></div><div class="line">         &#125;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"><span class="comment">//StringBuffer   </span></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">StringBuffer</span> <span class="keyword">extends</span> <span class="title">AbstractStringBuilder</span>  </span></div><div class="line">&#123;  </div><div class="line">         <span class="keyword">char</span> value[]; <span class="comment">//继承了父类AbstractStringBuilder中的value[]  </span></div><div class="line">         <span class="function"><span class="keyword">public</span> <span class="title">StringBuffer</span><span class="params">(String str)</span> </span>&#123;  </div><div class="line">                 <span class="keyword">super</span>(str.length() + <span class="number">16</span>); <span class="comment">//继承父类的构造器，并创建一个大小为str.length()+16的value[]数组  </span></div><div class="line">                 append(str); <span class="comment">//将str切分成字符序列并加入到value[]中  </span></div><div class="line">        &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>很显然，String和StringBuffer中的value[]都用于存储字符序列。但是,</p>
+<p>(1) String中的是常量(final)数组，只能被赋值一次。<br>比如：new String(“abc”)使得value[]={‘a’,’b’,’c’}，之后这个String对象中的value[]再也不能改变了。这也正是大家常说的，String是不可变的原因 。    </p>
+<p>注意：这个对初学者来说有个误区，有人说String str1=new String(“abc”); str1=new String(“cba”);不是改变了字符串str1吗？那么你有必要先搞懂对象引用和对象本身的区别。这里我简单的说明一下，对象本身指的是存放在堆空间中的该对象的实例数据(非静态非常量字段)。而对象引用指的是堆中对象本身所存放的地址，一般方法区和Java栈中存储的都是对象引用，而非对象本身的数据。</p>
+<p>(2) StringBuffer中的value[]就是一个很普通的数组，而且可以通过append()方法将新字符串加入value[]末尾。这样也就改变了value[]的内容和大小了。<br>比如：new StringBuffer(“abc”)使得value[]={‘a’,’b’,’c’,’’,’’…}(注意构造的长度是str.length()+16)。如果再将这个对象append(“abc”)，那么这个对象中的value[]={‘a’,’b’,’c’,’a’,’b’,’c’,’’….}。这也就是为什么大家说 StringBuffer是可变字符串 的涵义了。从这一点也可以看出，StringBuffer中的value[]完全可以作为字符串的缓冲区功能。其累加性能是很不错的，在后面我们会进行比较。</p>
+<p><strong>总结，讨论String和StringBuffer可不可变。本质上是指对象中的value[]字符数组可不可变，而不是对象引用可不可变。</strong> </p>
+<h3 id="2-2-StringBuffer与StringBuilder的线程安全性问题"><a href="#2-2-StringBuffer与StringBuilder的线程安全性问题" class="headerlink" title="2.2 StringBuffer与StringBuilder的线程安全性问题"></a>2.2 StringBuffer与StringBuilder的线程安全性问题</h3><p>StringBuffer和StringBuilder可以算是双胞胎了，这两者的方法没有很大区别。但在线程安全性方面，StringBuffer允许多线程进行字符操作。这是因为在源代码中StringBuffer的很多方法都被关键字synchronized 修饰了，而StringBuilder没有。</p>
+<p>有多线程编程经验的程序员应该知道synchronized。这个关键字是为线程同步机制 设定的。我简要阐述一下synchronized的含义：</p>
+<blockquote>
+<p>每一个类对象都对应一把锁，当某个线程A调用类对象O中的synchronized方法M时，必须获得对象O的锁才能够执行M方法，否则线程A阻塞。一旦线程A开始执行M方法，将独占对象O的锁。使得其它需要调用O对象的M方法的线程阻塞。只有线程A执行完毕，释放锁后。那些阻塞线程才有机会重新调用M方法。这就是解决线程同步问题的锁机制。 </p>
+</blockquote>
+<p>了解了synchronized的含义以后，大家可能都会有这个感觉。多线程编程中StringBuffer比StringBuilder要安全多了 ，事实确实如此。如果有多个线程需要对同一个字符串缓冲区进行操作的时候，StringBuffer应该是不二选择。</p>
+<p>注意：是不是String也不安全呢？事实上不存在这个问题，String是不可变的。线程对于堆中指定的一个String对象只能读取，无法修改。试问：还有什么不安全的呢？ </p>
+<h3 id="2-3-String和StringBuffer的效率问题（这可是个热门话题呀-）"><a href="#2-3-String和StringBuffer的效率问题（这可是个热门话题呀-）" class="headerlink" title="2.3 String和StringBuffer的效率问题（这可是个热门话题呀!）"></a>2.3 String和StringBuffer的效率问题（这可是个热门话题呀!）</h3><p>首先说明一点：StringBuffer和StringBuilder可谓双胞胎，StringBuilder是1.5新引入的，其前身就是StringBuffer。StringBuilder的效率比StringBuffer稍高，如果不考虑线程安全，StringBuilder应该是首选。另外，JVM运行程序主要的时间耗费是在创建对象和回收对象上。</p>
+<p>我们用下面的代码运行1W次字符串的连接操作，测试String,StringBuffer所运行的时间。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//测试代码  </span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RunTime</span></span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;  </div><div class="line">           <span class="comment">//测试代码位置1  </span></div><div class="line">          <span class="keyword">long</span> beginTime=System.currentTimeMillis();  </div><div class="line">          <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10000</span>;i++)&#123;  </div><div class="line">           <span class="comment">// 测试代码位置2  </span></div><div class="line">          &#125;  </div><div class="line">          <span class="keyword">long</span> endTime=System.currentTimeMillis();  </div><div class="line">          System.out.println(endTime-beginTime);     </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="2-3-1-String常量与String变量的”-”操作比较"><a href="#2-3-1-String常量与String变量的”-”操作比较" class="headerlink" title="2.3.1 String常量与String变量的”+”操作比较"></a>2.3.1 String常量与String变量的”+”操作比较</h4><p>▲测试①代码：     </p>
+<pre><code>(测试代码位置1)  String str=&quot;&quot;;
+(测试代码位置2)  str=&quot;Heart&quot;+&quot;Raid&quot;;
+[耗时：  0ms]
+</code></pre><p>▲测试②代码        </p>
+<pre><code>(测试代码位置1)  String s1=&quot;Heart&quot;;
+               String s2=&quot;Raid&quot;;
+               String str=&quot;&quot;;
+(测试代码位置2)  str=s1+s2;
+[耗时：  15—16ms]
+</code></pre><p><strong>结论：String常量的“+连接”  稍优于  String变量的“+连接”。</strong></p>
+<p>原因：</p>
+<ul>
+<li>测试①的”Heart”+”Raid”在编译阶段就已经连接起来，形成了一个字符串常量”HeartRaid”，并指向堆中的拘留字符串对象。运行时只需要将”HeartRaid”指向的拘留字符串对象地址取出1W次，存放在局部变量str中。这确实不需要什么时间。 </li>
+<li>测试②中局部变量s1和s2存放的是两个不同的拘留字符串对象的地址。然后会通过下面三个步骤完成“+连接”：<ol>
+<li>StringBuilder temp=new StringBuilder(s1)，</li>
+<li>temp.append(s2);</li>
+<li>str=temp.toString();</li>
+</ol>
+</li>
+</ul>
+<p>我们发现，虽然在中间的时候也用到了append()方法，但是在开始和结束的时候分别创建了StringBuilder和String对象。可想而知：调用1W次，是不是就创建了1W次这两种对象呢？不划算。</p>
+<p>但是，String变量的”+连接”操作比String常量的”+连接”操作使用的更加广泛。 这一点是不言而喻的。</p>
+<h4 id="2-3-2-String对象的”累-”连接操作与StringBuffer对象的append-累和连接操作比较。"><a href="#2-3-2-String对象的”累-”连接操作与StringBuffer对象的append-累和连接操作比较。" class="headerlink" title="2.3.2 String对象的”累+”连接操作与StringBuffer对象的append()累和连接操作比较。"></a>2.3.2 String对象的”累+”连接操作与StringBuffer对象的append()累和连接操作比较。</h4><p>▲测试①代码：</p>
+<pre><code>(代码位置1)  String s1=&quot;Heart&quot;;
+String s=&quot;&quot;;
+(代码位置2)  s=s+s1;
+[耗时：  4200—4500ms]
+</code></pre><p>▲测试②代码<br>                (代码位置1)  String s1=”Heart”;<br>                StringBuffer sb=new StringBuffer();<br>                (代码位置2) sb.append(s1);<br>                [耗时：  0ms(当循环100000次的时候，耗时大概16—31ms)]</p>
+<p><strong>结论：大量字符串累加时，StringBuffer的append()效率远好于String对象的”累+”连接</strong></p>
+<p>原因：</p>
+<ul>
+<li>测试① 中的s=s+s1，JVM会利用首先创建一个StringBuilder，并利用append方法完成s和s1所指向的字符串对象值的合并操作，接着调用StringBuilder的 toString()方法在堆中创建一个新的String对象，其值为刚才字符串的合并结果。而局部变量s指向了新创建的String对象。</li>
+<li>因为String对象中的value[]是不能改变的，每一次合并后字符串值都需要创建一个新的String对象来存放。循环1W次自然需要创建1W个String对象和1W个StringBuilder对象，效率低就可想而知了。</li>
+<li>测试②中sb.append(s1);只需要将自己的value[]数组不停的扩大来存放s1即可。循环过程中无需在堆中创建任何新的对象。效率高就不足为奇了。</li>
+</ul>
+<h3 id="2-4-小结"><a href="#2-4-小结" class="headerlink" title="2.4 小结"></a>2.4 小结</h3><ul>
+<li>(1) 在编译阶段就能够确定的字符串常量，完全没有必要创建String或StringBuffer对象。直接使用字符串常量的”+”连接操作效率最高。</li>
+<li>(2) StringBuffer对象的append效率要高于String对象的”+”连接操作。</li>
+<li>(3) 不停的创建对象是程序低效的一个重要原因。那么相同的字符串值能否在堆中只创建一个String对象那。显然拘留字符串能够做到这一点，除了程序中的字符串常量会被JVM自动创建拘留字符串之外，调用String的intern()方法也能做到这一点。当调用intern()时，如果常量池中已经有了当前String的值，那么返回这个常量指向拘留对象的地址。如果没有，则将String值加入常量池中，并创建一个新的拘留字符串对象。</li>
+</ul>
+<blockquote>
+<p>转自：<a href="http://hxraid.iteye.com/blog/522167" target="_blank" rel="external">http://hxraid.iteye.com/blog/522167</a><br>附加一篇比较浅显易懂的<a href="http://blog.csdn.net/exterminator/article/details/6055297" target="_blank" rel="external">http://blog.csdn.net/exterminator/article/details/6055297</a><br>再附加一篇更加浅显易懂的<a href="http://blog.csdn.net/zhangjg_blog/article/details/18319521" target="_blank" rel="external">http://blog.csdn.net/zhangjg_blog/article/details/18319521</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/15/Java基础/String类深入解析/" data-id="cj27jtjpi0007a7fy53lwxg04" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/15/面试/剑指Offer/Q_5_逆序打印链表/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          剑指Offer_5_逆序打印链表值
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/14/面试/剑指Offer/Q_4Extra_合并有序数组/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">剑指Offer_4Extra_合并两个有序数组</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java爬虫/">Java爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac工具/">Mac工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nosql/">Nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PythonWeb/">PythonWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python基础/">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指offer/">剑指offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据基础/">大数据基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面经/">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高并发/">高并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 11.43px;">Hadoop</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 20px;">JavaWeb</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Java爬虫/" style="font-size: 10px;">Java爬虫</a> <a href="/tags/Linux/" style="font-size: 11.43px;">Linux</a> <a href="/tags/Mac工具/" style="font-size: 12.86px;">Mac工具</a> <a href="/tags/Nosql/" style="font-size: 14.29px;">Nosql</a> <a href="/tags/Oracle/" style="font-size: 14.29px;">Oracle</a> <a href="/tags/PythonWeb/" style="font-size: 10px;">PythonWeb</a> <a href="/tags/Python基础/" style="font-size: 14.29px;">Python基础</a> <a href="/tags/Redis/" style="font-size: 14.29px;">Redis</a> <a href="/tags/Spring/" style="font-size: 18.57px;">Spring</a> <a href="/tags/剑指Offer/" style="font-size: 17.14px;">剑指Offer</a> <a href="/tags/剑指offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/大数据/" style="font-size: 12.86px;">大数据</a> <a href="/tags/大数据基础/" style="font-size: 12.86px;">大数据基础</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/搜索/" style="font-size: 12.86px;">搜索</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/面经/" style="font-size: 11.43px;">面经</a> <a href="/tags/高并发/" style="font-size: 14.29px;">高并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/">Hadoop学习笔记（二） - HDFS详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/">Hadoop学习笔记（一）- Hadoop快速入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/">JVM学习笔记（基础知识）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/大数据/大数据基础/Netty学习笔记（一）/">Netty学习笔记（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

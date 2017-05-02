@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-工具/SecureCRT" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/28/工具/SecureCRT/" class="article-date">
+  <time datetime="2017-03-28T10:37:34.000Z" itemprop="datePublished">2017-03-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/28/工具/SecureCRT/">SecureCRT使用日常快捷键</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="文件传输"><a href="#文件传输" class="headerlink" title="文件传输"></a>文件传输</h2><ul>
+<li>使用 rz 传输文件</li>
+<li>使用 Cmd + Shift + P 传输文件(直接拖船或put)</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2017/03/28/工具/SecureCRT/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/28/工具/SecureCRT/" data-id="cj27jtjqv0014a7fybho3kx65" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具/">工具</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-大数据/大数据基础/ZooKeeper" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/28/大数据/大数据基础/ZooKeeper/" class="article-date">
+  <time datetime="2017-03-28T06:43:47.000Z" itemprop="datePublished">2017-03-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/28/大数据/大数据基础/ZooKeeper/">ZooKeeper学习笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-概念简介"><a href="#1-概念简介" class="headerlink" title="1 概念简介"></a>1 概念简介</h2><ul>
+<li>Zookeeper是一个分布式协调服务；就是为用户的分布式应用程序提供协调服务</li>
+<li>zookeeper是为别的分布式程序服务的</li>
+<li>Zookeeper本身就是一个分布式程序（只要有半数以上节点存活，zk就能正常服务）</li>
+<li>Zookeeper所提供的服务涵盖：主从协调、服务器节点动态上下线、统一配置管理、分布式共享锁、统一名称服务……</li>
+<li>虽然说可以提供各种服务，但是zookeeper在底层其实只提供了两个功能：<ul>
+<li>管理(存储，读取)用户程序提交的数据；</li>
+<li>并为用户程序提供数据节点监听服务；</li>
+</ul>
+</li>
+</ul>
+<p>Zookeeper集群的角色：  Leader 和  follower  （Observer）<br>只要集群中有半数以上节点存活，集群就能提供服务</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/03/28/大数据/大数据基础/ZooKeeper/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/28/大数据/大数据基础/ZooKeeper/" data-id="cj27jtjtd003ua7fyveozv0ma" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据基础/">大数据基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/高并发/">高并发</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-大数据/大数据基础/Linux环境基本操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/22/大数据/大数据基础/Linux环境基本操作/" class="article-date">
+  <time datetime="2017-03-22T12:09:06.000Z" itemprop="datePublished">2017-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/22/大数据/大数据基础/Linux环境基本操作/">Linux基本操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>配置三台Linux服务器，为Hadoop集群准备硬件资源。</p>
+<h2 id="1-设备条件"><a href="#1-设备条件" class="headerlink" title="1 设备条件"></a>1 设备条件</h2><ul>
+<li>性能: 由一台32G的8Core服务器虚拟出3台(4G 4Core)CentOS7服务器,内存固定分配，Core根据使用状态动态调节 <ul>
+<li>查看CPU信息 <code>cat /proc/cpuinfo</code></li>
+<li>查看内存信息 <code>free -h</code></li>
+</ul>
+</li>
+<li>IP地址: 10.5.151.241 10.5.151.242 10.5.151.243 </li>
+<li>VM网络配置使用的桥接模式，使用真实的网络地址，Bridge适合远程操作；而NAT模式适合将虚拟机装在本机，使用虚拟网关，如果是在笔记本电脑中虚拟机器可以使用此方式。</li>
+</ul>
+<h2 id="2-操作"><a href="#2-操作" class="headerlink" title="2 操作"></a>2 操作</h2><h3 id="2-1-Vim基本操作"><a href="#2-1-Vim基本操作" class="headerlink" title="2.1 Vim基本操作"></a>2.1 Vim基本操作</h3><p><strong>一般模式</strong></p>
+<ul>
+<li>a  在光标后一位开始插入</li>
+<li>A   在该行的最后插入</li>
+<li>I   在该行的最前面插入</li>
+<li>gg   直接跳到文件的首行</li>
+<li>G    直接跳到文件的末行</li>
+<li>dd   删除行，如果  5dd   ，则一次性删除光标后的5行</li>
+<li>yy  复制当前行,  复制多行，则  3yy，则复制当前行附近的3行</li>
+<li>p   粘贴</li>
+<li>v  进入字符选择模式，选择完成后，按y复制，按p粘贴</li>
+<li>ctrl+v  进入块选择模式，选择完成后，按y复制，按p粘贴</li>
+<li>shift+v  进入行选择模式，选择完成后，按y复制，按p粘贴</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2017/03/22/大数据/大数据基础/Linux环境基本操作/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/22/大数据/大数据基础/Linux环境基本操作/" data-id="cj27jtjta003pa7fyg1awzphc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Java基础/Java Collections Framework - ArrayList" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/22/Java基础/Java Collections Framework - ArrayList/" class="article-date">
+  <time datetime="2017-03-22T02:34:41.000Z" itemprop="datePublished">2017-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/22/Java基础/Java Collections Framework - ArrayList/">Java Collections Framework - ArrayList</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
+<p>ArrayList底层以数组实现，允许重复，默认第一次插入元素时创建数组的大小为10，超出限制时会增加50%的容量，<br>每次扩容都底层采用System.arrayCopy()复制到新的数组，初始化时最好能给出数组大小的预估值。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> java.util;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt;, <span class="title">RandomAccess</span>, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span> </span>&#123; </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_CAPACITY = <span class="number">10</span>; </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] EMPTY_ELEMENTDATA = &#123;&#125;; </div><div class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> Object[] elementData; </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size;</div><div class="line">    <span class="comment">//其余省略</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2017/03/22/Java基础/Java Collections Framework - ArrayList/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/22/Java基础/Java Collections Framework - ArrayList/" data-id="cj27jtjpc0005a7fy42i8ij1i" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-面试/剑指Offer/Q_7_用两个栈实现一个队列" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/21/面试/剑指Offer/Q_7_用两个栈实现一个队列/" class="article-date">
+  <time datetime="2017-03-21T14:03:45.000Z" itemprop="datePublished">2017-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/21/面试/剑指Offer/Q_7_用两个栈实现一个队列/">剑指Offer_7_用两个栈实现一个队列</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>题目描述</strong></p>
+<blockquote>
+<p>使用两个栈实现一个队列的push和pop方法</p>
+</blockquote>
+<p><strong>解题思路</strong></p>
+<ul>
+<li>入栈时直接将数据存储到s1中，栈顶为最新元素；</li>
+<li>出栈时查看s2中是否有数据，如果没有，则将s1中的数据弹出并压入s2，弹出s2栈顶元素为最旧元素，弹出即可；</li>
+<li>当s1将所有数据压入s2后，s2仍然为空，则表示队列空；</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2017/03/21/面试/剑指Offer/Q_7_用两个栈实现一个队列/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/21/面试/剑指Offer/Q_7_用两个栈实现一个队列/" data-id="cj27jtjtr004ea7fypwa9s0tv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/剑指offer/">剑指offer</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-面试/剑指Offer/Q_6_重建二叉树" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/16/面试/剑指Offer/Q_6_重建二叉树/" class="article-date">
+  <time datetime="2017-03-16T11:56:11.000Z" itemprop="datePublished">2017-03-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/16/面试/剑指Offer/Q_6_重建二叉树/">剑指Offer_6_重建二叉树</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>题目描述</strong></p>
+<blockquote>
+<p>输入某二叉树的前序遍历和中序遍历，请重建出该二叉树。假设输入的 先序遍历和中序遍历的结果中不含重复的数字。<br>例如输入先序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建出图2.6所示的二叉树并输出它<br>的头结点。</p>
+</blockquote>
+<p><strong>解题思路</strong></p>
+<ol>
+<li>先序遍历的结果第一个节点一定是根节点</li>
+<li>根据先序遍历的第一个节点，即根节点，确定中序遍历中根节点的位置记为index</li>
+<li>中序遍历中根节点的左边都是左子树上的节点，右边都是右子数上的节点</li>
+<li>先序遍历中，前面index长度的节点为左子树，之后的都为右子树的节点</li>
+<li>递归构建左右子树</li>
+</ol>
+        
+          <p class="article-more-link">
+            <a href="/2017/03/16/面试/剑指Offer/Q_6_重建二叉树/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/16/面试/剑指Offer/Q_6_重建二叉树/" data-id="cj27jtjtp004ca7fy1lldgvtp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-面试/剑指Offer/Q_5_逆序打印链表" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/15/面试/剑指Offer/Q_5_逆序打印链表/" class="article-date">
+  <time datetime="2017-03-15T13:31:17.000Z" itemprop="datePublished">2017-03-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/15/面试/剑指Offer/Q_5_逆序打印链表/">剑指Offer_5_逆序打印链表值</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>题目描述</strong></p>
+<blockquote>
+<p>输入一个链表的头结点，从未到头反过来打印出每个节点的值。</p>
+</blockquote>
+<p><strong>解题思路</strong></p>
+<ul>
+<li>可以先将正序输出结果压入栈或双向队列，再从栈顶输出。FILO</li>
+<li>使用递归，从结尾开始输出</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2017/03/15/面试/剑指Offer/Q_5_逆序打印链表/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/15/面试/剑指Offer/Q_5_逆序打印链表/" data-id="cj27jtjtn0049a7fy8e6kl7db" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Java基础/String类深入解析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/15/Java基础/String类深入解析/" class="article-date">
+  <time datetime="2017-03-15T08:54:15.000Z" itemprop="datePublished">2017-03-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/15/Java基础/String类深入解析/">String类深入解析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>众所周知，String是由字符组成的串，在程序中使用频率很高。Java中的String是一个类，而并非基本数据类型。 不过她却不是普通的类哦！！！</p>
+</blockquote>
+<h2 id="1-String对象的创建"><a href="#1-String对象的创建" class="headerlink" title="1 String对象的创建"></a>1 String对象的创建</h2><ul>
+<li>关于类对象的创建，很普通的一种方式就是利用构造器，String类也不例外：<br><code>String s=new String(&quot;Hello world&quot;);</code><br>问题是参数”Hello world”是什么东西，也是字符串对象吗?莫非用字符串对象创建一个字符串对象?</li>
+<li>当然，String类对象还有一种大家都很喜欢的创建方式：<br><code>String s=&quot;Hello world&quot;;</code><br>但是有点怪呀，怎么与基本数据类型的赋值操作（int i=1）很像呀?</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2017/03/15/Java基础/String类深入解析/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/15/Java基础/String类深入解析/" data-id="cj27jtjpi0007a7fy53lwxg04" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-面试/剑指Offer/Q_4Extra_合并有序数组" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/14/面试/剑指Offer/Q_4Extra_合并有序数组/" class="article-date">
+  <time datetime="2017-03-14T13:51:15.000Z" itemprop="datePublished">2017-03-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/14/面试/剑指Offer/Q_4Extra_合并有序数组/">剑指Offer_4Extra_合并两个有序数组</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>题目描述</strong></p>
+<blockquote>
+<p>有两个排序的数组A1和A2，内存在A1的末尾有足够多的空余空间容纳A2。请事先一个函数，把A2中的所有数字插入到A1zhong并且所有的数字是排序的。</p>
+</blockquote>
+<p><strong>解题思路</strong></p>
+<p>和前面的例题一样，很多人首先想到的办法是在A1中从头到尾复制数字，但是这样会出现多次复制一个数字的情况。<br>更好的办法是从尾到头比较A1和A2中的数字，并把较大的数字复制到A1的合适位置。<br>注意边界条件的控制，如果A1已经移动结束，但是A2还没有结束，需要将A2移动到A1的其实位置而A1的指针不动</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/03/14/面试/剑指Offer/Q_4Extra_合并有序数组/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/14/面试/剑指Offer/Q_4Extra_合并有序数组/" data-id="cj27jtjtk0044a7fy6w95ocez" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-面试/剑指Offer/Q_4_空格字符替换" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/14/面试/剑指Offer/Q_4_空格字符替换/" class="article-date">
+  <time datetime="2017-03-14T12:57:44.000Z" itemprop="datePublished">2017-03-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/14/面试/剑指Offer/Q_4_空格字符替换/">剑指Offer_4_替换空格</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>题目描述</strong></p>
+<blockquote>
+<p>请实现一个函数，把字符串中的每个空格替换成 %20 。例如输入”We are happy”，则输出”We%20are%20happy”<br>不能用java的一些api，完全用C语言的方式完成本题，不然会被鄙视。</p>
+</blockquote>
+<p><strong>解题思路</strong><br>虽然我们可以使用遍历的方式，创建一个新的空数组来完成这道题，时间复杂度也只是O(n)，但是浪费了很多空间。<br>虽然我们可以正序遍历数组，每碰到一个空格，就将后边的所有元素向后移动，这样虽然不用开辟冗余的空间，但是时间复杂度较高，<br>最后一部分元素需要被移动 N*空格数 次。</p>
+<p><strong>如果我们采用倒序的方式遍历和移动数组，那么时间复杂的和空间复杂度都是最低的。</strong></p>
+<ol>
+<li>先遍历一次字符串，统计空格出现的次数，每出现一个空格，对改数组额外开辟2位。</li>
+<li>从字符串的后面开始复制和替换。<ul>
+<li>指针P1指向原始字符串末尾，指针P2指向开辟空间后字符串末尾</li>
+<li>P1向前移动，逐个把字符复制到P2，直到碰到空格为止</li>
+<li>碰到空格后，P1向前移动一位，P2向前移动三位的同时将%20填充</li>
+<li>当P2追赶上P1时，结束复制，表示所有空格已经替换完毕</li>
+</ul>
+</li>
+</ol>
+        
+          <p class="article-more-link">
+            <a href="/2017/03/14/面试/剑指Offer/Q_4_空格字符替换/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/14/面试/剑指Offer/Q_4_空格字符替换/" data-id="cj27jtjtm0047a7fyr6txzji6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java爬虫/">Java爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac工具/">Mac工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nosql/">Nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PythonWeb/">PythonWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python基础/">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指offer/">剑指offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据基础/">大数据基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面经/">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高并发/">高并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 11.43px;">Hadoop</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 20px;">JavaWeb</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Java爬虫/" style="font-size: 10px;">Java爬虫</a> <a href="/tags/Linux/" style="font-size: 11.43px;">Linux</a> <a href="/tags/Mac工具/" style="font-size: 12.86px;">Mac工具</a> <a href="/tags/Nosql/" style="font-size: 14.29px;">Nosql</a> <a href="/tags/Oracle/" style="font-size: 14.29px;">Oracle</a> <a href="/tags/PythonWeb/" style="font-size: 10px;">PythonWeb</a> <a href="/tags/Python基础/" style="font-size: 14.29px;">Python基础</a> <a href="/tags/Redis/" style="font-size: 14.29px;">Redis</a> <a href="/tags/Spring/" style="font-size: 18.57px;">Spring</a> <a href="/tags/剑指Offer/" style="font-size: 17.14px;">剑指Offer</a> <a href="/tags/剑指offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/大数据/" style="font-size: 12.86px;">大数据</a> <a href="/tags/大数据基础/" style="font-size: 12.86px;">大数据基础</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/搜索/" style="font-size: 12.86px;">搜索</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/面经/" style="font-size: 11.43px;">面经</a> <a href="/tags/高并发/" style="font-size: 14.29px;">高并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/">Hadoop学习笔记（二） - HDFS详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/">Hadoop学习笔记（一）- Hadoop快速入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/">JVM学习笔记（基础知识）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/大数据/大数据基础/Netty学习笔记（一）/">Netty学习笔记（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

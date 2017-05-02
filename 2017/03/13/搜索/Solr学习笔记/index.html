@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Solr学习笔记 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1 Solr基本概念1.1 什么是Solr Solr是基于Lucene的全文检索服务器 Solr需要部署在Web容器中 使用POST方法向Solr服务器发送一个描述Field及其内容的XML文档，Solr根据xml文档添加、删除、更新索引。">
+<meta name="keywords" content="搜索">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Solr学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/03/13/搜索/Solr学习笔记/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1 Solr基本概念1.1 什么是Solr Solr是基于Lucene的全文检索服务器 Solr需要部署在Web容器中 使用POST方法向Solr服务器发送一个描述Field及其内容的XML文档，Solr根据xml文档添加、删除、更新索引。">
+<meta property="og:image" content="http://yoursite.com/2017/03/13/搜索/Solr学习笔记/Solr学习笔记/1.jpeg">
+<meta property="og:image" content="http://yoursite.com/2017/03/13/搜索/Solr学习笔记/Solr学习笔记/123.png">
+<meta property="og:updated_time" content="2017-03-14T07:03:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Solr学习笔记">
+<meta name="twitter:description" content="1 Solr基本概念1.1 什么是Solr Solr是基于Lucene的全文检索服务器 Solr需要部署在Web容器中 使用POST方法向Solr服务器发送一个描述Field及其内容的XML文档，Solr根据xml文档添加、删除、更新索引。">
+<meta name="twitter:image" content="http://yoursite.com/2017/03/13/搜索/Solr学习笔记/Solr学习笔记/1.jpeg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-搜索/Solr学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/13/搜索/Solr学习笔记/" class="article-date">
+  <time datetime="2017-03-13T05:42:47.000Z" itemprop="datePublished">2017-03-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Solr学习笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-Solr基本概念"><a href="#1-Solr基本概念" class="headerlink" title="1 Solr基本概念"></a>1 Solr基本概念</h2><h3 id="1-1-什么是Solr"><a href="#1-1-什么是Solr" class="headerlink" title="1.1 什么是Solr"></a>1.1 什么是Solr</h3><ul>
+<li>Solr是基于Lucene的全文检索服务器</li>
+<li>Solr需要部署在Web容器中</li>
+<li>使用POST方法向Solr服务器发送一个描述Field及其内容的XML文档，Solr根据xml文档添加、删除、更新索引。</li>
+</ul>
+<a id="more"></a>
+<h3 id="1-2-Solr与Lucene的区别"><a href="#1-2-Solr与Lucene的区别" class="headerlink" title="1.2 Solr与Lucene的区别"></a>1.2 Solr与Lucene的区别</h3><p>Lucene是一个开元全文检索引擎工具包，并不是一个全文检索引擎。<br>Solr的目的是打造一款企业级引擎系统，他是一个搜索引擎服务，可以独立运行，通过Solr可以非常快速的构建企业的搜索引擎。</p>
+<h2 id="2-Solr配置"><a href="#2-Solr配置" class="headerlink" title="2 Solr配置"></a>2 Solr配置</h2><h3 id="2-1-Solr目录结构"><a href="#2-1-Solr目录结构" class="headerlink" title="2.1 Solr目录结构"></a>2.1 Solr目录结构</h3><ul>
+<li>bin: solr运行脚本</li>
+<li>contrib: solr的一些贡献软件，用于增强solar的功能</li>
+<li>dist: war、jar、相关依赖文件</li>
+<li>docs: API文档</li>
+<li>example: solr工程例子目录:<ul>
+<li>solr: 包含了默认配置信息的Solr和Core目录</li>
+<li>multicore: 包含了在Solr的multicore中设置的多个Core目录</li>
+<li>webapps: 包括一个solr.war,该war可作为solr的运行实例工程</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-Solr整合Tomcat"><a href="#2-2-Solr整合Tomcat" class="headerlink" title="2.2 Solr整合Tomcat"></a>2.2 Solr整合Tomcat</h3><h4 id="2-2-1-SolrHome与SolrCore"><a href="#2-2-1-SolrHome与SolrCore" class="headerlink" title="2.2.1 SolrHome与SolrCore"></a>2.2.1 SolrHome与SolrCore</h4><p>创建一个SolrHome目录，SolrHome是Solr运行的主目录，目录中包括了运行Solr实例所有的配置文件和数据文件,Solr实例就是SolrCore，一个SolrHome可以包括多个SolrCore（Solr实例），每个SolrCore提供单独的搜索和索引服务。<br>example/solr是一个标准的SolrHome目录，其中example/solr/collection1是一个SolrCore目录<br>一个SolrCore对外单独提供索引和搜索接口。</p>
+<h4 id="2-2。2-整合步骤"><a href="#2-2。2-整合步骤" class="headerlink" title="2.2。2 整合步骤"></a>2.2。2 整合步骤</h4><ul>
+<li>安装tomcat。D:\temp\apache-tomcat-7.0.53</li>
+<li>把solr的war包复制到tomcat 的webapp目录下。把\solr-4.10.3\dist\solr-4.10.3.war复制到D:\temp\apache-tomcat-7.0.53\webapps下。改名为solr.war</li>
+<li>solr.war解压。使用压缩工具解压或者启动tomcat自动解压。解压之后删除solr.war</li>
+<li>把\solr-4.10.3\example\lib\ext目录下的所有的jar包添加到solr工程中</li>
+<li>配置solrHome和solrCore。<ul>
+<li>创建一个solrhome（存放solr所有配置文件的一个文件夹）。\solr-4.10.3\example\solr目录就是一个标准的solrhome。</li>
+<li>把\solr-4.10.3\example\solr文件夹复制到D:\temp\0108路径下，改名为solrhome，改名不是必须的，是为了便于理解。</li>
+<li>在solrhome下有一个文件夹叫做collection1这就是一个solrcore。就是一个solr的实例。一个solrcore相当于mysql中一个数据库。Solrcore之间是相互隔离。<ul>
+<li>在solrcore中有一个文件夹叫做conf，包含了索引solr实例的配置信息。</li>
+<li>在conf文件夹下有一个solrconfig.xml。配置实例的相关信息。如果使用默认配置可以不用做任何修改。<br>Xml的配置信息：<br>Lib：solr服务依赖的扩展包，默认的路径是collection1\lib文件夹，如果没有就创建一个<br>dataDir：配置了索引库的存放路径。默认路径是collection1\data文件夹，如果data文件夹，会自动创建。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>告诉solr服务器配置文件也就是solrHome的位置。修改web.xml使用jndi的方式告诉solr服务器。<br>Solr/home名称必须是固定的。(apache下solr项目的web.xml)</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">env-entry</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">env-entry-name</span>&gt;</span>solr/home<span class="tag">&lt;/<span class="name">env-entry-name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">env-entry-value</span>&gt;</span>/Users/lixiwei-mac/app/solr-4.10.3/solrhome<span class="tag">&lt;/<span class="name">env-entry-value</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">env-entry-type</span>&gt;</span>java.lang.String<span class="tag">&lt;/<span class="name">env-entry-type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">env-entry</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>启动tomcat，访问<a href="http://localhost:8080/solr" target="_blank" rel="external">http://localhost:8080/solr</a></p>
+</li>
+</ul>
+<h2 id="3-使用SolrJ管理索引库"><a href="#3-使用SolrJ管理索引库" class="headerlink" title="3 使用SolrJ管理索引库"></a>3 使用SolrJ管理索引库</h2><h3 id="3-1-什么是SolrJ"><a href="#3-1-什么是SolrJ" class="headerlink" title="3.1 什么是SolrJ"></a>3.1 什么是SolrJ</h3><p>solrj是访问Solr服务的java客户端，提供索引和搜索的请求方法，SolrJ通常在嵌入在业务系统中，通过SolrJ的API接口操作Solr服务，如下图：<br><img src="Solr学习笔记/1.jpeg" alt=""></p>
+<h3 id="3-2-依赖"><a href="#3-2-依赖" class="headerlink" title="3.2 依赖"></a>3.2 依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- Solr --&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.solr<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>solr-solrj<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.10.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-io<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-io<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">               <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></div><div class="line">           <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.httpcomponents<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>httpclient<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.httpcomponents<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>httpcore<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.httpcomponents<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>httpmime<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.noggit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>noggit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"></div><div class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.woodstox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>wstx-asl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.zookeeper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zookeeper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">               <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">               <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">               <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">               <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></div><div class="line">           <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">       <span class="comment">&lt;!--Solr Ext--&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.17<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jul-to-slf4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="3-3-代码实现"><a href="#3-3-代码实现" class="headerlink" title="3.3 代码实现"></a>3.3 代码实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> lucene;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.commons.io.FileUtils;</div><div class="line"><span class="keyword">import</span> org.apache.lucene.analysis.Analyzer;</div><div class="line"><span class="keyword">import</span> org.apache.lucene.document.*;</div><div class="line"><span class="keyword">import</span> org.apache.lucene.index.*;</div><div class="line"><span class="keyword">import</span> org.apache.lucene.queryparser.classic.MultiFieldQueryParser;</div><div class="line"><span class="keyword">import</span> org.apache.lucene.queryparser.classic.ParseException;</div><div class="line"><span class="keyword">import</span> org.apache.lucene.queryparser.classic.QueryParser;</div><div class="line"><span class="keyword">import</span> org.apache.lucene.search.*;</div><div class="line"><span class="keyword">import</span> org.apache.lucene.store.Directory;</div><div class="line"><span class="keyword">import</span> org.apache.lucene.store.FSDirectory;</div><div class="line"><span class="keyword">import</span> org.apache.lucene.util.Version;</div><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"><span class="keyword">import</span> org.wltea.analyzer.lucene.IKAnalyzer;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.File;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@author</span> NikoBelic</div><div class="line"> * <span class="doctag">@create</span> 07/03/2017 13:05</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LuceneTest</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 创建索引</div><div class="line">     *</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 07/03/2017 19:01</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testIndexCreate</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 指定文档和索引的存储目录</span></div><div class="line">        Directory indexDir = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"/Users/lixiwei-mac/Documents/DataSet/lucene/index"</span>));</div><div class="line"></div><div class="line">        <span class="comment">// 标准分词器(英文效果好,中文单字分词)</span></div><div class="line">        Analyzer analyzer = <span class="keyword">new</span> IKAnalyzer();</div><div class="line">        IndexWriterConfig config = <span class="keyword">new</span> IndexWriterConfig(Version.LATEST, analyzer);</div><div class="line">        IndexWriter indexWriter = <span class="keyword">new</span> IndexWriter(indexDir, config);</div><div class="line"></div><div class="line">        <span class="comment">// 采集文档中的数据放入Lucene中</span></div><div class="line">        File sourceDir = <span class="keyword">new</span> File(<span class="string">"/Users/lixiwei-mac/Documents/DataSet/lucene/searchsource"</span>);</div><div class="line">        <span class="keyword">for</span> (File f : sourceDir.listFiles())</div><div class="line">        &#123;</div><div class="line">            String fileName = f.getName();</div><div class="line">            String fileContent = FileUtils.readFileToString(f);</div><div class="line">            String filePath = f.getPath();</div><div class="line">            <span class="keyword">long</span> fileSize = FileUtils.sizeOf(f);</div><div class="line"></div><div class="line">            <span class="comment">// (field_name,field_value,need_stored?)</span></div><div class="line">            Field fileNameField = <span class="keyword">new</span> TextField(<span class="string">"filename"</span>, fileName, Field.Store.YES);</div><div class="line">            Field fileContentField = <span class="keyword">new</span> TextField(<span class="string">"content"</span>, fileContent, Field.Store.NO);</div><div class="line">            Field filepPthField = <span class="keyword">new</span> StoredField(<span class="string">"path"</span>, filePath);</div><div class="line">            Field fileSizeField = <span class="keyword">new</span> LongField(<span class="string">"size"</span>, fileSize, Field.Store.YES);</div><div class="line">            Document document = <span class="keyword">new</span> Document();</div><div class="line"></div><div class="line">            document.add(fileNameField);</div><div class="line">            document.add(fileContentField);</div><div class="line">            document.add(filepPthField);</div><div class="line">            document.add(fileSizeField);</div><div class="line"></div><div class="line">            <span class="comment">// 这里会自动创建索引</span></div><div class="line">            indexWriter.addDocument(document);</div><div class="line">        &#125;</div><div class="line">        indexWriter.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 使用索引搜索</div><div class="line">     *</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 07/03/2017 19:01</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testIndexSearch</span><span class="params">()</span> <span class="keyword">throws</span> IOException, ParseException</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 指定索引库存放路径</span></div><div class="line">        Directory indexDir = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"/Users/lixiwei-mac/Documents/DataSet/lucene/index"</span>));</div><div class="line">        <span class="comment">// 创建索引Reader、Searcher对象</span></div><div class="line">        IndexReader indexReader = DirectoryReader.open(indexDir);</div><div class="line">        IndexSearcher indexSearcher = <span class="keyword">new</span> IndexSearcher(indexReader);</div><div class="line">        <span class="comment">// 创建查询</span></div><div class="line">        <span class="comment">// 方法1</span></div><div class="line">        Query query = <span class="keyword">new</span> TermQuery(<span class="keyword">new</span> Term(<span class="string">"content"</span>, <span class="string">"java"</span>));</div><div class="line">        <span class="comment">// 执行查询,(查询对象,查询结果返回最大值)</span></div><div class="line"></div><div class="line"></div><div class="line">        <span class="comment">// 方法2</span></div><div class="line">        <span class="comment">// 创建分词器(必须和创建索引所用分词器一致)</span></div><div class="line">        Analyzer analyzer = <span class="keyword">new</span> IKAnalyzer();</div><div class="line">        <span class="comment">// 默认搜索域作用:如果搜索语法中没有指定域名,则使用默认域名搜索</span></div><div class="line">        QueryParser queryParser = <span class="keyword">new</span> QueryParser(<span class="string">"filename"</span>, analyzer);</div><div class="line">        <span class="comment">// 查询语法:域名:搜索关键字</span></div><div class="line">        Query query2 = queryParser.parse(<span class="string">"apache"</span>);</div><div class="line"></div><div class="line"></div><div class="line">        TopDocs topDocs = indexSearcher.search(query2, <span class="number">5</span>);</div><div class="line">        System.out.println(<span class="string">"查询结果的总条数:"</span> + topDocs.totalHits);</div><div class="line"></div><div class="line">        <span class="comment">// 遍历查询结果</span></div><div class="line">        <span class="keyword">for</span> (ScoreDoc scoreDoc : topDocs.scoreDocs)</div><div class="line">        &#123;</div><div class="line">            <span class="comment">// scoreDoc.doc = 自动生成的文档ID</span></div><div class="line">            Document document = indexSearcher.doc(scoreDoc.doc);</div><div class="line">            System.out.println(document.get(<span class="string">"filename"</span>));</div><div class="line">            System.out.println(scoreDoc.toString());</div><div class="line">            System.out.println(<span class="string">"======================================================"</span>);</div><div class="line">        &#125;</div><div class="line">        indexReader.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDelIndex</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span></div><div class="line">    &#123;</div><div class="line">        Analyzer analyzer = <span class="keyword">new</span> IKAnalyzer();</div><div class="line">        Directory indexDir = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"/Users/lixiwei-mac/Documents/DataSet/lucene/index"</span>));</div><div class="line">        IndexWriterConfig config = <span class="keyword">new</span> IndexWriterConfig(Version.LATEST, analyzer);</div><div class="line">        IndexWriter indexWriter = <span class="keyword">new</span> IndexWriter(indexDir, config);</div><div class="line"></div><div class="line">        <span class="comment">// 删除所有</span></div><div class="line">        <span class="comment">//indexWriter.deleteAll();</span></div><div class="line">        <span class="comment">// Term 词源,(域名,删除含有这些关键词的数据)</span></div><div class="line">        indexWriter.deleteDocuments(<span class="keyword">new</span> Term(<span class="string">"filename"</span>, <span class="string">"apache"</span>));</div><div class="line">        indexWriter.commit();</div><div class="line">        indexWriter.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 更新就是按照传入的Term进行搜索,如果找到结果那么删除,将更新的内容重新生成一个Document对象</div><div class="line">     * 如果没有搜索到结果,那么将更新的内容直接添加一个新的Document对象</div><div class="line">     *</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 07/03/2017 20:57</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testUpdateIndex</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span></div><div class="line">    &#123;</div><div class="line">        Analyzer analyzer = <span class="keyword">new</span> IKAnalyzer();</div><div class="line">        Directory indexDir = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"/Users/lixiwei-mac/Documents/DataSet/lucene/index"</span>));</div><div class="line">        IndexWriterConfig config = <span class="keyword">new</span> IndexWriterConfig(Version.LATEST, analyzer);</div><div class="line">        IndexWriter indexWriter = <span class="keyword">new</span> IndexWriter(indexDir, config);</div><div class="line"></div><div class="line">        Document doc = <span class="keyword">new</span> Document();</div><div class="line">        doc.add(<span class="keyword">new</span> TextField(<span class="string">"filename"</span>, <span class="string">"更新检索测试.txt"</span>, Field.Store.YES));</div><div class="line">        doc.add(<span class="keyword">new</span> TextField(<span class="string">"content"</span>, <span class="string">"文件内容测试"</span>, Field.Store.NO));</div><div class="line">        doc.add(<span class="keyword">new</span> LongField(<span class="string">"size"</span>, <span class="number">100L</span>, Field.Store.YES));</div><div class="line"></div><div class="line"></div><div class="line">        indexWriter.updateDocument(<span class="keyword">new</span> Term(<span class="string">"filename"</span>, <span class="string">"检索"</span>), doc);</div><div class="line"></div><div class="line">        indexWriter.commit();</div><div class="line">        indexWriter.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 根据索引查询,多种查询</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 08/03/2017 13:02</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSearch</span><span class="params">()</span> <span class="keyword">throws</span> IOException, ParseException</span></div><div class="line">    &#123;</div><div class="line">        Directory indexDir = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"/Users/lixiwei-mac/Documents/DataSet/lucene/index"</span>));</div><div class="line">        IndexReader indexReader = DirectoryReader.open(indexDir);</div><div class="line">        IndexSearcher indexSearcher = <span class="keyword">new</span> IndexSearcher(indexReader);</div><div class="line"></div><div class="line">        <span class="comment">// 根据文本查询</span></div><div class="line">        Query termQuery = <span class="keyword">new</span> TermQuery(<span class="keyword">new</span> Term(<span class="string">"filename"</span>, <span class="string">"apache"</span>));</div><div class="line">        <span class="comment">// 根据数字范围查询</span></div><div class="line">        Query numQuery = NumericRangeQuery.newLongRange(<span class="string">"size"</span>, <span class="number">100L</span>, <span class="number">800L</span>, <span class="keyword">true</span>, <span class="keyword">true</span>);</div><div class="line">        <span class="comment">// Bool查询</span></div><div class="line">        BooleanQuery boolQuery = <span class="keyword">new</span> BooleanQuery();</div><div class="line">        boolQuery.add(termQuery, BooleanClause.Occur.MUST); <span class="comment">// 独自使用MUST_NOT没有任何意义</span></div><div class="line">        boolQuery.add(numQuery, BooleanClause.Occur.MUST);</div><div class="line"></div><div class="line">        <span class="comment">// 查询所有文档</span></div><div class="line">        MatchAllDocsQuery matchAllDocsQuery = <span class="keyword">new</span> MatchAllDocsQuery();</div><div class="line"></div><div class="line">        <span class="comment">// 多个域的查询,或 关系</span></div><div class="line">        String[] fields = &#123;<span class="string">"filename"</span>, <span class="string">"content"</span>&#125;;</div><div class="line">        MultiFieldQueryParser multiFieldQueryParser = <span class="keyword">new</span> MultiFieldQueryParser(fields, <span class="keyword">new</span> IKAnalyzer());</div><div class="line">        Query multiFieldQuery = multiFieldQueryParser.parse(<span class="string">"apache"</span>);</div><div class="line"></div><div class="line"></div><div class="line">        <span class="comment">//TopDocs topDocs = indexSearcher.search(boolQuery, 10);</span></div><div class="line">        <span class="comment">//TopDocs topDocs = indexSearcher.search(matchAllDocsQuery, 10);</span></div><div class="line">        TopDocs topDocs = indexSearcher.search(multiFieldQuery, <span class="number">10</span>);</div><div class="line">        System.out.println(<span class="string">"符合条件的文档数:"</span> + topDocs.totalHits);</div><div class="line">        <span class="keyword">for</span> (ScoreDoc scoreDoc : topDocs.scoreDocs)</div><div class="line">        &#123;</div><div class="line">            Document document = indexSearcher.doc(scoreDoc.doc);</div><div class="line">            System.out.println(document.get(<span class="string">"filename"</span>));</div><div class="line">            System.out.println(document.get(<span class="string">"size"</span>));</div><div class="line">            System.out.println(<span class="string">"======================================================================"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3-4-应用系统架构"><a href="#3-4-应用系统架构" class="headerlink" title="3.4 应用系统架构"></a>3.4 应用系统架构</h3><p><img src="Solr学习笔记/123.png" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/13/搜索/Solr学习笔记/" data-id="cj27jtjr3001aa7fy78p4qw99" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/搜索/">搜索</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/14/面试/剑指Offer/Q_2_单例模式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          剑指Offer_2_实现Singleton模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/10/面经/阿里面经_2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">阿里巴巴常考面试题及汇总答案</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java爬虫/">Java爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac工具/">Mac工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nosql/">Nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PythonWeb/">PythonWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python基础/">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指offer/">剑指offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据基础/">大数据基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面经/">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高并发/">高并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 11.43px;">Hadoop</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 20px;">JavaWeb</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Java爬虫/" style="font-size: 10px;">Java爬虫</a> <a href="/tags/Linux/" style="font-size: 11.43px;">Linux</a> <a href="/tags/Mac工具/" style="font-size: 12.86px;">Mac工具</a> <a href="/tags/Nosql/" style="font-size: 14.29px;">Nosql</a> <a href="/tags/Oracle/" style="font-size: 14.29px;">Oracle</a> <a href="/tags/PythonWeb/" style="font-size: 10px;">PythonWeb</a> <a href="/tags/Python基础/" style="font-size: 14.29px;">Python基础</a> <a href="/tags/Redis/" style="font-size: 14.29px;">Redis</a> <a href="/tags/Spring/" style="font-size: 18.57px;">Spring</a> <a href="/tags/剑指Offer/" style="font-size: 17.14px;">剑指Offer</a> <a href="/tags/剑指offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/大数据/" style="font-size: 12.86px;">大数据</a> <a href="/tags/大数据基础/" style="font-size: 12.86px;">大数据基础</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/搜索/" style="font-size: 12.86px;">搜索</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/面经/" style="font-size: 11.43px;">面经</a> <a href="/tags/高并发/" style="font-size: 14.29px;">高并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/">Hadoop学习笔记（二） - HDFS详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/">Hadoop学习笔记（一）- Hadoop快速入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/">JVM学习笔记（基础知识）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/大数据/大数据基础/Netty学习笔记（一）/">Netty学习笔记（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

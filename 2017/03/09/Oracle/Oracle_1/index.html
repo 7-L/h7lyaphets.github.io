@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Oracle数据库运维、备份常用指令 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. Oracle数据泵备份导出1.1 准备工作在linux系统下创建导出结果存放的文件夹，切记要切换到oracle用户创建，否则会出现权限问题。">
+<meta name="keywords" content="Oracle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle数据库运维、备份常用指令">
+<meta property="og:url" content="http://yoursite.com/2017/03/09/Oracle/Oracle_1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1. Oracle数据泵备份导出1.1 准备工作在linux系统下创建导出结果存放的文件夹，切记要切换到oracle用户创建，否则会出现权限问题。">
+<meta property="og:updated_time" content="2017-03-09T16:05:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Oracle数据库运维、备份常用指令">
+<meta name="twitter:description" content="1. Oracle数据泵备份导出1.1 准备工作在linux系统下创建导出结果存放的文件夹，切记要切换到oracle用户创建，否则会出现权限问题。">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Oracle/Oracle_1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/09/Oracle/Oracle_1/" class="article-date">
+  <time datetime="2017-03-09T14:04:00.000Z" itemprop="datePublished">2017-03-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Oracle数据库运维、备份常用指令
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-Oracle数据泵备份导出"><a href="#1-Oracle数据泵备份导出" class="headerlink" title="1. Oracle数据泵备份导出"></a>1. Oracle数据泵备份导出</h2><h3 id="1-1-准备工作"><a href="#1-1-准备工作" class="headerlink" title="1.1 准备工作"></a>1.1 准备工作</h3><p><strong>在linux系统下创建导出结果存放的文件夹</strong>，切记要切换到oracle用户创建，否则会出现权限问题。</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">su - oracle</div><div class="line">mkdir /home/oracle/dwcr_dumps</div></pre></td></tr></table></figure>
+<p>如果使用root创建了文件夹，可是使用命令来修改文件权限。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chown /home/oracle/dumps oralce:oinstall</div></pre></td></tr></table></figure>
+<hr>
+<p><strong>连接oracle，创建导出映射地址、用户授权</strong><br>先查看当前实例是不是你需要的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo $ORACLE_SID</div></pre></td></tr></table></figure>
+<p>如果不是，修改一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export ORACLE_SID=dwcr</div></pre></td></tr></table></figure>
+<p>进入oracle命令环境,使用管理员权限登陆，不需要密码.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlplus / as sysdba</div></pre></td></tr></table></figure>
+<p>Oracle参数举例:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户名</td>
+<td>dwcr</td>
+</tr>
+<tr>
+<td>密码</td>
+<td>password</td>
+</tr>
+<tr>
+<td>表空间名</td>
+<td>dwcr_tablespace</td>
+</tr>
+<tr>
+<td>实例名</td>
+<td>dwcrsid</td>
+</tr>
+<tr>
+<td>导出路径</td>
+<td>/home/oracle/dwcr_dumps</td>
+</tr>
+<tr>
+<td>数据库IP</td>
+<td>192.168.1.1100</td>
+</tr>
+</tbody>
+</table>
+<p><strong>创建导出地址的映射</strong>（内部别名-&gt;Linux文件系统）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">directory</span> DWCRDUMP <span class="keyword">as</span> <span class="string">'/home/oracle/dwcr_dumps'</span>;</div></pre></td></tr></table></figure>
+<p><strong>给用户授权</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">grant</span> <span class="keyword">read</span>,write <span class="keyword">on</span> <span class="keyword">directory</span> DWCRDUMP <span class="keyword">to</span> dwcr;</div></pre></td></tr></table></figure>
+<p><strong>数据泵导出</strong><br>退出oracle命令环境后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">expdp  dwcr/dwcr@192.168.1.1100:1521/dwcrsid  DIRECTORY=DWCRDUMP DUMPFILE=dwcr_20161206_1446.dmp  LOGFILE=dwcr_20161206_1446.log   SCHEMAS=dwcr</div></pre></td></tr></table></figure></p>
+<p>假如想从11g的数据库导出，并导入到10g的数据库，需要在结尾加一个参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">version=10.2.0.1.0</div></pre></td></tr></table></figure>
+<p>等待导出<strong>正常</strong>结束后，就可以去linux绝对路径下拷贝dmp文件了。<br>如果导出期间出现异常，根据ORA的错误提示，自行百度，无外乎就是那几种常见错误。</p>
+<p><strong>数据泵导入</strong><br><strong>注意</strong>:也需要创建文件映射、对用户授权，需要先将dmp文件放到指定的linux路径中供Oracle读取。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">impdp dwcr/dwcr@192.168.1.1200:1521/dwcrsid directory=DWCRDUMP schemas=dwcr dumpfile=dwcr_20161206_1446.dmp</div></pre></td></tr></table></figure></p>
+<h2 id="2-使用Python脚本导出-定时备份"><a href="#2-使用Python脚本导出-定时备份" class="headerlink" title="2. 使用Python脚本导出/定时备份"></a>2. 使用Python脚本导出/定时备份</h2><h3 id="2-1-安装Python"><a href="#2-1-安装Python" class="headerlink" title="2.1 安装Python"></a>2.1 安装Python</h3><p>1、在官方网站下载python安装包，这里注意python.org/download路径被屏蔽，需要使用<a href="http://www.python.org/页面上的中文“下载”链接进行下载。" target="_blank" rel="external">http://www.python.org/页面上的中文“下载”链接进行下载。</a><br>这里下载了python最新的3.2.2版本：Python-3.2.2.tgz<br>下载后，文件目录在/home/python/下，这也是我python的安装目录</p>
+<p>2、解压：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">[oot@www python]# tar zxvf    Python-3.2.2.tgz</div><div class="line"></div><div class="line">3、打开安装目录，执行：</div><div class="line">[root@www python]# cd Python-3.2.2</div><div class="line">[root@www Python-3.2.2]#./configure</div><div class="line">[root@www Python-3.2.2]# make</div><div class="line">[root@www Python-3.2.2]# makeinstall</div><div class="line">值此，安装完成。</div><div class="line"></div><div class="line">4、但此时输入”python”命令，仍然显示是旧版本的，这就需要创建软连接：</div><div class="line">[root@www bin]# cd /usr/bin</div><div class="line">[root@www bin]# ll |grep python</div><div class="line">[root@www bin]# rm -rf python</div><div class="line">[root@www bin]# ln -s /home/python/Python-3.2.2/python python</div><div class="line">[root@www bin]# python</div><div class="line">Python 3.2.2 (default, Oct 26 2011, 23:40:16)</div><div class="line">[GCC 4.1.2 20071124 (Red Hat 4.1.2-42)] on linux2</div><div class="line">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or&quot;license&quot; for more information.</div></pre></td></tr></table></figure>
+<p><strong>看一下 如果出现了以上提示信息就说明安装成功了 按ctrl+z退出来就好了。</strong></p>
+<h3 id="2-2-批量导出数据库脚本的编写"><a href="#2-2-批量导出数据库脚本的编写" class="headerlink" title="2.2 批量导出数据库脚本的编写"></a>2.2 批量导出数据库脚本的编写</h3><p>前阵子有个需求，需要一个人对10+台Oracle进行备份，每个数据库的信息又不相同，因此编写了一个简单的python导出脚本来完成这个工作。呵呵，酸爽。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">import</span> sched</div><div class="line"></div><div class="line">ISOTIMEFORMAT = <span class="string">'%Y%m%d%'</span></div><div class="line">IP_ADDR = [</div><div class="line">    <span class="string">'192.168.1.169'</span>, <span class="string">'192.168.1.172'</span>, <span class="string">'192.168.1.173'</span>,</div><div class="line">    <span class="string">'192.168.1.167'</span>, <span class="string">'192.168.1.168'</span>, <span class="string">'192.168.1.168'</span>,</div><div class="line">    <span class="string">'192.168.1.170'</span>, <span class="string">'192.168.1.170'</span>, <span class="string">'192.168.1.170'</span>, <span class="string">'192.168.1.170'</span>,</div><div class="line">    <span class="string">'192.168.1.171'</span>, <span class="string">'10.161.8192.168.16.71'</span>, <span class="string">'192.168.1.171'</span>]</div><div class="line">SID = [</div><div class="line">    <span class="string">'dwcr'</span>, <span class="string">'dwcrdci'</span>, <span class="string">'dwcrweb'</span>,</div><div class="line">    <span class="string">'ISRC2'</span>, <span class="string">'cpcc'</span>, <span class="string">'cpcc'</span>,</div><div class="line">    <span class="string">'orcl'</span>, <span class="string">'orcl'</span>, <span class="string">'orcl2'</span>, <span class="string">'orcl2'</span>,</div><div class="line">    <span class="string">'classcas'</span>, <span class="string">'copyrigh'</span>, <span class="string">'custody'</span>]</div><div class="line">USERNAME = [</div><div class="line">    <span class="string">'dwcr1'</span>, <span class="string">'dwcrdci'</span>, <span class="string">'dwcrweb'</span>,</div><div class="line">    <span class="string">'isrc2'</span>, <span class="string">'cpccfs_develop'</span>, <span class="string">'cpccfs_opus'</span>,</div><div class="line">    <span class="string">'cac_develop'</span>, <span class="string">'cac_opus'</span>, <span class="string">'cac_develop'</span>, <span class="string">'cac_opus'</span>,</div><div class="line">    <span class="string">'lab1107'</span>, <span class="string">'lab1107'</span>, <span class="string">'custody2'</span>]</div><div class="line">PASSWORD = [</div><div class="line">    <span class="string">'dwcr1'</span>, <span class="string">'dwcrdci'</span>, <span class="string">'dwcrweb'</span>,</div><div class="line">    <span class="string">'isrc2'</span>, <span class="string">'cpccfs'</span>, <span class="string">'cpccfs'</span>,</div><div class="line">    <span class="string">'cac'</span>, <span class="string">'cac'</span>, <span class="string">'cac_develop_7112'</span>, <span class="string">'cac_opus_7112'</span>,</div><div class="line">    <span class="string">'237133'</span>, <span class="string">'237133'</span>, <span class="string">'custody2'</span>]</div><div class="line">TABLESPACE_NAME = [</div><div class="line">    <span class="string">'dwcr_dumps'</span>, <span class="string">'dwcrdci_dumps'</span>, <span class="string">'dwcrweb_dumps'</span>,</div><div class="line">    <span class="string">'isrc2'</span>, <span class="string">'cpccfs_develop'</span>, <span class="string">'cpccfs_opus'</span>,</div><div class="line">    <span class="string">'softnew'</span>, <span class="string">'opusnew'</span>, <span class="string">'softold'</span>, <span class="string">'opusold'</span>,</div><div class="line">    <span class="string">'classcas'</span>, <span class="string">'copyrigh'</span>, <span class="string">'custody2'</span>]</div><div class="line">DUMP_FILENAME = [</div><div class="line">    <span class="string">'DWCRDUMP'</span>, <span class="string">'DWCRDCIDUMP'</span>, <span class="string">'DWCRWEBDUMP'</span>,</div><div class="line">    <span class="string">'DP_ISRC2'</span>, <span class="string">'CPCCFS_BACKUP'</span>, <span class="string">'CPCCFS_BACKUP'</span>,</div><div class="line">    <span class="string">'DAILI_NEW'</span>, <span class="string">'DAILI_NEW'</span>, <span class="string">'DAILI_OLD'</span>, <span class="string">'DAILI_OLD'</span>,</div><div class="line">    <span class="string">'THREEDUMP'</span>, <span class="string">'THREEDUMP'</span>, <span class="string">'THREEDUMP'</span>]</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    now_time = time.strftime(<span class="string">"%Y%m%d%H%M"</span>)</div><div class="line">    print(<span class="string">"当前系统时间:"</span>, now_time)</div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(IP_ADDR.__len__()):</div><div class="line">        ip_addr = IP_ADDR[i]</div><div class="line">        sid = SID[i]</div><div class="line">        username = USERNAME[i]</div><div class="line">        password = PASSWORD[i]</div><div class="line">        tablespace_name = TABLESPACE_NAME[i]</div><div class="line">        dump_filename = DUMP_FILENAME[i]</div><div class="line"></div><div class="line">        <span class="comment"># DWCR Keep 10 days file</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> sid == <span class="string">'dwcr'</span>:</div><div class="line">            dir_path = <span class="string">"/home/oracle/dwcr_dumps"</span></div><div class="line">            all_dmpfiles = os.listdir(dir_path)</div><div class="line">            all_dmpfiles.sort()</div><div class="line">            print(all_dmpfiles)</div><div class="line">            <span class="keyword">if</span> all_dmpfiles.__len__() &gt; <span class="number">20</span>:</div><div class="line">                del_file_num = all_dmpfiles.__len__() - <span class="number">20</span></div><div class="line">                print(<span class="string">"即将删除10天前的文件:"</span>, del_file_num, <span class="string">" 个"</span>)</div><div class="line">                <span class="keyword">for</span> file <span class="keyword">in</span> all_dmpfiles[:del_file_num]:</div><div class="line">                    print(<span class="string">'rm -f %s'</span> % dir_path + <span class="string">"/"</span> + file)</div><div class="line">                    os.system(<span class="string">'rm %s'</span> % dir_path + <span class="string">"/"</span> + file)</div><div class="line">        <span class="comment"># Export the new dmp file</span></div><div class="line">        <span class="comment"># expdp  dwcr1/dwcr1@192.168.1.1105:1521/dwcr  DIRECTORY=DWCRDUMP DUMPFILE=dwcr1_20161127.dmp  LOGFILE=dwcr1_20161127.log   SCHEMAS=dwcr1</span></div><div class="line">        print(<span class="string">"即将泵出"</span>, ip_addr, sid, username, tablespace_name, dump_filename)</div><div class="line">        excmd = <span class="string">'expdp %s/%s@%s:1521/%s  DIRECTORY=%s DUMPFILE=%s_%s.dmp  LOGFILE=%s_%s.log   SCHEMAS=%s'</span> % \</div><div class="line">                (username, password, ip_addr, sid, dump_filename, tablespace_name, now_time, tablespace_name, now_time,</div><div class="line">                 username)</div><div class="line">        print(excmd)</div><div class="line">        result = os.system(excmd)</div><div class="line">        print(<span class="string">"执行结果:"</span>, result)</div><div class="line">        os.system(<span class="string">'exit'</span>)</div><div class="line">    print(<span class="string">"计划内导出数据库文件的服务器IP列表为:"</span>)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(IP_ADDR.__len__()):</div><div class="line">        print(i + <span class="number">1</span>, <span class="string">"-&gt;"</span>, IP_ADDR[i],<span class="string">"-&gt;"</span>,<span class="string">"/home/oralce/"</span>+TABLESPACE_NAME[i])</div><div class="line">    print(<span class="string">"请分别到各数据库服务器拷贝文件:"</span>, <span class="string">'*'</span> + now_time + <span class="string">"*\n"</span>)</div><div class="line"></div><div class="line">    print(<span class="string">'''计划外导出数据库文件的服务器IP列表为:</span></div><div class="line">    IP:192.168.1.166 -&gt; /home/oracle/autobackup/(当天夜里3点的文件)</div><div class="line">    IP:192.168.1.13  -&gt; navicat/sqlyog连接 root/1Q2w3e4r@ 导出sql文件</div><div class="line">    ''')</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    print(<span class="string">'===========结束=========='</span>)</div></pre></td></tr></table></figure>
+<p>其中一下部分代码可以删除，因为有的数据库文件特别大，我每次又都懒得手动删除，因此写了这一段代码，将导出的文件按时间排序，删除超过n天的导出文件 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> sid == <span class="string">'dwcr'</span>:</div><div class="line">            dir_path = <span class="string">"/home/oracle/dwcr_dumps"</span></div><div class="line">            all_dmpfiles = os.listdir(dir_path)</div><div class="line">            all_dmpfiles.sort()</div><div class="line">            print(all_dmpfiles)</div><div class="line">            <span class="keyword">if</span> all_dmpfiles.__len__() &gt; <span class="number">20</span>:</div><div class="line">                del_file_num = all_dmpfiles.__len__() - <span class="number">20</span></div><div class="line">                print(<span class="string">"即将删除10天前的文件:"</span>, del_file_num, <span class="string">" 个"</span>)</div><div class="line">                <span class="keyword">for</span> file <span class="keyword">in</span> all_dmpfiles[:del_file_num]:</div><div class="line">                    print(<span class="string">'rm -f %s'</span> % dir_path + <span class="string">"/"</span> + file)</div><div class="line">                    os.system(<span class="string">'rm %s'</span> % dir_path + <span class="string">"/"</span> + file)</div></pre></td></tr></table></figure>
+<p>将脚本拷贝到/home/oracle下<br>执行方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">su - oracle</div><div class="line">cd /home/oracle/</div><div class="line">python _export.py</div></pre></td></tr></table></figure>
+<p><strong>Lift is short , I need python.</strong><br>喝杯咖啡等着去吧~ </p>
+<h3 id="2-3-全自动定时数据库备份"><a href="#2-3-全自动定时数据库备份" class="headerlink" title="2.3 全自动定时数据库备份"></a>2.3 全自动定时数据库备份</h3><p>什么？你还不满意？不想天天去机房备份？<br><strong>yo~满足你</strong></p>
+<p>定时器版python备份脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">import</span> sched</div><div class="line"></div><div class="line">ISOTIMEFORMAT = <span class="string">'%Y%m%d%'</span></div><div class="line">IP_ADDR = [<span class="string">'192.168.1.169:1521'</span>, <span class="string">'192.168.1.172:1521'</span>, <span class="string">'192.168.1.173:1521'</span>]</div><div class="line">SID = [<span class="string">'dwcr'</span>, <span class="string">'dwcrdci'</span>, <span class="string">'dwcrweb'</span>]</div><div class="line">USERNAME = [<span class="string">'dwcr1'</span>, <span class="string">'dwcrdci'</span>, <span class="string">'dwcrweb'</span>]</div><div class="line">TABLESPACE_NAME = [<span class="string">'dwcr1'</span>, <span class="string">'dwcrdci'</span>, <span class="string">'dwcrweb'</span>]</div><div class="line">DUMP_FILENAME = [<span class="string">'DWCRDUMP'</span>, <span class="string">'DWCRDCIDUMP'</span>, <span class="string">'DWCRWEBDUMP'</span>]</div><div class="line">DIR_PATH = [<span class="string">'dwcr_dumps'</span>, <span class="string">'dwcrdci_dumps'</span>, <span class="string">'dwcrweb_dumps'</span>]</div><div class="line"></div><div class="line">SLEEP_TIME = <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">export_Oracle</span><span class="params">()</span>:</span></div><div class="line">    now_time = time.strftime(<span class="string">"%Y%m%d%H%M"</span>)</div><div class="line">    print(<span class="string">"当前系统时间:"</span>, now_time)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</div><div class="line">        ip_addr = IP_ADDR[i]</div><div class="line">        sid = SID[i]</div><div class="line">        username = USERNAME[i]</div><div class="line">        tablespace_name = TABLESPACE_NAME[i]</div><div class="line">        dump_filename = DUMP_FILENAME[i]</div><div class="line"></div><div class="line">        <span class="comment"># Keep 10 days file</span></div><div class="line">        dir_path = <span class="string">"/home/oracle/"</span> + DIR_PATH[i]</div><div class="line">        all_dmpfiles = os.listdir(dir_path)</div><div class="line">        all_dmpfiles.sort()</div><div class="line">        print(all_dmpfiles)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> all_dmpfiles.__len__() &gt; <span class="number">20</span>:</div><div class="line">            del_file_num = all_dmpfiles.__len__() - <span class="number">20</span></div><div class="line">            print(<span class="string">"即将删除10天前的文件:"</span>, del_file_num, <span class="string">" 个"</span>)</div><div class="line">            <span class="keyword">for</span> file <span class="keyword">in</span> all_dmpfiles[:del_file_num]:</div><div class="line">                print(<span class="string">'rm -f %s'</span> % dir_path + <span class="string">"/"</span> + file)</div><div class="line">                os.system(<span class="string">'rm %s'</span> % dir_path + <span class="string">"/"</span> + file)</div><div class="line">        <span class="comment"># Export the new dmp file</span></div><div class="line">        <span class="comment"># expdp  dwcr1/dwcr1@192.168.1.105:1521/dwcr  DIRECTORY=DWCRDUMP DUMPFILE=dwcr1_20161127.dmp  LOGFILE=dwcr1_20161127.log   SCHEMAS=dwcr1</span></div><div class="line">        print(<span class="string">"即将泵出"</span>, ip_addr, sid, username, tablespace_name, dump_filename)</div><div class="line">        excmd = <span class="string">'expdp %s/%s@%s/%s  DIRECTORY=%s DUMPFILE=%s_%s.dmp  LOGFILE=%s_%s.log   SCHEMAS=%s'</span> % \</div><div class="line">                (username, username, ip_addr, sid, dump_filename, tablespace_name, now_time, tablespace_name, now_time,</div><div class="line">                 username)</div><div class="line">        print(excmd)</div><div class="line">        result = os.system(excmd)</div><div class="line">        print(<span class="string">"执行结果:"</span>, result)</div><div class="line">    os.system(<span class="string">'exit'</span>)</div><div class="line">    print(<span class="string">'===========结束=========='</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_function</span><span class="params">()</span>:</span></div><div class="line">    s = sched.scheduler(time.time, time.sleep)</div><div class="line">    <span class="comment"># 设置一个调度,因为time.sleep()的时间是一秒,所以timer的间隔时间就是sleep的时间,加上enter的第一个参数</span></div><div class="line">    s.enter(SLEEP_TIME, <span class="number">2</span>, export_Oracle)</div><div class="line">    s.run()</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">timer</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        run_function()</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    timer()</div></pre></td></tr></table></figure>
+<p>其中以下这部分代码用来控制自动备份间隔时间，假如你今天早晨8点执行了脚本，备份会立即执行一次，然后下次执行就是明天早晨的8点了。自己按需配置吧。脚本几乎和之前的一样，只是套了一层定时器而已。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SLEEP_TIME = 60 * 60 * 24</div></pre></td></tr></table></figure>
+<p>执行方法：<br>其中 –fork 是将该进程设置为守护进程，防止系统误杀。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python /home/oracle/time_export.py --fork</div></pre></td></tr></table></figure></p>
+<h2 id="3-常用Oracle语句"><a href="#3-常用Oracle语句" class="headerlink" title="3 常用Oracle语句"></a>3 常用Oracle语句</h2><p>首先进入Oralce命令环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlplus / as sysdba</div></pre></td></tr></table></figure>
+<h3 id="3-1-创建表空间"><a href="#3-1-创建表空间" class="headerlink" title="3.1 创建表空间"></a>3.1 创建表空间</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">tablespace</span> dwcr1</div><div class="line"><span class="keyword">logging</span></div><div class="line"><span class="keyword">datafile</span> <span class="string">'/DWCR_DBV2/dwcr/dwcr1_01.dbf'</span></div><div class="line"><span class="keyword">size</span> <span class="number">800</span>m</div><div class="line"><span class="keyword">autoextend</span> <span class="keyword">on</span></div><div class="line"><span class="keyword">next</span> <span class="number">100</span>m</div><div class="line"><span class="keyword">maxsize</span> <span class="keyword">unlimited</span></div><div class="line"><span class="keyword">extent</span> <span class="keyword">management</span> <span class="keyword">local</span>;</div></pre></td></tr></table></figure>
+<h3 id="3-2-创建用户、给用户分配表空间"><a href="#3-2-创建用户、给用户分配表空间" class="headerlink" title="3.2 创建用户、给用户分配表空间"></a>3.2 创建用户、给用户分配表空间</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">user</span> dwcrdci <span class="keyword">identified</span> <span class="keyword">by</span> dwcrdci</div><div class="line"><span class="keyword">default</span> <span class="keyword">tablespace</span> dwcrdci;</div></pre></td></tr></table></figure>
+<h3 id="3-3-给用户授权"><a href="#3-3-给用户授权" class="headerlink" title="3.3 给用户授权"></a>3.3 给用户授权</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">grant</span> dba,<span class="keyword">resource</span>,<span class="keyword">connect</span> <span class="keyword">to</span> dwcrdci;</div></pre></td></tr></table></figure>
+<h2 id="4-常用Oracle命令"><a href="#4-常用Oracle命令" class="headerlink" title="4 常用Oracle命令"></a>4 常用Oracle命令</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"># 查看dump文件映射</div><div class="line">select * from dba_directories;</div><div class="line"># 查看所有用户</div><div class="line">select * from dba_users;</div><div class="line"># 查看所有表空间</div><div class="line">select * from dba_tablespaces;</div><div class="line"># 查看用户的默认表空间</div><div class="line">select   username,   DEFAULT_TABLESPACE     from   dba_users where username='dwcr1';</div><div class="line"># 查看表空间所有文件路径</div><div class="line">select * from dba_data_files where tablespace_name='dwcr1';</div><div class="line"># 查看表在哪个表空间下</div><div class="line">select tablespace_name,table_name from user_talbes where table_name='td_product';</div><div class="line"># 查看表空间使用情况</div><div class="line">SELECT tbs 表空间名,                                    </div><div class="line">    sum(totalM) 总共大小M,                                    </div><div class="line">    sum(usedM) 已使用空间M,                                    </div><div class="line">    sum(remainedM) 剩余空间M,                                    </div><div class="line">    sum(usedM)/sum(totalM)*100 已使用百分比,                            </div><div class="line">    sum(remainedM)/sum(totalM)*100 剩余百分比                            </div><div class="line">    FROM(                                            </div><div class="line">     SELECT b.file_id ID,                                    </div><div class="line">     b.tablespace_name tbs,                                    </div><div class="line">     b.file_name name,                                    </div><div class="line">     b.bytes/1024/1024 totalM,                                    </div><div class="line">     (b.bytes-sum(nvl(a.bytes,0)))/1024/1024 usedM,                        </div><div class="line">     sum(nvl(a.bytes,0)/1024/1024) remainedM,                            </div><div class="line">     sum(nvl(a.bytes,0)/(b.bytes)*100),                                </div><div class="line">     (100 - (sum(nvl(a.bytes,0))/(b.bytes)*100))                            </div><div class="line">     FROM dba_free_space a,dba_data_files b                            </div><div class="line">     WHERE a.file_id = b.file_id                                </div><div class="line">     GROUP BY b.tablespace_name,b.file_name,b.file_id,b.bytes                    </div><div class="line">     ORDER BY b.tablespace_name                                </div><div class="line">    )                                            </div><div class="line">    GROUP BY tbs                                        </div><div class="line"># 重新调整表空间大小</div><div class="line">alter database datafile 'D:\Oracle\PRODUCT\ORADATA\TEST\USERS01.DBF' resize 1000m;</div><div class="line"># 设置自动扩展大小</div><div class="line">alter database datafile 'D:\ORACLE\PRODUCT\ORADATA\TEST\USERS01.DBF' autoextend on next 200m maxsize unlimited;</div><div class="line"># 增加数据文件</div><div class="line">alter tablespace yourtablespacename add datafile 'd:\newtablespacefile_02.dbf' size 800m;</div><div class="line"></div><div class="line"># 查看和修改用户默认表空间</div><div class="line">alter user dwcr1 default tablespace dwcr1 temporary tablespace temp;</div><div class="line">alter user dwcr1 TEMPORARY TABLESPACE DWCR_TEMP;</div><div class="line"># 修改数据库默认表空间</div><div class="line">alter database default temporary tablespace temp;</div><div class="line"># 查看数据库最大连接数</div><div class="line">select value from v$parameter where name ='processes' </div><div class="line"># 查看当前连接数</div><div class="line">select count(*) from v$process;</div><div class="line"># 修改最大连接数</div><div class="line">alter system set processes = 300 scope =spfile;</div><div class="line"># 查看当前并发量</div><div class="line">select count(*) from v$session where status='ACTIVE'</div><div class="line"># 查看参数</div><div class="line">show parameter processes ;</div><div class="line"># 查看当前session连接数</div><div class="line">select count(*) from v$session</div><div class="line"># 查看哪些用户正在使用数据库</div><div class="line">SELECT osuser, a.username,cpu_time/executions/1000000||'s',b.sql_text,machine</div><div class="line">from v$session a, v$sqlarea b</div><div class="line">where a.sql_address =b.address order by cpu_time/executions desc;</div><div class="line"># 批量杀掉连接</div><div class="line">SELECT 'alter system kill session ' || '''' ||t.sid ||','||t.SERIAL#|| '''' FROM v$session t WHERE t.USERNAME='DWCR1';</div><div class="line"># 删除用户</div><div class="line">drop user dwcr cascade;</div><div class="line"># 彻底删除表空间(包括内容,文件)</div><div class="line">drop tablespace DWCR including contents and datafiles;</div></pre></td></tr></table></figure>
+<p><strong>转载请注明出处，谢谢。</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/09/Oracle/Oracle_1/" data-id="cj27jtjqb000ma7fyxzhj2iah" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Oracle/">Oracle</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/09/JavaWeb/Spring/Spring_1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Chapter01 Spring之旅
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/09/Linux/Curl/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Curl实现Get、Post</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java爬虫/">Java爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac工具/">Mac工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nosql/">Nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PythonWeb/">PythonWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python基础/">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指offer/">剑指offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据基础/">大数据基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面经/">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高并发/">高并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 11.43px;">Hadoop</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 20px;">JavaWeb</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Java爬虫/" style="font-size: 10px;">Java爬虫</a> <a href="/tags/Linux/" style="font-size: 11.43px;">Linux</a> <a href="/tags/Mac工具/" style="font-size: 12.86px;">Mac工具</a> <a href="/tags/Nosql/" style="font-size: 14.29px;">Nosql</a> <a href="/tags/Oracle/" style="font-size: 14.29px;">Oracle</a> <a href="/tags/PythonWeb/" style="font-size: 10px;">PythonWeb</a> <a href="/tags/Python基础/" style="font-size: 14.29px;">Python基础</a> <a href="/tags/Redis/" style="font-size: 14.29px;">Redis</a> <a href="/tags/Spring/" style="font-size: 18.57px;">Spring</a> <a href="/tags/剑指Offer/" style="font-size: 17.14px;">剑指Offer</a> <a href="/tags/剑指offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/大数据/" style="font-size: 12.86px;">大数据</a> <a href="/tags/大数据基础/" style="font-size: 12.86px;">大数据基础</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/搜索/" style="font-size: 12.86px;">搜索</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/面经/" style="font-size: 11.43px;">面经</a> <a href="/tags/高并发/" style="font-size: 14.29px;">高并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/">Hadoop学习笔记（二） - HDFS详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/">Hadoop学习笔记（一）- Hadoop快速入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/">JVM学习笔记（基础知识）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/大数据/大数据基础/Netty学习笔记（一）/">Netty学习笔记（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

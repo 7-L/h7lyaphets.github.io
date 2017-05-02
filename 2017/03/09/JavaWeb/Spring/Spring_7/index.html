@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Chapter07 SpringMVC高级技术 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="7.1 SpringMVC的环境搭建方式Java配置方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter07 SpringMVC高级技术">
+<meta property="og:url" content="http://yoursite.com/2017/03/09/JavaWeb/Spring/Spring_7/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="7.1 SpringMVC的环境搭建方式Java配置方式">
+<meta property="og:updated_time" content="2017-03-09T15:44:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter07 SpringMVC高级技术">
+<meta name="twitter:description" content="7.1 SpringMVC的环境搭建方式Java配置方式">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JavaWeb/Spring/Spring_7" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/09/JavaWeb/Spring/Spring_7/" class="article-date">
+  <time datetime="2017-03-09T15:44:02.000Z" itemprop="datePublished">2017-03-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Chapter07 SpringMVC高级技术
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="7-1-SpringMVC的环境搭建方式"><a href="#7-1-SpringMVC的环境搭建方式" class="headerlink" title="7.1 SpringMVC的环境搭建方式"></a>7.1 SpringMVC的环境搭建方式</h2><p><strong>Java配置方式</strong></p>
+<a id="more"></a>
+<p>全局配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpitterWebInitializer</span> <span class="keyword">extends</span> <span class="title">AbstractAnnotationConfigDispatcherServletInitializer</span></span></div><div class="line">&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Spring上下文配置</div><div class="line">     * ContextLoaderListener</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 09/01/2017 20:40</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> Class&lt;?&gt;[] getRootConfigClasses() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Class&lt;?&gt;[]&#123;RootConfig.class&#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * SpringMVC上下文配置</div><div class="line">     * DisparcherServlet</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 09/01/2017 20:41</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> Class&lt;?&gt;[] getServletConfigClasses() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Class&lt;?&gt;[]&#123;WebConfig.class&#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * SpringMVC请求拦截,将DispatcherServlet映射到/</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 09/01/2017 20:41</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> String[] getServletMappings() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String[]&#123;<span class="string">"/"</span>&#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 配置文件上传限制</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 09/01/2017 20:40</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">customizeRegistration</span><span class="params">(ServletRegistration.Dynamic registration)</span> </span>&#123;</div><div class="line">        registration.setMultipartConfig(<span class="keyword">new</span> MultipartConfigElement(<span class="string">"/Users/lixiwei-mac/Desktop/tmp"</span>,<span class="number">20971520</span>, <span class="number">41943040</span>, <span class="number">0</span>));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Spring上下文配置（ContextLoaderListener）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@author</span> NikoBelic</div><div class="line"> * <span class="doctag">@create</span> 09/01/2017 20:30</div><div class="line"> */</div><div class="line"><span class="comment">//@Configuration</span></div><div class="line"><span class="meta">@ComponentScan</span>(basePackages = <span class="string">"chapter07"</span>,excludeFilters = &#123;<span class="meta">@ComponentScan</span>.Filter(type = FilterType.ANNOTATION,value = EnableWebMvc.class)&#125;)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RootConfig</span></span></div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>SpringMVC配置（DispatcherServlet）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableWebMvc</span></div><div class="line"><span class="meta">@ComponentScan</span>(<span class="string">"chapter07.controller"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span></span></div><div class="line">&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 配置视图解析器</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 09/01/2017 20:37</div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> ViewResolver <span class="title">viewResolver</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        InternalResourceViewResolver resolver = <span class="keyword">new</span> InternalResourceViewResolver();</div><div class="line">        resolver.setPrefix(<span class="string">"/WEB-INF/views/"</span>);</div><div class="line">        resolver.setSuffix(<span class="string">".jsp"</span>);</div><div class="line">        resolver.setExposeContextBeansAsAttributes(<span class="keyword">true</span>);</div><div class="line">        resolver.setViewClass(JstlView.class);</div><div class="line">        <span class="keyword">return</span> resolver;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 配置静态资源的处理</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 09/01/2017 20:37</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureDefaultServletHandling</span><span class="params">(DefaultServletHandlerConfigurer configurer)</span> </span>&#123;</div><div class="line">        configurer.enable();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 配置文件上传解析器</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 09/01/2017 20:38</div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> MultipartResolver <span class="title">multipartResolver</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> StandardServletMultipartResolver();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>XML配置方式（略） 可以参考前几章</strong></p>
+<h2 id="7-2-处理Multipart文件上传"><a href="#7-2-处理Multipart文件上传" class="headerlink" title="7.2 处理Multipart文件上传"></a>7.2 处理Multipart文件上传</h2><p>web相关配置已经包含在7.1中</p>
+<p>jsp页面</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %&gt;</div><div class="line">&lt;%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %&gt;</div><div class="line">&lt;%@ page isELIgnored="false" %&gt;</div><div class="line">&lt;%@ page session="false" %&gt;</div><div class="line">&lt;%@ page contentType="text/html;charset=UTF-8" language="java" %&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;title&gt;RegisterForm&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;h1&gt;Register&lt;/h1&gt;</div><div class="line">&lt;%--这里Form表单没有设置action,因此他会将请求提交到与展现时相同的URL路径上--%&gt;</div><div class="line">&lt;form method="post" enctype="multipart/form-data"&gt;</div><div class="line">    Username:&lt;input type="text" name="username"/&gt;&lt;br/&gt;</div><div class="line">    Password:&lt;input type="password" name="password"/&gt;&lt;br/&gt;</div><div class="line">    FirstName:&lt;input type="text" name="firstName"/&gt;&lt;br/&gt;</div><div class="line">    LastName:&lt;input type="text" name="lastName"/&gt;&lt;br/&gt;</div><div class="line">    ProfilePic:&lt;input type="file" name="profilePic" accept="image/jpeg,image/png,image/gif"/&gt;&lt;br/&gt;</div><div class="line">    &lt;input type="submit" value="Register"/&gt;</div><div class="line">&lt;/form&gt;</div><div class="line"></div><div class="line">使用Spring表单绑定标签</div><div class="line">&lt;%--&lt;sf:form method="post" commandName="spitter"&gt;--%&gt;</div><div class="line">    &lt;%--Username:&lt;sf:input path="username"/&gt;&lt;br/&gt;--%&gt;</div><div class="line">    &lt;%--Password:&lt;sf:password path="password"/&gt;&lt;br/&gt;--%&gt;</div><div class="line">    &lt;%--&lt;input type="submit" value="Register"&gt;--%&gt;</div><div class="line">&lt;%--&lt;/sf:form&gt;--%&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>控制器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"weibo"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeiboController</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 跳转到注册界面</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 09/01/2017 22:35</div><div class="line">     */</div><div class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/register"</span>,method = RequestMethod.GET)</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">showRegister</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"weibo/register"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 处理注册流程</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 09/01/2017 22:36</div><div class="line">     */</div><div class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/register"</span>,method = RequestMethod.POST)</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">processRegister</span><span class="params">(@RequestPart(<span class="string">"profilePic"</span>)</span>MultipartFile profilePic, @Valid Spitter spitter, Errors errors, RedirectAttributes model) <span class="keyword">throws</span> IOException, DuplicateException</span></div><div class="line">    &#123;</div><div class="line">        profilePic.transferTo(<span class="keyword">new</span> File(<span class="string">"/Users/lixiwei-mac/Desktop/data/"</span> + profilePic.getOriginalFilename()));</div><div class="line">        System.out.println(spitter);</div><div class="line">        <span class="keyword">if</span> (spitter.getUsername().equals(<span class="string">"dup"</span>))</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> DuplicateException();</div><div class="line">        model.addAttribute(<span class="string">"username"</span>,spitter.getUsername());</div><div class="line">        model.addAttribute(<span class="string">"password"</span>,spitter.getPassword());</div><div class="line">        model.addFlashAttribute(spitter);</div><div class="line">        <span class="keyword">return</span> <span class="string">"redirect:/weibo/profile/&#123;username&#125;"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/profile/&#123;username&#125;"</span>,method = RequestMethod.GET)</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">profile</span><span class="params">(@PathVariable(<span class="string">"username"</span>)</span> String username,String password,Model model)</span></div><div class="line">    &#123;</div><div class="line">        System.out.println(username);</div><div class="line">        System.out.println(password);</div><div class="line">        System.out.println(model.containsAttribute(<span class="string">"spitter"</span>));</div><div class="line">        <span class="keyword">return</span> <span class="string">"profile"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 控制器异常处理</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 10/01/2017 08:51</div><div class="line">     */</div><div class="line">    <span class="comment">//@ExceptionHandler(DuplicateException.class)</span></div><div class="line">    <span class="comment">//@ResponseBody</span></div><div class="line">    <span class="comment">//public String handleDuplicateException()</span></div><div class="line">    <span class="comment">//&#123;</span></div><div class="line">    <span class="comment">//    return "error/duplicate";</span></div><div class="line">    <span class="comment">//&#125;</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>customizeRegistration配置指定了临时文件的存储地址（传输完毕后会自动清除）</p>
+<h2 id="7-3-处理异常"><a href="#7-3-处理异常" class="headerlink" title="7.3 处理异常"></a>7.3 处理异常</h2><p>使用@ExceptionHandler可以处理Controller抛出的异常，异常出现后可以跳转到更加友好的提示界面。@ControllerAdvice作为一个Controller的全局配置，对所有@Controller注解的@RequestMapping方法生效。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ControllerAdvice</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppWideExceptionHandler</span></span></div><div class="line">&#123;</div><div class="line">    <span class="meta">@ExceptionHandler</span>(DuplicateException.class)</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">duplicateSpittleHandler</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"error/duplicate"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="7-4-跨重定向传递数据"><a href="#7-4-跨重定向传递数据" class="headerlink" title="7.4 跨重定向传递数据"></a>7.4 跨重定向传递数据</h2><p>redirect：将客户端的请求以get方式重定向到另一个controller，可以用${}路径和?参数的方式传递<strong>简单</strong>数据，但是无法传输Spitter这样的对象。重定向后模型中的数据将会丢失。<br>forward：将客户端的请求转发到另外一个页面，保留原有的模型数据，但是浏览器地址不会发生改变，因为浏览器不知道自己的请求被转发了。</p>
+<p>如果需要使用redirect并想保留model中的数据，可以使用flash属性。使用RedirectAttributes作为model，它会将模型暂存到session中，重定向后可以使用Model取出对应的对象。我们也可以不借助Spring提供的这个方法，自己将对象存储到session中，转发后在从session中取出并清空session。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/09/JavaWeb/Spring/Spring_7/" data-id="cj27jtjso002xa7fylpbu72go" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/09/JavaWeb/Spring/Spring_8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Chapter09 Spring Security
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/09/JavaWeb/Spring/Spring_6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Chapter06 渲染Web试图</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java爬虫/">Java爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac工具/">Mac工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nosql/">Nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PythonWeb/">PythonWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python基础/">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指offer/">剑指offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据基础/">大数据基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面经/">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高并发/">高并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 11.43px;">Hadoop</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 20px;">JavaWeb</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Java爬虫/" style="font-size: 10px;">Java爬虫</a> <a href="/tags/Linux/" style="font-size: 11.43px;">Linux</a> <a href="/tags/Mac工具/" style="font-size: 12.86px;">Mac工具</a> <a href="/tags/Nosql/" style="font-size: 14.29px;">Nosql</a> <a href="/tags/Oracle/" style="font-size: 14.29px;">Oracle</a> <a href="/tags/PythonWeb/" style="font-size: 10px;">PythonWeb</a> <a href="/tags/Python基础/" style="font-size: 14.29px;">Python基础</a> <a href="/tags/Redis/" style="font-size: 14.29px;">Redis</a> <a href="/tags/Spring/" style="font-size: 18.57px;">Spring</a> <a href="/tags/剑指Offer/" style="font-size: 17.14px;">剑指Offer</a> <a href="/tags/剑指offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/大数据/" style="font-size: 12.86px;">大数据</a> <a href="/tags/大数据基础/" style="font-size: 12.86px;">大数据基础</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/搜索/" style="font-size: 12.86px;">搜索</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/面经/" style="font-size: 11.43px;">面经</a> <a href="/tags/高并发/" style="font-size: 14.29px;">高并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/">Hadoop学习笔记（二） - HDFS详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/">Hadoop学习笔记（一）- Hadoop快速入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/">JVM学习笔记（基础知识）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/大数据/大数据基础/Netty学习笔记（一）/">Netty学习笔记（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

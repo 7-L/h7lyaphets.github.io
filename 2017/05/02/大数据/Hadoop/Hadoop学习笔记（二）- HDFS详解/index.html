@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hadoop学习笔记（二） - HDFS详解 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="HDFS详解1 HDFS 基本概念1.1 前言 设计思想  分而治之：将大文件、大批量文件，分布式存放在大量服务器上，以便于采取分而治之的方式对海量数据进行运算分析；  在大数据系统中作用  为各类分布式运算框架（如：mapreduce，spark，tez，……）提供数据存储服务  重点概念  文件切块，副本存放，元数据 1.2 HDFS概念和特性首先，它是一个文件系统，用于存储文件，通过统一的命">
+<meta name="keywords" content="大数据,Hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop学习笔记（二） - HDFS详解">
+<meta property="og:url" content="http://yoursite.com/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="HDFS详解1 HDFS 基本概念1.1 前言 设计思想  分而治之：将大文件、大批量文件，分布式存放在大量服务器上，以便于采取分而治之的方式对海量数据进行运算分析；  在大数据系统中作用  为各类分布式运算框架（如：mapreduce，spark，tez，……）提供数据存储服务  重点概念  文件切块，副本存放，元数据 1.2 HDFS概念和特性首先，它是一个文件系统，用于存储文件，通过统一的命">
+<meta property="og:image" content="http://yoursite.com/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）-%20HDFS详解/Hadoop学习笔记（二）-%20HDFS详解/14933904476703.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）-%20HDFS详解/Hadoop学习笔记（二）-%20HDFS详解/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）-%20HDFS详解/Hadoop学习笔记（二）-%20HDFS详解/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）-%20HDFS详解/Hadoop学习笔记（二）-%20HDFS详解/3.jpg">
+<meta property="og:updated_time" content="2017-05-02T11:19:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hadoop学习笔记（二） - HDFS详解">
+<meta name="twitter:description" content="HDFS详解1 HDFS 基本概念1.1 前言 设计思想  分而治之：将大文件、大批量文件，分布式存放在大量服务器上，以便于采取分而治之的方式对海量数据进行运算分析；  在大数据系统中作用  为各类分布式运算框架（如：mapreduce，spark，tez，……）提供数据存储服务  重点概念  文件切块，副本存放，元数据 1.2 HDFS概念和特性首先，它是一个文件系统，用于存储文件，通过统一的命">
+<meta name="twitter:image" content="http://yoursite.com/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）-%20HDFS详解/Hadoop学习笔记（二）-%20HDFS详解/14933904476703.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/" class="article-date">
+  <time datetime="2017-05-02T11:14:03.000Z" itemprop="datePublished">2017-05-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hadoop学习笔记（二） - HDFS详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="HDFS详解"><a href="#HDFS详解" class="headerlink" title="HDFS详解"></a>HDFS详解</h1><h1 id="1-HDFS-基本概念"><a href="#1-HDFS-基本概念" class="headerlink" title="1 HDFS 基本概念"></a>1 HDFS 基本概念</h1><h2 id="1-1-前言"><a href="#1-1-前言" class="headerlink" title="1.1 前言"></a>1.1 前言</h2><ul>
+<li>设计思想</li>
+</ul>
+<p>分而治之：将大文件、大批量文件，分布式存放在大量服务器上，以便于采取分而治之的方式对海量数据进行运算分析；</p>
+<ul>
+<li>在大数据系统中作用</li>
+</ul>
+<p>为各类分布式运算框架（如：mapreduce，spark，tez，……）提供数据存储服务</p>
+<ul>
+<li>重点概念</li>
+</ul>
+<p>文件切块，副本存放，元数据</p>
+<h2 id="1-2-HDFS概念和特性"><a href="#1-2-HDFS概念和特性" class="headerlink" title="1.2 HDFS概念和特性"></a>1.2 HDFS概念和特性</h2><p>首先，它是一个文件系统，用于存储文件，通过统一的命名空间——目录树来定位文件；<br>其次，它是分布式的，由很多服务器联合起来实现其功能，集群中的服务器有各自的角色；</p>
+<p><strong>重要特性如下：</strong></p>
+<ul>
+<li>HDFS中的文件在物理上是分块存储（block），块的大小可以通过配置参数( dfs.blocksize)来规定，默认大小在hadoop2.x版本中是128M，老版本中是64M</li>
+<li>HDFS文件系统会给客户端提供一个统一的抽象目录树，客户端通过路径来访问文件，形如：hdfs://namenode:port/dir-a/dir-b/dir-c/file.data</li>
+<li>目录结构及文件分块信息(元数据)的管理由namenode节点承担。namenode是HDFS集群主节点，负责维护整个hdfs文件系统的目录树，以及每一个路径（文件）所对应的block块信息（block的id，及所在的datanode服务器）</li>
+<li>文件的各个block的存储管理由datanode节点承担。datanode是HDFS集群从节点，每一个block都可以在多个datanode上存储多个副本（副本数量也可以通过参数设置dfs.replication）</li>
+<li>HDFS是设计成适应一次写入，多次读出的场景，且不支持文件的修改(注：适合用来做数据分析，并不适合用来做网盘应用，因为，不便修改，延迟大，网络开销大，成本太高)</li>
+</ul>
+<a id="more"></a>
+<h2 id="1-3-基本操作"><a href="#1-3-基本操作" class="headerlink" title="1.3 基本操作"></a>1.3 基本操作</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-help</td>
+<td>输出命令参数手册</td>
+<td></td>
+</tr>
+<tr>
+<td>-ls</td>
+<td>显示目录信息</td>
+<td>hadoop fs -ls /</td>
+</tr>
+<tr>
+<td>-mkdir</td>
+<td>创建目录</td>
+<td>hadoop fs -mkdir -p /aaa/bb/cc/dd</td>
+</tr>
+<tr>
+<td>-moveFromLocal</td>
+<td>从本地剪切到hdfs</td>
+<td>hadoop fs -moveFromLocal /home/hadoop/1.txt /aaa/bb/cc/dd</td>
+</tr>
+<tr>
+<td>-moveToLocal</td>
+<td>从hdfs剪切到本地</td>
+<td>hadoop fs -moveToLocal /aaa/bb/cc/dd /home/hadoop/1.txt</td>
+</tr>
+<tr>
+<td>-appendToFile</td>
+<td>追加一个文件到已经存在的文件末尾</td>
+<td>hadoop fs -appendToFile ./hello.txt /hello.txt</td>
+</tr>
+<tr>
+<td>-cat</td>
+<td>查看文件内容</td>
+<td>hadoop fs -cat /hello.txt</td>
+</tr>
+<tr>
+<td>-tail</td>
+<td>显示一个文件的末尾</td>
+<td>hadoop fs -tail /access_log.1</td>
+</tr>
+<tr>
+<td>-text</td>
+<td>以字符形式打印一个文件的内容</td>
+<td>hadoop fs -text /access_log.1</td>
+</tr>
+<tr>
+<td>-chgrp/-chmod/-chown</td>
+<td>修改文件权限</td>
+<td>hadoop fs -chmod 755 /hello.txt</td>
+</tr>
+<tr>
+<td>-copyFromLocal</td>
+<td>从本地文件系统中拷贝文件到hdfs路径去</td>
+<td></td>
+</tr>
+<tr>
+<td>-copyToLocal</td>
+<td>从hdfs拷贝到本地</td>
+<td></td>
+</tr>
+<tr>
+<td>-cp</td>
+<td>从hdfs的一个路径拷贝到hdfs另一个路径</td>
+<td></td>
+</tr>
+<tr>
+<td>-mv</td>
+<td>在hdfs中移动文件</td>
+<td></td>
+</tr>
+<tr>
+<td>-get</td>
+<td>等同于copyToLocal</td>
+<td></td>
+</tr>
+<tr>
+<td>-put</td>
+<td>等同于copyFromLocal</td>
+<td></td>
+</tr>
+<tr>
+<td>-getmerge</td>
+<td>合并下载多个文件</td>
+<td></td>
+</tr>
+<tr>
+<td>-rm</td>
+<td>删除文件或文件夹</td>
+<td>hadoop fs -rm -r /aaa/bbb</td>
+</tr>
+<tr>
+<td>-rmdir</td>
+<td>删除空目录</td>
+<td>hadoop fs -rmdir /aaa/bbb/ccc</td>
+</tr>
+<tr>
+<td>-df</td>
+<td>统计问价那系统的可用空间信息</td>
+<td>hadoop fs -df -h /</td>
+</tr>
+<tr>
+<td>-du</td>
+<td>统计文件夹的大小信息</td>
+<td>hadoop fs -du -s -h /aaa/*</td>
+</tr>
+<tr>
+<td>-count</td>
+<td>统计一个指定目录下的文件节点数量</td>
+<td>hadoop fs -count /aaa/</td>
+</tr>
+<tr>
+<td>-setrep</td>
+<td>设置hdfs中文件的副本数量</td>
+<td>hadoop fs -setrep 3 /aaa/jdk.tar</td>
+</tr>
+</tbody>
+</table>
+<h1 id="2-HDFS-原理"><a href="#2-HDFS-原理" class="headerlink" title="2 HDFS 原理"></a>2 HDFS 原理</h1><h2 id="2-1-概述"><a href="#2-1-概述" class="headerlink" title="2.1 概述"></a>2.1 概述</h2><ol>
+<li>HDFS集群分为两大角色：NameNode、DataNode</li>
+<li>NameNode负责管理整个文件系统的元数据</li>
+<li>DataNode 负责管理用户的文件数据块</li>
+<li>文件会按照固定的大小（blocksize）切成若干块后分布式存储在若干台datanode上</li>
+<li>每一个文件块可以有多个副本，并存放在不同的datanode上</li>
+<li>Datanode会定期向Namenode汇报自身所保存的文件block信息，而namenode则会负责保持文件的副本数量</li>
+<li>HDFS的内部工作机制对客户端保持透明，客户端请求访问HDFS都是通过向namenode申请来进行</li>
+</ol>
+<h2 id="2-2-HDFS-读写数据详细步骤"><a href="#2-2-HDFS-读写数据详细步骤" class="headerlink" title="2.2 HDFS 读写数据详细步骤"></a>2.2 HDFS 读写数据详细步骤</h2><h3 id="2-2-1-写数据"><a href="#2-2-1-写数据" class="headerlink" title="2.2.1 写数据"></a>2.2.1 写数据</h3><p><img src="Hadoop学习笔记（二）-%20HDFS详解/14933904476703.jpg" alt=""></p>
+<ol>
+<li>根namenode通信请求上传文件，namenode检查目标文件是否已存在，父目录是否存在</li>
+<li>namenode返回是否可以上传</li>
+<li>client请求第一个 block该传输到哪些datanode服务器上</li>
+<li>namenode返回3个datanode服务器ABC</li>
+<li>client请求3台dn中的一台A上传数据（本质上是一个RPC调用，建立pipeline），A收到请求会继续调用B，然后B调用C，将真个pipeline建立完成，逐级返回客户端</li>
+<li>client开始往A上传第一个block（先从磁盘读取数据放到一个本地内存缓存），以packet为单位，A收到一个packet就会传给B，B传给C；A每传一个packet会放入一个应答队列等待应答</li>
+<li>当一个block传输完成之后，client再次请求namenode上传第二个block的服务器。</li>
+</ol>
+<h3 id="2-2-2-读数据"><a href="#2-2-2-读数据" class="headerlink" title="2.2.2 读数据"></a>2.2.2 读数据</h3><p><img src="Hadoop学习笔记（二）-%20HDFS详解/1.jpg" alt=""></p>
+<h2 id="2-3-NameNode工作机制"><a href="#2-3-NameNode工作机制" class="headerlink" title="2.3 NameNode工作机制"></a>2.3 NameNode工作机制</h2><p><strong>NAMENODE职责：</strong><br>1、负责客户端请求的响应<br>2、元数据的管理（查询，修改）</p>
+<p><strong>namenode对数据的管理采用了三种存储形式：</strong><br>1、内存元数据(NameSystem)<br>2、磁盘元数据镜像文件<br>3、数据操作日志文件（可通过日志运算出元数据）</p>
+<h3 id="2-3-1-元数据的存储机制"><a href="#2-3-1-元数据的存储机制" class="headerlink" title="2.3.1 元数据的存储机制"></a>2.3.1 元数据的存储机制</h3><p>A、内存中有一份完整的元数据(内存meta data)<br>B、磁盘有一个“准完整”的元数据镜像（fsimage）文件(在namenode的工作目录中)<br>C、用于衔接内存metadata和持久化元数据镜像fsimage之间的操作日志（edits文件）注：当客户端对hdfs中的文件进行新增或者修改操作，操作记录首先被记入edits日志文件中，当客户端操作成功后，相应的元数据会更新到内存meta.data中</p>
+<h3 id="2-3-2-元数据的checkpoint"><a href="#2-3-2-元数据的checkpoint" class="headerlink" title="2.3.2 元数据的checkpoint"></a>2.3.2 元数据的checkpoint</h3><p>每隔一段时间，会由secondaryNamenode 将 namenode 上积累的所有edits和一个最新的fsimage下载到本地，并架子啊到内存进行merge（这个过程称为checkpoint）</p>
+<p><strong>checkpoint的详细过程</strong><br><img src="Hadoop学习笔记（二）-%20HDFS详解/2.jpg" alt=""></p>
+<p><strong>checkpoint操作的出发条件配置参数</strong></p>
+<p><img src="Hadoop学习笔记（二）-%20HDFS详解/3.jpg" alt=""></p>
+<p><strong>chekcpoint的附带作用</strong></p>
+<p>namenode和secondary namenode的工作目录存储结构完全相同，所以，当namenode故障退出需要重新恢复时，可以从secondary namenode的工作目录中将fsimage拷贝到namenode的工作目录，以恢复namenode的元数据</p>
+<h3 id="2-3-3-元数据目录说明"><a href="#2-3-3-元数据目录说明" class="headerlink" title="2.3.3 元数据目录说明"></a>2.3.3 元数据目录说明</h3><p>1、在第一次部署好Hadoop集群的时候，我们需要在NameNode（NN）节点上格式化磁盘：<br><code>$HADOOP_HOME/bin/hdfs namenode -format</code></p>
+<p>2、格式化完成之后，将会在$dfs.namenode.name.dir/current目录下如下的文件结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">current/</div><div class="line">|-- VERSION</div><div class="line">|-- edits_*</div><div class="line">|-- fsimage_0000000000008547077</div><div class="line">|-- fsimage_0000000000008547077.md5</div><div class="line">`-- seen_txid</div></pre></td></tr></table></figure>
+<p>3、其中的dfs.name.dir是在hdfs-site.xml文件中配置的，默认值如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.name.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>file://$&#123;hadoop.tmp.dir&#125;/dfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--hadoop.tmp.dir是在core-site.xml中配置的，默认值如下--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>/tmp/hadoop-$&#123;user.name&#125;<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>A base for other temporary directories.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>4、fs.namenode.name.dir属性可以配置多个目录，<br>如/data1/dfs/name,/data2/dfs/name,/data3/dfs/name,….。各个目录存储的文件结构和内容都完全一样，<strong>相当于备份</strong>，这样做的好处是当其中一个目录损坏了，也不会影响到Hadoop的元数据，特别是当其中一个目录是NFS（网络文件系统Network File System，NFS）之上，即使你这台机器损坏了，元数据也得到保存。 <br>5、下面对$dfs.namenode.name.dir/current/目录下的文件进行解释。</p>
+<p><strong>VERSION文件是Java属性文件，内容大致如下：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">namespaceID=934548976</div><div class="line">clusterID=CID-cdff7d73-93cd-4783-9399-0a22e6dce196</div><div class="line">cTime=0</div><div class="line">storageType=NAME_NODE</div><div class="line">blockpoolID=BP-893790215-192.168.24.72-1383809616115</div><div class="line">layoutVersion=-47</div></pre></td></tr></table></figure>
+<ul>
+<li>1、namespaceID是文件系统的唯一标识符，在文件系统首次格式化之后生成的</li>
+<li>2、storageType说明这个文件存储的是什么进程的数据结构信息（如果是DataNode，storageType=DATA_NODE）</li>
+<li>3、cTime表示NameNode存储时间的创建时间，由于我的NameNode没有更新过，所以这里的记录值为0，以后对NameNode升级之后，cTime将会记录更新时间戳</li>
+<li>4、layoutVersion表示HDFS永久性数据结构的版本信息， 只要数据结构变更，版本号也要递减，此时的HDFS也需要升级，否则磁盘仍旧是使用旧版本的数据结构，这会导致新版本的NameNode无法使用</li>
+<li><p>5、clusterID是系统生成或手动指定的集群ID，在-clusterid选项中可以使用它；如下说明</p>
+<ul>
+<li>a、使用如下命令格式化一个Namenode：<br>$HADOOP_HOME/bin/hdfs namenode -format [-clusterId <cluster_id>]<br>选择一个唯一的cluster_id，并且这个cluster_id不能与环境中其他集群有冲突。如果没有提供cluster_id，则会自动生成一个唯一的ClusterID。</cluster_id></li>
+<li>b、使用如下命令格式化其他Namenode：<br>$HADOOP_HOME/bin/hdfs namenode -format -clusterId <cluster_id></cluster_id></li>
+<li>c、升级集群至最新版本。在升级过程中需要提供一个ClusterID，例如：<br>$HADOOP_PREFIX_HOME/bin/hdfs start namenode –config $HADOOP_CONF_DIR  -upgrade -clusterId <cluster_id><br>如果没有提供ClusterID，则会自动生成一个ClusterID。</cluster_id></li>
+</ul>
+</li>
+<li><p>6、blockpoolID：是针对每一个Namespace所对应的blockpool的ID，上面的这个BP-893790215-192.168.24.72-1383809616115就是在我的ns1的namespace下的存储块池的ID，这个ID包括了其对应的NameNode节点的ip地址。 　　</p>
+</li>
+</ul>
+<p><strong>seen_txid</strong><br> $dfs.namenode.name.dir/current/seen<em>txid非常重要，是存放transactionId的文件，format之后是0，它代表的是namenode里面的edits</em>*文件的尾数，namenode重启的时候，会按照seen_txid的数字，循序从头跑edits_0000001~到seen_txid的数字。所以当你的hdfs发生异常重启的时候，一定要比对seen_txid内的数字是不是你edits最后的尾数，不然会发生建置namenode时metaData的资料有缺少，导致误删Datanode上多余Block的资讯。<br>文件中记录的是edits滚动的序号，每次重启namenode时，namenode就知道要将哪些edits进行加载edits</p>
+<p><strong>current目录</strong></p>
+<p>$dfs.namenode.name.dir/current目录下在format的同时也会生成fsimage和edits文件，及其对应的md5校验文件。</p>
+<h1 id="3-HDFS-API"><a href="#3-HDFS-API" class="headerlink" title="3 HDFS API"></a>3 HDFS API</h1><h2 id="3-1-普通方式"><a href="#3-1-普通方式" class="headerlink" title="3.1 普通方式"></a>3.1 普通方式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">package</span> hadoop.hdfs;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.fs.*;</div><div class="line"><span class="keyword">import</span> org.junit.Before;</div><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.net.URI;</div><div class="line"><span class="keyword">import</span> java.net.URISyntaxException;</div><div class="line"><span class="keyword">import</span> java.util.Iterator;</div><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * HDFS 基本API使用</div><div class="line"> * <span class="doctag">@author</span> NikoBelic</div><div class="line"> * <span class="doctag">@create</span> 2017/4/25 15:11</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HDFSTest</span></span></div><div class="line">&#123;</div><div class="line">    FileSystem fs = <span class="keyword">null</span>;</div><div class="line">    Configuration conf = <span class="keyword">null</span>;</div><div class="line">    <span class="meta">@Before</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> <span class="keyword">throws</span> IOException, URISyntaxException, InterruptedException</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">/*</span></div><div class="line">         客户端去操作HDFS时，是有一个用户身份的</div><div class="line">         默认情况下，HDFS客户端API会从JVM中获取一个参数来作为自己的用户身份，HADOOP_USER_NAME</div><div class="line">         也可以在构建客户端FS对象时指定身份</div><div class="line">          */</div><div class="line">        conf = <span class="keyword">new</span> Configuration();</div><div class="line">        <span class="comment">// 拿到一个文件系统操作的客户端实例对象</span></div><div class="line">        fs = FileSystem.get(<span class="keyword">new</span> URI(<span class="string">"hdfs://10.5.151.241:9000"</span>),conf,<span class="string">"root"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 配置文件参数</div><div class="line">     * <span class="doctag">@Author</span> SeawayLee</div><div class="line">     * <span class="doctag">@Date</span> 2017/05/02 12:22</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testConfig</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        Iterator&lt;Map.Entry&lt;String, String&gt;&gt; iterator = conf.iterator();</div><div class="line">        <span class="keyword">while</span> (iterator.hasNext())</div><div class="line">        &#123;</div><div class="line">            Map.Entry&lt;String, String&gt; entry = iterator.next();</div><div class="line">            System.out.println(entry.getKey() + <span class="string">":"</span> + entry.getValue());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 上传文件</div><div class="line">     * <span class="doctag">@Author</span> SeawayLee</div><div class="line">     * <span class="doctag">@Date</span> 2017/05/02 12:23</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testUpload</span><span class="params">()</span> <span class="keyword">throws</span> IOException, InterruptedException</span></div><div class="line">    &#123;</div><div class="line">        fs.copyFromLocalFile(<span class="keyword">new</span> Path(<span class="string">"/Users/lixiwei-mac/百度云同步盘/MAC云存储/电子书/机器学习/机器学习-Mitchell-中文-清晰版.pdf"</span>),<span class="keyword">new</span> Path(<span class="string">"/机器学习-Mitchell-中文-清晰版.pdf"</span>));</div><div class="line">        fs.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 下载文件</div><div class="line">     * <span class="doctag">@Author</span> SeawayLee</div><div class="line">     * <span class="doctag">@Date</span> 2017/05/02 12:23</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDownload</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span></div><div class="line">    &#123;</div><div class="line">        fs.copyToLocalFile(<span class="keyword">new</span> Path(<span class="string">"/paper.txt"</span>),<span class="keyword">new</span> Path(<span class="string">"/Users/lixiwei-mac/Documents/IdeaProjects/bigdatalearning/src/data"</span>));</div><div class="line">        fs.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 创建文件夹</div><div class="line">     * <span class="doctag">@Author</span> SeawayLee</div><div class="line">     * <span class="doctag">@Date</span> 2017/05/02 14:46</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testMkdir</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">boolean</span> mkdirs = fs.mkdirs(<span class="keyword">new</span> Path(<span class="string">"/tesMkdir/aaa/bbb"</span>));</div><div class="line">        System.out.println(mkdirs);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 删除文件或文件夹</div><div class="line">     * <span class="doctag">@Author</span> SeawayLee</div><div class="line">     * <span class="doctag">@Date</span> 2017/05/02 14:46</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDelete</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">boolean</span> delete = fs.delete(<span class="keyword">new</span> Path(<span class="string">"/tesMkdir"</span>), <span class="keyword">true</span>);</div><div class="line">        System.out.println(delete);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 查看文件信息 迭代方式</div><div class="line">     * <span class="doctag">@Author</span> SeawayLee</div><div class="line">     * <span class="doctag">@Date</span> 2017/05/02 14:46</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testLs</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span></div><div class="line">    &#123;</div><div class="line">        RemoteIterator&lt;LocatedFileStatus&gt; listFiles = fs.listFiles(<span class="keyword">new</span> Path(<span class="string">"/"</span>), <span class="keyword">true</span>);</div><div class="line">        <span class="keyword">while</span> (listFiles.hasNext())</div><div class="line">        &#123;</div><div class="line">            LocatedFileStatus file = listFiles.next();</div><div class="line">            System.out.println(<span class="string">"BlockSize:"</span> + file.getBlockSize() / <span class="number">1024.0</span> / <span class="number">1024.0</span> + <span class="string">"MB"</span>);</div><div class="line">            System.out.println(<span class="string">"Owner:"</span> + file.getOwner());</div><div class="line">            System.out.println(<span class="string">"Replication:"</span> + file.getReplication());</div><div class="line">            System.out.println(<span class="string">"Permission:"</span> + file.getPermission());</div><div class="line">            System.out.println(<span class="string">"Name:"</span> + file.getPath().getName());</div><div class="line">            BlockLocation[] blockLocations = file.getBlockLocations();</div><div class="line">            System.out.println(<span class="string">""</span>);</div><div class="line">            <span class="keyword">for</span> (BlockLocation blockLocation : blockLocations)</div><div class="line">            &#123;</div><div class="line">                System.out.println(<span class="string">"Block-Name:"</span>);</div><div class="line">                <span class="keyword">for</span> (String s : blockLocation.getNames())</div><div class="line">                &#123;</div><div class="line">                    System.out.print(s + <span class="string">" "</span>);</div><div class="line">                &#125;</div><div class="line">                System.out.println(<span class="string">""</span>);</div><div class="line">                System.out.println(<span class="string">"Block-Offset:"</span> + blockLocation.getOffset());</div><div class="line">                System.out.println(<span class="string">"Block-Length:"</span> + blockLocation.getLength());</div><div class="line">                System.out.println(<span class="string">"Block-Hosts:"</span>);</div><div class="line">                <span class="keyword">for</span> (String host : blockLocation.getHosts())</div><div class="line">                &#123;</div><div class="line">                    System.out.print(host + <span class="string">"  "</span>);</div><div class="line">                &#125;</div><div class="line">                System.out.println(<span class="string">""</span>);</div><div class="line">            &#125;</div><div class="line">            System.out.println(<span class="string">"=========================="</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 查看文件信息 数组方式</div><div class="line">     * <span class="doctag">@Author</span> SeawayLee</div><div class="line">     * <span class="doctag">@Date</span> 2017/05/02 14:46</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testLs2</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span></div><div class="line">    &#123;</div><div class="line">        FileStatus[] fileStatuses = fs.listStatus(<span class="keyword">new</span> Path(<span class="string">"/"</span>));</div><div class="line">        <span class="keyword">for</span> (FileStatus fileStatus : fileStatuses)</div><div class="line">        &#123;</div><div class="line">            System.out.println(fileStatus.getPath().getName());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3-2-流方式"><a href="#3-2-流方式" class="headerlink" title="3.2 流方式"></a>3.2 流方式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">package</span> hadoop.hdfs;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.commons.io.IOUtils;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.fs.FSDataInputStream;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.fs.FSDataOutputStream;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.fs.FileSystem;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.fs.Path;</div><div class="line"><span class="keyword">import</span> org.junit.Before;</div><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"><span class="keyword">import</span> sun.nio.ch.IOUtil;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.*;</div><div class="line"><span class="keyword">import</span> java.net.URI;</div><div class="line"><span class="keyword">import</span> java.net.URISyntaxException;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 流方式操作HDFS</div><div class="line"> * <span class="doctag">@author</span> NikoBelic</div><div class="line"> * <span class="doctag">@create</span> 2017/5/2 13:31</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HdfsStreamAccess</span></span></div><div class="line">&#123;</div><div class="line">    FileSystem fs = <span class="keyword">null</span>;</div><div class="line">    Configuration conf = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Before</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> <span class="keyword">throws</span> IOException, URISyntaxException, InterruptedException</span></div><div class="line">    &#123;</div><div class="line">        conf = <span class="keyword">new</span> Configuration();</div><div class="line">        fs = FileSystem.get(<span class="keyword">new</span> URI(<span class="string">"hdfs://10.5.151.241:9000"</span>), conf, <span class="string">"root"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 通过流的方式上传文件</div><div class="line">     * <span class="doctag">@Author</span> SeawayLee</div><div class="line">     * <span class="doctag">@Date</span> 2017/05/02 13:41</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testUpload</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span></div><div class="line">    &#123;</div><div class="line">        FSDataOutputStream outputStream = fs.create(<span class="keyword">new</span> Path(<span class="string">"/linux系统安装过程.avi"</span>));</div><div class="line">        FileInputStream inputStream = <span class="keyword">new</span> FileInputStream(<span class="string">"/Users/lixiwei-mac/linux系统安装过程.avi"</span>);</div><div class="line">        IOUtils.copy(inputStream, outputStream);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 通过流的方式下载文件</div><div class="line">     * <span class="doctag">@Author</span> SeawayLee</div><div class="line">     * <span class="doctag">@Date</span> 2017/05/02 13:55</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDownload</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span></div><div class="line">    &#123;</div><div class="line">        FSDataInputStream inputStream = fs.open(<span class="keyword">new</span> Path(<span class="string">"/TreeFor.png"</span>));</div><div class="line">        FileOutputStream outputStream = <span class="keyword">new</span> FileOutputStream(<span class="string">"/Users/lixiwei-mac/Downloads/fuck.txt"</span>);</div><div class="line">        IOUtils.copy(inputStream, outputStream);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 通过流的方式指读取文件大小(MapReduce从HDFS读文件进行切片时肯定会用到)</div><div class="line">     * <span class="doctag">@Author</span> SeawayLee</div><div class="line">     * <span class="doctag">@Date</span> 2017/05/02 14:18</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testRandomAccess</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span></div><div class="line">    &#123;</div><div class="line">        FSDataInputStream inputStream = fs.open(<span class="keyword">new</span> Path(<span class="string">"/TreeFor.png"</span>));</div><div class="line">        inputStream.seek(<span class="number">50</span>);</div><div class="line">        InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(inputStream);</div><div class="line">        BufferedReader bf = <span class="keyword">new</span> BufferedReader(isr);</div><div class="line">        <span class="keyword">char</span>[] buffer = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">1024</span> * <span class="number">20</span>];</div><div class="line">        <span class="keyword">int</span> len = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span> ((len = bf.read(buffer) )!= -<span class="number">1</span>)</div><div class="line">        &#123;</div><div class="line">            System.out.print(String.valueOf(buffer,<span class="number">0</span>,len));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 流的方式读取文件</div><div class="line">     * <span class="doctag">@Author</span> SeawayLee</div><div class="line">     * <span class="doctag">@Date</span> 2017/05/02 14:21</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCat</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span></div><div class="line">    &#123;</div><div class="line">        FSDataInputStream inputStream = fs.open(<span class="keyword">new</span> Path(<span class="string">"/TreeFor.png"</span>));</div><div class="line">        IOUtils.copy(inputStream, System.out);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="4-Hadoop中的RPC框架"><a href="#4-Hadoop中的RPC框架" class="headerlink" title="4 Hadoop中的RPC框架"></a>4 Hadoop中的RPC框架</h1><p>Hadoop中各个节点的远程调用非常频繁，他自己封装了一套RPC框架，我们也可以直接拿来用，只需要导入Hadoop的common包即可，与Hadoop集群启动与否毫无关系。</p>
+<blockquote>
+<p>假设我们需要远程调用一个登陆服务，使用Hadoop的RPC框架很容易就可以实现。</p>
+</blockquote>
+<p><strong>服务接口</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">LoginServiceInterface</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> versionID = <span class="number">1L</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">(String username, String passowrd)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>服务实现</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginServiceImpl</span> <span class="keyword">implements</span> <span class="title">LoginServiceInterface</span></span></div><div class="line">&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">(String username, String passowrd)</span></span></div><div class="line">    &#123;</div><div class="line">        System.out.println(username + <span class="string">", 你好啊!"</span>);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> username + <span class="string">" Successfully login...."</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>服务启动</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PublishServer</span></span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException</span></div><div class="line">    &#123;</div><div class="line">        RPC.Builder builder = <span class="keyword">new</span> RPC.Builder(<span class="keyword">new</span> Configuration());</div><div class="line">        builder.setBindAddress(<span class="string">"localhost"</span>)</div><div class="line">                .setPort(<span class="number">8888</span>)</div><div class="line">                .setProtocol(LoginServiceInterface.class)</div><div class="line">                .setInstance(<span class="keyword">new</span> LoginServiceImpl());</div><div class="line">        RPC.Server loginServer = builder.build();</div><div class="line">        loginServer.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>客户端远程调用</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginAction</span></span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException</span></div><div class="line">    &#123;</div><div class="line">        LoginServiceInterface loginService = RPC.getProxy(LoginServiceInterface.class, <span class="number">2L</span>, <span class="keyword">new</span> InetSocketAddress(<span class="string">"localhost"</span>, <span class="number">8888</span>), <span class="keyword">new</span> Configuration());</div><div class="line">        String res = loginService.login(<span class="string">"NikoBelic"</span>, <span class="string">"asdasd"</span>);</div><div class="line">        System.out.println(res);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>客户端输出</strong></p>
+<p><code>NikoBelic, 你好啊!</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/" data-id="cj27jtjt6003ka7fycfmyhyd9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/02/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hadoop学习笔记（一）- Hadoop快速入门</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java爬虫/">Java爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac工具/">Mac工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nosql/">Nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PythonWeb/">PythonWeb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python基础/">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指offer/">剑指offer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据基础/">大数据基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面经/">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高并发/">高并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 11.43px;">Hadoop</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 20px;">JavaWeb</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Java爬虫/" style="font-size: 10px;">Java爬虫</a> <a href="/tags/Linux/" style="font-size: 11.43px;">Linux</a> <a href="/tags/Mac工具/" style="font-size: 12.86px;">Mac工具</a> <a href="/tags/Nosql/" style="font-size: 14.29px;">Nosql</a> <a href="/tags/Oracle/" style="font-size: 14.29px;">Oracle</a> <a href="/tags/PythonWeb/" style="font-size: 10px;">PythonWeb</a> <a href="/tags/Python基础/" style="font-size: 14.29px;">Python基础</a> <a href="/tags/Redis/" style="font-size: 14.29px;">Redis</a> <a href="/tags/Spring/" style="font-size: 18.57px;">Spring</a> <a href="/tags/剑指Offer/" style="font-size: 17.14px;">剑指Offer</a> <a href="/tags/剑指offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/大数据/" style="font-size: 12.86px;">大数据</a> <a href="/tags/大数据基础/" style="font-size: 12.86px;">大数据基础</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/搜索/" style="font-size: 12.86px;">搜索</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/面经/" style="font-size: 11.43px;">面经</a> <a href="/tags/高并发/" style="font-size: 14.29px;">高并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/">Hadoop学习笔记（二） - HDFS详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/">Hadoop学习笔记（一）- Hadoop快速入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/">JVM学习笔记（基础知识）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/大数据/大数据基础/Netty学习笔记（一）/">Netty学习笔记（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
