@@ -164,6 +164,67 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-大数据/Hadoop/Hadoop学习笔记（四）- MapReduce运行剖析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/12/大数据/Hadoop/Hadoop学习笔记（四）- MapReduce运行剖析/">Hadoop学习笔记（三）- MapReduce运行剖析</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/12/大数据/Hadoop/Hadoop学习笔记（四）- MapReduce运行剖析/" class="archive-article-date">
+  	<time datetime="2017-06-12T12:00:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-MapReduce中的Shuffle机制"><a href="#1-MapReduce中的Shuffle机制" class="headerlink" title="1 MapReduce中的Shuffle机制"></a>1 MapReduce中的Shuffle机制</h1><h2 id="1-1-Shuffle概述"><a href="#1-1-Shuffle概述" class="headerlink" title="1.1 Shuffle概述"></a>1.1 Shuffle概述</h2><p>MR中，Map阶段处理的数据如何传递给Reduce阶段是MR框架中最关键的一个流程–<strong>Shuffle</strong>。<br>Shuffle的核心机制：<strong>数据分区、排序、缓存</strong><br>具体来说就是将MapTask输出的处理结果分发给ReduceTask，并在分发的过程中对数据<strong>按key进行了分区和排序</strong>。</p>
+<p>Shuffle缓存流程<br><img src="/2017/06/12/大数据/Hadoop/Hadoop学习笔记（四）- MapReduce运行剖析/shuffle缓存流程.png" alt=""></p>
+        
+          <a class="article-more-a" href="/2017/06/12/大数据/Hadoop/Hadoop学习笔记（四）- MapReduce运行剖析/#more">阅读全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+ 
+
+
+
+  
     <article id="post-Nosql/InfluxDB简介" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -238,19 +299,19 @@
 
 
   
-    <article id="post-大数据/Hadoop/Hadoop学习笔记（三）- MapReduce" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-大数据/Hadoop/Hadoop学习笔记（三）- MapReduce详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）- MapReduce/">Hadoop学习笔记（三）- MapReduce详解</a>
+      <a class="article-title" href="/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）- MapReduce详解/">Hadoop学习笔记（三）- MapReduce详解</a>
     </h1>
   
 
         
-        <a href="/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）- MapReduce/" class="archive-article-date">
+        <a href="/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）- MapReduce详解/" class="archive-article-date">
   	<time datetime="2017-05-12T05:55:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-12</time>
 </a>
         
@@ -266,7 +327,7 @@
 <li>（3）引入mapreduce框架后，开发人员可以将绝大部分工作集中在业务逻辑的开发上，而将分布式计算中的复杂性交由框架来处理</li>
 </ul>
         
-          <a class="article-more-a" href="/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）- MapReduce/#more">阅读全文 >></a>
+          <a class="article-more-a" href="/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）- MapReduce详解/#more">阅读全文 >></a>
         
       
 
@@ -784,72 +845,6 @@
 
 
   
-    <article id="post-大数据/大数据基础/JMS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/10/大数据/大数据基础/JMS/">JMS消息队列</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/10/大数据/大数据基础/JMS/" class="archive-article-date">
-  	<time datetime="2017-04-10T05:01:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-JMS"><a href="#1-JMS" class="headerlink" title="1 JMS"></a>1 JMS</h2><h3 id="1-1-什么是JMS"><a href="#1-1-什么是JMS" class="headerlink" title="1.1 什么是JMS"></a>1.1 什么是JMS</h3><blockquote>
-<p>JMS即Java消息服务（Java Message Service）应用程序接口是一个Java平台中关于面向消息中间件（MOM）的API，用于在两个应用程序之间，或分布式系统中发送消息，进行异步通信。Java消息服务是一个与具体平台无关的API，绝大多数MOM提供商都对JMS提供支持。</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2017/04/10/大数据/大数据基础/JMS/#more">阅读全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">高并发</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
- 
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -978,11 +973,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1002,11 +997,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
