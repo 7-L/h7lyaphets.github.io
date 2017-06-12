@@ -16,8 +16,9 @@
 <meta property="og:site_name" content="SeawayLee">
 <meta property="og:description" content="1 MapReduce背景及原理1.1 背景Mapreduce是一个分布式运算程序的编程框架，是用户开发“基于hadoop的数据分析应用”的核心框架；Mapreduce核心功能是将用户编写的业务逻辑代码和自带默认组件整合成一个完整的分布式运算程序，并发运行在一个hadoop集群上； Why MapReduce?  （1）海量数据在单机上处理因为硬件资源限制，无法胜任 （2）而一旦将单机版程序扩展到">
 <meta property="og:image" content="https://seawaylee.github.io/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）-%20MapReduce/mapreduce运行全流程.png">
+<meta property="og:image" content="https://seawaylee.github.io/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）-%20MapReduce/切片2.png">
 <meta property="og:image" content="https://seawaylee.github.io/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）-%20MapReduce/切片示意.png">
-<meta property="og:updated_time" content="2017-06-12T03:21:56.000Z">
+<meta property="og:updated_time" content="2017-06-12T11:12:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop学习笔记（三）- MapReduce详解">
 <meta name="twitter:description" content="1 MapReduce背景及原理1.1 背景Mapreduce是一个分布式运算程序的编程框架，是用户开发“基于hadoop的数据分析应用”的核心框架；Mapreduce核心功能是将用户编写的业务逻辑代码和自带默认组件整合成一个完整的分布式运算程序，并发运行在一个hadoop集群上； Why MapReduce?  （1）海量数据在单机上处理因为硬件资源限制，无法胜任 （2）而一旦将单机版程序扩展到">
@@ -194,6 +195,7 @@
 <li>（2）而一旦将单机版程序扩展到集群来分布式运行，将极大增加程序的复杂度和开发难度</li>
 <li>（3）引入mapreduce框架后，开发人员可以将绝大部分工作集中在业务逻辑的开发上，而将分布式计算中的复杂性交由框架来处理</li>
 </ul>
+<a id="more"></a>
 <h2 id="1-2-MR框架结构核心及运行机制"><a href="#1-2-MR框架结构核心及运行机制" class="headerlink" title="1.2 MR框架结构核心及运行机制"></a>1.2 MR框架结构核心及运行机制</h2><h3 id="1-2-1-结构"><a href="#1-2-1-结构" class="headerlink" title="1.2.1 结构"></a>1.2.1 结构</h3><p>一个完整的mapreduce程序在分布式运行时有三类实例进程：</p>
 <ul>
 <li>1、MRAppMaster：负责整个程序的过程调度及状态协调</li>
@@ -201,7 +203,6 @@
 <li>3、ReduceTask：负责reduce阶段的整个数据处理流程</li>
 </ul>
 <p><img src="/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）- MapReduce/mapreduce运行全流程.png" alt=""></p>
-<a id="more"></a>
 <p><strong>流程解析</strong></p>
 <ol>
 <li><p>一个mr程序启动的时候，最先启动的是MRAppMaster，MRAppMaster启动后根据本次job的描述信息，计算出需要的maptask实例数量，然后向集群申请机器启动相应数量的maptask进程</p>
@@ -220,6 +221,7 @@
 </ol>
 <h3 id="1-2-2-MapTask并行度的决定机制"><a href="#1-2-2-MapTask并行度的决定机制" class="headerlink" title="1.2.2 MapTask并行度的决定机制"></a>1.2.2 MapTask并行度的决定机制</h3><p>一个job的map阶段并行度由客户端在提交job时决定，而客户端对map阶段并行度的规划的基本逻辑为：</p>
 <p>将待处理数据执行逻辑切片（即按照一个特定切片大小，将待处理数据划分成逻辑上的多个split），然后<strong>每一个split分配一个mapTask并行实例处理</strong><br>这段逻辑及形成的切片规划描述文件，由FileInputFormat实现类的getSplits()方法完成，其过程如下图：</p>
+<p><img src="/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）- MapReduce/切片2.png" alt=""></p>
 <p><img src="/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）- MapReduce/切片示意.png" alt=""></p>
 <h3 id="1-2-3-FileInputFormat切片机制"><a href="#1-2-3-FileInputFormat切片机制" class="headerlink" title="1.2.3 FileInputFormat切片机制"></a>1.2.3 FileInputFormat切片机制</h3><p><strong>切片定义在InputFormat类中的getSplit()方法</strong></p>
 <p><strong>FileInputFormat中默认的切片机制</strong></p>
@@ -276,6 +278,8 @@
 </li>
 <li>combiner能够应用的前提是不能影响最终的业务逻辑。而且，combiner的输出kv应该跟reducer的输入kv类型要对应起来</li>
 </ol>
+<h2 id="1-5-Partitioner"><a href="#1-5-Partitioner" class="headerlink" title="1.5 Partitioner"></a>1.5 Partitioner</h2><p>Mapreduce中会将mapTask输出的kv对，按照相同key分组，然后分发给不同的reduceTask<br>默认的分发规则为：根据key的hashcode%reducetask数来分发<br>组件Partitioner能够改写数据分发（分组）</p>
+<h2 id="1-6-GroupingComparator"><a href="#1-6-GroupingComparator" class="headerlink" title="1.6 GroupingComparator"></a>1.6 GroupingComparator</h2><p>自定义GroupingComparator可以将Map输出的K-V按照自己的需求进行聚合</p>
 <h1 id="2-MR-编程实践"><a href="#2-MR-编程实践" class="headerlink" title="2 MR 编程实践"></a>2 MR 编程实践</h1><h2 id="2-1-编程规范"><a href="#2-1-编程规范" class="headerlink" title="2.1 编程规范"></a>2.1 编程规范</h2><ol>
 <li>用户编写的程序分成三个部分：Mapper，Reducer，Driver(提交运行mr程序的客户端)</li>
 <li>Mapper的输入数据是KV对的形式（KV的类型可自定义）</li>
@@ -294,6 +298,41 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * KEYIN,VALUEIN 对应 Mapper输出的KEYOUT,VALUEOUT</div><div class="line"> * KEYOUT,VALUEOUT 是自动以Reduce逻辑处理结果的输出数据类型</div><div class="line"> * KEYOUT是单词，VALUEOUT是总次数</div><div class="line"> * <span class="doctag">@author</span> NikoBelic</div><div class="line"> * <span class="doctag">@create</span> 2017/5/3 09:49</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WordCountReducer</span> <span class="keyword">extends</span> <span class="title">Reducer</span>&lt;<span class="title">Text</span>,<span class="title">IntWritable</span>,<span class="title">Text</span>,<span class="title">IntWritable</span>&gt;</span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * ReduceTask处理逻辑</div><div class="line">     * &lt;Niko,1&gt; &lt;Niko,1&gt; &lt;Niko,1&gt; &lt;Niko,1&gt;</div><div class="line">     * &lt;Belic,1&gt; &lt;Belic,1&gt; &lt;Belic,1&gt; &lt;Belic,1&gt;</div><div class="line">     * <span class="doctag">@param</span> key 一组相同单词kv的key</div><div class="line">     * <span class="doctag">@param</span> values</div><div class="line">     *</div><div class="line">     * <span class="doctag">@Author</span> SeawayLee</div><div class="line">     * <span class="doctag">@Date</span> 2017/05/03 09:52</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">reduce</span><span class="params">(Text key, Iterable&lt;IntWritable&gt; values, Context context)</span> <span class="keyword">throws</span> IOException, InterruptedException</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (IntWritable value : values)</div><div class="line">        &#123;</div><div class="line">            count += value.get();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        context.write(key, <span class="keyword">new</span> IntWritable(count));</div><div class="line">        System.out.println(<span class="string">"ReduceTask正在处理第 "</span> + key.toString() + <span class="string">" 行文本,ObjHashCode:"</span> + <span class="keyword">this</span>.hashCode() + <span class="string">",IP:"</span>  + Inet4Address.getLocalHost().getHostAddress());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>Driver</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Driver相当于Yarn集群的客户端</div><div class="line"> * 需要在此封装MR程序的相关运行参数，指定jar包</div><div class="line"> * 最后提交给Yarn</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span> NikoBelic</div><div class="line"> * <span class="doctag">@create</span> 2017/5/3</div><div class="line"> * 10:00</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WordCountDriver</span></span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException, InterruptedException, URISyntaxException</span></div><div class="line">    &#123;</div><div class="line">        Configuration conf = <span class="keyword">new</span> Configuration();</div><div class="line">        conf.set(<span class="string">"mapreduce.framework.name"</span>, <span class="string">"yarn"</span>);</div><div class="line">        conf.set(<span class="string">"yarn.resourcemanager.hostname"</span>, <span class="string">"10.5.151.241"</span>);</div><div class="line">        <span class="comment">//conf.set("mapred.jar", "hadoop.jar");</span></div><div class="line">        Job job = Job.getInstance(conf);</div><div class="line"></div><div class="line">        <span class="comment">//job.setJar("/home/hadoop/wc.jar");</span></div><div class="line">        <span class="comment">// 指定本程序的jar包所在的本地路径，需要提交给Yarn</span></div><div class="line">        <span class="comment">// setJar方法传入jar包绝对路径，必须将jar部署到指定位置，很不灵活</span></div><div class="line">        <span class="comment">// 而使用setJarByClass，可以从JVM中找到该类，比较常用</span></div><div class="line">        job.setJarByClass(WordCountDriver.class);</div><div class="line">        job.setJar(<span class="string">"hadoop.jar"</span>);</div><div class="line"></div><div class="line">        <span class="comment">// 指定本业务job要使用的Map和Reduce业务类</span></div><div class="line">        job.setMapperClass(WordCountMapper.class);</div><div class="line">        job.setReducerClass(WordCountReducer.class);</div><div class="line"></div><div class="line">        <span class="comment">// 指定Mapper输数据的KV类型</span></div><div class="line">        job.setMapOutputKeyClass(Text.class);</div><div class="line">        job.setMapOutputValueClass(IntWritable.class);</div><div class="line"></div><div class="line">        <span class="comment">// 指定最终输出数据的KV类型</span></div><div class="line">        job.setOutputKeyClass(Text.class);</div><div class="line">        job.setOutputValueClass(IntWritable.class);</div><div class="line"></div><div class="line">        <span class="comment">// 指定job的输入源</span></div><div class="line">        FileInputFormat.setInputPaths(job, <span class="keyword">new</span> Path(args[<span class="number">0</span>]));</div><div class="line"></div><div class="line">        <span class="comment">// 指定job的输出结构存储位置</span></div><div class="line">        FileSystem fs = FileSystem.get(<span class="keyword">new</span> URI(<span class="string">"hdfs://hadoop1:9000"</span>), conf, <span class="string">"root"</span>);</div><div class="line">        <span class="keyword">if</span> (fs.exists(<span class="keyword">new</span> Path(args[<span class="number">1</span>])))</div><div class="line">        &#123;</div><div class="line">            fs.delete(<span class="keyword">new</span> Path(args[<span class="number">1</span>]), <span class="keyword">true</span>);</div><div class="line">        &#125;</div><div class="line">        FileOutputFormat.setOutputPath(job, <span class="keyword">new</span> Path(args[<span class="number">1</span>]));</div><div class="line"></div><div class="line">        <span class="comment">// 将job中配置的相关参数，以及job所用的java类所在的jar包提交给yarn去运行</span></div><div class="line">        <span class="comment">//job.submit();</span></div><div class="line">        <span class="comment">// 以阻塞的方式提交job，便于查看job处理进度</span></div><div class="line">        <span class="keyword">boolean</span> res = job.waitForCompletion(<span class="keyword">true</span>);</div><div class="line">        System.exit(res ? <span class="number">0</span> : <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="3-MapReduce参数优化"><a href="#3-MapReduce参数优化" class="headerlink" title="3 MapReduce参数优化"></a>3 MapReduce参数优化</h1><h2 id="3-1-资源相关参数"><a href="#3-1-资源相关参数" class="headerlink" title="3.1 资源相关参数"></a>3.1 资源相关参数</h2><p><strong>以下参数是在用户自己的mr应用程序中配置就可以生效</strong></p>
+<ul>
+<li>(1) mapreduce.map.memory.mb: 一个Map Task可使用的资源上限（单位:MB），默认为1024。如果Map Task实际使用的资源量超过该值，则会被强制杀死。</li>
+<li>(2) mapreduce.reduce.memory.mb: 一个Reduce Task可使用的资源上限（单位:MB），默认为1024。如果Reduce Task实际使用的资源量超过该值，则会被强制杀死。</li>
+<li>(3) mapreduce.map.java.opts: Map Task的JVM参数，你可以在此配置默认的java heap size等参数, e.g.</li>
+<li>“-Xmx1024m -verbose:gc -Xloggc:/tmp/@taskid@.gc” （@taskid@会被Hadoop框架自动换为相应的taskid）, 默认值: “”</li>
+<li>(4) mapreduce.reduce.java.opts: Reduce Task的JVM参数，你可以在此配置默认的java heap size等参数, e.g.</li>
+<li>“-Xmx1024m -verbose:gc -Xloggc:/tmp/@taskid@.gc”, 默认值: “”</li>
+<li>(5) mapreduce.map.cpu.vcores: 每个Map task可使用的最多cpu core数目, 默认值: 1</li>
+<li>(6) mapreduce.reduce.cpu.vcores: 每个Reduce task可使用的最多cpu core数目, 默认值: 1</li>
+</ul>
+<p><strong>以下在yarn启动之前就配置在服务器的配置文件中才能生效</strong></p>
+<ul>
+<li>(7) yarn.scheduler.minimum-allocation-mb      1024   给应用程序container分配的最小内存</li>
+<li>(8) yarn.scheduler.maximum-allocation-mb      8192    给应用程序container分配的最大内存</li>
+<li>(9) yarn.scheduler.minimum-allocation-vcores    1    </li>
+<li>(10)yarn.scheduler.maximum-allocation-vcores    32</li>
+<li>(11)yarn.nodemanager.resource.memory-mb   8192  </li>
+</ul>
+<p><strong>shuffle性能优化的关键参数，应在yarn启动之前就配置好</strong></p>
+<p>mapreduce.task.io.sort.mb   100         //shuffle的环形缓冲区大小，默认100m<br>mapreduce.map.sort.spill.percent   0.8    //环形缓冲区溢出的阈值，默认80%</p>
+<h2 id="3-2-容错相关参数"><a href="#3-2-容错相关参数" class="headerlink" title="3.2 容错相关参数"></a>3.2 容错相关参数</h2><ul>
+<li>(1) mapreduce.map.maxattempts: 每个Map Task最大重试次数，一旦重试参数超过该值，则认为Map Task运行失败，默认值：4。</li>
+<li>(2) mapreduce.reduce.maxattempts: 每个Reduce Task最大重试次数，一旦重试参数超过该值，则认为Map Task运行失败，默认值：4。</li>
+<li>(3) mapreduce.map.failures.maxpercent: 当失败的Map Task失败比例超过该值为，整个作业则失败，默认值为0. 如果你的应用程序允许丢弃部分输入数据，则该该值设为一个大于0的值，比如5，表示如果有低于5%的Map Task失败（如果一个Map Task重试次数超过mapreduce.map.maxattempts，则认为这个Map Task失败，其对应的输入数据将不会产生任何结果），整个作业扔认为成功。</li>
+<li>(4) mapreduce.reduce.failures.maxpercent: 当失败的Reduce Task失败比例超过该值为，整个作业则失败，默认值为0.</li>
+<li>(5) mapreduce.task.timeout: Task超时时间，经常需要设置的一个参数，该参数表达的意思为：如果一个task在一定时间内没有任何进入，即不会读取新的数据，也没有输出数据，则认为该task处于block状态，可能是卡住了，也许永远会卡主，为了防止因为用户程序永远block住不退出，则强制设置了一个该超时时间（单位毫秒），默认是300000。如果你的程序对每条输入数据的处理时间过长（比如会访问数据库，通过网络拉取数据等），建议将该参数调大，该参数过小常出现的错误提示是“AttemptID:attempt_14267829456721_123456_m_000224_0 Timed out after 300 secsContainer killed by the ApplicationMaster.”。</li>
+</ul>
+<h2 id="3-3-本地运行mapreduce-作业"><a href="#3-3-本地运行mapreduce-作业" class="headerlink" title="3.3 本地运行mapreduce 作业"></a>3.3 本地运行mapreduce 作业</h2><p>设置以下几个参数:<br>mapreduce.framework.name=local<br>mapreduce.jobtracker.address=local<br>fs.defaultFS=local</p>
+<h2 id="3-4-效率和稳定性相关参数"><a href="#3-4-效率和稳定性相关参数" class="headerlink" title="3.4 效率和稳定性相关参数"></a>3.4 效率和稳定性相关参数</h2><ul>
+<li>(1) mapreduce.map.speculative: 是否为Map Task打开推测执行机制，默认为false</li>
+<li>(2) mapreduce.reduce.speculative: 是否为Reduce Task打开推测执行机制，默认为false</li>
+<li>(3) mapreduce.job.user.classpath.first &amp; mapreduce.task.classpath.user.precedence：当同一个class同时出现在用户jar包和hadoop jar中时，优先使用哪个jar包中的class，默认为false，表示优先使用hadoop jar中的class。</li>
+<li>(4) mapreduce.input.fileinputformat.split.minsize: FileInputFormat做切片时的最小切片大小，(5)mapreduce.input.fileinputformat.split.maxsize:  FileInputFormat做切片时的最大切片大小(切片的默认大小就等于blocksize，即 134217728)</li>
+</ul>
 
       
 
@@ -559,7 +598,7 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,15 +606,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,19 +626,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -611,15 +650,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
