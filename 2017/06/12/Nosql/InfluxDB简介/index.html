@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="https://seawaylee.github.io">
   <title>InfluxDB简介 | SeawayLee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Personal Blog">
+  <meta name="description" content="1 简介InfluxDB 是一个开源分布式时序、事件和指标数据库。使用 Go 语言编写，无需外部依赖。其设计目标是实现分布式和水平伸缩扩展。它有三大特性：  Time Series （时间序列）：你可以使用与时间有关的相关函数（如最大，最小，求和等） Metrics（度量）：你可以实时对大量数据进行计算 Eevents（事件）：它支持任意的事件数据  特点  schemaless(无结构)，可以是">
 <meta name="keywords" content="Nosql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="InfluxDB简介">
-<meta property="og:url" content="https://seawaylee.github.io/2017/05/11/Nosql/InfluxDB简介/index.html">
+<meta property="og:url" content="https://seawaylee.github.io/2017/06/12/Nosql/InfluxDB简介/index.html">
 <meta property="og:site_name" content="SeawayLee">
-<meta property="og:description" content="Personal Blog">
-<meta property="og:updated_time" content="2017-05-11T04:36:43.000Z">
+<meta property="og:description" content="1 简介InfluxDB 是一个开源分布式时序、事件和指标数据库。使用 Go 语言编写，无需外部依赖。其设计目标是实现分布式和水平伸缩扩展。它有三大特性：  Time Series （时间序列）：你可以使用与时间有关的相关函数（如最大，最小，求和等） Metrics（度量）：你可以实时对大量数据进行计算 Eevents（事件）：它支持任意的事件数据  特点  schemaless(无结构)，可以是">
+<meta property="og:updated_time" content="2017-06-12T03:25:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="InfluxDB简介">
-<meta name="twitter:description" content="Personal Blog">
+<meta name="twitter:description" content="1 简介InfluxDB 是一个开源分布式时序、事件和指标数据库。使用 Go 语言编写，无需外部依赖。其设计目标是实现分布式和水平伸缩扩展。它有三大特性：  Time Series （时间序列）：你可以使用与时间有关的相关函数（如最大，最小，求和等） Metrics（度量）：你可以实时对大量数据进行计算 Eevents（事件）：它支持任意的事件数据  特点  schemaless(无结构)，可以是">
   
     <link rel="alternative" href="/atom.xml" title="SeawayLee" type="application/atom+xml">
   
@@ -176,15 +176,102 @@
   
 
         
-        <a href="/2017/05/11/Nosql/InfluxDB简介/" class="archive-article-date">
-  	<time datetime="2017-05-11T04:36:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-11</time>
+        <a href="/2017/06/12/Nosql/InfluxDB简介/" class="archive-article-date">
+  	<time datetime="2017-06-12T04:36:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h2><p><a href="https://docs.influxdata.com/influxdb/v1.2/introduction/getting_started/" target="_blank" rel="external">InfluxDB</a> 是一个开源分布式时序、事件和指标数据库。使用 Go 语言编写，无需外部依赖。其设计目标是实现分布式和水平伸缩扩展。<br>它有三大特性：</p>
+<ol>
+<li>Time Series （时间序列）：你可以使用与时间有关的相关函数（如最大，最小，求和等）</li>
+<li>Metrics（度量）：你可以实时对大量数据进行计算</li>
+<li>Eevents（事件）：它支持任意的事件数据</li>
+</ol>
+<p><strong>特点</strong></p>
+<ul>
+<li>schemaless(无结构)，可以是任意数量的列</li>
+<li>Scalable</li>
+<li>min, max, sum, count, mean, median 一系列函数，方便统计</li>
+<li>Native HTTP API, 内置http支持，使用http读写</li>
+<li>Powerful Query Language 类似sql</li>
+<li>Built-in Explorer 自带管理工具</li>
+</ul>
+<a id="more"></a>
+<h2 id="2-CLI-Command-Line-Interface-操作"><a href="#2-CLI-Command-Line-Interface-操作" class="headerlink" title="2 CLI(Command Line Interface)操作"></a>2 CLI(Command Line Interface)操作</h2><h3 id="2-1-安装-启动"><a href="#2-1-安装-启动" class="headerlink" title="2.1 安装 启动"></a>2.1 安装 启动</h3><p><strong>Install:</strong>  <code>brew install influxdb</code><br><strong>Start:</strong>  <code>influxd run</code><br><strong>Connect:</strong>  <code>influx</code></p>
+<h3 id="2-2-CLI"><a href="#2-2-CLI" class="headerlink" title="2.2 CLI"></a>2.2 CLI</h3><ul>
+<li>帮助信息 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Usage:</div><div class="line">        connect &lt;host:port&gt;   connects to another node specified by host:port</div><div class="line">        auth                  prompts for username and password</div><div class="line">        pretty                toggles pretty print for the json format</div><div class="line">        use &lt;db_name&gt;         sets current database</div><div class="line">        format &lt;format&gt;       specifies the format of the server responses: json, csv, or column</div><div class="line">        precision &lt;format&gt;    specifies the format of the timestamp: rfc3339, h, m, s, ms, u or ns</div><div class="line">        consistency &lt;level&gt;   sets write consistency level: any, one, quorum, or all</div><div class="line">        history               displays command history</div><div class="line">        settings              outputs the current settings for the shell</div><div class="line">        clear                 clears settings such as database or retention policy.  run &apos;clear&apos; for help</div><div class="line">        exit/quit/ctrl+d      quits the influx shell</div><div class="line"></div><div class="line">        show databases        show database names</div><div class="line">        show series           show series information</div><div class="line">        show measurements     show measurement information</div><div class="line">        show tag keys         show tag key information</div><div class="line">        show field keys       show field key information</div><div class="line"></div><div class="line">        A full list of influxql commands can be found at:</div><div class="line">        https://docs.influxdata.com/influxdb/latest/query_language/spec/</div></pre></td></tr></table></figure>
+<ul>
+<li>创建数据库 <code>create database rhinotech</code> </li>
+<li>显示所有DB  <code>show databases</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; show databases</div><div class="line">name: databases</div><div class="line">name</div><div class="line">----</div><div class="line">_internal</div><div class="line">rhinotech</div></pre></td></tr></table></figure>
+<ul>
+<li><p>使用数据库 <code>use rhinotech</code></p>
+</li>
+<li><p><a href="https://docs.influxdata.com/influxdb/v1.2/tools/shell/" target="_blank" rel="external">写数据</a> <code>insert students,name=NikoBelic,age=18,region=china value=888,shit=999</code></p>
+</li>
+</ul>
+<blockquote>
+<p>Now that we have a database, InfluxDB is ready to accept queries and writes. First, a short primer on the datastore. Data in InfluxDB is organized by “<strong>time series</strong>”, which contain a measured value, like “cpu_load” or “temperature”. Time series have zero to many points, one for each discrete sample of the metric. Points consist of <strong>time</strong> (a timestamp), a <strong>measurement</strong> (“cpu_load”, for example), at least one key-value field (the measured value itself, e.g. “value=0.64”, or “temperature=21.2”), and zero to many key-value <strong>tags</strong> containing any metadata about the value (e.g. “host=server01”, “region=EMEA”, “dc=Frankfurt”). Conceptually you can think of a<strong> measurement as an SQL table</strong>, where the <strong>primary index is always time</strong>. <strong>tags and fields are effectively columns in the table</strong>. tags are indexed, and fields are not. The difference is that, with InfluxDB, you can have millions of measurements, you don’t have to define schemas up-front, and null values aren’t stored.</p>
+</blockquote>
+<p>时序库与关系库相关名词对应：</p>
+<table>
+<thead>
+<tr>
+<th>时序库</th>
+<th>关系库</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>time</td>
+<td>id</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>measurement</td>
+<td>table</td>
+<td>表</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>column + index</td>
+<td>带索引的列</td>
+</tr>
+<tr>
+<td>fields</td>
+<td>column</td>
+<td>普通列</td>
+</tr>
+</tbody>
+</table>
+<p>tags和fields差不多，tags自带索引，因此查询时候更快。</p>
+<ul>
+<li><a href="https://docs.influxdata.com/influxdb/v1.2/guides/querying_data/" target="_blank" rel="external">查询数</a> <code>select * from students</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; select * from students</div><div class="line">name: students</div><div class="line">time                age name      region shit value</div><div class="line">----                --- ----      ------ ---- -----</div><div class="line">1494490902239708732 18  NikoBelic china       888</div><div class="line">1494492099547889163 18  NikoBelic china  999  888</div></pre></td></tr></table></figure>
+<h2 id="3-HTTP-读写数据"><a href="#3-HTTP-读写数据" class="headerlink" title="3 HTTP 读写数据"></a>3 HTTP 读写数据</h2><h3 id="3-1-Writing-Data-With-Http-API"><a href="#3-1-Writing-Data-With-Http-API" class="headerlink" title="3.1 Writing Data With Http API"></a>3.1 <a href="https://docs.influxdata.com/influxdb/v1.2/guides/writing_data/" target="_blank" rel="external">Writing Data With Http API</a></h3><ul>
+<li>创建数据库 <code>curl -i -XPOST http://localhost:8086/query --data-urlencode &quot;q=CREATE DATABASE mydb&quot;</code></li>
+<li>写数据库  <code>curl -i -XPOST &#39;http://localhost:8086/write?db=mydb&#39; --data-binary &#39;cpu_load_info,host=server1,region=A3-1-1 load=0.64&#39;</code></li>
+<li>从文件导入数据</li>
+</ul>
+<p>文件格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cpu_load_short, host=server02 value=0.67</div><div class="line">cpu_load_short, host=server02, region=us-west value=0.55 1422568543702900257</div><div class="line">cpu_load_short, direction=in,host=server01,region=us-west value=2.0 1422568543702900257</div></pre></td></tr></table></figure>
+<p>导入 <code>curl -i -XPOST &#39;http://localhost:8086/write?db=mydb&#39; --data-binary @cpu_data.txt</code></p>
+<p>注意 如果文件中的数据数量超过5000个，建议切分成多个文件批量导入，因为http请求的默认超时时间为5s，虽然请求超时后influxdb仍然会继续导入数据，但是客户端将无法收到导入成功的提示信息。</p>
+<h3 id="3-2-Querying-Data-With-Http-API"><a href="#3-2-Querying-Data-With-Http-API" class="headerlink" title="3.2 Querying Data With Http API"></a>3.2 Querying Data With Http API</h3><ul>
+<li>查询 <code>curl -G &#39;http://localhost:8086/query?pretty=true&#39; --data-urlencode &quot;db=mydb&quot; --data-urlencode &quot;q=SELECT * FROM \&quot;cpu_load_info\&quot;&quot;</code></li>
+</ul>
+<p>结果</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"results"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"statement_id"</span>: <span class="number">0</span>,</div><div class="line">            <span class="attr">"series"</span>: [</div><div class="line">                &#123;</div><div class="line">                    <span class="attr">"name"</span>: <span class="string">"cpu_load_info"</span>,</div><div class="line">                    <span class="attr">"columns"</span>: [</div><div class="line">                        <span class="string">"time"</span>,</div><div class="line">                        <span class="string">"host"</span>,</div><div class="line">                        <span class="string">"load"</span>,</div><div class="line">                        <span class="string">"region"</span>,</div><div class="line">                        <span class="string">"size"</span></div><div class="line">                    ],</div><div class="line">                    <span class="attr">"values"</span>: [</div><div class="line">                        [</div><div class="line">                            <span class="string">"2017-05-13T05:28:52.323145124Z"</span>,</div><div class="line">                            <span class="string">"server1"</span>,</div><div class="line">                            <span class="number">0.64</span>,</div><div class="line">                            <span class="string">"A3-1-1"</span>,</div><div class="line">                            <span class="literal">null</span></div><div class="line">                        ],</div><div class="line">                        [</div><div class="line">                            <span class="string">"2017-05-13T05:55:47.007680205Z"</span>,</div><div class="line">                            <span class="literal">null</span>,</div><div class="line">                            <span class="number">0.64</span>,</div><div class="line">                            <span class="string">"A3-1-1"</span>,</div><div class="line">                            <span class="string">"120"</span></div><div class="line">                        ]</div><div class="line">                    ]</div><div class="line">                &#125;</div><div class="line">            ]</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用 <code>--data-urlencode &quot;epoch=h&quot;</code> 可以控制显示的时间戳格式[h,m,s,ms,u,ns]</p>
+
       
 
       
@@ -284,7 +371,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://seawaylee.github.io/2017/05/11/Nosql/InfluxDB简介/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://seawaylee.github.io/2017/06/12/Nosql/InfluxDB简介/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -298,18 +385,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）- MapReduce/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Hadoop学习笔记（三）- MapReduce详解
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/05/02/大数据/Hadoop/Hadoop学习笔记（二）- HDFS详解/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hadoop学习笔记（二） - HDFS详解</div>
+    <a href="/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）- MapReduce/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hadoop学习笔记（三）- MapReduce详解</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -323,7 +401,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Nosql/InfluxDB简介" data-title="InfluxDB简介" data-url="https://seawaylee.github.io/2017/05/11/Nosql/InfluxDB简介/"></div>
+	<div class="ds-thread" data-thread-key="Nosql/InfluxDB简介" data-title="InfluxDB简介" data-url="https://seawaylee.github.io/2017/06/12/Nosql/InfluxDB简介/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -452,11 +530,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -468,10 +550,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
@@ -480,11 +558,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
+                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -496,15 +574,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">高并发</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -513,6 +587,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,15 +610,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
               </li>
             
             <div class="clearfix"></div>
