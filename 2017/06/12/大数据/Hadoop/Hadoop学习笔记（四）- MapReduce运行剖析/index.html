@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://seawaylee.github.io">
-  <title>Hadoop学习笔记（三）- MapReduce运行剖析 | SeawayLee</title>
+  <title>Hadoop学习笔记（四）- MapReduce运行剖析 | SeawayLee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1 MapReduce中的Shuffle机制1.1 Shuffle概述MR中，Map阶段处理的数据如何传递给Reduce阶段是MR框架中最关键的一个流程–Shuffle。Shuffle的核心机制：数据分区、排序、缓存具体来说就是将MapTask输出的处理结果分发给ReduceTask，并在分发的过程中对数据按key进行了分区和排序。 Shuffle缓存流程">
 <meta name="keywords" content="Hadoop">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hadoop学习笔记（三）- MapReduce运行剖析">
+<meta property="og:title" content="Hadoop学习笔记（四）- MapReduce运行剖析">
 <meta property="og:url" content="https://seawaylee.github.io/2017/06/12/大数据/Hadoop/Hadoop学习笔记（四）- MapReduce运行剖析/index.html">
 <meta property="og:site_name" content="SeawayLee">
 <meta property="og:description" content="1 MapReduce中的Shuffle机制1.1 Shuffle概述MR中，Map阶段处理的数据如何传递给Reduce阶段是MR框架中最关键的一个流程–Shuffle。Shuffle的核心机制：数据分区、排序、缓存具体来说就是将MapTask输出的处理结果分发给ReduceTask，并在分发的过程中对数据按key进行了分区和排序。 Shuffle缓存流程">
@@ -19,9 +19,9 @@
 <meta property="og:image" content="https://seawaylee.github.io/2017/06/12/大数据/Hadoop/Hadoop学习笔记（四）-%20MapReduce运行剖析/mapreduce的shuffle原理.png">
 <meta property="og:image" content="https://seawaylee.github.io/2017/06/12/大数据/Hadoop/Hadoop学习笔记（四）-%20MapReduce运行剖析/MR在Yarn的调度过程.png">
 <meta property="og:image" content="https://seawaylee.github.io/2017/06/12/大数据/Hadoop/Hadoop学习笔记（四）-%20MapReduce运行剖析/mr全流程原理全剖析.png">
-<meta property="og:updated_time" content="2017-06-12T12:07:20.000Z">
+<meta property="og:updated_time" content="2017-06-12T12:14:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hadoop学习笔记（三）- MapReduce运行剖析">
+<meta name="twitter:title" content="Hadoop学习笔记（四）- MapReduce运行剖析">
 <meta name="twitter:description" content="1 MapReduce中的Shuffle机制1.1 Shuffle概述MR中，Map阶段处理的数据如何传递给Reduce阶段是MR框架中最关键的一个流程–Shuffle。Shuffle的核心机制：数据分区、排序、缓存具体来说就是将MapTask输出的处理结果分发给ReduceTask，并在分发的过程中对数据按key进行了分区和排序。 Shuffle缓存流程">
 <meta name="twitter:image" content="https://seawaylee.github.io/2017/06/12/大数据/Hadoop/Hadoop学习笔记（四）-%20MapReduce运行剖析/shuffle缓存流程.png">
   
@@ -176,7 +176,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hadoop学习笔记（三）- MapReduce运行剖析
+      Hadoop学习笔记（四）- MapReduce运行剖析
     </h1>
   
 
@@ -351,7 +351,7 @@
  
   <section id="comments">
 <!--高速版，加载速度快，使用前需测试页面的兼容性-->
-<div id="SOHUCS" sid="Hadoop学习笔记（三）- MapReduce运行剖析"></div>
+<div id="SOHUCS" sid="Hadoop学习笔记（四）- MapReduce运行剖析"></div>
 <script>
   (function(){
     var appid = 'cyt3IkjC7',
@@ -490,15 +490,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -514,11 +514,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -558,15 +558,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
               </li>
             
             <div class="clearfix"></div>
