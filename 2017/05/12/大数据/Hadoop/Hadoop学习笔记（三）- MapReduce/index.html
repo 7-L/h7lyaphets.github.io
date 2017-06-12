@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="https://seawaylee.github.io">
   <title>Hadoop学习笔记（三）- MapReduce详解 | SeawayLee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC] 1 MapReduce背景及原理1.1 背景Mapreduce是一个分布式运算程序的编程框架，是用户开发“基于hadoop的数据分析应用”的核心框架；Mapreduce核心功能是将用户编写的业务逻辑代码和自带默认组件整合成一个完整的分布式运算程序，并发运行在一个hadoop集群上； Why MapReduce?  （1）海量数据在单机上处理因为硬件资源限制，无法胜任 （2）而一旦将单机">
+  <meta name="description" content="1 MapReduce背景及原理1.1 背景Mapreduce是一个分布式运算程序的编程框架，是用户开发“基于hadoop的数据分析应用”的核心框架；Mapreduce核心功能是将用户编写的业务逻辑代码和自带默认组件整合成一个完整的分布式运算程序，并发运行在一个hadoop集群上； Why MapReduce?  （1）海量数据在单机上处理因为硬件资源限制，无法胜任 （2）而一旦将单机版程序扩展到">
 <meta name="keywords" content="Hadoop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hadoop学习笔记（三）- MapReduce详解">
 <meta property="og:url" content="https://seawaylee.github.io/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）- MapReduce/index.html">
 <meta property="og:site_name" content="SeawayLee">
-<meta property="og:description" content="[TOC] 1 MapReduce背景及原理1.1 背景Mapreduce是一个分布式运算程序的编程框架，是用户开发“基于hadoop的数据分析应用”的核心框架；Mapreduce核心功能是将用户编写的业务逻辑代码和自带默认组件整合成一个完整的分布式运算程序，并发运行在一个hadoop集群上； Why MapReduce?  （1）海量数据在单机上处理因为硬件资源限制，无法胜任 （2）而一旦将单机">
+<meta property="og:description" content="1 MapReduce背景及原理1.1 背景Mapreduce是一个分布式运算程序的编程框架，是用户开发“基于hadoop的数据分析应用”的核心框架；Mapreduce核心功能是将用户编写的业务逻辑代码和自带默认组件整合成一个完整的分布式运算程序，并发运行在一个hadoop集群上； Why MapReduce?  （1）海量数据在单机上处理因为硬件资源限制，无法胜任 （2）而一旦将单机版程序扩展到">
 <meta property="og:image" content="https://seawaylee.github.io/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）-%20MapReduce/mapreduce运行全流程.png">
 <meta property="og:image" content="https://seawaylee.github.io/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）-%20MapReduce/切片示意.png">
-<meta property="og:updated_time" content="2017-06-12T03:20:18.000Z">
+<meta property="og:updated_time" content="2017-06-12T03:21:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop学习笔记（三）- MapReduce详解">
-<meta name="twitter:description" content="[TOC] 1 MapReduce背景及原理1.1 背景Mapreduce是一个分布式运算程序的编程框架，是用户开发“基于hadoop的数据分析应用”的核心框架；Mapreduce核心功能是将用户编写的业务逻辑代码和自带默认组件整合成一个完整的分布式运算程序，并发运行在一个hadoop集群上； Why MapReduce?  （1）海量数据在单机上处理因为硬件资源限制，无法胜任 （2）而一旦将单机">
+<meta name="twitter:description" content="1 MapReduce背景及原理1.1 背景Mapreduce是一个分布式运算程序的编程框架，是用户开发“基于hadoop的数据分析应用”的核心框架；Mapreduce核心功能是将用户编写的业务逻辑代码和自带默认组件整合成一个完整的分布式运算程序，并发运行在一个hadoop集群上； Why MapReduce?  （1）海量数据在单机上处理因为硬件资源限制，无法胜任 （2）而一旦将单机版程序扩展到">
 <meta name="twitter:image" content="https://seawaylee.github.io/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）-%20MapReduce/mapreduce运行全流程.png">
   
     <link rel="alternative" href="/atom.xml" title="SeawayLee" type="application/atom+xml">
@@ -187,8 +187,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[TOC]</p>
-<h1 id="1-MapReduce背景及原理"><a href="#1-MapReduce背景及原理" class="headerlink" title="1 MapReduce背景及原理"></a>1 MapReduce背景及原理</h1><h2 id="1-1-背景"><a href="#1-1-背景" class="headerlink" title="1.1 背景"></a>1.1 背景</h2><p>Mapreduce是一个<strong>分布式运算程序的编程框架</strong>，是用户开发“基于hadoop的数据分析应用”的核心框架；<br>Mapreduce核心功能是将用户编写的业务逻辑代码和自带默认组件整合成一个完整的分布式运算程序，并发运行在一个hadoop集群上；</p>
+        <h1 id="1-MapReduce背景及原理"><a href="#1-MapReduce背景及原理" class="headerlink" title="1 MapReduce背景及原理"></a>1 MapReduce背景及原理</h1><h2 id="1-1-背景"><a href="#1-1-背景" class="headerlink" title="1.1 背景"></a>1.1 背景</h2><p>Mapreduce是一个<strong>分布式运算程序的编程框架</strong>，是用户开发“基于hadoop的数据分析应用”的核心框架；<br>Mapreduce核心功能是将用户编写的业务逻辑代码和自带默认组件整合成一个完整的分布式运算程序，并发运行在一个hadoop集群上；</p>
 <p><strong>Why MapReduce?</strong></p>
 <ul>
 <li>（1）海量数据在单机上处理因为硬件资源限制，无法胜任</li>
@@ -570,11 +569,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -622,11 +621,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
               </li>
              
               <li class="article-tag-list-item">
