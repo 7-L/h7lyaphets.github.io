@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://seawaylee.github.io/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）-%20MapReduce详解/mapreduce运行全流程.png">
 <meta property="og:image" content="https://seawaylee.github.io/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）-%20MapReduce详解/切片2.png">
 <meta property="og:image" content="https://seawaylee.github.io/2017/05/12/大数据/Hadoop/Hadoop学习笔记（三）-%20MapReduce详解/切片示意.png">
-<meta property="og:updated_time" content="2017-06-12T11:12:55.000Z">
+<meta property="og:updated_time" content="2017-06-13T11:59:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop学习笔记（三）- MapReduce详解">
 <meta name="twitter:description" content="1 MapReduce背景及原理1.1 背景Mapreduce是一个分布式运算程序的编程框架，是用户开发“基于hadoop的数据分析应用”的核心框架；Mapreduce核心功能是将用户编写的业务逻辑代码和自带默认组件整合成一个完整的分布式运算程序，并发运行在一个hadoop集群上； Why MapReduce?  （1）海量数据在单机上处理因为硬件资源限制，无法胜任 （2）而一旦将单机版程序扩展到">
@@ -333,6 +333,37 @@
 <li>(3) mapreduce.job.user.classpath.first &amp; mapreduce.task.classpath.user.precedence：当同一个class同时出现在用户jar包和hadoop jar中时，优先使用哪个jar包中的class，默认为false，表示优先使用hadoop jar中的class。</li>
 <li>(4) mapreduce.input.fileinputformat.split.minsize: FileInputFormat做切片时的最小切片大小，(5)mapreduce.input.fileinputformat.split.maxsize:  FileInputFormat做切片时的最大切片大小(切片的默认大小就等于blocksize，即 134217728)</li>
 </ul>
+<h1 id="4-MR编程小结"><a href="#4-MR编程小结" class="headerlink" title="4 MR编程小结"></a>4 MR编程小结</h1><p>MR在编程的时候，基本上一个固化的模式，没有太多可灵活改变的地方，除了以下几处：</p>
+<ul>
+<li><p>1、输入数据接口：InputFormat —&gt; FileInputFormat(文件类型数据读取的通用抽象类)  DBInputFormat （数据库数据读取的通用抽象类） 默认使用的实现类是： TextInputFormat  <code>job.setInputFormatClass(TextInputFormat.class)</code></p>
+<p>  TextInputFormat的功能逻辑是：一次<strong>读一行</strong>文本，然后将该行的起始偏移量作为key，行内容作为value返回</p>
+</li>
+<li><p>2、逻辑处理接口： Mapper<br> 完全需要用户自己去实现其中  map()   setup()   clean()   </p>
+</li>
+<li><p>3、Map输出的结果在shuffle阶段会被partition以及sort，此处有两个接口可自定义：</p>
+<ul>
+<li><p><strong>Partitioner</strong></p>
+<p>  有默认实现 HashPartitioner，逻辑是  根据key和numReduces来返回一个分区号； key.hashCode()&amp;Integer.MAXVALUE % numReduces<br>通常情况下，用默认的这个HashPartitioner就可以，如果业务上有特别的需求，可以自定义</p>
+</li>
+<li><p><strong>Comparable</strong></p>
+<p>  当我们用自定义的对象作为key来输出时，就必须要实现WritableComparable接口，override其中的compareTo()方法</p>
+</li>
+</ul>
+</li>
+<li><p>4、Reduce端的数据分组比较接口 ： <strong>Groupingcomparator</strong><br>  reduceTask拿到输入数据（一个partition的<strong>所有</strong>数据）后，首先需要对数据进行<strong>分组</strong>，其分组的<strong>默认原则是key相同</strong>，然后对每一组kv数据调用一次reduce()方法，并且将这一组kv中的<strong>第一个</strong>kv的key作为参数传给reduce的key，将这一组数据的value的迭代器传给reduce()的values参数</p>
+<p>  利用上述这个机制，我们可以实现一个<strong>高效的分组取最大值的逻辑</strong>：</p>
+<ul>
+<li>自定义一个bean对象用来封装我们的数据，然后改写其compareTo方法产生倒序排序的效果</li>
+<li>然后自定义一个<strong>Groupingcomparator</strong>，将bean对象的分组逻辑改成按照我们的业务分组id来分组（比如订单号）<br>这样，我们要取的最大值就是reduce()方法中传进来key</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>5、逻辑处理接口：Reducer<br>  完全需要用户自己去实现其中  reduce()   setup()   clean()   </p>
+</li>
+<li><p>6、输出数据接口： OutputFormat  —&gt; 有一系列子类  FileOutputformat  DBoutputFormat  …..<br>  默认实现类是TextOutputFormat，功能逻辑是：  将每一个KV对向目标文本文件中<strong>输出为一行</strong></p>
+</li>
+</ul>
 
       
 
@@ -614,15 +645,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -642,11 +673,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+                <a href="javascript:void(0)" class="js-tag color4">高并发</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">高并发</a>
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
