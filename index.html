@@ -184,6 +184,37 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+        <h1 id="1-Hadoop的HA机制"><a href="#1-Hadoop的HA机制" class="headerlink" title="1 Hadoop的HA机制"></a>1 Hadoop的HA机制</h1><p>正式引入HA机制是从hadoop2.0开始，之前的版本中没有HA机制。</p>
+<p>Hadoo的HA机制可以分成各个组件的HA机制</p>
+<ul>
+<li>HDFS的HA</li>
+<li>YARN的HA</li>
+</ul>
+<h2 id="1-1-HDFS的HA"><a href="#1-1-HDFS的HA" class="headerlink" title="1.1 HDFS的HA"></a>1.1 HDFS的HA</h2><ul>
+<li>通过双NameNode消除单点故障</li>
+<li><p>双NameNode工作要点如下：</p>
+<ul>
+<li>A. <strong>元数据管理</strong>方式需要改变<ol>
+<li>双NameNode各自在内存中保存一份元数据(fsimage+edits合成结果)</li>
+<li>edits日志只能有一份，只有Active状态的NameNode节点可以对其进行写操作</li>
+<li>双NameNode都可以读取edits</li>
+<li>共享的edits仿造一个共享的存储介质中管理（qjournal和NFS两个主流实现）</li>
+</ol>
+</li>
+<li><p>B. 需要一个<strong>状态管理</strong>功能模块</p>
+<ol>
+<li>实现了一个ZKFC（ZooKeeperFailContrl），常驻在<strong>每一个NameNode</strong>所在的节点</li>
+<li>每一个ZKFC负责监控自己所在的NameNode节点，利用ZK进行<strong>状态标识</strong></li>
+<li>当需要进行状态切换时，由<strong>ZKFC来负责切换</strong>（RPC调用NameNode中的方法）</li>
+<li>切换时需要放置<strong>BrainSplit</strong>（多个NameNode都是Active状态）现象的发生（新Active节点主动发送杀死被取代Active状态的节点的命令，<strong>防止假死</strong>）</li>
+</ol>
+<p><img src="/2017/06/13/大数据/Hadoop/Hadoop学习笔记（六）- Hadoop的HA原理与配置/HDFS_HA.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/06/13/大数据/Hadoop/Hadoop学习笔记（六）- Hadoop的HA原理与配置/#more">阅读全文 >></a>
         
       
 
@@ -974,19 +1005,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -998,11 +1029,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1042,15 +1073,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
               </li>
             
             <div class="clearfix"></div>

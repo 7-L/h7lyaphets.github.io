@@ -8,17 +8,20 @@
   <link rel="dns-prefetch" href="https://seawaylee.github.io">
   <title>Hadoop学习笔记（六）- Hadoop的HA原理与配置 | SeawayLee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Personal Blog">
+  <meta name="description" content="1 Hadoop的HA机制正式引入HA机制是从hadoop2.0开始，之前的版本中没有HA机制。 Hadoo的HA机制可以分成各个组件的HA机制  HDFS的HA YARN的HA  1.1 HDFS的HA 通过双NameNode消除单点故障 双NameNode工作要点如下：  A. 元数据管理方式需要改变 双NameNode各自在内存中保存一份元数据(fsimage+edits合成结果) edit">
 <meta name="keywords" content="Hadoop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hadoop学习笔记（六）- Hadoop的HA原理与配置">
 <meta property="og:url" content="https://seawaylee.github.io/2017/06/13/大数据/Hadoop/Hadoop学习笔记（六）- Hadoop的HA原理与配置/index.html">
 <meta property="og:site_name" content="SeawayLee">
-<meta property="og:description" content="Personal Blog">
-<meta property="og:updated_time" content="2017-06-13T12:07:39.000Z">
+<meta property="og:description" content="1 Hadoop的HA机制正式引入HA机制是从hadoop2.0开始，之前的版本中没有HA机制。 Hadoo的HA机制可以分成各个组件的HA机制  HDFS的HA YARN的HA  1.1 HDFS的HA 通过双NameNode消除单点故障 双NameNode工作要点如下：  A. 元数据管理方式需要改变 双NameNode各自在内存中保存一份元数据(fsimage+edits合成结果) edit">
+<meta property="og:image" content="https://seawaylee.github.io/2017/06/13/大数据/Hadoop/Hadoop学习笔记（六）-%20Hadoop的HA原理与配置/HDFS_HA.png">
+<meta property="og:image" content="https://seawaylee.github.io/2017/06/13/大数据/Hadoop/Hadoop学习笔记（六）-%20Hadoop的HA原理与配置/Yarn_HA.png">
+<meta property="og:updated_time" content="2017-06-13T13:55:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop学习笔记（六）- Hadoop的HA原理与配置">
-<meta name="twitter:description" content="Personal Blog">
+<meta name="twitter:description" content="1 Hadoop的HA机制正式引入HA机制是从hadoop2.0开始，之前的版本中没有HA机制。 Hadoo的HA机制可以分成各个组件的HA机制  HDFS的HA YARN的HA  1.1 HDFS的HA 通过双NameNode消除单点故障 双NameNode工作要点如下：  A. 元数据管理方式需要改变 双NameNode各自在内存中保存一份元数据(fsimage+edits合成结果) edit">
+<meta name="twitter:image" content="https://seawaylee.github.io/2017/06/13/大数据/Hadoop/Hadoop学习笔记（六）-%20Hadoop的HA原理与配置/HDFS_HA.png">
   
     <link rel="alternative" href="/atom.xml" title="SeawayLee" type="application/atom+xml">
   
@@ -184,7 +187,158 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="1-Hadoop的HA机制"><a href="#1-Hadoop的HA机制" class="headerlink" title="1 Hadoop的HA机制"></a>1 Hadoop的HA机制</h1><p>正式引入HA机制是从hadoop2.0开始，之前的版本中没有HA机制。</p>
+<p>Hadoo的HA机制可以分成各个组件的HA机制</p>
+<ul>
+<li>HDFS的HA</li>
+<li>YARN的HA</li>
+</ul>
+<h2 id="1-1-HDFS的HA"><a href="#1-1-HDFS的HA" class="headerlink" title="1.1 HDFS的HA"></a>1.1 HDFS的HA</h2><ul>
+<li>通过双NameNode消除单点故障</li>
+<li><p>双NameNode工作要点如下：</p>
+<ul>
+<li>A. <strong>元数据管理</strong>方式需要改变<ol>
+<li>双NameNode各自在内存中保存一份元数据(fsimage+edits合成结果)</li>
+<li>edits日志只能有一份，只有Active状态的NameNode节点可以对其进行写操作</li>
+<li>双NameNode都可以读取edits</li>
+<li>共享的edits仿造一个共享的存储介质中管理（qjournal和NFS两个主流实现）</li>
+</ol>
+</li>
+<li><p>B. 需要一个<strong>状态管理</strong>功能模块</p>
+<ol>
+<li>实现了一个ZKFC（ZooKeeperFailContrl），常驻在<strong>每一个NameNode</strong>所在的节点</li>
+<li>每一个ZKFC负责监控自己所在的NameNode节点，利用ZK进行<strong>状态标识</strong></li>
+<li>当需要进行状态切换时，由<strong>ZKFC来负责切换</strong>（RPC调用NameNode中的方法）</li>
+<li>切换时需要放置<strong>BrainSplit</strong>（多个NameNode都是Active状态）现象的发生（新Active节点主动发送杀死被取代Active状态的节点的命令，<strong>防止假死</strong>）</li>
+</ol>
+<p><img src="/2017/06/13/大数据/Hadoop/Hadoop学习笔记（六）- Hadoop的HA原理与配置/HDFS_HA.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="1-2-Yarn的HA"><a href="#1-2-Yarn的HA" class="headerlink" title="1.2 Yarn的HA"></a>1.2 Yarn的HA</h2><ul>
+<li>双ResourceManager消除单点故障</li>
+<li><p>双RM工作要点如下：</p>
+<ul>
+<li>A. 直接由ZooKeeper检测双节点状态。</li>
+<li><p>B. 假设Application在请求资源的过程中，当前Active状态的RM发生故障，则直接重新发送请求，并不产生严重影响。</p>
+<p><img src="/2017/06/13/大数据/Hadoop/Hadoop学习笔记（六）- Hadoop的HA原理与配置/Yarn_HA.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-HA环境搭建"><a href="#2-HA环境搭建" class="headerlink" title="2 HA环境搭建"></a>2 HA环境搭建</h1><h2 id="2-1-集群节点规划"><a href="#2-1-集群节点规划" class="headerlink" title="2.1 集群节点规划"></a>2.1 集群节点规划</h2><h3 id="2-1-1-10节点规划"><a href="#2-1-1-10节点规划" class="headerlink" title="2.1.1 10节点规划"></a>2.1.1 10节点规划</h3><table>
+<thead>
+<tr>
+<th>节点名称</th>
+<th>节点服务</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server01</td>
+<td>NameNode、ZKFC</td>
+<td>start-dfs.sh</td>
+</tr>
+<tr>
+<td>Server02</td>
+<td>NameNode、ZKFC</td>
+<td></td>
+</tr>
+<tr>
+<td>Server03</td>
+<td>ResourceManager</td>
+<td></td>
+</tr>
+<tr>
+<td>Server04</td>
+<td>ResourceManager</td>
+<td></td>
+</tr>
+<tr>
+<td>Server05</td>
+<td>DataNode、NodeManager</td>
+<td>start-yarn.sh</td>
+</tr>
+<tr>
+<td>Server06</td>
+<td>DataNode、NodeManager</td>
+<td></td>
+</tr>
+<tr>
+<td>Server07</td>
+<td>DataNode、NodeManager</td>
+<td></td>
+</tr>
+<tr>
+<td>Server08</td>
+<td>JournalNode、ZooKeeper</td>
+<td></td>
+</tr>
+<tr>
+<td>Server09</td>
+<td>JournalNode、ZooKeeper</td>
+<td></td>
+</tr>
+<tr>
+<td>Server10</td>
+<td>JournalNode、ZooKeeper</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-1-2-3节点规划"><a href="#2-1-2-3节点规划" class="headerlink" title="2.1.2 3节点规划"></a>2.1.2 3节点规划</h3><table>
+<thead>
+<tr>
+<th>节点名称</th>
+<th>节点服务</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server01</td>
+<td>NameNode、ZKFC、ResourceManager、NodeManager、DataNode、ZooKeeper、JournalNode</td>
+<td></td>
+</tr>
+<tr>
+<td>Server02</td>
+<td>NameNode、ZKFC、ResourceManager、NodeManager、DataNode、ZooKeeper、JournalNode</td>
+<td></td>
+</tr>
+<tr>
+<td>Server03</td>
+<td>DataNode、NodeManager、ZooKeeper、JournalNode</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-2-配置文件"><a href="#2-2-配置文件" class="headerlink" title="2.2 配置文件"></a>2.2 配置文件</h2><p><strong>core-site.xml</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 指定hdfs的nameservice为ns1 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://ns1/<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 指定hadoop临时目录 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/hadoop/app/hadoop-2.4.1/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- 指定zookeeper地址 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>ha.zookeeper.quorum<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>weekend05:2181,weekend06:2181,weekend07:2181<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>hdfs-site.xml</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">configuration&gt;</div><div class="line"><span class="comment">&lt;!--指定hdfs的nameservice为ns1，需要和core-site.xml中的保持一致 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.nameservices<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>ns1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- ns1下面有两个NameNode，分别是nn1，nn2 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.ha.namenodes.ns1<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>nn1,nn2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- nn1的RPC通信地址 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.rpc-address.ns1.nn1<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>weekend01:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- nn1的http通信地址 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.http-address.ns1.nn1<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>weekend01:50070<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- nn2的RPC通信地址 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.rpc-address.ns1.nn2<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>weekend02:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- nn2的http通信地址 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.http-address.ns1.nn2<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>weekend02:50070<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 指定NameNode的edits元数据在JournalNode上的存放位置 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.shared.edits.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>qjournal://weekend05:8485;weekend06:8485;weekend07:8485/ns1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 指定JournalNode在本地磁盘存放数据的位置 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.journalnode.edits.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/hadoop/app/hadoop-2.4.1/journaldata<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 开启NameNode失败自动切换 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.ha.automatic-failover.enabled<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 配置失败自动切换实现方式 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.client.failover.proxy.provider.ns1<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 配置隔离机制方法，多个机制用换行分割，即每个机制暂用一行--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.ha.fencing.methods<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span></div><div class="line">		sshfence</div><div class="line">		shell(/bin/true)</div><div class="line">	<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 使用sshfence隔离机制时需要ssh免登陆 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.ha.fencing.ssh.private-key-files<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/hadoop/.ssh/id_rsa<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 配置sshfence隔离机制超时时间 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.ha.fencing.ssh.connect-timeout<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>30000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">/configuration&gt;</div></pre></td></tr></table></figure>
+<h1 id="3-集群运维测试"><a href="#3-集群运维测试" class="headerlink" title="3 集群运维测试"></a>3 集群运维测试</h1><h2 id="3-1-DataNode动态上下线"><a href="#3-1-DataNode动态上下线" class="headerlink" title="3.1 DataNode动态上下线"></a>3.1 DataNode动态上下线</h2><p>Datanode动态上下线很简单，步骤如下：</p>
+<ol>
+<li>准备一台服务器，设置好环境</li>
+<li>部署hadoop的安装包，并同步集群配置</li>
+<li>联网上线，新datanode会自动加入集群</li>
+<li>如果是一次增加大批datanode，还应该做集群负载重均衡</li>
+</ol>
+<h2 id="3-2-NameNode状态切换管理"><a href="#3-2-NameNode状态切换管理" class="headerlink" title="3.2 NameNode状态切换管理"></a>3.2 NameNode状态切换管理</h2><p>使用的命令上hdfs  haadmin<br>可用 hdfs  haadmin –help查看所有帮助信息</p>
+<p>可以看到，状态操作的命令示例：</p>
+<ul>
+<li>查看namenode工作状态   <code>hdfs haadmin -getServiceState nn1</code></li>
+<li>将standby状态NameNode切换到active <code>hdfs haadmin –transitionToActive nn1</code></li>
+<li>将active状态NameNode切换到standby <code>hdfs haadmin –transitionToStandby nn2</code></li>
+</ul>
+<h2 id="3-3-数据块的Balance"><a href="#3-3-数据块的Balance" class="headerlink" title="3.3 数据块的Balance"></a>3.3 数据块的Balance</h2><ul>
+<li>启动balancer的命令： <code>start-balancer.sh -threshold 8</code></li>
+<li>运行之后，会有Balancer进程出现。</li>
+<li>上述命令设置了Threshold为8%，那么执行balancer命令的时候，首先统计所有DataNode的磁盘利用率的均值，然后判断如果某一个DataNode的磁盘利用率超过这个均值Threshold，那么将会把这个DataNode的block转移到磁盘利用率低的DataNode，这对于新节点的加入来说十分有用。Threshold的值为1到100之间，不显示的进行参数设置的话，默认是10。</li>
+</ul>
+<h2 id="3-4-HA下HDFS-API的变化"><a href="#3-4-HA下HDFS-API的变化" class="headerlink" title="3.4 HA下HDFS-API的变化"></a>3.4 HA下HDFS-API的变化</h2><p>客户端需要nameservice的配置信息，其他不变</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 如果访问的是一个ha机制的集群</div><div class="line"> * 则一定要把core-site.xml和hdfs-site.xml配置文件放在客户端程序的classpath下</div><div class="line"> * 以让客户端能够理解hdfs://ns1/中  “ns1”是一个ha机制中的namenode对——nameservice</div><div class="line"> * 以及知道ns1下具体的namenode通信地址</div><div class="line"> * <span class="doctag">@author</span></div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UploadFile</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception  </span>&#123;</div><div class="line">		</div><div class="line">		Configuration conf = <span class="keyword">new</span> Configuration();</div><div class="line">		conf.set(<span class="string">"fs.defaultFS"</span>, <span class="string">"hdfs://ns1/"</span>);</div><div class="line">		</div><div class="line">		FileSystem fs = FileSystem.get(<span class="keyword">new</span> URI(<span class="string">"hdfs://ns1/"</span>),conf,<span class="string">"hadoop"</span>);</div><div class="line">		</div><div class="line">		fs.copyFromLocalFile(<span class="keyword">new</span> Path(<span class="string">"g:/eclipse-jee-luna-SR1-linux-gtk.tar.gz"</span>), <span class="keyword">new</span> Path(<span class="string">"hdfs://ns1/"</span>));</div><div class="line">		</div><div class="line">		fs.close();</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
       
 
       
@@ -452,19 +606,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -476,11 +630,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -520,15 +674,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
               </li>
             
             <div class="clearfix"></div>
