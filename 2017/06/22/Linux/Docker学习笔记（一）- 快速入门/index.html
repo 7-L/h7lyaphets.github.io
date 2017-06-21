@@ -12,22 +12,22 @@
 <meta name="keywords" content="Linux,Docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker学习笔记（一）- 快速入门">
-<meta property="og:url" content="https://seawaylee.github.io/2017/06/22/Linux/Docker快速入门/index.html">
+<meta property="og:url" content="https://seawaylee.github.io/2017/06/22/Linux/Docker学习笔记（一）- 快速入门/index.html">
 <meta property="og:site_name" content="SeawayLee">
 <meta property="og:description" content="Docker本文是我通过Docker官方文档学习时做的一些笔记。能够快速理清Docker中的各种概念并进行实践。">
-<meta property="og:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker快速入门/14980137567058.png">
-<meta property="og:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker快速入门/14980137685830.png">
-<meta property="og:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker快速入门/14980238387578.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker快速入门/14980260054158.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker快速入门/14980567079650.png">
-<meta property="og:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker快速入门/14980638673223.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker快速入门/14980660196683.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker快速入门/14980659880173.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker学习笔记（一）-%20快速入门/14980137567058.png">
+<meta property="og:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker学习笔记（一）-%20快速入门/14980137685830.png">
+<meta property="og:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker学习笔记（一）-%20快速入门/14980238387578.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker学习笔记（一）-%20快速入门/14980260054158.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker学习笔记（一）-%20快速入门/14980567079650.png">
+<meta property="og:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker学习笔记（一）-%20快速入门/14980638673223.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker学习笔记（一）-%20快速入门/14980660196683.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker学习笔记（一）-%20快速入门/14980659880173.jpg">
 <meta property="og:updated_time" content="2017-06-21T18:00:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker学习笔记（一）- 快速入门">
 <meta name="twitter:description" content="Docker本文是我通过Docker官方文档学习时做的一些笔记。能够快速理清Docker中的各种概念并进行实践。">
-<meta name="twitter:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker快速入门/14980137567058.png">
+<meta name="twitter:image" content="https://seawaylee.github.io/2017/06/22/Linux/Docker学习笔记（一）-%20快速入门/14980137567058.png">
   
     <link rel="alternative" href="/atom.xml" title="SeawayLee" type="application/atom+xml">
   
@@ -173,7 +173,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Linux/Docker快速入门" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Linux/Docker学习笔记（一）- 快速入门" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -185,7 +185,7 @@
   
 
         
-        <a href="/2017/06/22/Linux/Docker快速入门/" class="archive-article-date">
+        <a href="/2017/06/22/Linux/Docker学习笔记（一）- 快速入门/" class="archive-article-date">
   	<time datetime="2017-06-21T17:54:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
 </a>
         
@@ -213,9 +213,9 @@
 <h1 id="2-Get-Started"><a href="#2-Get-Started" class="headerlink" title="2 Get-Started"></a>2 Get-Started</h1><h2 id="2-1-概览"><a href="#2-1-概览" class="headerlink" title="2.1 概览"></a>2.1 概览</h2><h3 id="2-1-1-什么是image"><a href="#2-1-1-什么是image" class="headerlink" title="2.1.1 什么是image"></a>2.1.1 什么是image</h3><p>image是一个轻量的、独立的、可执行的包，其中包含了运行某一软件所需要的全部资源（代码、运行时环境、库、环境变量、配置文件）</p>
 <h3 id="2-1-2-什么是container"><a href="#2-1-2-什么是container" class="headerlink" title="2.1.2 什么是container"></a>2.1.2 什么是container</h3><p>container是image的一个运行实例–image在内存中被执行后的结果。<br>container的运行完全与宿主隔离（默认），仅会根据配置去访问宿主机的文件、端口。<br>containers在宿主机的内核中运行各种app。与虚拟机相比的优点是：这些containers比虚拟机更有特质。<br>每一个container都运行于不同的进程中，不占用用其他程序的内存。</p>
 <h3 id="2-1-3-VM与Container的对比"><a href="#2-1-3-VM与Container的对比" class="headerlink" title="2.1.3 VM与Container的对比"></a>2.1.3 VM与Container的对比</h3><p><strong>VM</strong></p>
-<p><img src="/2017/06/22/Linux/Docker快速入门/14980137567058.png" alt=""></p>
+<p><img src="/2017/06/22/Linux/Docker学习笔记（一）- 快速入门/14980137567058.png" alt=""></p>
 <p><strong>Container</strong></p>
-<p><img src="/2017/06/22/Linux/Docker快速入门/14980137685830.png" alt=""></p>
+<p><img src="/2017/06/22/Linux/Docker学习笔记（一）- 快速入门/14980137685830.png" alt=""></p>
 <h3 id="2-1-4-Docker的层级"><a href="#2-1-4-Docker的层级" class="headerlink" title="2.1.4 Docker的层级"></a>2.1.4 Docker的层级</h3><ul>
 <li>Stack: 一组相互关联的服务，共享依赖关系，并且可以协调一致。</li>
 <li>Services: 对containers的管理与配置，构建出一个服务</li>
@@ -236,7 +236,7 @@
 <li>运行app <code>docker run -p 4000:80 friendlyhello</code></li>
 <li>访问app localhost:4000 即可访问container中80端口启动的服务</li>
 </ul>
-<p><img src="/2017/06/22/Linux/Docker快速入门/14980238387578.jpg" alt=""></p>
+<p><img src="/2017/06/22/Linux/Docker学习笔记（一）- 快速入门/14980238387578.jpg" alt=""></p>
 <ul>
 <li>后台运行app <code>docker run -d -p 4000:80 friendlyhello</code></li>
 <li>查看container进程 <code>docker ps</code></li>
@@ -244,7 +244,7 @@
 </ul>
 <h3 id="2-2-4-共享image"><a href="#2-2-4-共享image" class="headerlink" title="2.2.4 共享image"></a>2.2.4 共享image</h3><h4 id="2-2-4-1-注册一个docker账号"><a href="#2-2-4-1-注册一个docker账号" class="headerlink" title="2.2.4.1 注册一个docker账号"></a>2.2.4.1 注册一个docker账号</h4><p><a href="https://cloud.docker.com/" target="_blank" rel="external">https://cloud.docker.com/</a></p>
 <h4 id="2-2-4-2-登陆"><a href="#2-2-4-2-登陆" class="headerlink" title="2.2.4.2 登陆"></a>2.2.4.2 登陆</h4><p><code>docker login</code><br>输入用户名密码，若登陆成功则显示<code>Login Succeeded</code></p>
-<h4 id="2-2-4-3-将本地image注册到docker云"><a href="#2-2-4-3-将本地image注册到docker云" class="headerlink" title="2.2.4.3 将本地image注册到docker云"></a>2.2.4.3 将本地image注册到docker云</h4><p>打标签的格式 <code>docker tag image username/repository:tag</code><br>举例 <code>docker tag friendlyhello NikoBelic/get-started:part1</code><br>上传 <code>docker push NikoBelic/get-started:part1</code><br>到docker云上查看<br><img src="/2017/06/22/Linux/Docker快速入门/14980260054158.jpg" alt=""></p>
+<h4 id="2-2-4-3-将本地image注册到docker云"><a href="#2-2-4-3-将本地image注册到docker云" class="headerlink" title="2.2.4.3 将本地image注册到docker云"></a>2.2.4.3 将本地image注册到docker云</h4><p>打标签的格式 <code>docker tag image username/repository:tag</code><br>举例 <code>docker tag friendlyhello NikoBelic/get-started:part1</code><br>上传 <code>docker push NikoBelic/get-started:part1</code><br>到docker云上查看<br><img src="/2017/06/22/Linux/Docker学习笔记（一）- 快速入门/14980260054158.jpg" alt=""></p>
 <p>远程获取并运行 `docker run -p 4000:80 username/repository:tag</p>
 <h3 id="2-2-5-最常用命令"><a href="#2-2-5-最常用命令" class="headerlink" title="2.2.5 最常用命令"></a>2.2.5 最常用命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">docker build -t friendlyname .  # Create image using this directory&apos;s Dockerfile</div><div class="line">docker run -p 4000:80 friendlyname  # Run &quot;friendlyname&quot; mapping port 4000 to 80</div><div class="line">docker run -d -p 4000:80 friendlyname         # Same thing, but in detached mode</div><div class="line">docker ps                                 # See a list of all running containers</div><div class="line">docker stop &lt;hash&gt;                     # Gracefully stop the specified container</div><div class="line">docker ps -a           # See a list of all containers, even the ones not running</div><div class="line">docker kill &lt;hash&gt;                   # Force shutdown of the specified container</div><div class="line">docker rm &lt;hash&gt;              # Remove the specified container from this machine</div><div class="line">docker rm $(docker ps -a -q)           # Remove all containers from this machine</div><div class="line">docker images -a                               # Show all images on this machine</div><div class="line">docker rmi &lt;imagename&gt;            # Remove the specified image from this machine</div><div class="line">docker rmi $(docker images -q)             # Remove all images from this machine</div><div class="line">docker login             # Log in this CLI session using your Docker credentials</div><div class="line">docker tag &lt;image&gt; username/repository:tag  # Tag &lt;image&gt; for upload to registry</div><div class="line">docker push username/repository:tag            # Upload tagged image to registry</div><div class="line">docker run username/repository:tag                   # Run image from a registry</div></pre></td></tr></table></figure>
 <h2 id="2-3-Services"><a href="#2-3-Services" class="headerlink" title="2.3 Services"></a>2.3 Services</h2><p>一个分布式应用程序，其不同的部分被称为 服务。<br>一般情况下服务的扩展非常困难，需要修改程序的实例数量、分配更多的计算资源等等。<br>而在docker平台上，使用docker-compose.yml文件即可完成。</p>
@@ -333,7 +333,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS</div><div class="line">myvm1   -        virtualbox   Running   tcp://192.168.99.100:2376           v17.05.0-ce</div><div class="line">myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.05.0-ce</div></pre></td></tr></table></figure>
 <p>可以通过myvm1或者myvm2来访问app。刚才创建的app在它们之间被共享并且负载均衡。<br>两个IP都能正常访问的原因是，swarm集群中的节点参与了入口的网络路由。</p>
 <p>下图描述了swarm集群中节点的路由方式</p>
-<p><img src="/2017/06/22/Linux/Docker快速入门/14980567079650.png" alt=""></p>
+<p><img src="/2017/06/22/Linux/Docker学习笔记（一）- 快速入门/14980567079650.png" alt=""></p>
 <h3 id="2-4-6-配置APP"><a href="#2-4-6-配置APP" class="headerlink" title="2.4.6 配置APP"></a>2.4.6 配置APP</h3><ul>
 <li>现在你可以使用2.3节中的方式，修改docker-compose.yml文件来扩展你的app。</li>
 <li>修改代码以改变app的的功能。</li>
@@ -370,7 +370,7 @@
 <p>更新services成功</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Updating service getstartedlab_web (id: 43lo6a1be3tr03bxkekt32kw5)</div><div class="line">Creating service getstartedlab_visualizer</div></pre></td></tr></table></figure>
 <ul>
-<li>查看可视化<br><img src="/2017/06/22/Linux/Docker快速入门/14980638673223.jpg" alt=""></li>
+<li>查看可视化<br><img src="/2017/06/22/Linux/Docker学习笔记（一）- 快速入门/14980638673223.jpg" alt=""></li>
 </ul>
 <p>正如我们之前配置的，visualizer只有一个实例，而web则在swarm集群中有很多实例。<br>我们可以使用 <code>docket-machine ssh myvm1 &quot;docker stack ps getstartedlab&quot;</code>来证实其可视化结果</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ID                  NAME                         IMAGE                             NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS</div><div class="line">fm0v360ndv24        getstartedlab_visualizer.1   dockersamples/visualizer:stable   myvm1               Running             Running 6 minutes ago</div><div class="line">l7w76v6ldure        getstartedlab_web.2          lixiwei/get-started:part1         myvm1               Running             Running 6 hours ago</div><div class="line">jei5oc8wuvqr        getstartedlab_web.3          lixiwei/get-started:part1         myvm1               Running             Running 6 hours ago</div><div class="line">z5nkfsixu6uc        getstartedlab_web.7          lixiwei/get-started:part1         myvm2               Running             Running 6 hours ago</div><div class="line">gsn6xv4jenoo        getstartedlab_web.8          lixiwei/get-started:part1         myvm1               Running             Running 6 hours ago</div><div class="line">x0zeq340z8i2        getstartedlab_web.10         lixiwei/get-started:part1         myvm2               Running             Running 6 hours ago</div></pre></td></tr></table></figure>
@@ -401,8 +401,8 @@
 <li><p>查看结果</p>
 </li>
 </ul>
-<p><img src="/2017/06/22/Linux/Docker快速入门/14980660196683.jpg" alt=""></p>
-<p><img src="/2017/06/22/Linux/Docker快速入门/14980659880173.jpg" alt=""></p>
+<p><img src="/2017/06/22/Linux/Docker学习笔记（一）- 快速入门/14980660196683.jpg" alt=""></p>
+<p><img src="/2017/06/22/Linux/Docker学习笔记（一）- 快速入门/14980659880173.jpg" alt=""></p>
 <h2 id="2-6-部署APP"><a href="#2-6-部署APP" class="headerlink" title="2.6 部署APP"></a>2.6 <a href="https://docs.docker.com/get-started/part6/" target="_blank" rel="external">部署APP</a></h2>
       
 
@@ -507,7 +507,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://seawaylee.github.io/2017/06/22/Linux/Docker快速入门/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://seawaylee.github.io/2017/06/22/Linux/Docker学习笔记（一）- 快速入门/" alt="微信分享二维码">
     </div>
 </div>
 
