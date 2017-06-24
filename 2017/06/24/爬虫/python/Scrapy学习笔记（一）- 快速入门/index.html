@@ -9,13 +9,13 @@
   <title>Scrapy学习笔记（一）- 快速入门 | SeawayLee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1 概览1.1 安装pip install scrapy=1.4.0 1.2 测试Demovim quotes_spider.py 12345678910111213141516171819import scrapyclass QuotesSpider(scrapy.Spider):    name = &quot;quotes&quot;    start_urls = [        &apos;http://quote">
-<meta name="keywords" content="爬虫,Python">
+<meta name="keywords" content="Python,爬虫">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Scrapy学习笔记（一）- 快速入门">
 <meta property="og:url" content="https://seawaylee.github.io/2017/06/24/爬虫/python/Scrapy学习笔记（一）- 快速入门/index.html">
 <meta property="og:site_name" content="SeawayLee">
 <meta property="og:description" content="1 概览1.1 安装pip install scrapy=1.4.0 1.2 测试Demovim quotes_spider.py 12345678910111213141516171819import scrapyclass QuotesSpider(scrapy.Spider):    name = &quot;quotes&quot;    start_urls = [        &apos;http://quote">
-<meta property="og:updated_time" content="2017-06-24T02:45:10.000Z">
+<meta property="og:updated_time" content="2017-06-24T03:19:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Scrapy学习笔记（一）- 快速入门">
 <meta name="twitter:description" content="1 概览1.1 安装pip install scrapy=1.4.0 1.2 测试Demovim quotes_spider.py 12345678910111213141516171819import scrapyclass QuotesSpider(scrapy.Spider):    name = &quot;quotes&quot;    start_urls = [        &apos;http://quote">
@@ -233,12 +233,12 @@
 <p>但是我们需要的仅仅是href，可是这样操作 <code>response.css(&#39;li.next a::attr(href)&#39;).extract_first()</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;/page/2/&apos;</div></pre></td></tr></table></figure>
 <p>现在我们的爬虫是这样的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">import scrapy</div><div class="line"></div><div class="line"></div><div class="line">class QuotesSpider(scrapy.Spider):</div><div class="line">    name = &quot;quotes&quot;</div><div class="line">    start_urls = [</div><div class="line">        &apos;http://quotes.toscrape.com/page/1/&apos;,</div><div class="line">    ]</div><div class="line"></div><div class="line">    def parse(self, response):</div><div class="line">        for quote in response.css(&apos;div.quote&apos;):</div><div class="line">            yield &#123;</div><div class="line">                &apos;text&apos;: quote.css(&apos;span.text::text&apos;).extract_first(),</div><div class="line">                &apos;author&apos;: quote.css(&apos;small.author::text&apos;).extract_first(),</div><div class="line">                &apos;tags&apos;: quote.css(&apos;div.tags a.tag::text&apos;).extract(),</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        next_page = response.css(&apos;li.next a::attr(href)&apos;).extract_first()</div><div class="line">        if next_page is not None:</div><div class="line">            next_page = response.urljoin(next_page)</div><div class="line">            yield scrapy.Request(next_page, callback=self.parse)</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">QuotesSpider</span><span class="params">(scrapy.Spider)</span>:</span></div><div class="line">    name = <span class="string">"quotes"</span></div><div class="line">    start_urls = [</div><div class="line">        <span class="string">'http://quotes.toscrape.com/page/1/'</span>,</div><div class="line">    ]</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></div><div class="line">        <span class="keyword">for</span> quote <span class="keyword">in</span> response.css(<span class="string">'div.quote'</span>):</div><div class="line">            <span class="keyword">yield</span> &#123;</div><div class="line">                <span class="string">'text'</span>: quote.css(<span class="string">'span.text::text'</span>).extract_first(),</div><div class="line">                <span class="string">'author'</span>: quote.css(<span class="string">'small.author::text'</span>).extract_first(),</div><div class="line">                <span class="string">'tags'</span>: quote.css(<span class="string">'div.tags a.tag::text'</span>).extract(),</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        next_page = response.css(<span class="string">'li.next a::attr(href)'</span>).extract_first()</div><div class="line">        <span class="keyword">if</span> next_page <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            next_page = response.urljoin(next_page)</div><div class="line">            <span class="keyword">yield</span> scrapy.Request(next_page, callback=self.parse)</div></pre></td></tr></table></figure>
 <p>加入一些简化操作</p>
 <p>follow支持相对路径<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">next_page = response.css(<span class="string">'li.next a::attr(href)'</span>).extract_first()</div><div class="line"><span class="keyword">if</span> next_page <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">   <span class="keyword">yield</span> response.follow(next_page, callback=self.parse)</div></pre></td></tr></table></figure></p>
 <p>follow可以自动识别href</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> a <span class="keyword">in</span> response.css(<span class="string">'li.next a'</span>):</div><div class="line">    <span class="keyword">yield</span> response.follow(a, callback=self.parse)</div></pre></td></tr></table></figure>
-<h1 id="3-Demo"><a href="#3-Demo" class="headerlink" title="3 Demo"></a>3 Demo</h1><p>帮同学爬一个健康网站的数据，网站也没有反爬手段，结构又很简单，所以现学现卖用scrapy（代码写的比较随意，仅供参考），<br>其实向这种简单的爬虫，直接用requests包更省事儿。<br>project最终结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">└── boohee</div><div class="line">    ├── boohee</div><div class="line">    │   ├── __init__.py</div><div class="line">    │   ├── items.py</div><div class="line">    │   ├── middlewares.py</div><div class="line">    │   ├── pipelines.py</div><div class="line">    │   ├── settings.py</div><div class="line">    │   └── spiders</div><div class="line">    │       ├── __init__.py</div><div class="line">    │       ├── food_detail.py</div><div class="line">    │       └── food_name_spider.py</div><div class="line">    │       </div><div class="line">    ├── food_detail.json</div><div class="line">    ├── food_name.json</div><div class="line">    └── scrapy.cfg</div></pre></td></tr></table></figure></p>
+<h1 id="3-Demo"><a href="#3-Demo" class="headerlink" title="3 Demo"></a>3 Demo</h1><p>帮同学爬一个健康网站的数据，网站也没有反爬手段，结构又很简单，所以现学现卖用scrapy（代码写的比较随意，仅供参考），<br>其实向这种简单的爬虫，直接用requests更省事儿。<br>project最终结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">└── boohee</div><div class="line">    ├── boohee</div><div class="line">    │   ├── __init__.py</div><div class="line">    │   ├── items.py</div><div class="line">    │   ├── middlewares.py</div><div class="line">    │   ├── pipelines.py</div><div class="line">    │   ├── settings.py</div><div class="line">    │   └── spiders</div><div class="line">    │       ├── __init__.py</div><div class="line">    │       ├── food_detail.py</div><div class="line">    │       └── food_name_spider.py</div><div class="line">    │       </div><div class="line">    ├── food_detail.json</div><div class="line">    ├── food_name.json</div><div class="line">    └── scrapy.cfg</div></pre></td></tr></table></figure></p>
 <p>核心代码</p>
 <p><strong>food_name.py</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"><span class="keyword">import</span> time</div><div class="line"></div><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> json</div><div class="line"></div><div class="line">file_res = json.loads(open(<span class="string">'/Users/lixiwei-mac/Documents/IdeaProjects/rhinotech_spider/boohee_spider/boohee/food_name.json'</span>).read())</div><div class="line">cookie = <span class="string">'gwdang_brwext_share=0; from_device=default; gwdang_brwext_more_force=0; history=1479334-223%2C2365144-3%2C1462046326-3%2C12596075384-3%2C2365148-3%2C2365158-3%2C4830462-3%2C3498623-3%2C2504829-3%2C11905178-3; gwdang_permanent_id=9b26f59a3e854641cafe23c267ea728b; gwdang_brwext_is_open=0; gwdang_brwext_first=1; gwdang_brwext_position=0; gwdang_brwext_close_update=0; gwdang_brwext_close_update_hour=0; gwdang_brwext_close_install=0; gwdang_brwext_style=top; gwdang_brwext_notice=0; gwdang_brwext_fold=0; gwdang_brwext_show_tip=1; gwdang_brwext_imageAd=1; gwdang_brwext_show_popup=1; gwdang_brwext_show_ljfqrcode=1; gwdang_brwext_hide_shoptip=0; gwdang_brwext_apptg_close=0; gwdang_brwext_show_lowpri=1; gwdang_brwext_show_guessfavor=1; gwdang_brwext_show_lowpri_right=1; gwdang_brwext_show_guessfavor_right=1; gwdang_brwext_show_vips=1; gwdang_brwext_show_wishlist=1; gwdang_brwext_show_guess=1; gwdang_brwext_show_promo=1; gwdang_search_way=0'</span></div><div class="line">headers = &#123;<span class="string">'Cookie'</span>:cookie&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FoodNameSpider</span><span class="params">(scrapy.Spider)</span>:</span></div><div class="line">    name = <span class="string">'food_name'</span></div><div class="line">    base_url = <span class="string">'http://www.boohee.com/food/group/%s'</span></div><div class="line">    start_urls = [base_url % x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">41</span>)] * <span class="number">10</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></div><div class="line">        <span class="keyword">for</span> food_ref <span class="keyword">in</span> response.css(<span class="string">'ul.food-list li h4 a::attr(href)'</span>).extract():</div><div class="line">            group_id = response.url.split(<span class="string">'/'</span>)[<span class="number">5</span>].split(<span class="string">"?"</span>)[<span class="number">0</span>]</div><div class="line">            food_name = response.xpath(<span class="string">'//a[@href="%s"]/@title'</span> % food_ref).extract_first()</div><div class="line">            res = &#123;<span class="string">'group_id'</span>: group_id, <span class="string">'href'</span>: food_ref, <span class="string">'food_name'</span>: food_name&#125;</div><div class="line">            <span class="keyword">if</span> res <span class="keyword">not</span> <span class="keyword">in</span> file_res:</div><div class="line">                <span class="keyword">yield</span> res</div><div class="line">        <span class="keyword">for</span> href <span class="keyword">in</span> response.css(<span class="string">'a.next_page'</span>):</div><div class="line">            time.sleep(<span class="number">0.1</span>)</div><div class="line">            <span class="keyword">yield</span> response.follow(href, self.parse, headers=headers)</div></pre></td></tr></table></figure>
@@ -290,11 +290,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
         		</li>
       		
 		</ul>
@@ -506,15 +506,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -522,11 +518,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -534,11 +530,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -547,6 +543,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -562,10 +562,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
@@ -574,11 +570,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -586,7 +582,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -594,15 +598,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java爬虫</a>
               </li>
             
             <div class="clearfix"></div>
