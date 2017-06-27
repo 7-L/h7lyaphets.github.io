@@ -164,6 +164,63 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python基础/格式化日期" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/10/Python基础/格式化日期/">格式化日期与时间戳转换</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/10/Python基础/格式化日期/" class="archive-article-date">
+  	<time datetime="2017-03-09T16:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">#设a为字符串</span></div><div class="line"><span class="keyword">import</span> time</div><div class="line">a = <span class="string">"2011-09-28 10:00:00"</span></div><div class="line"><span class="comment">#中间过程，一般都需要将字符串转化为时间数组</span></div><div class="line">time.strptime(a,<span class="string">'%Y-%m-%d %H:%M:%S'</span>)</div><div class="line">&gt;&gt;time.struct_time(tm_year=<span class="number">2011</span>, tm_mon=<span class="number">9</span>, tm_mday=<span class="number">27</span>, tm_hour=<span class="number">10</span>, tm_min=<span class="number">50</span>, tm_sec=<span class="number">0</span>, tm_wday=<span class="number">1</span>, tm_yday=<span class="number">270</span>, tm_isdst=<span class="number">-1</span>)</div><div class="line"><span class="comment">#将"2011-09-28 10:00:00"转化为时间戳</span></div><div class="line">time.mktime(time.strptime(a,<span class="string">'%Y-%m-%d %H:%M:%S'</span>))</div><div class="line">&gt;&gt;<span class="number">1317091800.0</span></div><div class="line"><span class="comment">#将时间戳转化为localtime</span></div><div class="line">x = time.localtime(<span class="number">1317091800.0</span>)</div><div class="line">time.strftime(<span class="string">'%Y-%m-%d %H:%M:%S'</span>,x)</div><div class="line">&gt;&gt;<span class="number">2011</span><span class="number">-09</span><span class="number">-27</span> <span class="number">10</span>:<span class="number">50</span>:<span class="number">00</span></div><div class="line"><span class="comment">#将时间戳转换为日期</span></div><div class="line">format_time = time.strftime(<span class="string">"%Y-%m-%d"</span>, time.localtime( <span class="number">1317091800.0</span>))</div><div class="line">&gt;&gt;<span class="number">2011</span><span class="number">-09</span><span class="number">-27</span></div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Python基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+ 
+
+
+
+  
     <article id="post-Java基础/多线程/Timer与ScheduledThreadPoolExecutor" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -738,121 +795,6 @@
 
 
   
-    <article id="post-JavaWeb/Spring/Spring_8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/09/JavaWeb/Spring/Spring_8/">SpringInAction读书笔记(八) Spring Security</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/09/JavaWeb/Spring/Spring_8/" class="archive-article-date">
-  	<time datetime="2017-03-09T15:45:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="9-1-Spring-Security简介"><a href="#9-1-Spring-Security简介" class="headerlink" title="9.1 Spring Security简介"></a>9.1 Spring Security简介</h2><p>Spring Security 是为基于Spring的应用程序提供声明式安全保护的安全性框架。SpringSecurity充分利用了DI和AOP技术。本章将使用SpringSecurity保证Web安全性。</p>
-<h3 id="9-1-1-SpringSecurity模块"><a href="#9-1-1-SpringSecurity模块" class="headerlink" title="9.1.1 SpringSecurity模块"></a>9.1.1 SpringSecurity模块</h3><p>SpringSecurity被分成了11个模块 </p>
-<table>
-<thead>
-<tr>
-<th>ACL</th>
-<th>AccessControlList访问控制列表为域对象提供安全性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>切面</td>
-<td>当使用SpringSecurity注解时，会使用基于AspectJ的且米娜，而不是使用标准的SpringAOP</td>
-</tr>
-<tr>
-<td>CAS客户端</td>
-<td>提供与Jasig的中心认证服务（Central Authentication Service）进行集成的功能</td>
-</tr>
-<tr>
-<td>配置</td>
-<td>包含通过XML和Java配置SpringSecurity的功能支持</td>
-</tr>
-<tr>
-<td>核心</td>
-<td>提供SpringSecurity基本库</td>
-</tr>
-<tr>
-<td>加密</td>
-<td>提供了加密和密码编码的功能</td>
-</tr>
-<tr>
-<td>LDAP</td>
-<td>支持基于LDAP进行认证</td>
-</tr>
-<tr>
-<td>OpenID</td>
-<td>支持使用OpenID进行集中式认证</td>
-</tr>
-<tr>
-<td>Remoting</td>
-<td>提供了对SpringRemoting的支持</td>
-</tr>
-<tr>
-<td>标签库</td>
-<td>SpringSecurity的JSP标签库</td>
-</tr>
-<tr>
-<td>Web</td>
-<td>提供了SpringSecurity基于Filter的Web安全性支持</td>
-</tr>
-</tbody>
-</table>
-        
-          <a class="article-more-a" href="/2017/03/09/JavaWeb/Spring/Spring_8/#more">阅读全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JavaWeb</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
- 
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
@@ -969,15 +911,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -985,11 +923,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -997,7 +935,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1006,10 +952,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1025,15 +967,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1061,11 +1003,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
               </li>
             
             <div class="clearfix"></div>
