@@ -164,6 +164,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/">Hadoop学习笔记（一）- Hadoop快速入门</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/" class="archive-article-date">
+  	<time datetime="2017-04-24T07:08:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Hadoop生态圈简介"><a href="#1-Hadoop生态圈简介" class="headerlink" title="1 Hadoop生态圈简介"></a>1 Hadoop生态圈简介</h1><p><img src="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/hadoop_sys.jpg" alt=""></p>
+<p><strong>重点组件：</strong></p>
+<ul>
+<li>HDFS：分布式文件系统</li>
+<li>MAPREDUCE：分布式运算程序开发框架</li>
+<li>HIVE：基于大数据技术（文件系统+运算框架）的SQL数据仓库工具</li>
+<li>HBASE：基于HADOOP的分布式海量数据库</li>
+<li>ZOOKEEPER：分布式协调服务基础组件</li>
+<li>Mahout：基于mapreduce/spark/flink等分布式运算框架的机器学习算法库</li>
+<li>Oozie：工作流调度框架</li>
+<li>Sqoop：数据导入导出工具</li>
+<li>Flume：日志数据采集框架</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/04/24/大数据/Hadoop/Hadoop学习笔记（一）- Hadoop快速入门/#more">阅读全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+ 
+
+
+
+  
     <article id="post-Java基础/JVM/JVM学习笔记（基础知识）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -750,93 +826,6 @@
 
 
   
-    <article id="post-大数据/大数据基础/Linux环境基本操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/22/大数据/大数据基础/Linux环境基本操作/">Linux基本操作</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/22/大数据/大数据基础/Linux环境基本操作/" class="archive-article-date">
-  	<time datetime="2017-03-22T12:09:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>配置三台Linux服务器，为Hadoop集群准备硬件资源。</p>
-<h2 id="1-设备条件"><a href="#1-设备条件" class="headerlink" title="1 设备条件"></a>1 设备条件</h2><ul>
-<li>性能: 由一台32G的8Core服务器虚拟出3台(4G 4Core)CentOS7服务器,内存固定分配，Core根据使用状态动态调节 <ul>
-<li>查看CPU信息 <code>cat /proc/cpuinfo</code></li>
-<li>查看内存信息 <code>free -h</code></li>
-</ul>
-</li>
-<li>IP地址: 10.5.151.241 10.5.151.242 10.5.151.243 </li>
-<li>VM网络配置使用的桥接模式，使用真实的网络地址，Bridge适合远程操作；而NAT模式适合将虚拟机装在本机，使用虚拟网关，如果是在笔记本电脑中虚拟机器可以使用此方式。</li>
-</ul>
-<h2 id="2-操作"><a href="#2-操作" class="headerlink" title="2 操作"></a>2 操作</h2><h3 id="2-1-Vim基本操作"><a href="#2-1-Vim基本操作" class="headerlink" title="2.1 Vim基本操作"></a>2.1 Vim基本操作</h3><p><strong>一般模式</strong></p>
-<ul>
-<li>a  在光标后一位开始插入</li>
-<li>A   在该行的最后插入</li>
-<li>I   在该行的最前面插入</li>
-<li>gg   直接跳到文件的首行</li>
-<li>G    直接跳到文件的末行</li>
-<li>dd   删除行，如果  5dd   ，则一次性删除光标后的5行</li>
-<li>yy  复制当前行,  复制多行，则  3yy，则复制当前行附近的3行</li>
-<li>p   粘贴</li>
-<li>v  进入字符选择模式，选择完成后，按y复制，按p粘贴</li>
-<li>ctrl+v  进入块选择模式，选择完成后，按y复制，按p粘贴</li>
-<li>shift+v  进入行选择模式，选择完成后，按y复制，按p粘贴</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/03/22/大数据/大数据基础/Linux环境基本操作/#more">阅读全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
- 
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -977,11 +966,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1030,6 +1019,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
