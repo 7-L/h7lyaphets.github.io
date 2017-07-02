@@ -17,7 +17,7 @@
 <meta property="og:description" content="1 Hive基础知识1.1 简介什么是HiveHive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供类SQL查询功能。 为什么使用Hive  直接使用Hadoop所面临的问题  学习成本高 一般项目周期要求短 MapReduce实现复杂的查询呢逻辑开发难度较大   为什么要使用Hive  操作接口采用类SQL语法，可以快速开发 避免编写MR，减少学习成本 扩">
 <meta property="og:image" content="https://seawaylee.github.io/2017/07/02/大数据/Hive/Hive学习笔记（一）-%20详解Hive/Hive架构.jpg">
 <meta property="og:image" content="https://seawaylee.github.io/2017/07/02/大数据/Hive/Hive学习笔记（一）-%20详解Hive/Hive与Hadoop关系.jpg">
-<meta property="og:updated_time" content="2017-07-02T15:37:38.000Z">
+<meta property="og:updated_time" content="2017-07-02T15:41:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive学习笔记（一）- 详解Hive">
 <meta name="twitter:description" content="1 Hive基础知识1.1 简介什么是HiveHive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供类SQL查询功能。 为什么使用Hive  直接使用Hadoop所面临的问题  学习成本高 一般项目周期要求短 MapReduce实现复杂的查询呢逻辑开发难度较大   为什么要使用Hive  操作接口采用类SQL语法，可以快速开发 避免编写MR，减少学习成本 扩">
@@ -379,7 +379,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">FROM from_statement </div><div class="line"><span class="keyword">INSERT</span> OVERWRITE <span class="keyword">TABLE</span> tablename1 [<span class="keyword">PARTITION</span> (partcol1=val1, partcol2=val2 ...)] select_statement1 </div><div class="line">[<span class="keyword">INSERT</span> OVERWRITE <span class="keyword">TABLE</span> tablename2 [<span class="keyword">PARTITION</span> ...] select_statement2] ...</div></pre></td></tr></table></figure>
 <p><strong>Dynamic partition inserts:</strong></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> OVERWRITE <span class="keyword">TABLE</span> tablename <span class="keyword">PARTITION</span> (partcol1[=val1], partcol2[=val2] ...) select_statement <span class="keyword">FROM</span> from_statement</div></pre></td></tr></table></figure>
-<p>导出表数据</p>
+<p><strong>导出表数据</strong></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> OVERWRITE [<span class="keyword">LOCAL</span>] <span class="keyword">DIRECTORY</span> directory1 <span class="keyword">SELECT</span> ... <span class="keyword">FROM</span> ...</div></pre></td></tr></table></figure>
 <p><strong>Multiple inserts:</strong></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">FROM from_statement</div><div class="line"><span class="keyword">INSERT</span> OVERWRITE [<span class="keyword">LOCAL</span>] <span class="keyword">DIRECTORY</span> directory1 select_statement1</div><div class="line">[<span class="keyword">INSERT</span> OVERWRITE [<span class="keyword">LOCAL</span>] <span class="keyword">DIRECTORY</span> directory2 select_statement2] ...</div></pre></td></tr></table></figure>
@@ -716,15 +716,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -732,11 +724,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -744,19 +740,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -788,15 +788,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -809,10 +813,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
               </li>
             
             <div class="clearfix"></div>
