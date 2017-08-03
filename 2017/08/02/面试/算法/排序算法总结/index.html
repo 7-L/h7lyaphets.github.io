@@ -19,7 +19,20 @@
 <meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15016079050699.jpg">
 <meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15016082018153.jpg">
 <meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15016082070497.jpg">
-<meta property="og:updated_time" content="2017-08-01T17:35:35.000Z">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017809437243.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017809776825.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017810187241.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017818606788.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017820707548.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017834931821.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017838901438.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017839100925.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017839251076.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017842763039.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017843971277.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017848392982.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017853744551.jpg">
+<meta property="og:updated_time" content="2017-08-03T18:40:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序算法总结">
 <meta name="twitter:description" content="1 对比分析图">
@@ -251,6 +264,146 @@
 <p><strong>代码实现</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 折半插入排序 空间、时间复杂度不变,较少了比较次数</div><div class="line"> *</div><div class="line"> * <span class="doctag">@Author</span> NikoBelic</div><div class="line"> * <span class="doctag">@Date</span> 16/01/2017 09:37</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] binarySort(<span class="keyword">int</span>[] array)</div><div class="line">&#123;</div><div class="line">    <span class="comment">//从数组的第二个位置开始遍历值</span></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; array.length; i++)  &#123;</div><div class="line">        <span class="keyword">int</span> key = array[i];           <span class="comment">//暂存要插入的值</span></div><div class="line">        <span class="keyword">int</span> pre = <span class="number">0</span>;              <span class="comment">//有序序列开始和结尾下标申明</span></div><div class="line">        <span class="keyword">int</span> last = i - <span class="number">1</span>;</div><div class="line">        <span class="comment">// 折半查找出插入位置 a[pre]</span></div><div class="line">        <span class="keyword">while</span>(pre &lt;= last)  &#123;</div><div class="line">            <span class="keyword">int</span> mid = (pre + last) / <span class="number">2</span>;</div><div class="line">            <span class="keyword">if</span>(key &lt; array[mid])  &#123;</div><div class="line">                last = mid - <span class="number">1</span>;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                pre = mid + <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//a[i]已经取出来存放在key中，把下标从pre + 1到 i-1的元素依次后移</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &gt;= pre + <span class="number">1</span>; j--)  &#123;</div><div class="line">            array[j] = array[j - <span class="number">1</span>];</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//把值插入空白位置</span></div><div class="line">        array[pre] = key;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> array;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>直接插入排序是，比较一个后移一个</strong><br><strong>折半插入排序是，先找到位置，然后一起移动；</strong></p>
+<h3 id="2-4-快速排序"><a href="#2-4-快速排序" class="headerlink" title="2.4 快速排序"></a>2.4 快速排序</h3><p><strong>概述</strong></p>
+<p>快速排序（Quicksort）是对冒泡排序的一种改进，又称划分交换排序（partition-exchange sort。<br>快速排序使用<strong>分治法</strong>（Divide and conquer）策略来把一个序列（list）分为两个子序列（sub-lists）。</p>
+<p><strong>步骤</strong></p>
+<ol>
+<li><p>从数列中挑出一个元素，称为”基准”（pivot）</p>
+</li>
+<li><p>重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区结束之后，该基准就处于数列的中间位置。这个称为分区（partition）操作。</p>
+</li>
+<li><p>递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序</p>
+</li>
+</ol>
+<hr>
+<p><a href="http://blog.csdn.net/morewindows/article/details/6684558" target="_blank" rel="external"><strong>网上的通俗讲解</strong></a></p>
+<p>快速排序由于排序效率在同为O(N*logN)的几种排序方法中效率较高，因此经常被采用，再加上快速排序思想—-分治法也确实实用，因此很多软件公司的笔试面试，包括像腾讯，微软等知名IT公司都喜欢考这个，还有大大小的程序方面的考试如软考，考研中也常常出现快速排序的身影。</p>
+<p>总的说来，要直接默写出快速排序还是有一定难度的，因为本人就自己的理解对快速排序作了下白话解释，希望对大家理解有帮助，达到快速排序，快速搞定。</p>
+<p>快速排序是C.R.A.Hoare于1962年提出的一种划分交换排序。它采用了一种分治的策略，通常称其为分治法(Divide-and-ConquerMethod)。</p>
+<p><strong>该方法的基本思想是：</strong></p>
+<ol>
+<li><p>先从数列中取出一个数作为基准数。</p>
+</li>
+<li><p>分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。</p>
+</li>
+<li><p>再对左右区间重复第二步，直到各区间只有一个数。</p>
+</li>
+</ol>
+<p>虽然快速排序称为分治法，但分治法这三个字显然无法很好的概括快速排序的全部步骤。因此我的对快速排序作了进一步的说明：挖坑填数+分治法：</p>
+<p><strong>先来看实例吧，定义下面再给出（最好能用自己的话来总结定义，这样对实现代码会有帮助）。</strong></p>
+<p>以一个数组作为示例，取区间第一个数为基准数。</p>
+<p><img src="/2017/08/02/面试/算法/排序算法总结/15017809437243.jpg" alt=""></p>
+<p>初始时，i = 0;  j = 9;   X = a[i] = 72</p>
+<p>由于已经将a[0]中的数保存到X中，可以理解成在数组a[0]上挖了个坑，可以将其它数据填充到这来。</p>
+<p>从j开始向前找一个比X小或等于X的数。当j=8，符合条件，将a[8]挖出再填到上一个坑a[0]中。a[0]=a[8]; i++;  这样一个坑a[0]就被搞定了，但又形成了一个新坑a[8]，这怎么办了？简单，再找数字来填a[8]这个坑。这次从i开始向后找一个大于X的数，当i=3，符合条件，将a[3]挖出再填到上一个坑中a[8]=a[3]; j–;</p>
+<p>数组变为：<br><img src="/2017/08/02/面试/算法/排序算法总结/15017809776825.jpg" alt=""></p>
+<p>i = 3;   j = 7;   X=72<br>再重复上面的步骤，先从后向前找，再从前向后找。<br>从j开始向前找，当j=5，符合条件，将a[5]挖出填到上一个坑中，a[3] = a[5]; i++;<br>从i开始向后找，当i=5时，由于i==j退出。<br>此时，i = j = 5，而a[5]刚好又是上次挖的坑，因此将X填入a[5]。</p>
+<p>数组变为：<br><img src="/2017/08/02/面试/算法/排序算法总结/15017810187241.jpg" alt=""></p>
+<p>可以看出a[5]前面的数字都小于它，a[5]后面的数字都大于它。因此再对a[0…4]和a[6…9]这二个子区间重复上述步骤就可以了。</p>
+<p><strong>对挖坑填数进行总结</strong></p>
+<ol>
+<li><p>i =L; j = R; 将基准数挖出形成第一个坑a[i]。</p>
+</li>
+<li><p>j–由后向前找比它小的数，找到后挖出此数填前一个坑a[i]中。</p>
+</li>
+<li><p>i++由前向后找比它大的数，找到后也挖出此数填到前一个坑a[j]中。</p>
+</li>
+<li><p>再重复执行2，3二步，直到i==j，将基准数填入a[i]中。</p>
+</li>
+</ol>
+<p><strong>实现</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (left &lt; right)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> i = left, j = right;</div><div class="line">            <span class="comment">// 以中间数为基准</span></div><div class="line">            <span class="comment">//SortUtil.swap(a, left, (left + right) / 2);</span></div><div class="line">            <span class="comment">// 以随机数为基准</span></div><div class="line">            SortUtil.swap(a, left, SortUtil.getRandomIndex(left, right));</div><div class="line">            <span class="keyword">int</span> x = a[left]; <span class="comment">// a[left] 就是被挖出的第一个坑</span></div><div class="line">            <span class="keyword">while</span> (i &lt; j)</div><div class="line">            &#123;</div><div class="line">                <span class="comment">// 从右向左找小于x的数来填a[i]</span></div><div class="line">                <span class="keyword">while</span> (i &lt; j &amp;&amp; a[j] &gt; x)</div><div class="line">                    j--;</div><div class="line"></div><div class="line">                <span class="keyword">if</span> (i &lt; j)</div><div class="line">                    a[i++] = a[j]; <span class="comment">// 将a[j]填到a[i]，a[j]形成了新的坑</span></div><div class="line">                <span class="comment">// 从左向右找大于x的数来填a[j]</span></div><div class="line">                <span class="keyword">while</span> (i &lt; j &amp;&amp; a[i] &lt; x)</div><div class="line">                    i++;</div><div class="line">                <span class="keyword">if</span> (i &lt; j)</div><div class="line">                    a[j--] = a[i];<span class="comment">// 将[i]天到a[j],a[i]形成了新的坑</span></div><div class="line">            &#125;</div><div class="line">            a[i] = x;<span class="comment">// 退出时，i等于j，将x填到这个坑</span></div><div class="line">            quickSort(a, left, i - <span class="number">1</span>);</div><div class="line">            quickSort(a, i + <span class="number">1</span>, right);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="3-桶排序"><a href="#3-桶排序" class="headerlink" title="3 桶排序"></a>3 桶排序</h2><blockquote>
+<p>时间复杂度O(n),思想都是来自于桶排序，桶排序不是一种具体的排序算法，而是一种思想。</p>
+</blockquote>
+<h3 id="3-1-计数排序"><a href="#3-1-计数排序" class="headerlink" title="3.1 计数排序"></a>3.1 计数排序</h3><p><img src="/2017/08/02/面试/算法/排序算法总结/15017818606788.jpg" alt=""></p>
+<p>分别创建100-300号的桶，将待排序数按对应的桶号存储，全部存储完毕后，从100号-300号桶逐一倒出数值，即完成排序。</p>
+<h3 id="3-2-基数排序"><a href="#3-2-基数排序" class="headerlink" title="3.2 基数排序"></a>3.2 基数排序</h3><p><img src="/2017/08/02/面试/算法/排序算法总结/15017820707548.jpg" alt=""></p>
+<p>将待排序数列分别按照，个位、十位、百位 添加到不同的桶中并倒出，三次装入与倒出后的数列即为有序数列。</p>
+<h2 id="4-排序笔试面试题"><a href="#4-排序笔试面试题" class="headerlink" title="4 排序笔试面试题"></a>4 排序笔试面试题</h2><ol>
+<li><p>已知一个几乎有序的数组，几乎有序是值如果把数组排好顺序的话，每个元素移动的距离不超过k，并且k相对于数组长度来说很小。请问选择什么方法对其排序比较好？</p>
+<ul>
+<li>冒泡、选择都不好，因为他们是严格的O( n^2 )算法</li>
+<li>插入排序还不错，其排序过程与原始顺序有关，时间复杂度不会超过O(N*K)</li>
+<li>快排、归并不好</li>
+<li>答案是<strong>改进后的堆排序</strong><ul>
+<li>由于元素移动距离不会超过k，i=0,所以建立a[i,k-1]的小根堆，将最小值换到a[i],i++</li>
+<li>构建a[i,k+i]的小根堆，将当前堆最小值换到a[i],i++</li>
+<li>堆顶的弹出顺序其实就是最终排序结果</li>
+<li>每得到一个数的时间复杂度为O(logK),总共N个数，时间复杂度就是O(N*logK)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>判断数组中是否有重复值。必须保证额外的空间复杂度为O(1)</p>
+<ul>
+<li>如果没有空间复杂度的限制，用哈希表实现最好</li>
+<li>有空间复杂度要求，需要先排序，然后判断（遍历一次）</li>
+<li>答案是<strong>改出一个非递归版本的堆排序</strong>，堆排序递归空间复杂度是O(logN)</li>
+</ul>
+</li>
+<li><p>把两个有序数组合并为一个数组，第一个数组空间正好可以容纳两个数组的元素。</p>
+<ul>
+<li>从后往前遍历数组A和B</li>
+<li><img src="/2017/08/02/面试/算法/排序算法总结/15017834931821.jpg" alt=""></li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p>荷兰国旗问题。只包含0，2，3的整数数组进行排序，要求使用交换、原地排序，而不是利用计数进行排序。</p>
+<ul>
+<li><p>与快排的划分过程类似</p>
+</li>
+<li><p>如果当前数为1，那么就与0区的后一个数进行交换，并且0区向后扩充1</p>
+</li>
+<li><p><img src="/2017/08/02/面试/算法/排序算法总结/15017838901438.jpg" alt=""><br><img src="/2017/08/02/面试/算法/排序算法总结/15017839100925.jpg" alt=""></p>
+</li>
+<li><p>如果当前数是2，那么当前数与2区前一个数进行交换，并且2区向前扩充1</p>
+</li>
+<li>注意2区域的前一个数是我们没有遍历过的数，所以index不能加1<br><img src="/2017/08/02/面试/算法/排序算法总结/15017839251076.jpg" alt=""></li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p>给定一个2维数组，在2维数组中，每一行每一列都是有序的，给定一个数k，判断2维数组中是否包含这个数。 </p>
+<ul>
+<li>如果二维数组规模为 m*n，那么最优时间复杂度为m+n</li>
+<li>从2维数组右上角开始找</li>
+<li><p>如果当前数大于k，舍弃当前列，向左移动</p>
+<p><img src="/2017/08/02/面试/算法/排序算法总结/15017842763039.jpg" alt=""></p>
+</li>
+<li><p>如果当前数小于k，舍弃行，向下移动</p>
+<p><img src="/2017/08/02/面试/算法/排序算法总结/15017843971277.jpg" alt=""></p>
+</li>
+<li><p>在查找过程中如果找到该数则返回true，若最终角标都越界了还没找到，则返回false</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p>给定一个数组，求解数组中需要排序的最短子数组的长度。比如[1,5,4,3,2,6,7]，返回4，因为只有[5,4,3,2]需要排序</p>
+<ul>
+<li>最优解：时间复杂度O(n),空间复杂度O(1)</li>
+<li>首先从左向右遍历数组，过程中用max来标记过程中数值的最大值，并记录max&gt;curr_val 最后出现的to_index<br><img src="/2017/08/02/面试/算法/排序算法总结/15017848392982.jpg" alt="">    <ul>
+<li>从右往左遍历数组，过程中用min来标记过程中数值最小的值，并记录min&lt;curr_val最后出现的位置from_index</li>
+<li>[from_index,to_index]就是需要排序的最短子数组</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p>给定一个无序数组a，返回如果排序之后，相邻两数的最大差值。</p>
+<ul>
+<li>最优解O(n),空间O(n)</li>
+<li>思想来自于桶排序</li>
+<li>遍历数组，找到min和max，将[min,max]分为 n 个等量区间<br><img src="/2017/08/02/面试/算法/排序算法总结/15017853744551.jpg" alt=""></li>
+<li>同一个桶中的数差不会超过当前桶区间，所以不用考虑。</li>
+<li>考虑每一个桶的最小值 和 上一个桶中的最大值，记录最大差值，即为答案 </li>
+</ul>
+</li>
+</ol>
 
       
 
@@ -519,11 +672,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,11 +720,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -583,6 +736,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
@@ -591,7 +748,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -600,10 +757,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
