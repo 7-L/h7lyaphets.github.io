@@ -6,37 +6,37 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://seawaylee.github.io">
-  <title>排序算法总结 | SeawayLee</title>
+  <title>C2-排序算法总结 | SeawayLee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1 对比分析图">
 <meta name="keywords" content="算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="排序算法总结">
-<meta property="og:url" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/index.html">
+<meta property="og:title" content="C2-排序算法总结">
+<meta property="og:url" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/index.html">
 <meta property="og:site_name" content="SeawayLee">
 <meta property="og:description" content="1 对比分析图">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15016077176340.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15016079050699.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15016082018153.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15016082070497.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017809437243.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017809776825.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017810187241.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017818606788.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017820707548.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017834931821.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017838901438.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017839100925.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017839251076.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017842763039.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017843971277.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017848392982.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15017853744551.jpg">
-<meta property="og:updated_time" content="2017-08-03T18:40:54.000Z">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15016077176340.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15016079050699.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15016082018153.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15016082070497.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15017809437243.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15017809776825.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15017810187241.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15017818606788.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15017820707548.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15017834931821.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15017838901438.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15017839100925.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15017839251076.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15017842763039.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15017843971277.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15017848392982.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15017853744551.jpg">
+<meta property="og:updated_time" content="2017-08-06T18:52:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="排序算法总结">
+<meta name="twitter:title" content="C2-排序算法总结">
 <meta name="twitter:description" content="1 对比分析图">
-<meta name="twitter:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/15016077176340.jpg">
+<meta name="twitter:image" content="https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/15016077176340.jpg">
   
     <link rel="alternative" href="/atom.xml" title="SeawayLee" type="application/atom+xml">
   
@@ -182,19 +182,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-面试/算法/排序算法总结" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-面试/算法/C2-排序算法总结" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      排序算法总结
+      C2-排序算法总结
     </h1>
   
 
         
-        <a href="/2017/08/02/面试/算法/排序算法总结/" class="archive-article-date">
+        <a href="/2017/08/02/面试/算法/C2-排序算法总结/" class="archive-article-date">
   	<time datetime="2017-08-01T17:07:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-02</time>
 </a>
         
@@ -202,7 +202,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-对比分析图"><a href="#1-对比分析图" class="headerlink" title="1 对比分析图"></a>1 对比分析图</h2><p><img src="/2017/08/02/面试/算法/排序算法总结/15016077176340.jpg" alt=""></p>
+        <h2 id="1-对比分析图"><a href="#1-对比分析图" class="headerlink" title="1 对比分析图"></a>1 对比分析图</h2><p><img src="/2017/08/02/面试/算法/C2-排序算法总结/15016077176340.jpg" alt=""></p>
 <a id="more"></a>
 <ul>
 <li><p>均按从小到大排列</p>
@@ -230,7 +230,7 @@
 <li><p>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。　</p>
 </li>
 </ol>
-<p><img src="/2017/08/02/面试/算法/排序算法总结/15016079050699.jpg" alt=""></p>
+<p><img src="/2017/08/02/面试/算法/C2-排序算法总结/15016079050699.jpg" alt=""></p>
 <p><strong>性能</strong></p>
 <ul>
 <li>最差时间复杂度 O(n^2)</li>
@@ -242,8 +242,8 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 优化版冒泡排序</div><div class="line"> * 思路:每次冒泡都会将无序部分最大的数移动到无序部分的最后一个位置</div><div class="line"> * <span class="doctag">@author</span> NikoBelic</div><div class="line"> * <span class="doctag">@create</span> 16/01/2017 17:54</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] sort(<span class="keyword">int</span>[] array)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">boolean</span> swap = <span class="keyword">false</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length - <span class="number">1</span>; i++)</div><div class="line">    &#123;</div><div class="line">        swap = <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; array.length - i - <span class="number">1</span>; j++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (array[j] &gt; array[j + <span class="number">1</span>])</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">int</span> t = array[j];</div><div class="line">                array[j] = array[j + <span class="number">1</span>];</div><div class="line">                array[j + <span class="number">1</span>] = t;</div><div class="line">                swap = <span class="keyword">true</span>; <span class="comment">// 如果某一轮冒泡发现没有任何位置的交换,那么说明这个数组已经是有序的,无需再进行下一轮冒泡</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (!swap)</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> array;</div></pre></td></tr></table></figure>
 <h3 id="2-2-简单选择排序"><a href="#2-2-简单选择排序" class="headerlink" title="2.2 简单选择排序"></a>2.2 简单选择排序</h3><p><strong>概述</strong></p>
 <p>设所排序序列的记录个数为n，i　取　1,2,…,n-1　。<br>从所有n-i+1个记录（Ri,Ri+1,…,Rn）中找出排序码最小（或最大）的记录，与第i个记录交换。执行n-1趟 后就完成了记录序列的排序。</p>
-<p>以排序数组｛3，2，1，4，6，5｝为例<br><img src="/2017/08/02/面试/算法/排序算法总结/15016082018153.jpg" alt=""></p>
-<p><img src="/2017/08/02/面试/算法/排序算法总结/15016082070497.jpg" alt=""></p>
+<p>以排序数组｛3，2，1，4，6，5｝为例<br><img src="/2017/08/02/面试/算法/C2-排序算法总结/15016082018153.jpg" alt=""></p>
+<p><img src="/2017/08/02/面试/算法/C2-排序算法总结/15016082070497.jpg" alt=""></p>
 <p><strong>简单选择排序性能</strong></p>
 <p>在简单选择排序过程中，所需移动记录的次数比较少。最好情况下，即待排序记录初始状态就已经是正序排列了，则不需要移动记录。　<br>最坏情况下，即待排序记录初始状态是按第一条记录最大，之后的记录从小到大顺序排列，则需要移动记录的次数最多为3（n-1）。</p>
 <p>简单选择排序过程中需要进行的比较次数与初始状态下待排序的记录序列的排列情况无关。<br>当i=1时，需进行n-1次比较；当i=2时，需进行n-2次比较；依次类推，共需要进行的比较次数是(n-1)+(n-2)+…+2+1=n(n-1)/2，即进行比较操作的时间复杂度为O(n^2)，进行移动操作的时间复杂度为O(n)。　</p>
@@ -292,13 +292,13 @@
 <p>虽然快速排序称为分治法，但分治法这三个字显然无法很好的概括快速排序的全部步骤。因此我的对快速排序作了进一步的说明：挖坑填数+分治法：</p>
 <p><strong>先来看实例吧，定义下面再给出（最好能用自己的话来总结定义，这样对实现代码会有帮助）。</strong></p>
 <p>以一个数组作为示例，取区间第一个数为基准数。</p>
-<p><img src="/2017/08/02/面试/算法/排序算法总结/15017809437243.jpg" alt=""></p>
+<p><img src="/2017/08/02/面试/算法/C2-排序算法总结/15017809437243.jpg" alt=""></p>
 <p>初始时，i = 0;  j = 9;   X = a[i] = 72</p>
 <p>由于已经将a[0]中的数保存到X中，可以理解成在数组a[0]上挖了个坑，可以将其它数据填充到这来。</p>
 <p>从j开始向前找一个比X小或等于X的数。当j=8，符合条件，将a[8]挖出再填到上一个坑a[0]中。a[0]=a[8]; i++;  这样一个坑a[0]就被搞定了，但又形成了一个新坑a[8]，这怎么办了？简单，再找数字来填a[8]这个坑。这次从i开始向后找一个大于X的数，当i=3，符合条件，将a[3]挖出再填到上一个坑中a[8]=a[3]; j–;</p>
-<p>数组变为：<br><img src="/2017/08/02/面试/算法/排序算法总结/15017809776825.jpg" alt=""></p>
+<p>数组变为：<br><img src="/2017/08/02/面试/算法/C2-排序算法总结/15017809776825.jpg" alt=""></p>
 <p>i = 3;   j = 7;   X=72<br>再重复上面的步骤，先从后向前找，再从前向后找。<br>从j开始向前找，当j=5，符合条件，将a[5]挖出填到上一个坑中，a[3] = a[5]; i++;<br>从i开始向后找，当i=5时，由于i==j退出。<br>此时，i = j = 5，而a[5]刚好又是上次挖的坑，因此将X填入a[5]。</p>
-<p>数组变为：<br><img src="/2017/08/02/面试/算法/排序算法总结/15017810187241.jpg" alt=""></p>
+<p>数组变为：<br><img src="/2017/08/02/面试/算法/C2-排序算法总结/15017810187241.jpg" alt=""></p>
 <p>可以看出a[5]前面的数字都小于它，a[5]后面的数字都大于它。因此再对a[0…4]和a[6…9]这二个子区间重复上述步骤就可以了。</p>
 <p><strong>对挖坑填数进行总结</strong></p>
 <ol>
@@ -317,9 +317,9 @@
 <h2 id="3-桶排序"><a href="#3-桶排序" class="headerlink" title="3 桶排序"></a>3 桶排序</h2><blockquote>
 <p>时间复杂度O(n),思想都是来自于桶排序，桶排序不是一种具体的排序算法，而是一种思想。</p>
 </blockquote>
-<h3 id="3-1-计数排序"><a href="#3-1-计数排序" class="headerlink" title="3.1 计数排序"></a>3.1 计数排序</h3><p><img src="/2017/08/02/面试/算法/排序算法总结/15017818606788.jpg" alt=""></p>
+<h3 id="3-1-计数排序"><a href="#3-1-计数排序" class="headerlink" title="3.1 计数排序"></a>3.1 计数排序</h3><p><img src="/2017/08/02/面试/算法/C2-排序算法总结/15017818606788.jpg" alt=""></p>
 <p>分别创建100-300号的桶，将待排序数按对应的桶号存储，全部存储完毕后，从100号-300号桶逐一倒出数值，即完成排序。</p>
-<h3 id="3-2-基数排序"><a href="#3-2-基数排序" class="headerlink" title="3.2 基数排序"></a>3.2 基数排序</h3><p><img src="/2017/08/02/面试/算法/排序算法总结/15017820707548.jpg" alt=""></p>
+<h3 id="3-2-基数排序"><a href="#3-2-基数排序" class="headerlink" title="3.2 基数排序"></a>3.2 基数排序</h3><p><img src="/2017/08/02/面试/算法/C2-排序算法总结/15017820707548.jpg" alt=""></p>
 <p>将待排序数列分别按照，个位、十位、百位 添加到不同的桶中并倒出，三次装入与倒出后的数列即为有序数列。</p>
 <h2 id="4-排序笔试面试题"><a href="#4-排序笔试面试题" class="headerlink" title="4 排序笔试面试题"></a>4 排序笔试面试题</h2><ol>
 <li><p>已知一个几乎有序的数组，几乎有序是值如果把数组排好顺序的话，每个元素移动的距离不超过k，并且k相对于数组长度来说很小。请问选择什么方法对其排序比较好？</p>
@@ -346,7 +346,7 @@
 <li><p>把两个有序数组合并为一个数组，第一个数组空间正好可以容纳两个数组的元素。</p>
 <ul>
 <li>从后往前遍历数组A和B</li>
-<li><img src="/2017/08/02/面试/算法/排序算法总结/15017834931821.jpg" alt=""></li>
+<li><img src="/2017/08/02/面试/算法/C2-排序算法总结/15017834931821.jpg" alt=""></li>
 </ul>
 </li>
 </ol>
@@ -357,11 +357,11 @@
 </li>
 <li><p>如果当前数为1，那么就与0区的后一个数进行交换，并且0区向后扩充1</p>
 </li>
-<li><p><img src="/2017/08/02/面试/算法/排序算法总结/15017838901438.jpg" alt=""><br><img src="/2017/08/02/面试/算法/排序算法总结/15017839100925.jpg" alt=""></p>
+<li><p><img src="/2017/08/02/面试/算法/C2-排序算法总结/15017838901438.jpg" alt=""><br><img src="/2017/08/02/面试/算法/C2-排序算法总结/15017839100925.jpg" alt=""></p>
 </li>
 <li><p>如果当前数是2，那么当前数与2区前一个数进行交换，并且2区向前扩充1</p>
 </li>
-<li>注意2区域的前一个数是我们没有遍历过的数，所以index不能加1<br><img src="/2017/08/02/面试/算法/排序算法总结/15017839251076.jpg" alt=""></li>
+<li>注意2区域的前一个数是我们没有遍历过的数，所以index不能加1<br><img src="/2017/08/02/面试/算法/C2-排序算法总结/15017839251076.jpg" alt=""></li>
 </ul>
 </li>
 </ol>
@@ -371,10 +371,10 @@
 <li>如果二维数组规模为 m*n，那么最优时间复杂度为m+n</li>
 <li>从2维数组右上角开始找</li>
 <li><p>如果当前数大于k，舍弃当前列，向左移动</p>
-<p><img src="/2017/08/02/面试/算法/排序算法总结/15017842763039.jpg" alt=""></p>
+<p><img src="/2017/08/02/面试/算法/C2-排序算法总结/15017842763039.jpg" alt=""></p>
 </li>
 <li><p>如果当前数小于k，舍弃行，向下移动</p>
-<p><img src="/2017/08/02/面试/算法/排序算法总结/15017843971277.jpg" alt=""></p>
+<p><img src="/2017/08/02/面试/算法/C2-排序算法总结/15017843971277.jpg" alt=""></p>
 </li>
 <li><p>在查找过程中如果找到该数则返回true，若最终角标都越界了还没找到，则返回false</p>
 </li>
@@ -385,7 +385,7 @@
 <li><p>给定一个数组，求解数组中需要排序的最短子数组的长度。比如[1,5,4,3,2,6,7]，返回4，因为只有[5,4,3,2]需要排序</p>
 <ul>
 <li>最优解：时间复杂度O(n),空间复杂度O(1)</li>
-<li>首先从左向右遍历数组，过程中用max来标记过程中数值的最大值，并记录max&gt;curr_val 最后出现的to_index<br><img src="/2017/08/02/面试/算法/排序算法总结/15017848392982.jpg" alt="">    <ul>
+<li>首先从左向右遍历数组，过程中用max来标记过程中数值的最大值，并记录max&gt;curr_val 最后出现的to_index<br><img src="/2017/08/02/面试/算法/C2-排序算法总结/15017848392982.jpg" alt="">    <ul>
 <li>从右往左遍历数组，过程中用min来标记过程中数值最小的值，并记录min&lt;curr_val最后出现的位置from_index</li>
 <li>[from_index,to_index]就是需要排序的最短子数组</li>
 </ul>
@@ -398,7 +398,7 @@
 <ul>
 <li>最优解O(n),空间O(n)</li>
 <li>思想来自于桶排序</li>
-<li>遍历数组，找到min和max，将[min,max]分为 n 个等量区间<br><img src="/2017/08/02/面试/算法/排序算法总结/15017853744551.jpg" alt=""></li>
+<li>遍历数组，找到min和max，将[min,max]分为 n 个等量区间<br><img src="/2017/08/02/面试/算法/C2-排序算法总结/15017853744551.jpg" alt=""></li>
 <li>同一个桶中的数差不会超过当前桶区间，所以不用考虑。</li>
 <li>考虑每一个桶的最小值 和 上一个桶中的最大值，记录最大差值，即为答案 </li>
 </ul>
@@ -504,7 +504,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://seawaylee.github.io/2017/08/02/面试/算法/排序算法总结/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://seawaylee.github.io/2017/08/02/面试/算法/C2-排序算法总结/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -542,7 +542,7 @@
  
   <section id="comments">
 <!--高速版，加载速度快，使用前需测试页面的兼容性-->
-<div id="SOHUCS" sid="排序算法总结"></div>
+<div id="SOHUCS" sid="C2-排序算法总结"></div>
 <script>
   (function(){
     var appid = 'cyt3IkjC7',
@@ -669,10 +669,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
@@ -693,15 +689,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -709,7 +701,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -717,7 +713,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -725,11 +721,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -737,19 +729,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -757,7 +745,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -769,11 +757,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
             
             <div class="clearfix"></div>
