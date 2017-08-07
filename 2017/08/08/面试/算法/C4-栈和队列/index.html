@@ -6,55 +6,55 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://seawaylee.github.io">
-  <title>C3-栈和队列 | SeawayLee</title>
+  <title>C4-栈和队列 | SeawayLee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="栈和队列1 概念栈和队列的基本性质  栈：先进后出 队列：先进先出 栈和队列在实现结构上可以有数组和链表两种形式 数组结构容易实现 链表结构复杂，因为有很多指针操作    栈结构的基本操作  pop操作 top或peek操作 push操作 size操作  队列基本操作 与栈不同的是，push操作为在队头加入元素，而pop操作是从队列尾部弹出一个元素。 其他  栈和队列的基本操作，都是时间复杂度为O">
 <meta name="keywords" content="算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C3-栈和队列">
-<meta property="og:url" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/index.html">
+<meta property="og:title" content="C4-栈和队列">
+<meta property="og:url" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/index.html">
 <meta property="og:site_name" content="SeawayLee">
 <meta property="og:description" content="栈和队列1 概念栈和队列的基本性质  栈：先进后出 队列：先进先出 栈和队列在实现结构上可以有数组和链表两种形式 数组结构容易实现 链表结构复杂，因为有很多指针操作    栈结构的基本操作  pop操作 top或peek操作 push操作 size操作  队列基本操作 与栈不同的是，push操作为在队头加入元素，而pop操作是从队列尾部弹出一个元素。 其他  栈和队列的基本操作，都是时间复杂度为O">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021208175235.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021211328672.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021211518150.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021211651789.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021262350093.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021262692541.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021262848594.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021262994346.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021263348736.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021264901771.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021264989398.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021265105041.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021265184972.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021265372206.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021265421692.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021265553131.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021265617743.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021265681642.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021265898868.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021267071368.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021267328358.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021267417904.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021267964474.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021268777785.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021268836568.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021268901223.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021269338505.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021269422799.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021269478304.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021270795482.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021272860946.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021308381514.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021308530686.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021309671024.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021311228794.jpg">
-<meta property="og:updated_time" content="2017-08-07T18:40:25.000Z">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021208175235.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021211328672.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021211518150.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021211651789.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021262350093.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021262692541.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021262848594.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021262994346.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021263348736.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021264901771.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021264989398.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021265105041.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021265184972.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021265372206.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021265421692.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021265553131.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021265617743.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021265681642.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021265898868.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021267071368.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021267328358.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021267417904.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021267964474.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021268777785.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021268836568.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021268901223.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021269338505.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021269422799.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021269478304.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021270795482.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021272860946.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021308381514.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021308530686.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021309671024.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021311228794.jpg">
+<meta property="og:updated_time" content="2017-08-07T18:41:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C3-栈和队列">
+<meta name="twitter:title" content="C4-栈和队列">
 <meta name="twitter:description" content="栈和队列1 概念栈和队列的基本性质  栈：先进后出 队列：先进先出 栈和队列在实现结构上可以有数组和链表两种形式 数组结构容易实现 链表结构复杂，因为有很多指针操作    栈结构的基本操作  pop操作 top或peek操作 push操作 size操作  队列基本操作 与栈不同的是，push操作为在队头加入元素，而pop操作是从队列尾部弹出一个元素。 其他  栈和队列的基本操作，都是时间复杂度为O">
-<meta name="twitter:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/15021208175235.jpg">
+<meta name="twitter:image" content="https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/15021208175235.jpg">
   
     <link rel="alternative" href="/atom.xml" title="SeawayLee" type="application/atom+xml">
   
@@ -200,19 +200,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-面试/算法/C3-栈和队列" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-面试/算法/C4-栈和队列" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      C3-栈和队列
+      C4-栈和队列
     </h1>
   
 
         
-        <a href="/2017/08/08/面试/算法/C3-栈和队列/" class="archive-article-date">
+        <a href="/2017/08/08/面试/算法/C4-栈和队列/" class="archive-article-date">
   	<time datetime="2017-08-07T18:39:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-08</time>
 </a>
         
@@ -258,31 +258,31 @@
 <li>所有用递归函数可以做的过程都一定可以用非递归的方式实现</li>
 </ul>
 <h2 id="3-例题"><a href="#3-例题" class="headerlink" title="3 例题"></a>3 例题</h2><p><strong>例题1</strong></p>
-<p><img src="/2017/08/08/面试/算法/C3-栈和队列/15021208175235.jpg" alt=""></p>
-<p><img src="/2017/08/08/面试/算法/C3-栈和队列/15021211328672.jpg" alt=""></p>
-<p><img src="/2017/08/08/面试/算法/C3-栈和队列/15021211518150.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021211651789.jpg" alt=""></p>
+<p><img src="/2017/08/08/面试/算法/C4-栈和队列/15021208175235.jpg" alt=""></p>
+<p><img src="/2017/08/08/面试/算法/C4-栈和队列/15021211328672.jpg" alt=""></p>
+<p><img src="/2017/08/08/面试/算法/C4-栈和队列/15021211518150.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021211651789.jpg" alt=""></p>
 <p><strong>例题2</strong></p>
-<p><img src="/2017/08/08/面试/算法/C3-栈和队列/15021262350093.jpg" alt=""></p>
+<p><img src="/2017/08/08/面试/算法/C4-栈和队列/15021262350093.jpg" alt=""></p>
 <p><strong>解法</strong></p>
-<p><img src="/2017/08/08/面试/算法/C3-栈和队列/15021262692541.jpg" alt=""></p>
-<p><img src="/2017/08/08/面试/算法/C3-栈和队列/15021262848594.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021262994346.jpg" alt=""></p>
+<p><img src="/2017/08/08/面试/算法/C4-栈和队列/15021262692541.jpg" alt=""></p>
+<p><img src="/2017/08/08/面试/算法/C4-栈和队列/15021262848594.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021262994346.jpg" alt=""></p>
 <p><strong>例题3</strong></p>
-<p><img src="/2017/08/08/面试/算法/C3-栈和队列/15021263348736.jpg" alt=""></p>
+<p><img src="/2017/08/08/面试/算法/C4-栈和队列/15021263348736.jpg" alt=""></p>
 <p><strong>解法</strong></p>
-<p><img src="/2017/08/08/面试/算法/C3-栈和队列/15021264901771.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021264989398.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021265105041.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021265184972.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021265372206.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021265421692.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021265553131.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021265617743.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021265681642.jpg" alt=""><br> <img src="/2017/08/08/面试/算法/C3-栈和队列/15021265898868.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021267071368.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021267328358.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021267417904.jpg" alt=""></p>
+<p><img src="/2017/08/08/面试/算法/C4-栈和队列/15021264901771.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021264989398.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021265105041.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021265184972.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021265372206.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021265421692.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021265553131.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021265617743.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021265681642.jpg" alt=""><br> <img src="/2017/08/08/面试/算法/C4-栈和队列/15021265898868.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021267071368.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021267328358.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021267417904.jpg" alt=""></p>
 <p><strong>例题4</strong></p>
-<p><img src="/2017/08/08/面试/算法/C3-栈和队列/15021267964474.jpg" alt=""></p>
+<p><img src="/2017/08/08/面试/算法/C4-栈和队列/15021267964474.jpg" alt=""></p>
 <p><strong>解法</strong></p>
-<p><img src="/2017/08/08/面试/算法/C3-栈和队列/15021268777785.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021268836568.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021268901223.jpg" alt=""><img src="/2017/08/08/面试/算法/C3-栈和队列/15021269338505.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021269422799.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021269478304.jpg" alt=""></p>
+<p><img src="/2017/08/08/面试/算法/C4-栈和队列/15021268777785.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021268836568.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021268901223.jpg" alt=""><img src="/2017/08/08/面试/算法/C4-栈和队列/15021269338505.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021269422799.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021269478304.jpg" alt=""></p>
 <p><strong>例题5</strong></p>
-<p><img src="/2017/08/08/面试/算法/C3-栈和队列/15021270795482.jpg" alt=""></p>
+<p><img src="/2017/08/08/面试/算法/C4-栈和队列/15021270795482.jpg" alt=""></p>
 <p><strong>解法</strong></p>
-<p>方法1：<br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021272860946.jpg" alt=""></p>
+<p>方法1：<br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021272860946.jpg" alt=""></p>
 <p><strong>例题6</strong></p>
-<p><img src="/2017/08/08/面试/算法/C3-栈和队列/15021308381514.jpg" alt=""></p>
+<p><img src="/2017/08/08/面试/算法/C4-栈和队列/15021308381514.jpg" alt=""></p>
 <p><strong>解法</strong></p>
-<p><img src="/2017/08/08/面试/算法/C3-栈和队列/15021308530686.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C3-栈和队列/15021309671024.jpg" alt=""></p>
-<p><img src="/2017/08/08/面试/算法/C3-栈和队列/15021311228794.jpg" alt=""></p>
+<p><img src="/2017/08/08/面试/算法/C4-栈和队列/15021308530686.jpg" alt=""><br><img src="/2017/08/08/面试/算法/C4-栈和队列/15021309671024.jpg" alt=""></p>
+<p><img src="/2017/08/08/面试/算法/C4-栈和队列/15021311228794.jpg" alt=""></p>
 
       
 
@@ -383,7 +383,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://seawaylee.github.io/2017/08/08/面试/算法/C3-栈和队列/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://seawaylee.github.io/2017/08/08/面试/算法/C4-栈和队列/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -412,7 +412,7 @@
  
   <section id="comments">
 <!--高速版，加载速度快，使用前需测试页面的兼容性-->
-<div id="SOHUCS" sid="C3-栈和队列"></div>
+<div id="SOHUCS" sid="C4-栈和队列"></div>
 <script>
   (function(){
     var appid = 'cyt3IkjC7',
@@ -555,6 +555,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
               </li>
              
@@ -563,19 +567,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
+                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,11 +587,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+                <a href="javascript:void(0)" class="js-tag color4">高并发</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">高并发</a>
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -619,15 +619,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -639,11 +635,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
               </li>
             
             <div class="clearfix"></div>
