@@ -164,6 +164,134 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-高并发/ISTC_高并发数据重复问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/10/高并发/ISTC_高并发数据重复问题/">解决高并发环境下数据插入重复问题</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/10/高并发/ISTC_高并发数据重复问题/" class="archive-article-date">
+  	<time datetime="2017-03-09T16:11:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-背景描述"><a href="#1-背景描述" class="headerlink" title="1.背景描述"></a>1.背景描述</h2><ul>
+<li>应用框架: spring + SpringMVC + hibernate </li>
+<li>数据库: Oracle11g</li>
+<li>问题: 一家文学网站向我系统推多线程低并发推送数据，我这边观察日志和数据库，发现有一个作者被存储了2次到数据库中。按照程序的编写逻辑，重复的数据是会被判断出来不被存储的。</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/03/10/高并发/ISTC_高并发数据重复问题/#more">阅读全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">高并发</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+ 
+
+
+
+  
+    <article id="post-JavaWeb/Spring/Spring_13" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/09/JavaWeb/Spring/Spring_13/">SpringInAction读书笔记(十三) Spring JMS</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/09/JavaWeb/Spring/Spring_13/" class="archive-article-date">
+  	<time datetime="2017-03-09T15:57:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-maven配置"><a href="#1-maven配置" class="headerlink" title="1 maven配置"></a>1 maven配置</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--Spring ActiveMQ--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">spring-activemq.version</span>&gt;</span>5.14.3<span class="tag">&lt;/<span class="name">spring-activemq.version</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">activemq.version</span>&gt;</span>5.14.3<span class="tag">&lt;/<span class="name">activemq.version</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-jms<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.activemq<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>activemq-all<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;activemq.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/03/09/JavaWeb/Spring/Spring_13/#more">阅读全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JavaWeb</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+ 
+
+
+
+  
     <article id="post-JavaWeb/Spring/Spring_12" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -740,138 +868,6 @@
 
 
   
-    <article id="post-JavaWeb/Spring/Spring_4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/09/JavaWeb/Spring/Spring_4/">SpringInAction读书笔记(四) 面向切面的Spring</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/09/JavaWeb/Spring/Spring_4/" class="archive-article-date">
-  	<time datetime="2017-03-09T15:35:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="4-1AOP所要解决的问题"><a href="#4-1AOP所要解决的问题" class="headerlink" title="4.1AOP所要解决的问题"></a>4.1AOP所要解决的问题</h2><p>将横切关注点（包裹在业务代码外层）与业务逻辑相分离，AOP实现将横切关注点与他们所影响的对象之间的解耦。除此之外，AOP还还会在声明式事务、安全和缓存进行应用。<br>AOP用于重用通用功能，传统方式最常见的是继承和委托。继承会造成对象体系非常脆弱，委托会对委托对象进行复杂的对象，AOP提供了另一种可选方案。我们通过声明式的方式定义这个功能要以何种方式在何处应用，而无需求改受影响的类。横切关注点可以被模块化为特殊的类，这些类被称为切面（aspect）。<br>优点：</p>
-<ul>
-<li>1.每个关注点都集中于一个地方，而不是分散到代码中</li>
-<li>2.服务模块更简洁，只包含核心代码，关注点的代码都被转移到切面中</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/03/09/JavaWeb/Spring/Spring_4/#more">阅读全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JavaWeb</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
- 
-
-
-
-  
-    <article id="post-JavaWeb/Spring/Spring_3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/09/JavaWeb/Spring/Spring_3/">SpringInAction读书笔记(三) 高级装备</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/09/JavaWeb/Spring/Spring_3/" class="archive-article-date">
-  	<time datetime="2017-03-09T15:34:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="3-1-环境与Profile"><a href="#3-1-环境与Profile" class="headerlink" title="3.1 环境与Profile"></a>3.1 环境与Profile</h2><p>一般情况下，开发环境所需要的spring配置文件，例如dataSource数据源肯定与生产环境是不一样的，开发环境到生产环境或测试换几个时，我们都需要手动的去替换大量配置文件，非常麻烦，Spring的Profile为我们解决了这个问题，通过激活不同的profile来控制创建哪些bean。</p>
-        
-          <a class="article-more-a" href="/2017/03/09/JavaWeb/Spring/Spring_3/#more">阅读全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JavaWeb</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
- 
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
@@ -1008,6 +1004,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
@@ -1016,11 +1016,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+                <a href="javascript:void(0)" class="js-tag color2">Celery</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1028,11 +1032,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1064,11 +1068,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1084,11 +1088,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
