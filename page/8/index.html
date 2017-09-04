@@ -164,29 +164,64 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-高并发/Ngxin学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Nosql/Redis/Redis_1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/09/高并发/Ngxin学习笔记/">Ngxin学习笔记</a>
+      <a class="article-title" href="/2017/03/09/Nosql/Redis/Redis_1/">Redis学习（一）数据结构</a>
     </h1>
   
 
         
-        <a href="/2017/03/09/高并发/Ngxin学习笔记/" class="archive-article-date">
-  	<time datetime="2017-03-09T12:21:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-09</time>
+        <a href="/2017/03/09/Nosql/Redis/Redis_1/" class="archive-article-date">
+  	<time datetime="2017-03-09T13:38:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-什么是Nginx"><a href="#1-什么是Nginx" class="headerlink" title="1 什么是Nginx"></a>1 什么是Nginx</h2><p>Nginx (“engine x”) 是一个高性能的HTTP和反向代理服务器，也是一个IMAP/POP3/SMTP服务器。其特点是占有内存少，并发能力强，事实上nginx的并发能力确实在同类型的网页服务器中表现较好，中国大陆使用nginx网站用户有：百度、京东、新浪、网易、腾讯、淘宝等。</p>
+        <h2 id="1-Redis数据结构简介"><a href="#1-Redis数据结构简介" class="headerlink" title="1 Redis数据结构简介"></a>1 Redis数据结构简介</h2><table>
+<thead>
+<tr>
+<th>结构类型</th>
+<th>结构存储的值</th>
+<th>结构的读写能力</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String</td>
+<td>字符串、整数、浮点数</td>
+<td>对字符串或字符串的一部分执行操作；对整数、浮点数进行自增、自减</td>
+</tr>
+<tr>
+<td>List</td>
+<td>一个链表，链表上的每个节点都包含了一个字符串</td>
+<td>从链表的两端push或者pop元素，根据index对链表进行trim；读取单个或多个元素；根据值查找或移除元素</td>
+</tr>
+<tr>
+<td>Set</td>
+<td>字符串无序collection，每个String独一无二</td>
+<td>添加、获取、删除单个元素；检查元素是否存在于collection中；计算交集、并集、差集；从集合里随机获取元素</td>
+</tr>
+<tr>
+<td>Hash</td>
+<td>包含键值对的无序散列表</td>
+<td>添加、获取、移除单个键值对；获取所有键值对</td>
+</tr>
+<tr>
+<td>ZSet</td>
+<td>字符串成员与浮点数score之间的有序映射，元素的排列顺序由大小决定</td>
+<td>添加、获取、删除单个元素；根据score的range或者成员来获取元素</td>
+</tr>
+</tbody>
+</table>
         
-          <a class="article-more-a" href="/2017/03/09/高并发/Ngxin学习笔记/#more">阅读全文 >></a>
+          <a class="article-more-a" href="/2017/03/09/Nosql/Redis/Redis_1/#more">阅读全文 >></a>
         
       
 
@@ -200,7 +235,78 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">高并发</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nosql</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+ 
+
+
+
+  
+    <article id="post-Mac工具/Iterm快捷键" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/09/Mac工具/Iterm快捷键/">Iterm2快捷键</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/09/Mac工具/Iterm快捷键/" class="archive-article-date">
+  	<time datetime="2017-03-09T12:21:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>标签</strong></p>
+<ul>
+<li>新建标签：command + t</li>
+<li>关闭标签：command + w</li>
+<li>切换标签：command + 数字 command + 左右方向键</li>
+<li>切换全屏：command + enter</li>
+<li>查找：command + f</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/03/09/Mac工具/Iterm快捷键/#more">阅读全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mac工具</a>
         		</li>
       		
 		</ul>
@@ -324,19 +430,19 @@
 
 
   
-    <article id="post-Mac工具/Iterm快捷键" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-高并发/Ngxin学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/09/Mac工具/Iterm快捷键/">Iterm2快捷键</a>
+      <a class="article-title" href="/2017/03/09/高并发/Ngxin学习笔记/">Ngxin学习笔记</a>
     </h1>
   
 
         
-        <a href="/2017/03/09/Mac工具/Iterm快捷键/" class="archive-article-date">
+        <a href="/2017/03/09/高并发/Ngxin学习笔记/" class="archive-article-date">
   	<time datetime="2017-03-09T12:21:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-09</time>
 </a>
         
@@ -344,16 +450,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>标签</strong></p>
-<ul>
-<li>新建标签：command + t</li>
-<li>关闭标签：command + w</li>
-<li>切换标签：command + 数字 command + 左右方向键</li>
-<li>切换全屏：command + enter</li>
-<li>查找：command + f</li>
-</ul>
+        <h2 id="1-什么是Nginx"><a href="#1-什么是Nginx" class="headerlink" title="1 什么是Nginx"></a>1 什么是Nginx</h2><p>Nginx (“engine x”) 是一个高性能的HTTP和反向代理服务器，也是一个IMAP/POP3/SMTP服务器。其特点是占有内存少，并发能力强，事实上nginx的并发能力确实在同类型的网页服务器中表现较好，中国大陆使用nginx网站用户有：百度、京东、新浪、网易、腾讯、淘宝等。</p>
         
-          <a class="article-more-a" href="/2017/03/09/Mac工具/Iterm快捷键/#more">阅读全文 >></a>
+          <a class="article-more-a" href="/2017/03/09/高并发/Ngxin学习笔记/#more">阅读全文 >></a>
         
       
 
@@ -367,7 +466,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mac工具</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">高并发</a>
         		</li>
       		
 		</ul>
@@ -634,15 +733,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -650,11 +749,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -682,19 +785,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">高并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -726,11 +829,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -739,10 +846,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">

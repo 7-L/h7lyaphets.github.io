@@ -164,6 +164,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Mysql/Mysql快速重装与配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/04/Mysql/Mysql快速重装与配置/">Mysql快速重装与配置</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/04/Mysql/Mysql快速重装与配置/" class="archive-article-date">
+  	<time datetime="2017-09-04T11:12:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-彻底删除旧版"><a href="#1-彻底删除旧版" class="headerlink" title="1 彻底删除旧版"></a>1 彻底删除旧版</h1><ol>
+<li>yum remove  mysql mysql-server mysql-libs mysql-server</li>
+<li>find / -name mysql   将找到的相关东西delete掉；</li>
+<li>rpm -qa|grep mysql  (查询出来的东东yum remove掉)</li>
+</ol>
+<h1 id="2-安装、启动Mysql"><a href="#2-安装、启动Mysql" class="headerlink" title="2 安装、启动Mysql"></a>2 安装、启动Mysql</h1><ol>
+<li>yum install mariadb-server -y</li>
+<li>systemctl start mariadb.service</li>
+<li>systemctl enable mariadb.service</li>
+<li>mysql_secure_installation    初始化配置</li>
+<li>mysql</li>
+</ol>
+<h1 id="3-开启远程访问"><a href="#3-开启远程访问" class="headerlink" title="3 开启远程访问"></a>3 开启远程访问</h1><ul>
+<li><p>方法一</p>
+<ul>
+<li>本地登入mysql，更改 “mysql” 数据库里的 “user” 表里的 “host” 项，将”localhost”改为”%”</li>
+<li>mysql -u root -proot</li>
+<li>mysql&gt;use mysql;</li>
+<li>mysql&gt;update user set host = ‘%’ where user = ‘root’;</li>
+<li>mysql&gt;select host, user from user;</li>
+</ul>
+</li>
+<li><p>方法二</p>
+<ul>
+<li>直接授权(推荐)</li>
+<li>从任何主机上使用root用户，密码：youpassword（你的root密码）连接到mysql服务器：</li>
+<li>mysql -uroot -proot </li>
+<li>mysql&gt;GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’%’ IDENTIFIED BY ‘youpassword’ WITH GRANT OPTION;</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+ 
+
+
+
+  
     <article id="post-PythonWeb/PythonWeb - 一次关于Celery的性能调试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -807,94 +895,6 @@
 
 
   
-    <article id="post-大数据/Hadoop/Hadoop学习笔记（六）- Hadoop的HA原理与配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/13/大数据/Hadoop/Hadoop学习笔记（六）- Hadoop的HA原理与配置/">Hadoop学习笔记（六）- Hadoop的HA原理与配置</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/13/大数据/Hadoop/Hadoop学习笔记（六）- Hadoop的HA原理与配置/" class="archive-article-date">
-  	<time datetime="2017-06-13T12:03:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-Hadoop的HA机制"><a href="#1-Hadoop的HA机制" class="headerlink" title="1 Hadoop的HA机制"></a>1 Hadoop的HA机制</h1><p>正式引入HA机制是从hadoop2.0开始，之前的版本中没有HA机制。</p>
-<p>Hadoo的HA机制可以分成各个组件的HA机制</p>
-<ul>
-<li>HDFS的HA</li>
-<li>YARN的HA</li>
-</ul>
-<h2 id="1-1-HDFS的HA"><a href="#1-1-HDFS的HA" class="headerlink" title="1.1 HDFS的HA"></a>1.1 HDFS的HA</h2><ul>
-<li>通过双NameNode消除单点故障</li>
-<li><p>双NameNode工作要点如下：</p>
-<ul>
-<li>A. <strong>元数据管理</strong>方式需要改变<ol>
-<li>双NameNode各自在内存中保存一份元数据(fsimage+edits合成结果)</li>
-<li>edits日志只能有一份，只有Active状态的NameNode节点可以对其进行写操作</li>
-<li>双NameNode都可以读取edits</li>
-<li>共享的edits仿造一个共享的存储介质中管理（qjournal和NFS两个主流实现）</li>
-</ol>
-</li>
-<li><p>B. 需要一个<strong>状态管理</strong>功能模块</p>
-<ol>
-<li>实现了一个ZKFC（ZooKeeperFailContrl），常驻在<strong>每一个NameNode</strong>所在的节点</li>
-<li>每一个ZKFC负责监控自己所在的NameNode节点，利用ZK进行<strong>状态标识</strong></li>
-<li>当需要进行状态切换时，由<strong>ZKFC来负责切换</strong>（RPC调用NameNode中的方法）</li>
-<li>切换时需要放置<strong>BrainSplit</strong>（多个NameNode都是Active状态）现象的发生（新Active节点主动发送杀死被取代Active状态的节点的命令，<strong>防止假死</strong>）</li>
-</ol>
-<p><img src="/2017/06/13/大数据/Hadoop/Hadoop学习笔记（六）- Hadoop的HA原理与配置/HDFS_HA.png" alt=""></p>
-</li>
-</ul>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/06/13/大数据/Hadoop/Hadoop学习笔记（六）- Hadoop的HA原理与配置/#more">阅读全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
- 
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1011,15 +1011,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1027,11 +1027,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1059,19 +1063,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">高并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1103,11 +1107,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1116,10 +1124,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
