@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="https://seawaylee.github.io">
   <title>Effective Python - 学习笔记 | SeawayLee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1 Thinking In Pythonic1.1 Knowing Bytes、Str、Unicode12345678def str_and_unicode():    &quot;&quot;&quot;    In Python3: Str.encode() -&amp;gt; Bytes, Bytes.decode() -&amp;gt; Str    In Python2: Unicode.encode() -&amp;gt; Str, S">
+  <meta name="description" content="1 Thinking In Pythonic1.1 Knowing Bytes、Str、Unicode">
 <meta name="keywords" content="Python基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Effective Python - 学习笔记">
 <meta property="og:url" content="https://seawaylee.github.io/2017/09/05/Python基础/Effective Python - 学习笔记/index.html">
 <meta property="og:site_name" content="SeawayLee">
-<meta property="og:description" content="1 Thinking In Pythonic1.1 Knowing Bytes、Str、Unicode12345678def str_and_unicode():    &quot;&quot;&quot;    In Python3: Str.encode() -&amp;gt; Bytes, Bytes.decode() -&amp;gt; Str    In Python2: Unicode.encode() -&amp;gt; Str, S">
-<meta property="og:updated_time" content="2017-09-05T05:28:50.000Z">
+<meta property="og:description" content="1 Thinking In Pythonic1.1 Knowing Bytes、Str、Unicode">
+<meta property="og:updated_time" content="2017-09-05T05:44:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Effective Python - 学习笔记">
-<meta name="twitter:description" content="1 Thinking In Pythonic1.1 Knowing Bytes、Str、Unicode12345678def str_and_unicode():    &quot;&quot;&quot;    In Python3: Str.encode() -&amp;gt; Bytes, Bytes.decode() -&amp;gt; Str    In Python2: Unicode.encode() -&amp;gt; Str, S">
+<meta name="twitter:description" content="1 Thinking In Pythonic1.1 Knowing Bytes、Str、Unicode">
   
   
     <link rel="icon" href="/logo.jpeg">
@@ -182,8 +182,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
-<h2 id="1-Thinking-In-Pythonic"><a href="#1-Thinking-In-Pythonic" class="headerlink" title="1 Thinking In Pythonic"></a>1 Thinking In Pythonic</h2><h3 id="1-1-Knowing-Bytes、Str、Unicode"><a href="#1-1-Knowing-Bytes、Str、Unicode" class="headerlink" title="1.1 Knowing Bytes、Str、Unicode"></a>1.1 Knowing Bytes、Str、Unicode</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">str_and_unicode</span><span class="params">()</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    In Python3: Str.encode() -&gt; Bytes, Bytes.decode() -&gt; Str</div><div class="line">    In Python2: Unicode.encode() -&gt; Str, Str.decode() -&gt; Unicode</div><div class="line">    """</div><div class="line">    my_unicode = <span class="string">u'你好'</span></div><div class="line">    my_str = my_unicode.encode(<span class="string">'utf-8'</span>)</div><div class="line">    <span class="keyword">print</span> my_str</div></pre></td></tr></table></figure>
+        <h2 id="1-Thinking-In-Pythonic"><a href="#1-Thinking-In-Pythonic" class="headerlink" title="1 Thinking In Pythonic"></a>1 Thinking In Pythonic</h2><h3 id="1-1-Knowing-Bytes、Str、Unicode"><a href="#1-1-Knowing-Bytes、Str、Unicode" class="headerlink" title="1.1 Knowing Bytes、Str、Unicode"></a>1.1 Knowing Bytes、Str、Unicode</h3><a id="more"></a>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">str_and_unicode</span><span class="params">()</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    In Python3: Str.encode() -&gt; Bytes, Bytes.decode() -&gt; Str</div><div class="line">    In Python2: Unicode.encode() -&gt; Str, Str.decode() -&gt; Unicode</div><div class="line">    """</div><div class="line">    my_unicode = <span class="string">u'你好'</span></div><div class="line">    my_str = my_unicode.encode(<span class="string">'utf-8'</span>)</div><div class="line">    <span class="keyword">print</span> my_str</div></pre></td></tr></table></figure>
 <h3 id="1-2-Using-List-Generator-Instead-Of-Map-amp-Filter"><a href="#1-2-Using-List-Generator-Instead-Of-Map-amp-Filter" class="headerlink" title="1.2 Using List Generator Instead Of Map &amp; Filter"></a>1.2 Using List Generator Instead Of Map &amp; Filter</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">list_generator</span><span class="params">()</span>:</span></div><div class="line">    a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</div><div class="line">    sqr_list_gen = [x ** <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> a]</div><div class="line">    sqr_lambda = map(<span class="keyword">lambda</span> x: x ** <span class="number">2</span>, a)</div><div class="line">    sqr_list_gen_with_condition = [x ** <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> a <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>]</div><div class="line">    sqr_map_filter = map(<span class="keyword">lambda</span> x: x ** <span class="number">2</span>, filter(<span class="keyword">lambda</span> x: x % <span class="number">2</span> == <span class="number">0</span>, a))</div><div class="line">    <span class="keyword">print</span> sqr_list_gen</div><div class="line">    <span class="keyword">print</span> sqr_lambda</div><div class="line">    <span class="keyword">print</span> sqr_list_gen_with_condition</div><div class="line">    <span class="keyword">print</span> sqr_map_filter</div><div class="line">    <span class="keyword">print</span> <span class="string">"============== Pretty Split Line =============="</span></div><div class="line">    chile_ranks = &#123;<span class="string">'tom'</span>: <span class="number">1</span>, <span class="string">'helen'</span>: <span class="number">2</span>, <span class="string">'harry_porter'</span>: <span class="number">3</span>&#125;</div><div class="line">    rank_dict = &#123;rank: name <span class="keyword">for</span> name, rank <span class="keyword">in</span> chile_ranks.items()&#125;  <span class="comment"># Dict Generator</span></div><div class="line">    <span class="keyword">print</span> rank_dict</div><div class="line">    <span class="keyword">print</span> <span class="string">"============== Pretty Split Line =============="</span></div><div class="line">    chile_len_set = &#123;len(name) <span class="keyword">for</span> name <span class="keyword">in</span> rank_dict.values()&#125;</div><div class="line">    <span class="keyword">print</span> chile_len_set</div></pre></td></tr></table></figure>
 <h3 id="1-3-Don’t-Using-List-Generator-More-Than-Twice-With-One-Time"><a href="#1-3-Don’t-Using-List-Generator-More-Than-Twice-With-One-Time" class="headerlink" title="1.3 Don’t Using List Generator More Than Twice With One Time"></a>1.3 Don’t Using List Generator More Than Twice With One Time</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">more_list_generator</span><span class="params">()</span>:</span></div><div class="line">    matrix = [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]]</div><div class="line">    <span class="comment"># flat = [e for row in matrix for e in row]</span></div><div class="line">    flat = [[x <span class="keyword">for</span> x <span class="keyword">in</span> row] <span class="keyword">for</span> row <span class="keyword">in</span> matrix]</div><div class="line">    <span class="keyword">print</span> flat</div><div class="line">    sqr = [[e ** <span class="number">2</span> <span class="keyword">for</span> e <span class="keyword">in</span> row] <span class="keyword">for</span> row <span class="keyword">in</span> matrix]</div><div class="line">    <span class="keyword">print</span> sqr</div><div class="line"></div><div class="line">    my_lists = [</div><div class="line">        [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]]</div><div class="line">    ]</div><div class="line">    <span class="comment"># Write Multiple Lines While Using Multiple List Generators</span></div><div class="line">    flat = [x <span class="keyword">for</span> s1 <span class="keyword">in</span> my_lists</div><div class="line">            <span class="keyword">for</span> s2 <span class="keyword">in</span> s1</div><div class="line">            <span class="keyword">for</span> x <span class="keyword">in</span> s2]</div><div class="line">    <span class="keyword">print</span> flat</div><div class="line"></div><div class="line">    <span class="comment"># Multiple Conditions While Creating List</span></div><div class="line">    a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</div><div class="line">    b = [x <span class="keyword">for</span> x <span class="keyword">in</span> a <span class="keyword">if</span> x &gt; <span class="number">4</span> <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>]</div><div class="line">    <span class="keyword">print</span> b</div><div class="line"></div><div class="line">    <span class="comment"># Find The Elements Whose RowSum &gt;= 10 And Element % 3 == 0</span></div><div class="line">    filtered = [[x <span class="keyword">for</span> x <span class="keyword">in</span> row <span class="keyword">if</span> x % <span class="number">3</span> == <span class="number">0</span>] <span class="keyword">for</span> row <span class="keyword">in</span> matrix <span class="keyword">if</span> sum(row) &gt;= <span class="number">10</span>]</div><div class="line">    <span class="comment"># filtered = [e for row in matrix if sum(row) &gt;= 10 for e in row if e % 3 == 0]</span></div><div class="line">    <span class="keyword">print</span> filtered</div></pre></td></tr></table></figure>
 <h3 id="1-4-Generator-Expression"><a href="#1-4-Generator-Expression" class="headerlink" title="1.4 Generator Expression"></a>1.4 Generator Expression</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generator_expression</span><span class="params">()</span>:</span></div><div class="line">    l = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</div><div class="line">    l_it = (x <span class="keyword">for</span> x <span class="keyword">in</span> l)</div><div class="line">    sqr_it = ((x, x ** <span class="number">2</span>) <span class="keyword">for</span> x <span class="keyword">in</span> l_it)</div><div class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> sqr_it:</div><div class="line">        <span class="keyword">print</span> x</div></pre></td></tr></table></figure>
@@ -451,6 +451,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
@@ -459,23 +463,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -487,11 +479,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -499,11 +487,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -511,11 +507,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">高并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -527,15 +531,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -547,6 +543,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
@@ -555,7 +559,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -564,10 +568,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
               </li>
             
             <div class="clearfix"></div>
