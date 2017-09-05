@@ -164,6 +164,76 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python基础/Effective Python - 学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/05/Python基础/Effective Python - 学习笔记/">Effective Python - 学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/05/Python基础/Effective Python - 学习笔记/" class="archive-article-date">
+  	<time datetime="2017-09-05T05:20:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+<h2 id="1-Thinking-In-Pythonic"><a href="#1-Thinking-In-Pythonic" class="headerlink" title="1 Thinking In Pythonic"></a>1 Thinking In Pythonic</h2><h3 id="1-1-Knowing-Bytes、Str、Unicode"><a href="#1-1-Knowing-Bytes、Str、Unicode" class="headerlink" title="1.1 Knowing Bytes、Str、Unicode"></a>1.1 Knowing Bytes、Str、Unicode</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">str_and_unicode</span><span class="params">()</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    In Python3: Str.encode() -&gt; Bytes, Bytes.decode() -&gt; Str</div><div class="line">    In Python2: Unicode.encode() -&gt; Str, Str.decode() -&gt; Unicode</div><div class="line">    """</div><div class="line">    my_unicode = <span class="string">u'你好'</span></div><div class="line">    my_str = my_unicode.encode(<span class="string">'utf-8'</span>)</div><div class="line">    <span class="keyword">print</span> my_str</div></pre></td></tr></table></figure>
+<h3 id="1-2-Using-List-Generator-Instead-Of-Map-amp-Filter"><a href="#1-2-Using-List-Generator-Instead-Of-Map-amp-Filter" class="headerlink" title="1.2 Using List Generator Instead Of Map &amp; Filter"></a>1.2 Using List Generator Instead Of Map &amp; Filter</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">list_generator</span><span class="params">()</span>:</span></div><div class="line">    a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</div><div class="line">    sqr_list_gen = [x ** <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> a]</div><div class="line">    sqr_lambda = map(<span class="keyword">lambda</span> x: x ** <span class="number">2</span>, a)</div><div class="line">    sqr_list_gen_with_condition = [x ** <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> a <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>]</div><div class="line">    sqr_map_filter = map(<span class="keyword">lambda</span> x: x ** <span class="number">2</span>, filter(<span class="keyword">lambda</span> x: x % <span class="number">2</span> == <span class="number">0</span>, a))</div><div class="line">    <span class="keyword">print</span> sqr_list_gen</div><div class="line">    <span class="keyword">print</span> sqr_lambda</div><div class="line">    <span class="keyword">print</span> sqr_list_gen_with_condition</div><div class="line">    <span class="keyword">print</span> sqr_map_filter</div><div class="line">    <span class="keyword">print</span> <span class="string">"============== Pretty Split Line =============="</span></div><div class="line">    chile_ranks = &#123;<span class="string">'tom'</span>: <span class="number">1</span>, <span class="string">'helen'</span>: <span class="number">2</span>, <span class="string">'harry_porter'</span>: <span class="number">3</span>&#125;</div><div class="line">    rank_dict = &#123;rank: name <span class="keyword">for</span> name, rank <span class="keyword">in</span> chile_ranks.items()&#125;  <span class="comment"># Dict Generator</span></div><div class="line">    <span class="keyword">print</span> rank_dict</div><div class="line">    <span class="keyword">print</span> <span class="string">"============== Pretty Split Line =============="</span></div><div class="line">    chile_len_set = &#123;len(name) <span class="keyword">for</span> name <span class="keyword">in</span> rank_dict.values()&#125;</div><div class="line">    <span class="keyword">print</span> chile_len_set</div></pre></td></tr></table></figure>
+<h3 id="1-3-Don’t-Using-List-Generator-More-Than-Twice-With-One-Time"><a href="#1-3-Don’t-Using-List-Generator-More-Than-Twice-With-One-Time" class="headerlink" title="1.3 Don’t Using List Generator More Than Twice With One Time"></a>1.3 Don’t Using List Generator More Than Twice With One Time</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">more_list_generator</span><span class="params">()</span>:</span></div><div class="line">    matrix = [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]]</div><div class="line">    <span class="comment"># flat = [e for row in matrix for e in row]</span></div><div class="line">    flat = [[x <span class="keyword">for</span> x <span class="keyword">in</span> row] <span class="keyword">for</span> row <span class="keyword">in</span> matrix]</div><div class="line">    <span class="keyword">print</span> flat</div><div class="line">    sqr = [[e ** <span class="number">2</span> <span class="keyword">for</span> e <span class="keyword">in</span> row] <span class="keyword">for</span> row <span class="keyword">in</span> matrix]</div><div class="line">    <span class="keyword">print</span> sqr</div><div class="line"></div><div class="line">    my_lists = [</div><div class="line">        [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]]</div><div class="line">    ]</div><div class="line">    <span class="comment"># Write Multiple Lines While Using Multiple List Generators</span></div><div class="line">    flat = [x <span class="keyword">for</span> s1 <span class="keyword">in</span> my_lists</div><div class="line">            <span class="keyword">for</span> s2 <span class="keyword">in</span> s1</div><div class="line">            <span class="keyword">for</span> x <span class="keyword">in</span> s2]</div><div class="line">    <span class="keyword">print</span> flat</div><div class="line"></div><div class="line">    <span class="comment"># Multiple Conditions While Creating List</span></div><div class="line">    a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</div><div class="line">    b = [x <span class="keyword">for</span> x <span class="keyword">in</span> a <span class="keyword">if</span> x &gt; <span class="number">4</span> <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>]</div><div class="line">    <span class="keyword">print</span> b</div><div class="line"></div><div class="line">    <span class="comment"># Find The Elements Whose RowSum &gt;= 10 And Element % 3 == 0</span></div><div class="line">    filtered = [[x <span class="keyword">for</span> x <span class="keyword">in</span> row <span class="keyword">if</span> x % <span class="number">3</span> == <span class="number">0</span>] <span class="keyword">for</span> row <span class="keyword">in</span> matrix <span class="keyword">if</span> sum(row) &gt;= <span class="number">10</span>]</div><div class="line">    <span class="comment"># filtered = [e for row in matrix if sum(row) &gt;= 10 for e in row if e % 3 == 0]</span></div><div class="line">    <span class="keyword">print</span> filtered</div></pre></td></tr></table></figure>
+<h3 id="1-4-Generator-Expression"><a href="#1-4-Generator-Expression" class="headerlink" title="1.4 Generator Expression"></a>1.4 Generator Expression</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generator_expression</span><span class="params">()</span>:</span></div><div class="line">    l = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</div><div class="line">    l_it = (x <span class="keyword">for</span> x <span class="keyword">in</span> l)</div><div class="line">    sqr_it = ((x, x ** <span class="number">2</span>) <span class="keyword">for</span> x <span class="keyword">in</span> l_it)</div><div class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> sqr_it:</div><div class="line">        <span class="keyword">print</span> x</div></pre></td></tr></table></figure>
+<h3 id="1-5-Enumerate"><a href="#1-5-Enumerate" class="headerlink" title="1.5 Enumerate"></a>1.5 Enumerate</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">enum_instead_of_range</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">from</span> random <span class="keyword">import</span> randint</div><div class="line">    <span class="comment"># Range Is Useful while Handle Integers</span></div><div class="line">    random_bits = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">64</span>):</div><div class="line">        <span class="keyword">if</span> randint(<span class="number">0</span>, <span class="number">1</span>):</div><div class="line">            random_bits |= <span class="number">1</span> &lt;&lt; i</div><div class="line">    <span class="keyword">print</span> <span class="string">"============== Pretty Split Line =============="</span></div><div class="line"></div><div class="line">    flavor_list = [<span class="string">'coco'</span>, <span class="string">'coke'</span>, <span class="string">'KungPaoKiTen'</span>, <span class="string">'Banana'</span>]</div><div class="line">    <span class="keyword">for</span> flavor_index <span class="keyword">in</span> range(len(flavor_list)):</div><div class="line">        <span class="keyword">print</span> <span class="string">'%d : %s is delicious'</span> % (flavor_index + <span class="number">1</span>, flavor_list[flavor_index])</div><div class="line"></div><div class="line">    <span class="keyword">print</span> <span class="string">"============== Pretty Split Line =============="</span></div><div class="line"></div><div class="line">    <span class="keyword">for</span> i, flavor <span class="keyword">in</span> enumerate(flavor_list, <span class="number">1</span>):</div><div class="line">        <span class="keyword">print</span> <span class="string">'%d : %s is delicious'</span> % (i, flavor)</div></pre></td></tr></table></figure>
+<h3 id="1-6-Zip"><a href="#1-6-Zip" class="headerlink" title="1.6 Zip"></a>1.6 Zip</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">iterator_multiple_collections_by_zip</span><span class="params">()</span>:</span></div><div class="line">    names = [<span class="string">'Niko'</span>, <span class="string">'Tom'</span>, <span class="string">'Helen'</span>]</div><div class="line">    ages = [<span class="number">21</span>, <span class="number">15</span>, <span class="number">25</span>]</div><div class="line">    sizes = &#123;<span class="string">'A'</span>: <span class="number">35</span>, <span class="string">'B'</span>: <span class="number">60</span>, <span class="string">'C'</span>: <span class="number">22</span>&#125;</div><div class="line">    <span class="keyword">for</span> name, age, size, <span class="keyword">in</span> zip(names, ages, sizes):</div><div class="line">        <span class="keyword">print</span> name, age, size</div></pre></td></tr></table></figure>
+<h3 id="1-7-For-Else"><a href="#1-7-For-Else" class="headerlink" title="1.7 For Else"></a>1.7 For Else</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">for_else</span><span class="params">()</span>:</span></div><div class="line">    num_list = [x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">100</span>)]</div><div class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> num_list:</div><div class="line">        <span class="keyword">print</span> n</div><div class="line">        <span class="keyword">if</span> n == <span class="number">20</span>:</div><div class="line">            <span class="keyword">break</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">'for never break.'</span></div></pre></td></tr></table></figure>
+<h3 id="1-8-Try-Except-Else-Finally"><a href="#1-8-Try-Except-Else-Finally" class="headerlink" title="1.8 Try Except Else Finally"></a>1.8 Try Except Else Finally</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">try_except_else_finally</span><span class="params">()</span>:</span></div><div class="line">    f = open(<span class="string">'/Users/lixiwei-mac/Documents/IdeaProjects/PythonStudy/effective_python/test.txt'</span>, <span class="string">'r'</span>)</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        data = f.read()</div><div class="line">        <span class="keyword">if</span> len(data) &lt; <span class="number">100</span>:</div><div class="line">            <span class="keyword">raise</span> Exception(<span class="string">"Shit ! This fucking file is too short"</span>)</div><div class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</div><div class="line">        <span class="keyword">raise</span> ValueError(e)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">'There is no exception happend.'</span></div><div class="line">        <span class="keyword">print</span> data</div><div class="line">        <span class="keyword">return</span> data</div><div class="line">    <span class="keyword">finally</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">'closing file handle'</span></div><div class="line">        f.close()</div></pre></td></tr></table></figure>
+<h2 id="2-Function"><a href="#2-Function" class="headerlink" title="2 Function"></a>2 Function</h2><h3 id="2-1-Closure"><a href="#2-1-Closure" class="headerlink" title="2.1 Closure"></a>2.1 Closure</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> islice</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sort_priority</span><span class="params">(values, group)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper</span><span class="params">(x)</span>:</span></div><div class="line">        <span class="keyword">if</span> x <span class="keyword">in</span> group:</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>, x</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>, x</div><div class="line"></div><div class="line">    values.sort(key=helper)</div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sort_priority_v2</span><span class="params">(values, group)</span>:</span></div><div class="line">    found = [<span class="keyword">False</span>]  <span class="comment"># 位于此作用于的列表、元组、字典可以被内部函数搜索并修改</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper</span><span class="params">(x)</span>:</span></div><div class="line">        <span class="comment"># python3中可以使用nonlocal来在此处声明found，以表示查找并修改外层作用域的found</span></div><div class="line">        <span class="keyword">if</span> x <span class="keyword">in</span> group:</div><div class="line">            found[<span class="number">0</span>] = <span class="keyword">True</span></div><div class="line">        <span class="keyword">if</span> found:</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>, x</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>, x</div><div class="line"></div><div class="line">    values.sort(key=helper)</div><div class="line">    <span class="keyword">return</span> found</div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_sort_proority</span><span class="params">()</span>:</span></div><div class="line">    nums = [<span class="number">2</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">45</span>, <span class="number">54</span>, <span class="number">8</span>]</div><div class="line">    group = &#123;<span class="number">2</span>, <span class="number">4</span>, <span class="number">45</span>, <span class="number">8</span>&#125;</div><div class="line">    found = sort_priority_v2(nums, group)</div><div class="line">    <span class="keyword">print</span> nums</div><div class="line">    <span class="keyword">print</span> found</div></pre></td></tr></table></figure>
+<h3 id="2-2-Generator"><a href="#2-2-Generator" class="headerlink" title="2.2 Generator"></a>2.2 Generator</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_first_letter</span><span class="params">(text)</span>:</span></div><div class="line">    <span class="keyword">if</span> text:</div><div class="line">        <span class="keyword">yield</span> <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> index, letter <span class="keyword">in</span> enumerate(text):</div><div class="line">        <span class="keyword">if</span> letter == <span class="string">' '</span>:</div><div class="line">            <span class="keyword">yield</span> index + <span class="number">1</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_get_first_letter</span><span class="params">()</span>:</span></div><div class="line">    <span class="comment"># for index in get_first_letter('Niko Belic Is A Good Boy'):</span></div><div class="line">    <span class="comment">#     print index</span></div><div class="line"></div><div class="line">    <span class="comment"># print list(get_first_letter('Niko Belic Is A Good Boy'))</span></div><div class="line"></div><div class="line">    index_iterator = get_first_letter(<span class="string">'Niko Belic Is A Good Boy'</span>)</div><div class="line">    <span class="keyword">print</span> list(islice(index_iterator, <span class="number">0</span>, <span class="number">3</span>))</div></pre></td></tr></table></figure>
+<h3 id="2-3-Iterate-In-Params"><a href="#2-3-Iterate-In-Params" class="headerlink" title="2.3 Iterate In Params"></a>2.3 Iterate In Params</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">normalize</span><span class="params">(numbers)</span>:</span></div><div class="line">    total = sum(numbers)  <span class="comment"># return a new iterator</span></div><div class="line">    result = []</div><div class="line"></div><div class="line">    <span class="keyword">for</span> value <span class="keyword">in</span> numbers:  <span class="comment"># return a new iterator</span></div><div class="line">        percent = <span class="number">100</span> * value / total</div><div class="line">        result.append(percent)</div><div class="line">    <span class="keyword">return</span> result</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ReadVisits</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, numbers)</span>:</span></div><div class="line">        self.numbers = numbers</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">for</span> value <span class="keyword">in</span> self.numbers:</div><div class="line">            <span class="keyword">yield</span> value</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_nomalize</span><span class="params">()</span>:</span></div><div class="line">    numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</div><div class="line">    visits = ReadVisits(numbers)</div><div class="line">    <span class="keyword">print</span> iter(visits) <span class="keyword">is</span> iter(visits)</div></pre></td></tr></table></figure>
+<h2 id="3-Property"><a href="#3-Property" class="headerlink" title="3 Property"></a>3 Property</h2><h3 id="3-1-Using-property-instead-of-get-and-set"><a href="#3-1-Using-property-instead-of-get-and-set" class="headerlink" title="3.1 Using property instead of get and set"></a>3.1 Using property instead of get and set</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Register</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age)</span>:</span></div><div class="line">        self._name = name</div><div class="line">        self.age = age</div><div class="line">        self.logo = self._name + <span class="string">","</span> + str(self.age)</div><div class="line"></div><div class="line"><span class="meta">    @property</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">name</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self._name</div><div class="line"></div><div class="line"><span class="meta">    @name.setter</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">name</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">"""You can do something more than just setting property in this method"""</span></div><div class="line">        self._name = name  <span class="comment"># Do not use self.name = name, it will raise max recursive exception</span></div><div class="line">        self.logo = self._name + <span class="string">","</span> + str(self.age)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    r = Register(<span class="string">'Niko'</span>, <span class="number">18</span>)</div><div class="line">    r.name = <span class="string">'Belic'</span></div><div class="line">    <span class="keyword">print</span> r.logo</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Python基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+ 
+
+
+
+  
     <article id="post-Mysql/Mysql快速重装与配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -290,75 +360,6 @@
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Celery</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
- 
-
-
-
-  
-    <article id="post-PythonWeb/PythonWeb - 学习笔记（一）- Flask" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/27/PythonWeb/PythonWeb - 学习笔记（一）- Flask/">PythonWeb - 学习笔记（一）- Flask</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/27/PythonWeb/PythonWeb - 学习笔记（一）- Flask/" class="archive-article-date">
-  	<time datetime="2017-08-27T07:33:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本部分基于图书《Flask Web开发》学习总结，后续将继续深入学习扩展知识。</p>
-<p><strong>学习计划</strong></p>
-<ul>
-<li><strong>Flask框架学习与实战</strong></li>
-<li>Celery任务调度框架的深入学习与研究</li>
-<li>基于WebSocket的网络通讯研究</li>
-<li>高并发PyWeb框架Tornado</li>
-</ul>
-<h1 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h1>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">PythonWeb</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
         		</li>
       		
 		</ul>
@@ -802,11 +803,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
         		</li>
       		
 		</ul>
@@ -1011,11 +1012,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1027,15 +1028,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1047,10 +1048,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
               </li>
              
@@ -1059,11 +1056,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1071,11 +1064,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">高并发</a>
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">面经</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">高并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1087,15 +1088,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1103,19 +1096,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1127,7 +1120,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
             
             <div class="clearfix"></div>
