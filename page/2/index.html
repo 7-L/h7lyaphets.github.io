@@ -162,136 +162,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-JavaWeb/Maven_SSH_Oracle项目搭建全流程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/27/JavaWeb/Maven_SSH_Oracle项目搭建全流程/">Maven_SSH_Oracle项目搭建全流程</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/27/JavaWeb/Maven_SSH_Oracle项目搭建全流程/" class="archive-article-date">
-  	<time datetime="2017-06-27T15:02:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[TOC]</p>
-<h1 id="系统搭建"><a href="#系统搭建" class="headerlink" title="系统搭建"></a>系统搭建</h1><p><strong>github:</strong> <a href="https://github.com/seawaylee/maven-ssh-quickstart" target="_blank" rel="external">https://github.com/seawaylee/maven-ssh-quickstart</a></p>
-<h1 id="1-SSH框架搭建"><a href="#1-SSH框架搭建" class="headerlink" title="1 SSH框架搭建"></a>1 SSH框架搭建</h1><h2 id="1-1-SVN创建项目"><a href="#1-1-SVN创建项目" class="headerlink" title="1.1 SVN创建项目"></a>1.1 SVN创建项目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cd /svn</div><div class="line">sudo svnadmin create nwrd2017    # 创建下面</div><div class="line">sudo chown -R www-data:www-data /svn  # 修改权限</div><div class="line">cd /svn/auth</div><div class="line">sudo vim dav_svn.authz  # 为项目配置用户及权限</div><div class="line">sudo htpasswd dav_svn.passwd $&#123;username&#125;  # 为新用户设置密码</div><div class="line">sudo service apache2 restart   # 重启项目</div></pre></td></tr></table></figure>
-<p>访问 <code>https://${SVN_IP}/svn/${project_name}</code> 查看项目结构</p>
-        
-          <a class="article-more-a" href="/2017/06/27/JavaWeb/Maven_SSH_Oracle项目搭建全流程/#more">阅读全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JavaWeb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
- 
-
-
-
-  
-    <article id="post-爬虫/python/Scrapy学习笔记（一）- 快速入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/24/爬虫/python/Scrapy学习笔记（一）- 快速入门/">Scrapy学习笔记（一）- 快速入门</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/24/爬虫/python/Scrapy学习笔记（一）- 快速入门/" class="archive-article-date">
-  	<time datetime="2017-06-24T02:41:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-概览"><a href="#1-概览" class="headerlink" title="1 概览"></a>1 概览</h1><h2 id="1-1-安装"><a href="#1-1-安装" class="headerlink" title="1.1 安装"></a>1.1 安装</h2><p><code>pip install scrapy=1.4.0</code></p>
-<h2 id="1-2-测试Demo"><a href="#1-2-测试Demo" class="headerlink" title="1.2 测试Demo"></a>1.2 测试Demo</h2><p><code>vim quotes_spider.py</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">QuotesSpider</span><span class="params">(scrapy.Spider)</span>:</span></div><div class="line">    name = <span class="string">"quotes"</span></div><div class="line">    start_urls = [</div><div class="line">        <span class="string">'http://quotes.toscrape.com/tag/humor/'</span>,</div><div class="line">    ]</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></div><div class="line">        <span class="keyword">for</span> quote <span class="keyword">in</span> response.css(<span class="string">'div.quote'</span>):</div><div class="line">            <span class="keyword">yield</span> &#123;</div><div class="line">                <span class="string">'text'</span>: quote.css(<span class="string">'span.text::text'</span>).extract_first(),</div><div class="line">                <span class="string">'author'</span>: quote.xpath(<span class="string">'span/small/text()'</span>).extract_first(),</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        next_page = response.css(<span class="string">'li.next a::attr("href")'</span>).extract_first()</div><div class="line">        <span class="keyword">if</span> next_page <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            <span class="keyword">yield</span> response.follow(next_page, self.parse)</div></pre></td></tr></table></figure>
-<p><code>scrapy runspider quotes_spider.py -o quotes.json</code></p>
-        
-          <a class="article-more-a" href="/2017/06/24/爬虫/python/Scrapy学习笔记（一）- 快速入门/#more">阅读全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
- 
-
-
-
-  
     <article id="post-Linux/Docker学习笔记（一）- 快速入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -872,6 +742,137 @@
 
 
   
+    <article id="post-Java基础/JVM/JVM学习笔记（基础知识）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/">JVM学习笔记（一）- 基础知识</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/" class="archive-article-date">
+  	<time datetime="2017-04-19T12:39:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Java内存模型"><a href="#1-Java内存模型" class="headerlink" title="1 Java内存模型"></a>1 Java内存模型</h1><h2 id="1-1-内存模型图解"><a href="#1-1-内存模型图解" class="headerlink" title="1.1 内存模型图解"></a>1.1 内存模型图解</h2><p>Java虚拟机在执行Java程序的过程中，会把它所管理的内存划分为若干个不同的数据区。<br>这些区域有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而存在，有的区域则依赖用户线程的启动和结束而建立和销毁，<br>我们可以将这些区域统称为Java运行时数据区域。</p>
+<p>如下图是一个内存模型的关系图（详情见图：内存划分.png）：</p>
+<p><img src="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/Java内存模型.png" alt=""></p>
+<p>如上图所示，Java虚拟机运行时数据区域被分为五个区域：<strong>堆(Heap)、栈(Stack)、本地方法栈(Native Stack)、方法区(Method Area)、程序计数器(Program Count Register)</strong>。</p>
+        
+          <a class="article-more-a" href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/#more">阅读全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+ 
+
+
+
+  
+    <article id="post-大数据/大数据基础/Netty学习笔记（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/18/大数据/大数据基础/Netty学习笔记（一）/">Netty学习笔记（一）</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/18/大数据/大数据基础/Netty学习笔记（一）/" class="archive-article-date">
+  	<time datetime="2017-04-18T06:23:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Netty简介"><a href="#1-Netty简介" class="headerlink" title="1 Netty简介"></a>1 Netty简介</h1><blockquote>
+<p>Netty是基于Java NIO的网络应用框架.</p>
+<p>Netty是一个NIO client-server(客户端服务器)框架，使用Netty可以快速开发网络应用，例如服务器和客户端协议。Netty提供了一种新的方式来使开发网络应用程序，这种新的方式使得它很容易使用和有很强的扩展性。Netty的内部实现时很复杂的，但是Netty提供了简单易用的api从网络处理代码中解耦业务逻辑。Netty是完全基于NIO实现的，所以整个Netty都是异步的。</p>
+<p>网络应用程序通常需要有较高的可扩展性，无论是Netty还是其他的基于Java NIO的框架，都会提供可扩展性的解决方案。Netty中一个关键组成部分是它的异步特性.</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2017/04/18/大数据/大数据基础/Netty学习笔记（一）/#more">阅读全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+ 
+
+
+
+  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -992,6 +993,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -1000,15 +1005,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1016,15 +1017,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1037,6 +1034,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Flask</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1056,15 +1057,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1088,10 +1089,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
@@ -1100,15 +1097,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
             
             <div class="clearfix"></div>
