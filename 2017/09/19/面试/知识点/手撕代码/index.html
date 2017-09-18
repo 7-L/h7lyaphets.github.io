@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="https://seawaylee.github.io">
   <title>面试-手撕代码（持续更新） | SeawayLee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="快排 1234567891011121314151617181920212223242526272829303132333435363738394041public class QuickSort&amp;#123;    public static void quickSort(int[] a, int left, int right)    &amp;#123;        if (left &amp;lt; r">
+  <meta name="description" content="快排 1234567891011121314151617181920212223242526272829303132333435363738394041public class QuickSort&amp;#123;    public static void quickSort(int[] a, int left, int right)    &amp;#123;        if (left &amp;lt; ri">
 <meta name="keywords" content="面试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试-手撕代码（持续更新）">
 <meta property="og:url" content="https://seawaylee.github.io/2017/09/19/面试/知识点/手撕代码/index.html">
 <meta property="og:site_name" content="SeawayLee">
-<meta property="og:description" content="快排 1234567891011121314151617181920212223242526272829303132333435363738394041public class QuickSort&amp;#123;    public static void quickSort(int[] a, int left, int right)    &amp;#123;        if (left &amp;lt; r">
-<meta property="og:updated_time" content="2017-09-18T17:28:38.000Z">
+<meta property="og:description" content="快排 1234567891011121314151617181920212223242526272829303132333435363738394041public class QuickSort&amp;#123;    public static void quickSort(int[] a, int left, int right)    &amp;#123;        if (left &amp;lt; ri">
+<meta property="og:updated_time" content="2017-09-18T17:33:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试-手撕代码（持续更新）">
-<meta name="twitter:description" content="快排 1234567891011121314151617181920212223242526272829303132333435363738394041public class QuickSort&amp;#123;    public static void quickSort(int[] a, int left, int right)    &amp;#123;        if (left &amp;lt; r">
+<meta name="twitter:description" content="快排 1234567891011121314151617181920212223242526272829303132333435363738394041public class QuickSort&amp;#123;    public static void quickSort(int[] a, int left, int right)    &amp;#123;        if (left &amp;lt; ri">
   
   
     <link rel="icon" href="/logo.jpeg">
@@ -182,9 +182,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
-<p><strong>快排</strong></p>
+        <p><strong>快排</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuickSort</span></span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (left &lt; right)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> i = left, j = right;</div><div class="line">            <span class="comment">// 以中间数为基准</span></div><div class="line">            <span class="comment">//SortUtil.swap(a, left, (left + right) / 2);</span></div><div class="line">            <span class="comment">// 以随机数为基准</span></div><div class="line">            SortUtil.swap(a, left, SortUtil.getRandomIndex(left, right));</div><div class="line">            <span class="keyword">int</span> x = a[left]; <span class="comment">// a[left] 就是被挖出的第一个坑</span></div><div class="line">            <span class="keyword">while</span> (i &lt; j)</div><div class="line">            &#123;</div><div class="line">                <span class="comment">// 从右向左找小于x的数来填a[i]</span></div><div class="line">                <span class="keyword">while</span> (i &lt; j &amp;&amp; a[j] &gt; x)</div><div class="line">                    j--;</div><div class="line"></div><div class="line">                <span class="keyword">if</span> (i &lt; j)</div><div class="line">                    a[i++] = a[j]; <span class="comment">// 将a[j]填到a[i]，a[j]形成了新的坑</span></div><div class="line">                <span class="comment">// 从左向右找大于x的数来填a[j]</span></div><div class="line">                <span class="keyword">while</span> (i &lt; j &amp;&amp; a[i] &lt; x)</div><div class="line">                    i++;</div><div class="line">                <span class="keyword">if</span> (i &lt; j)</div><div class="line">                    a[j--] = a[i];<span class="comment">// 将[i]天到a[j],a[i]形成了新的坑</span></div><div class="line">            &#125;</div><div class="line">            a[i] = x;<span class="comment">// 退出时，i等于j，将x填到这个坑</span></div><div class="line">            quickSort(a, left, i - <span class="number">1</span>);</div><div class="line">            quickSort(a, i + <span class="number">1</span>, right);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span>[] a = SortUtil.getRandomArray(<span class="number">10</span>);</div><div class="line">        SortUtil.printArray(a);</div><div class="line">        quickSort(a, <span class="number">0</span>, a.length - <span class="number">1</span>);</div><div class="line">        SortUtil.printArray(a);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <p><strong>二分查找</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> interview;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Arrays;</div><div class="line"><span class="keyword">import</span> java.util.Random;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@author</span> NikoBelic</div><div class="line"> * <span class="doctag">@create</span> 05/01/2017 10:01</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Search</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 折半查找</div><div class="line">     * <span class="doctag">@Author</span> NikoBelic</div><div class="line">     * <span class="doctag">@Date</span> 09/01/2017 01:31</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T extends Comparable&lt;T&gt;&gt; <span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(T[] list,T key)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> mid = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> high = list.length - <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> low = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span> (low &lt;= high)</div><div class="line">        &#123;</div><div class="line">            mid = (high + low) &gt;&gt;&gt; <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span> (list[mid].compareTo(key) == <span class="number">0</span>)</div><div class="line">                <span class="keyword">return</span> mid;</div><div class="line">            <span class="keyword">if</span> (list[mid].compareTo(key) &gt; <span class="number">0</span>)</div><div class="line">                high = mid - <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span> (list[mid].compareTo(key) &lt; <span class="number">0</span>)</div><div class="line">                low = mid + <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
@@ -467,11 +467,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -487,15 +487,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
               </li>
              
               <li class="article-tag-list-item">
