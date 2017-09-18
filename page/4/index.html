@@ -162,6 +162,138 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java基础/Java Collections Framework - ArrayList" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/22/Java基础/Java Collections Framework - ArrayList/">Java Collections Framework - ArrayList</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/22/Java基础/Java Collections Framework - ArrayList/" class="archive-article-date">
+  	<time datetime="2017-03-22T02:34:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
+<p>ArrayList底层以数组实现，允许重复，默认第一次插入元素时创建数组的大小为10，超出限制时会增加50%的容量，<br>每次扩容都底层采用System.arrayCopy()复制到新的数组，初始化时最好能给出数组大小的预估值。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> java.util;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt;, <span class="title">RandomAccess</span>, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span> </span>&#123; </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_CAPACITY = <span class="number">10</span>; </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] EMPTY_ELEMENTDATA = &#123;&#125;; </div><div class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> Object[] elementData; </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size;</div><div class="line">    <span class="comment">//其余省略</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/03/22/Java基础/Java Collections Framework - ArrayList/#more">阅读全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+ 
+
+
+
+  
+    <article id="post-面试/剑指Offer/Q_7_用两个栈实现一个队列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/21/面试/剑指Offer/Q_7_用两个栈实现一个队列/">剑指Offer_7_用两个栈实现一个队列</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/21/面试/剑指Offer/Q_7_用两个栈实现一个队列/" class="archive-article-date">
+  	<time datetime="2017-03-21T14:03:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>题目描述</strong></p>
+<blockquote>
+<p>使用两个栈实现一个队列的push和pop方法</p>
+</blockquote>
+<p><strong>解题思路</strong></p>
+<ul>
+<li>入栈时直接将数据存储到s1中，栈顶为最新元素；</li>
+<li>出栈时查看s2中是否有数据，如果没有，则将s1中的数据弹出并压入s2，弹出s2栈顶元素为最旧元素，弹出即可；</li>
+<li>当s1将所有数据压入s2后，s2仍然为空，则表示队列空；</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/03/21/面试/剑指Offer/Q_7_用两个栈实现一个队列/#more">阅读全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指Offer</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+ 
+
+
+
+  
     <article id="post-面试/剑指Offer/Q_6_重建二叉树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -701,144 +833,6 @@
 
 
   
-    <article id="post-面经/阿里面经_2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/10/面经/阿里面经_2/">阿里巴巴常考面试题及汇总答案</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/10/面经/阿里面经_2/" class="archive-article-date">
-  	<time datetime="2017-03-10T13:46:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://blog.csdn.net/natian306/article/details/10858097" target="_blank" rel="external">阿里巴巴常考面试题及汇总答案</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面经</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
- 
-
-
-
-  
-    <article id="post-面经/阿里面经_1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/10/面经/阿里面经_1/">阿里巴巴-软件工程师面经（一）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/10/面经/阿里面经_1/" class="archive-article-date">
-  	<time datetime="2017-03-10T13:27:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>1.hashmap、concurrenthashmap底层实现和区别</li>
-<li>2.spring框架的原理</li>
-<li>3.如何写一个orm框架</li>
-<li>4.hibernate一级缓存和二级缓存，hibernate其他缓存</li>
-<li>5.hibernate事务传播行为种类</li>
-<li>6.springmvc原理</li>
-<li>7.restful的好处</li>
-<li>8.restful有几种请求，表单如何提交put请求</li>
-<li>9.web中安全性问题的考虑，如何防止</li>
-<li>10.web系统整体架构</li>
-<li>11.hibernate如何实现声明式事务</li>
-<li>12.java并发包</li>
-<li>13.volatile</li>
-<li>14.平常都看哪些书</li>
-<li>15.spring底层数据结构</li>
-<li>16.如何进行反射，如何提高反射的性能</li>
-<li>17.如何实现java的代理，为什么需要实现接口</li>
-<li>18.TCP协议三次握手</li>
-<li>19.springmvc用过哪些注解</li>
-<li>20.springAOP可以使用哪些代理，有什么区别</li>
-<li>21.为什么要分三层这面没有准备好，广度很深度压力很大，建议大家多看看三大框架源码、原理。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面经</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
- 
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -967,10 +961,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
@@ -983,15 +973,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1007,11 +997,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">高并发</a>
+                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1019,7 +1005,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">面经</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">高并发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1039,19 +1033,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">大数据</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1059,7 +1041,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1071,7 +1057,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
             
             <div class="clearfix"></div>
