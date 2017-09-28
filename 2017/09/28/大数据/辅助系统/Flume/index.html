@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="https://seawaylee.github.io">
   <title>大数据架构辅助系统（一）- Flume学习笔记 | SeawayLee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在一个完整的大数据处理系统中，除了hdfs+mapreduce+hive组成分析系统的核心之外，还需要数据采集、结果数据导出、任务调度等不可或缺的辅助系统，而这些辅助工具在hadoop生态体系中都有便捷的开源框架，如图所示：   1 Flume介绍1.1 概述 Flume是一个分布式、可靠、和高可用的海量日志采集、聚合和传输的系统。 Flume可以采集文件，socket数据包等各种形式源数据，又">
+  <meta name="description" content="在一个完整的大数据处理系统中，除了hdfs+mapreduce+hive组成分析系统的核心之外，还需要数据采集、结果数据导出、任务调度等不可或缺的辅助系统，而这些辅助工具在hadoop生态体系中都有便捷的开源框架，如图所示：">
 <meta name="keywords" content="大数据,Flume">
 <meta property="og:type" content="article">
 <meta property="og:title" content="大数据架构辅助系统（一）- Flume学习笔记">
 <meta property="og:url" content="https://seawaylee.github.io/2017/09/28/大数据/辅助系统/Flume/index.html">
 <meta property="og:site_name" content="SeawayLee">
-<meta property="og:description" content="在一个完整的大数据处理系统中，除了hdfs+mapreduce+hive组成分析系统的核心之外，还需要数据采集、结果数据导出、任务调度等不可或缺的辅助系统，而这些辅助工具在hadoop生态体系中都有便捷的开源框架，如图所示：   1 Flume介绍1.1 概述 Flume是一个分布式、可靠、和高可用的海量日志采集、聚合和传输的系统。 Flume可以采集文件，socket数据包等各种形式源数据，又">
+<meta property="og:description" content="在一个完整的大数据处理系统中，除了hdfs+mapreduce+hive组成分析系统的核心之外，还需要数据采集、结果数据导出、任务调度等不可或缺的辅助系统，而这些辅助工具在hadoop生态体系中都有便捷的开源框架，如图所示：">
 <meta property="og:image" content="https://seawaylee.github.io/2017/09/28/大数据/辅助系统/Flume/15066112700596.jpg">
 <meta property="og:image" content="https://seawaylee.github.io/2017/09/28/大数据/辅助系统/Flume/15066115509038.jpg">
 <meta property="og:image" content="https://seawaylee.github.io/2017/09/28/大数据/辅助系统/Flume/15066115985134.jpg">
 <meta property="og:image" content="https://seawaylee.github.io/2017/09/28/大数据/辅助系统/Flume/15066121063877.jpg">
-<meta property="og:updated_time" content="2017-09-28T15:31:12.000Z">
+<meta property="og:updated_time" content="2017-09-28T15:33:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="大数据架构辅助系统（一）- Flume学习笔记">
-<meta name="twitter:description" content="在一个完整的大数据处理系统中，除了hdfs+mapreduce+hive组成分析系统的核心之外，还需要数据采集、结果数据导出、任务调度等不可或缺的辅助系统，而这些辅助工具在hadoop生态体系中都有便捷的开源框架，如图所示：   1 Flume介绍1.1 概述 Flume是一个分布式、可靠、和高可用的海量日志采集、聚合和传输的系统。 Flume可以采集文件，socket数据包等各种形式源数据，又">
+<meta name="twitter:description" content="在一个完整的大数据处理系统中，除了hdfs+mapreduce+hive组成分析系统的核心之外，还需要数据采集、结果数据导出、任务调度等不可或缺的辅助系统，而这些辅助工具在hadoop生态体系中都有便捷的开源框架，如图所示：">
 <meta name="twitter:image" content="https://seawaylee.github.io/2017/09/28/大数据/辅助系统/Flume/15066112700596.jpg">
   
   
@@ -191,6 +191,7 @@
 <p>在一个完整的大数据处理系统中，除了hdfs+mapreduce+hive组成分析系统的核心之外，还需要<strong>数据采集</strong>、结果数据导出、任务调度等不可或缺的辅助系统，而这些辅助工具在hadoop生态体系中都有便捷的开源框架，如图所示：</p>
 </blockquote>
 <p><img src="/2017/09/28/大数据/辅助系统/Flume/15066112700596.jpg" alt=""></p>
+<a id="more"></a>
 <h2 id="1-Flume介绍"><a href="#1-Flume介绍" class="headerlink" title="1 Flume介绍"></a>1 Flume介绍</h2><h3 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a>1.1 概述</h3><ol>
 <li>Flume是一个分布式、可靠、和高可用的海量日志采集、聚合和传输的系统。</li>
 <li>Flume可以<strong>采集文件</strong>，<strong>socket数据包</strong>等各种形式源数据，又可以将采集到的数据<strong>输出到HDFS、hbase、hive、kafka</strong>等众多外部存储系统中</li>
@@ -209,7 +210,6 @@
 <h3 id="1-3-Flume采集系统结构图"><a href="#1-3-Flume采集系统结构图" class="headerlink" title="1.3 Flume采集系统结构图"></a>1.3 Flume采集系统结构图</h3><p><strong>简单结构</strong> - 单个agent采集数据<br><img src="/2017/09/28/大数据/辅助系统/Flume/15066115509038.jpg" alt=""></p>
 <p><strong>复杂结构</strong> - 多级agent之间串联</p>
 <p><img src="/2017/09/28/大数据/辅助系统/Flume/15066115985134.jpg" alt=""></p>
-<a id="more"></a>
 <h2 id="2-Flume实战"><a href="#2-Flume实战" class="headerlink" title="2 Flume实战"></a>2 Flume实战</h2><h3 id="2-1-安装"><a href="#2-1-安装" class="headerlink" title="2.1 安装"></a>2.1 安装</h3><blockquote>
 <p>Flume的安装非常简单，只需要解压即可，当然，前提是已有hadoop环境</p>
 </blockquote>
@@ -259,12 +259,16 @@
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">#定义三大组件的名称</div><div class="line">agent1.sources = source1</div><div class="line">agent1.sinks = sink1</div><div class="line">agent1.channels = channel1</div><div class="line"></div><div class="line"># 配置source组件</div><div class="line">agent1.sources.source1.type = spooldir</div><div class="line">agent1.sources.source1.spoolDir = /home/hadoop/logs/</div><div class="line">agent1.sources.source1.fileHeader = false</div><div class="line"></div><div class="line">#配置拦截器</div><div class="line">agent1.sources.source1.interceptors = i1</div><div class="line">agent1.sources.source1.interceptors.i1.type = host</div><div class="line">agent1.sources.source1.interceptors.i1.hostHeader = hostname</div><div class="line"></div><div class="line"># 配置sink组件</div><div class="line">agent1.sinks.sink1.type = hdfs</div><div class="line">agent1.sinks.sink1.hdfs.path =hdfs://hdp-node-01:9000/weblog/flume-collection/%y-%m-%d/%H-%M</div><div class="line">agent1.sinks.sink1.hdfs.filePrefix = access_log</div><div class="line">agent1.sinks.sink1.hdfs.maxOpenFiles = 5000</div><div class="line">agent1.sinks.sink1.hdfs.batchSize= 100</div><div class="line">agent1.sinks.sink1.hdfs.fileType = DataStream</div><div class="line">agent1.sinks.sink1.hdfs.writeFormat =Text</div><div class="line">agent1.sinks.sink1.hdfs.rollSize = 102400</div><div class="line">agent1.sinks.sink1.hdfs.rollCount = 1000000</div><div class="line">agent1.sinks.sink1.hdfs.rollInterval = 60</div><div class="line">#agent1.sinks.sink1.hdfs.round = true</div><div class="line">#agent1.sinks.sink1.hdfs.roundValue = 10</div><div class="line">#agent1.sinks.sink1.hdfs.roundUnit = minute</div><div class="line">agent1.sinks.sink1.hdfs.useLocalTimeStamp = true</div><div class="line"># Use a channel which buffers events in memory</div><div class="line">agent1.channels.channel1.type = memory</div><div class="line">agent1.channels.channel1.keep-alive = 120</div><div class="line">agent1.channels.channel1.capacity = 500000</div><div class="line">agent1.channels.channel1.transactionCapacity = 600</div><div class="line"></div><div class="line"># Bind the source and sink to the channel</div><div class="line">agent1.sources.source1.channels = channel1</div><div class="line">agent1.sinks.sink1.channel = channel1</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<pre><code>- Channel参数解释：
-
-    * capacity：默认该通道中最大的可以存储的event数量
-    * trasactionCapacity：每次最大可以从source中拿到或者送到sink中的event数量
-    * keep-alive：event添加到通道中或者移出的允许时间
-</code></pre><p><strong>采集文件到HDFS</strong></p>
+<ul>
+<li><p>Channel参数解释：</p>
+<ul>
+<li>capacity：默认该通道中最大的可以存储的event数量</li>
+<li>trasactionCapacity：每次最大可以从source中拿到或者送到sink中的event数量</li>
+<li>keep-alive：event添加到通道中或者移出的允许时间</li>
+</ul>
+</li>
+</ul>
+<p><strong>采集文件到HDFS</strong></p>
 <ol>
 <li>采集需求：比如业务系统使用log4j生成的日志，日志内容不断增加，需要<strong>把追加到日志文件中的数据实时采集到hdfs</strong></li>
 <li><p>根据需求，首先定义以下3大要素</p>
@@ -539,10 +543,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
@@ -552,6 +552,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,10 +575,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
@@ -583,15 +587,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Flask</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -599,7 +599,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -607,7 +607,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -619,6 +619,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
@@ -627,11 +631,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">Flume</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -639,7 +639,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flume</a>
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
