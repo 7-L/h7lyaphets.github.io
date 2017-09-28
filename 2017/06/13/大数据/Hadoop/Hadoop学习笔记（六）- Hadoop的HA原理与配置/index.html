@@ -9,7 +9,7 @@
   <title>Hadoop学习笔记（六）- Hadoop的HA原理与配置 | SeawayLee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1 Hadoop的HA机制正式引入HA机制是从hadoop2.0开始，之前的版本中没有HA机制。 Hadoo的HA机制可以分成各个组件的HA机制  HDFS的HA YARN的HA  1.1 HDFS的HA 通过双NameNode消除单点故障 双NameNode工作要点如下：  A. 元数据管理方式需要改变 双NameNode各自在内存中保存一份元数据(fsimage+edits合成结果) edit">
-<meta name="keywords" content="Hadoop">
+<meta name="keywords" content="大数据,Hadoop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hadoop学习笔记（六）- Hadoop的HA原理与配置">
 <meta property="og:url" content="https://seawaylee.github.io/2017/06/13/大数据/Hadoop/Hadoop学习笔记（六）- Hadoop的HA原理与配置/index.html">
@@ -17,7 +17,7 @@
 <meta property="og:description" content="1 Hadoop的HA机制正式引入HA机制是从hadoop2.0开始，之前的版本中没有HA机制。 Hadoo的HA机制可以分成各个组件的HA机制  HDFS的HA YARN的HA  1.1 HDFS的HA 通过双NameNode消除单点故障 双NameNode工作要点如下：  A. 元数据管理方式需要改变 双NameNode各自在内存中保存一份元数据(fsimage+edits合成结果) edit">
 <meta property="og:image" content="https://seawaylee.github.io/2017/06/13/大数据/Hadoop/Hadoop学习笔记（六）-%20Hadoop的HA原理与配置/HDFS_HA.png">
 <meta property="og:image" content="https://seawaylee.github.io/2017/06/13/大数据/Hadoop/Hadoop学习笔记（六）-%20Hadoop的HA原理与配置/Yarn_HA.png">
-<meta property="og:updated_time" content="2017-06-13T13:55:05.000Z">
+<meta property="og:updated_time" content="2017-09-28T15:57:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop学习笔记（六）- Hadoop的HA原理与配置">
 <meta name="twitter:description" content="1 Hadoop的HA机制正式引入HA机制是从hadoop2.0开始，之前的版本中没有HA机制。 Hadoo的HA机制可以分成各个组件的HA机制  HDFS的HA YARN的HA  1.1 HDFS的HA 通过双NameNode消除单点故障 双NameNode工作要点如下：  A. 元数据管理方式需要改变 双NameNode各自在内存中保存一份元数据(fsimage+edits合成结果) edit">
@@ -380,6 +380,10 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
         		</li>
       		
@@ -609,11 +613,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -621,11 +625,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -645,15 +649,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,11 +661,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">高并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -685,10 +689,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">大数据</a>
               </li>
              
@@ -697,11 +697,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flume</a>
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Flume</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -717,15 +725,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
             
             <div class="clearfix"></div>
