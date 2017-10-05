@@ -15,13 +15,13 @@
 <meta property="og:url" content="https://seawaylee.github.io/2017/07/02/大数据/Hive/Hive学习笔记（一）- 详解Hive/index.html">
 <meta property="og:site_name" content="SeawayLee">
 <meta property="og:description" content="1 Hive基础知识1.1 简介什么是HiveHive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供类SQL查询功能。 为什么使用Hive  直接使用Hadoop所面临的问题  学习成本高 一般项目周期要求短 MapReduce实现复杂的查询呢逻辑开发难度较大   为什么要使用Hive  操作接口采用类SQL语法，可以快速开发 避免编写MR，减少学习成本 扩">
-<meta property="og:image" content="https://seawaylee.github.io/2017/07/02/大数据/Hive/Hive学习笔记（一）-%20详解Hive/Hive架构.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/07/02/大数据/Hive/Hive学习笔记（一）-%20详解Hive/Hive与Hadoop关系.jpg">
-<meta property="og:updated_time" content="2017-07-02T15:41:51.000Z">
+<meta property="og:image" content="https://seawaylee.github.io/2017/07/02/大数据/Hive/Hive学习笔记（一）-%20详解Hive/14983216998950.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/07/02/大数据/Hive/Hive学习笔记（一）-%20详解Hive/14986658358207.jpg">
+<meta property="og:updated_time" content="2017-10-05T05:41:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive学习笔记（一）- 详解Hive">
 <meta name="twitter:description" content="1 Hive基础知识1.1 简介什么是HiveHive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供类SQL查询功能。 为什么使用Hive  直接使用Hadoop所面临的问题  学习成本高 一般项目周期要求短 MapReduce实现复杂的查询呢逻辑开发难度较大   为什么要使用Hive  操作接口采用类SQL语法，可以快速开发 避免编写MR，减少学习成本 扩">
-<meta name="twitter:image" content="https://seawaylee.github.io/2017/07/02/大数据/Hive/Hive学习笔记（一）-%20详解Hive/Hive架构.jpg">
+<meta name="twitter:image" content="https://seawaylee.github.io/2017/07/02/大数据/Hive/Hive学习笔记（一）-%20详解Hive/14983216998950.jpg">
   
   
     <link rel="icon" href="/logo.jpeg">
@@ -210,7 +210,7 @@
 <li>容错： 良好的容错性，节点出现问题SQL仍然可以完成执行</li>
 </ul>
 <a id="more"></a>
-<h2 id="1-2-架构"><a href="#1-2-架构" class="headerlink" title="1.2 架构"></a>1.2 架构</h2><p><img src="/2017/07/02/大数据/Hive/Hive学习笔记（一）- 详解Hive/Hive架构.jpg" alt=""></p>
+<h2 id="1-2-架构"><a href="#1-2-架构" class="headerlink" title="1.2 架构"></a>1.2 架构</h2><p><img src="/2017/07/02/大数据/Hive/Hive学习笔记（一）- 详解Hive/14983216998950.jpg" alt=""></p>
 <p>JobTracker是Hadoop1.x中的ResouceManager + AppMaster<br>TaskTracker相当于NodeManager + YarnChild</p>
 <h3 id="1-2-1-基本组成"><a href="#1-2-1-基本组成" class="headerlink" title="1.2.1 基本组成"></a>1.2.1 基本组成</h3><ul>
 <li>用户接口：CLI、JDBC/ODBC、WebGUI<ul>
@@ -229,7 +229,7 @@
 </li>
 </ul>
 <h2 id="1-3-Hive与Hadoop的关系"><a href="#1-3-Hive与Hadoop的关系" class="headerlink" title="1.3 Hive与Hadoop的关系"></a>1.3 Hive与Hadoop的关系</h2><p>Hive利用HDFS存储数据，利用MapReduce查询数据</p>
-<p><img src="/2017/07/02/大数据/Hive/Hive学习笔记（一）- 详解Hive/Hive与Hadoop关系.jpg" alt=""></p>
+<p><img src="/2017/07/02/大数据/Hive/Hive学习笔记（一）- 详解Hive/14986658358207.jpg" alt=""></p>
 <h2 id="1-4-Hive与传统数据库对比"><a href="#1-4-Hive与传统数据库对比" class="headerlink" title="1.4 Hive与传统数据库对比"></a>1.4 Hive与传统数据库对比</h2><p>Hive具有SQL数据库的外表，但应用应用场景完全不同，Hive只适合用来做批量的数据统计分析</p>
 <table>
 <thead>
@@ -327,7 +327,7 @@
 </li>
 <li><p>EXTERNAL关键字可以让用户创建一个外部表，在建表的同时指定一个指向实际数据的路径（LOCATION），Hive 创建内部表时，会将数据移动到数据仓库指向的路径；若创建外部表，仅记录数据所在的路径，不对数据的位置做任何改变。在删除表的时候，内部表的元数据和数据会被一起删除，而外部表只删除元数据，不删除数据。</p>
 </li>
-<li><p>LIKE 允许用户复制现有的表结构，但是不复制数据。</p>
+<li><p>PARTITIONED 表示根据某一个key(不在create table里面)对数据进行分区，体现在HDFS上就是 table目录下有n个不同的分区文件夹(country=China,country=USA)</p>
 </li>
 <li><p>ROW FORMAT<br> DELIMITED [FIELDS TERMINATED BY char] [COLLECTION ITEMS TERMINATED BY char]<br>[MAP KEYS TERMINATED BY char] [LINES TERMINATED BY char]<br>| SERDE serde_name [WITH SERDEPROPERTIES (property_name=property_value, property_name=property_value, …)]<br>用户在建表的时候可以自定义 SerDe 或者使用自带的 SerDe。如果没有指定 ROW FORMAT 或者 ROW FORMAT DELIMITED，将会使用自带的 SerDe。在建表的时候，用户还需要为表指定列，用户在指定表的列的同时也会指定自定义的 SerDe，Hive通过 SerDe 确定表的具体的列的数据。</p>
 </li>
@@ -361,6 +361,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">CHANGE</span> [<span class="keyword">COLUMN</span>] col_old_name col_new_name column_type [<span class="keyword">COMMENT</span> col_comment] [<span class="keyword">FIRST</span>|<span class="keyword">AFTER</span> column_name]</div></pre></td></tr></table></figure>
 <h3 id="2-1-3-显示命令"><a href="#2-1-3-显示命令" class="headerlink" title="2.1.3 显示命令"></a>2.1.3 显示命令</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">tables</span></div><div class="line"><span class="keyword">show</span> <span class="keyword">databases</span></div><div class="line"><span class="keyword">show</span> <span class="keyword">partitions</span></div><div class="line"><span class="keyword">show</span> functions</div><div class="line"><span class="keyword">desc</span> <span class="keyword">extended</span> t_name;</div><div class="line">desc formatted table_name;</div></pre></td></tr></table></figure>
 <h2 id="2-2-DML操作"><a href="#2-2-DML操作" class="headerlink" title="2.2 DML操作"></a>2.2 DML操作</h2><h3 id="2-2-1-Load"><a href="#2-2-1-Load" class="headerlink" title="2.2.1 Load"></a>2.2.1 Load</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">LOAD DATA [LOCAL] INPATH &apos;filepath&apos; [OVERWRITE] INTO </div><div class="line">TABLE tablename [PARTITION (partcol1=val1, partcol2=val2 ...)]</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">load</span> <span class="keyword">data</span> <span class="keyword">local</span> inpath <span class="string">'/Users/lixiwei-mac/app/data/hive_tmp/metrics.data'</span> <span class="keyword">into</span> <span class="keyword">table</span> metrics;</div></pre></td></tr></table></figure>
 <ol>
 <li><p>Load 操作只是单纯的复制/移动操作，将数据文件移动到 Hive 表对应的位置。</p>
 </li>
@@ -377,10 +378,9 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">FROM from_statement </div><div class="line"><span class="keyword">INSERT</span> OVERWRITE <span class="keyword">TABLE</span> tablename1 [<span class="keyword">PARTITION</span> (partcol1=val1, partcol2=val2 ...)] select_statement1 </div><div class="line">[<span class="keyword">INSERT</span> OVERWRITE <span class="keyword">TABLE</span> tablename2 [<span class="keyword">PARTITION</span> ...] select_statement2] ...</div></pre></td></tr></table></figure>
 <p><strong>Dynamic partition inserts:</strong></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> OVERWRITE <span class="keyword">TABLE</span> tablename <span class="keyword">PARTITION</span> (partcol1[=val1], partcol2[=val2] ...) select_statement <span class="keyword">FROM</span> from_statement</div></pre></td></tr></table></figure>
-<p><strong>导出表数据</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">table</span> metrics_buck <span class="keyword">select</span> * <span class="keyword">from</span> metrics <span class="keyword">distribute</span> <span class="keyword">by</span> (<span class="keyword">type</span>);</div></pre></td></tr></table></figure>
+<p>导出表数据</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> OVERWRITE [<span class="keyword">LOCAL</span>] <span class="keyword">DIRECTORY</span> directory1 <span class="keyword">SELECT</span> ... <span class="keyword">FROM</span> ...</div></pre></td></tr></table></figure>
-<p><strong>Multiple inserts:</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">FROM from_statement</div><div class="line"><span class="keyword">INSERT</span> OVERWRITE [<span class="keyword">LOCAL</span>] <span class="keyword">DIRECTORY</span> directory1 select_statement1</div><div class="line">[<span class="keyword">INSERT</span> OVERWRITE [<span class="keyword">LOCAL</span>] <span class="keyword">DIRECTORY</span> directory2 select_statement2] ...</div></pre></td></tr></table></figure>
 <h3 id="2-2-3-Select"><a href="#2-2-3-Select" class="headerlink" title="2.2.3 Select"></a>2.2.3 Select</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> [ALL | <span class="keyword">DISTINCT</span>] select_expr, select_expr, ... </div><div class="line"><span class="keyword">FROM</span> table_reference</div><div class="line">[<span class="keyword">WHERE</span> where_condition] </div><div class="line">[<span class="keyword">GROUP</span> <span class="keyword">BY</span> col_list [<span class="keyword">HAVING</span> condition]] </div><div class="line">[CLUSTER <span class="keyword">BY</span> col_list </div><div class="line">  | [<span class="keyword">DISTRIBUTE</span> <span class="keyword">BY</span> col_list] [<span class="keyword">SORT</span> <span class="keyword">BY</span>| <span class="keyword">ORDER</span> <span class="keyword">BY</span> col_list] </div><div class="line">] </div><div class="line">[<span class="keyword">LIMIT</span> <span class="built_in">number</span>]</div></pre></td></tr></table></figure>
 <p>注：</p>
 <ol>
@@ -427,6 +427,130 @@
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> a.val1, a.val2, b.val, c.val</div><div class="line">  <span class="keyword">FROM</span> a</div><div class="line">  <span class="keyword">JOIN</span> b <span class="keyword">ON</span> (a.key = b.key)</div><div class="line">  <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> c <span class="keyword">ON</span> (a.key = c.key)</div></pre></td></tr></table></figure>
 <p>先 join a 表到 b 表，丢弃掉所有 join key 中不匹配的记录，然后用这一中间结果和 c 表做 join。这一表述有一个不太明显的问题，就是当一个 key 在 a 表和 c 表都存在，但是 b 表中不存在的时候：整个记录在第一次 join，即 a JOIN b 的时候都被丢掉了（包括a.val1，a.val2和a.key），然后我们再和 c 表 join 的时候，如果 c.key 与 a.key 或 b.key 相等，就会得到这样的结果：NULL, NULL, NULL, c.val</p>
+<h2 id="2-4-HQL小结"><a href="#2-4-HQL小结" class="headerlink" title="2.4 HQL小结"></a>2.4 HQL小结</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">databases</span>;</div><div class="line"><span class="keyword">show</span> <span class="keyword">tables</span>;</div><div class="line">desc test;</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="2-4-1-分桶表示例"><a href="#2-4-1-分桶表示例" class="headerlink" title="2.4.1 分桶表示例"></a>2.4.1 分桶表示例</h3><ul>
+<li><p>创建分桶表</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">drop</span> <span class="keyword">table</span> stu_buck;</div><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> stu_buck(Sno <span class="built_in">int</span>,Sname <span class="keyword">string</span>,Sex <span class="keyword">string</span>,Sage <span class="built_in">int</span>,Sdept <span class="keyword">string</span>)</div><div class="line">clustered <span class="keyword">by</span>(Sno) </div><div class="line">sorted <span class="keyword">by</span>(Sno <span class="keyword">DESC</span>)</div><div class="line"><span class="keyword">into</span> <span class="number">4</span> buckets</div><div class="line"><span class="keyword">row</span> <span class="keyword">format</span> <span class="keyword">delimited</span></div><div class="line"><span class="keyword">fields</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">','</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>设置变量,设置分桶为true, 设置reduce数量是分桶的数量个数</p>
+<ul>
+<li>set hive.enforce.bucketing = true;</li>
+<li>set mapreduce.job.reduces=4;</li>
+<li>insert overwrite table student_buck</li>
+<li>select * from student cluster by(Sno) sort by(Sage);  报错,cluster 和 sort 不能共存</li>
+</ul>
+</li>
+<li><p>往创建的分通表插入数据(插入数据需要是已分桶, 且排序的)</p>
+<ul>
+<li>可以使用distribute by(sno) sort by(sno asc)   或是排序和分桶的字段相同的时候使用Cluster by(字段)</li>
+<li><p>注意使用cluster by  就等同于分桶+排序(sort)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">table</span> stu_buck</div><div class="line"><span class="keyword">select</span> Sno,Sname,Sex,Sage,Sdept <span class="keyword">from</span> student <span class="keyword">distribute</span> <span class="keyword">by</span>(Sno) <span class="keyword">sort</span> <span class="keyword">by</span>(Sno <span class="keyword">asc</span>);</div><div class="line"></div><div class="line"><span class="keyword">insert</span> overwrite <span class="keyword">table</span> stu_buck</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">distribute</span> <span class="keyword">by</span>(Sno) <span class="keyword">sort</span> <span class="keyword">by</span>(Sno <span class="keyword">asc</span>);</div><div class="line"></div><div class="line"><span class="keyword">insert</span> overwrite <span class="keyword">table</span> stu_buck</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student cluster <span class="keyword">by</span>(Sno);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-4-2-保存select查询结果的几种方式："><a href="#2-4-2-保存select查询结果的几种方式：" class="headerlink" title="2.4.2 保存select查询结果的几种方式："></a>2.4.2 保存select查询结果的几种方式：</h3><ol>
+<li><p>将查询结果保存到一张新的hive表中</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> t_tmp</div><div class="line"><span class="keyword">as</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t_p;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>将查询结果保存到一张已经存在的hive表中</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span>  <span class="keyword">table</span> t_tmp</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t_p;</div></pre></td></tr></table></figure>
+</li>
+<li><p>将查询结果保存到指定的文件目录（可以是本地，也可以是hdfs）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">insert</span> overwrite <span class="keyword">local</span> <span class="keyword">directory</span> <span class="string">'/home/hadoop/test'</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t_p;</div><div class="line"></div><div class="line"><span class="keyword">insert</span> overwrite <span class="keyword">directory</span> <span class="string">'/aaa/test'</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t_p;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<h3 id="2-4-3-关于hive中的各种join"><a href="#2-4-3-关于hive中的各种join" class="headerlink" title="2.4.3 关于hive中的各种join"></a>2.4.3 关于hive中的各种join</h3><ol>
+<li><p>准备数据</p>
+<p> 1,a<br> 2,b<br> 3,c<br> 4,d<br> 7,y<br> 8,u</p>
+<p> 2,bb<br> 3,cc<br> 7,yy<br> 9,pp</p>
+</li>
+</ol>
+<ol>
+<li>建表：</li>
+</ol>
+<pre><code><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> a(<span class="keyword">id</span> <span class="built_in">int</span>,<span class="keyword">name</span> <span class="keyword">string</span>)</div><div class="line"><span class="keyword">row</span> <span class="keyword">format</span> <span class="keyword">delimited</span> <span class="keyword">fields</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">','</span>;</div><div class="line"></div><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> b(<span class="keyword">id</span> <span class="built_in">int</span>,<span class="keyword">name</span> <span class="keyword">string</span>)</div><div class="line"><span class="keyword">row</span> <span class="keyword">format</span> <span class="keyword">delimited</span> <span class="keyword">fields</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">','</span>;</div></pre></td></tr></table></figure>
+</code></pre><ol>
+<li><p>导入数据</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">load</span> <span class="keyword">data</span> <span class="keyword">local</span> inpath <span class="string">'/home/hadoop/a.txt'</span> <span class="keyword">into</span> <span class="keyword">table</span> a;</div><div class="line"><span class="keyword">load</span> <span class="keyword">data</span> <span class="keyword">local</span> inpath <span class="string">'/home/hadoop/b.txt'</span> <span class="keyword">into</span> <span class="keyword">table</span> b;</div></pre></td></tr></table></figure>
+</li>
+<li><p>实验</p>
+<ul>
+<li>inner join</li>
+</ul>
+</li>
+</ol>
+<pre><code>    <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> a <span class="keyword">inner</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.id=b.id;</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">| a.id  | a.name  | b.id  | b.name  |</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">| 2     | b       | 2     | bb      |</div><div class="line">| 3     | c       | 3     | cc      |</div><div class="line">| 7     | y       | 7     | yy      |</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div></pre></td></tr></table></figure>
+
+- left join
+
+    <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> a <span class="keyword">left</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.id=b.id;</div><div class="line">        +<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">        | a.id  | a.name  | b.id  | b.name  |</div><div class="line">        +<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">        | 1     | a       | NULL  | NULL    |</div><div class="line">        | 2     | b       | 2     | bb      |</div><div class="line">        | 3     | c       | 3     | cc      |</div><div class="line">        | 4     | d       | NULL  | NULL    |</div><div class="line">        | 7     | y       | 7     | yy      |</div><div class="line">        | 8     | u       | NULL  | NULL    |</div><div class="line">        +<span class="comment">-------+---------+-------+---------+--+</span></div></pre></td></tr></table></figure>
+
+- right join
+
+    `select * from a right join b on a.id=b.id;`
+
+- outer join
+
+    <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> a <span class="keyword">full</span> <span class="keyword">outer</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.id=b.id;</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">| a.id  | a.name  | b.id  | b.name  |</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">| 1     | a       | NULL  | NULL    |</div><div class="line">| 2     | b       | 2     | bb      |</div><div class="line">| 3     | c       | 3     | cc      |</div><div class="line">| 4     | d       | NULL  | NULL    |</div><div class="line">| 7     | y       | 7     | yy      |</div><div class="line">| 8     | u       | NULL  | NULL    |</div><div class="line">| NULL  | NULL    | 9     | pp      |</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div></pre></td></tr></table></figure>
+</code></pre><ul>
+<li><p>left semi join</p>
+   <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> a <span class="keyword">left</span> semi <span class="keyword">join</span> b <span class="keyword">on</span> a.id = b.id;</div><div class="line">+<span class="comment">-------+---------+--+</span></div><div class="line">| a.id  | a.name  |</div><div class="line">+<span class="comment">-------+---------+--+</span></div><div class="line">| 2     | b       |</div><div class="line">| 3     | c       |</div><div class="line">| 7     | y       |</div><div class="line">+<span class="comment">-------+---------+--+</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="2-4-4-其他"><a href="#2-4-4-其他" class="headerlink" title="2.4.4 其他"></a>2.4.4 其他</h3><ul>
+<li>多重插入：</li>
+</ul>
+<pre><code><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">from student</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">table</span> student_p <span class="keyword">partition</span>(part=<span class="string">'a'</span>)</div><div class="line"><span class="keyword">select</span> * <span class="keyword">where</span> Sno&lt;<span class="number">95011</span>;</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">table</span> student_p <span class="keyword">partition</span>(part=<span class="string">'a'</span>)</div><div class="line"><span class="keyword">select</span> * <span class="keyword">where</span> Sno&lt;<span class="number">95011</span>;</div></pre></td></tr></table></figure>
+</code></pre><ul>
+<li><p>导出数据到本地</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">insert</span> overwrite <span class="keyword">local</span> <span class="keyword">directory</span> <span class="string">'/home/hadoop/student.txt'</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student;</div></pre></td></tr></table></figure>
+</li>
+<li><p>UDF案例</p>
+</li>
+</ul>
+<pre><code><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> rat_json(line <span class="keyword">string</span>) <span class="keyword">row</span> <span class="keyword">format</span> <span class="keyword">delimited</span>;</div><div class="line"><span class="keyword">load</span> <span class="keyword">data</span> <span class="keyword">local</span> inpath <span class="string">'/home/hadoop/rating.json'</span> <span class="keyword">into</span> <span class="keyword">table</span> rat_json;</div><div class="line"></div><div class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> t_rating;</div><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> t_rating(movieid <span class="keyword">string</span>,rate <span class="built_in">int</span>,timestring <span class="keyword">string</span>,uid <span class="keyword">string</span>)</div><div class="line"><span class="keyword">row</span> <span class="keyword">format</span> <span class="keyword">delimited</span> <span class="keyword">fields</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">'\t'</span>;</div><div class="line"></div><div class="line"><span class="keyword">insert</span> overwrite <span class="keyword">table</span> t_rating</div><div class="line"><span class="keyword">select</span> <span class="keyword">split</span>(parsejson(line),<span class="string">'\t'</span>)[<span class="number">0</span>]<span class="keyword">as</span> movieid,<span class="keyword">split</span>(parsejson(line),<span class="string">'\t'</span>)[<span class="number">1</span>] <span class="keyword">as</span> rate,<span class="keyword">split</span>(parsejson(line),<span class="string">'\t'</span>)[<span class="number">2</span>] <span class="keyword">as</span> timestring,<span class="keyword">split</span>(parsejson(line),<span class="string">'\t'</span>)[<span class="number">3</span>] <span class="keyword">as</span> uid <span class="keyword">from</span> rat_json <span class="keyword">limit</span> <span class="number">10</span>;</div></pre></td></tr></table></figure>
+</code></pre><ul>
+<li>内置jason函数</li>
+</ul>
+<pre><code><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> get_json_object(line,<span class="string">'$.movie'</span>) <span class="keyword">as</span> moive,get_json_object(line,<span class="string">'$.rate'</span>) <span class="keyword">as</span> rate  <span class="keyword">from</span> rat_json <span class="keyword">limit</span> <span class="number">10</span>;</div></pre></td></tr></table></figure>
+</code></pre><ul>
+<li><p>transform案例</p>
+<ol>
+<li><p>先加载rating.json文件到hive的一个原始表 rat_json</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> rat_json(line <span class="keyword">string</span>) <span class="keyword">row</span> <span class="keyword">format</span> <span class="keyword">delimited</span>;</div><div class="line"><span class="keyword">load</span> <span class="keyword">data</span> <span class="keyword">local</span> inpath <span class="string">'/home/hadoop/rating.json'</span> <span class="keyword">into</span> <span class="keyword">table</span> rat_json;</div></pre></td></tr></table></figure>
+</li>
+<li><p>需要解析json数据成四个字段，插入一张新的表 t_rating</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">insert</span> overwrite <span class="keyword">table</span> t_rating</div><div class="line"><span class="keyword">select</span> get_json_object(line,<span class="string">'$.movie'</span>) <span class="keyword">as</span> moive,get_json_object(line,<span class="string">'$.rate'</span>) <span class="keyword">as</span> rate  <span class="keyword">from</span> rat_json;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<ol>
+<li><p>使用transform+python的方式去转换unixtime为weekday</p>
+<ul>
+<li><p>先编辑一个python脚本文件</p>
+<p>  <code>vi weekday_mapper.py</code></p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">#!/bin/python</span></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> datetime</div><div class="line"></div><div class="line"><span class="keyword">for</span> line <span class="keyword">in</span> sys.stdin:</div><div class="line">  line = line.strip()</div><div class="line">  movieid, rating, unixtime,userid = line.split(<span class="string">'\t'</span>)</div><div class="line">  weekday = datetime.datetime.fromtimestamp(float(unixtime)).isoweekday()</div><div class="line">  <span class="keyword">print</span> <span class="string">'\t'</span>.join([movieid, rating, str(weekday),userid])</div></pre></td></tr></table></figure>
+</li>
+<li><p>保存文件</p>
+</li>
+<li><p>然后，将文件加入hive的classpath：</p>
+<ul>
+<li>hive&gt;add FILE /home/hadoop/weekday_mapper.py;</li>
+<li>hive&gt;create TABLE u_data_new as</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span></div><div class="line">  TRANSFORM (movieid, rate, timestring,uid)</div><div class="line">  <span class="keyword">USING</span> <span class="string">'python weekday_mapper.py'</span></div><div class="line">  <span class="keyword">AS</span> (movieid, rate, <span class="keyword">weekday</span>,uid)</div><div class="line"><span class="keyword">FROM</span> t_rating;</div><div class="line"></div><div class="line"><span class="keyword">select</span> <span class="keyword">distinct</span>(<span class="keyword">weekday</span>) <span class="keyword">from</span> u_data_new <span class="keyword">limit</span> <span class="number">10</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
 <h1 id="3-Hive-Shell参数"><a href="#3-Hive-Shell参数" class="headerlink" title="3 Hive Shell参数"></a>3 Hive Shell参数</h1><h2 id="3-1-Hive命令行"><a href="#3-1-Hive命令行" class="headerlink" title="3.1 Hive命令行"></a>3.1 Hive命令行</h2><p><strong>语法结构</strong></p>
 <p>hive [-hiveconf x=y]<em> [&lt;-i filename&gt;]</em> [&lt;-f filename&gt;|&lt;-e query-string&gt;] [-S]</p>
 <p><strong>说明：</strong></p>
@@ -450,6 +574,85 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set mapred.reduce.tasks=100;</div></pre></td></tr></table></figure>
 <p>这一设定的作用域也是session级的。</p>
 <p>上述三种设定方式的优先级依次递增。即参数声明覆盖命令行参数，命令行参数覆盖配置文件设定。注意某些系统级的参数，例如log4j相关的设定，必须用前两种方式设定，因为那些参数的读取在Session建立以前已经完成了。</p>
+<h1 id="4-Hive函数"><a href="#4-Hive函数" class="headerlink" title="4 Hive函数"></a>4 Hive函数</h1><p><strong>创建测试表</strong></p>
+<ul>
+<li><code>vim dual.data</code> 只写一个空格</li>
+<li>创建表 <ul>
+<li><code>use school;</code></li>
+<li><code>create table dual(id int);</code></li>
+</ul>
+</li>
+<li><code>load data local inpath &#39;/Users/lixiwei-mac/app/data/hive_tmp/dual.data&#39; into table dual;</code> 导入数据</li>
+<li><p>测试</p>
+<ul>
+<li><p><code>select substr(&#39;NikoBelic&#39;,0,4) from dual;</code></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+-------+--+</div><div class="line">|  _c0  |</div><div class="line">+-------+--+</div><div class="line">| Niko  |</div><div class="line">+-------+--+</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-1-内置运算符"><a href="#4-1-内置运算符" class="headerlink" title="4.1 内置运算符"></a>4.1 内置运算符</h2><p><a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF#LanguageManualUDF-StringOperators" target="_blank" rel="external">内容较多，见《Hive官方文档》</a></p>
+<h2 id="4-2-内置函数"><a href="#4-2-内置函数" class="headerlink" title="4.2 内置函数"></a>4.2 内置函数</h2><p><a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF#LanguageManualUDF-StringOperators" target="_blank" rel="external">内容较多，见《Hive官方文档》</a></p>
+<h2 id="4-3-Hive自定义函数和Transform"><a href="#4-3-Hive自定义函数和Transform" class="headerlink" title="4.3 Hive自定义函数和Transform"></a>4.3 Hive自定义函数和Transform</h2><p>当Hive提供的内置函数无法满足你的业务处理需要时，此时就可以考虑使用用户自定义函数（UDF：user-defined function）。</p>
+<h3 id="4-3-1-自定义函数类别"><a href="#4-3-1-自定义函数类别" class="headerlink" title="4.3.1 自定义函数类别"></a>4.3.1 自定义函数类别</h3><ul>
+<li>UDF  作用于单个数据行，产生一个数据行作为输出。（数学函数，字符串函数）</li>
+<li>UDAF（用户定义聚集函数）：接收多个输入数据行，并产生一个输出数据行。（count，max）</li>
+</ul>
+<h3 id="4-3-2-UDF开发实例"><a href="#4-3-2-UDF开发实例" class="headerlink" title="4.3.2 UDF开发实例"></a>4.3.2 UDF开发实例</h3><ol>
+<li><p>先开发一个java类，继承UDF，并重载evaluate方法</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> cn.itcast.bigdata.udf</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hive.ql.exec.UDF;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.io.Text;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Lower</span> <span class="keyword">extends</span> <span class="title">UDF</span></span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> Text <span class="title">evaluate</span><span class="params">(<span class="keyword">final</span> Text s)</span></span>&#123;</div><div class="line">		<span class="keyword">if</span>(s==<span class="keyword">null</span>)&#123;<span class="keyword">return</span> <span class="keyword">null</span>;&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Text(s.toString().toLowerCase());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>打成jar包上传到服务器</li>
+<li>将jar包添加到hive的classpath<ul>
+<li>hive&gt;add JAR /home/hadoop/udf.jar;</li>
+<li>创建临时函数与开发好的java class关联</li>
+<li>即可在hql中使用自定义的函数strip </li>
+<li>Select strip(name),age from t_test;</li>
+</ul>
+</li>
+<li>创建临时函数与开发好的java class关联<ul>
+<li><code>Hive&gt;create temporary function toprovince as &#39;cn.itcast.bigdata.udf.ToProvince&#39;;</code></li>
+</ul>
+</li>
+<li>即可在hql中使用自定义的函数strip <ul>
+<li><code>Select strip(name),age from t_test;</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="4-3-3-Transform实现"><a href="#4-3-3-Transform实现" class="headerlink" title="4.3.3 Transform实现"></a>4.3.3 Transform实现</h3><ul>
+<li>Hive的 TRANSFORM 关键字提供了在SQL中调用自写脚本的功能</li>
+<li>适合实现Hive中没有的功能又不想写UDF的情况</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> u_data_new (</div><div class="line">  movieid <span class="built_in">INT</span>,</div><div class="line">  rating <span class="built_in">INT</span>,</div><div class="line">  <span class="keyword">weekday</span> <span class="built_in">INT</span>,</div><div class="line">  userid <span class="built_in">INT</span>)</div><div class="line"><span class="keyword">ROW</span> <span class="keyword">FORMAT</span> <span class="keyword">DELIMITED</span></div><div class="line"><span class="keyword">FIELDS</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">'\t'</span>;</div><div class="line"></div><div class="line">add FILE weekday_mapper.py;</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> OVERWRITE <span class="keyword">TABLE</span> u_data_new</div><div class="line"><span class="keyword">SELECT</span></div><div class="line">  TRANSFORM (movieid, rating, unixtime,userid)</div><div class="line">  <span class="keyword">USING</span> <span class="string">'python weekday_mapper.py'</span></div><div class="line">  <span class="keyword">AS</span> (movieid, rating, <span class="keyword">weekday</span>,userid)</div><div class="line"><span class="keyword">FROM</span> u_data;</div></pre></td></tr></table></figure>
+<ul>
+<li>使用示例1：下面这句sql就是借用了weekday_mapper.py对数据进行了处理.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/bin/python</span></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> datetime</div><div class="line"></div><div class="line"><span class="keyword">for</span> line <span class="keyword">in</span> sys.stdin:</div><div class="line">  line = line.strip()</div><div class="line">  movieid, rating, unixtime,userid = line.split(<span class="string">'\t'</span>)</div><div class="line">  weekday = datetime.datetime.fromtimestamp(float(unixtime)).isoweekday()</div><div class="line">  <span class="keyword">print</span> <span class="string">'\t'</span>.join([movieid, rating, str(weekday),userid])</div></pre></td></tr></table></figure>
+<ul>
+<li>其中weekday_mapper.py内容如下</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/bin/python</span></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> datetime</div><div class="line"></div><div class="line"><span class="keyword">for</span> line <span class="keyword">in</span> sys.stdin:</div><div class="line">  line = line.strip()</div><div class="line">  movieid, rating, unixtime,userid = line.split(<span class="string">'\t'</span>)</div><div class="line">  weekday = datetime.datetime.fromtimestamp(float(unixtime)).isoweekday()</div><div class="line">  <span class="keyword">print</span> <span class="string">'\t'</span>.join([movieid, rating, str(weekday),userid])</div></pre></td></tr></table></figure>
+<ul>
+<li>使用示例2：下面的例子则是使用了shell的cat命令来处理数据</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">FROM invites a <span class="keyword">INSERT</span> OVERWRITE <span class="keyword">TABLE</span> <span class="keyword">events</span> <span class="keyword">SELECT</span> TRANSFORM(a.foo, a.bar) <span class="keyword">AS</span> (oof, rab) <span class="keyword">USING</span> <span class="string">'/bin/cat'</span> <span class="keyword">WHERE</span> a.ds &gt; <span class="string">'2008-08-09'</span>;</div></pre></td></tr></table></figure>
+<h1 id="5-遇到的问题问题"><a href="#5-遇到的问题问题" class="headerlink" title="5 遇到的问题问题"></a>5 遇到的问题问题</h1><ol>
+<li><p>UDF 载入Jar成功 但添加function时ClassNotFound。</p>
+<ul>
+<li>如果确定create function xx as ‘ClassPackageName’ 中的ClassPackageName没有输入错误，那么可能是导出的Jar出现了问题。</li>
+<li>Idea编辑器下，导出jar时不要选择 from moudles 而要选择empty,并创建META-INF，不要引入依赖jar包</li>
+<li>退出Hive服务重新连接并导入即可</li>
+</ul>
+</li>
+<li><p>创建UDF方法出现异常  Unsupported major.minor version 52.0</p>
+<ul>
+<li>Hadoop的JDK版本和jar的导出版本不一致，52.0是jdk8的版本号</li>
+<li>修改Hadoop的hadoop-env.sh，将jdk7的路径修改为jdk8即可</li>
+</ul>
+</li>
+</ol>
 
       
 
@@ -719,6 +922,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
@@ -727,19 +934,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -747,7 +942,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -771,11 +974,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -783,7 +990,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -792,10 +999,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -811,10 +1014,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
@@ -823,7 +1022,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -832,6 +1031,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
