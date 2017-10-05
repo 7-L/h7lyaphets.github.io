@@ -17,7 +17,7 @@
 <meta property="og:description" content="1 Hive基础知识1.1 简介什么是HiveHive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供类SQL查询功能。 为什么使用Hive  直接使用Hadoop所面临的问题  学习成本高 一般项目周期要求短 MapReduce实现复杂的查询呢逻辑开发难度较大   为什么要使用Hive  操作接口采用类SQL语法，可以快速开发 避免编写MR，减少学习成本 扩">
 <meta property="og:image" content="https://seawaylee.github.io/2017/07/02/大数据/Hive/Hive学习笔记（一）-%20详解Hive/14983216998950.jpg">
 <meta property="og:image" content="https://seawaylee.github.io/2017/07/02/大数据/Hive/Hive学习笔记（一）-%20详解Hive/14986658358207.jpg">
-<meta property="og:updated_time" content="2017-10-05T05:41:41.000Z">
+<meta property="og:updated_time" content="2017-10-05T05:46:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive学习笔记（一）- 详解Hive">
 <meta name="twitter:description" content="1 Hive基础知识1.1 简介什么是HiveHive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供类SQL查询功能。 为什么使用Hive  直接使用Hadoop所面临的问题  学习成本高 一般项目周期要求短 MapReduce实现复杂的查询呢逻辑开发难度较大   为什么要使用Hive  操作接口采用类SQL语法，可以快速开发 避免编写MR，减少学习成本 扩">
@@ -405,8 +405,8 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> a.val, b.val, c.val <span class="keyword">FROM</span> a <span class="keyword">JOIN</span> b <span class="keyword">ON</span> (a.key = b.key1)</div><div class="line">  <span class="keyword">JOIN</span> c <span class="keyword">ON</span> (c.key = b.key2)</div></pre></td></tr></table></figure>
 <p>而这一 join 被转化为 2 个 map/reduce 任务。因为 b.key1 用于第一次 join 条件，而 b.key2 用于第二次 join。</p>
 <p><strong>3、join 时，每次 map/reduce 任务的逻辑：</strong></p>
-<pre><code>reducer 会**缓存 join 序列中除了最后一个表的所有表的记录**，再通过最后一个表将结果序列化到文件系统。这一实现有助于在 reduce 端减少内存的使用量。实践中，应该**把最大的那个表写在最后**（否则会因为缓存浪费大量内存）。例如：
-</code></pre><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> a.val, b.val, c.val <span class="keyword">FROM</span> a</div><div class="line">    <span class="keyword">JOIN</span> b <span class="keyword">ON</span> (a.key = b.key1) <span class="keyword">JOIN</span> c <span class="keyword">ON</span> (c.key = b.key1)</div></pre></td></tr></table></figure>
+<p>reducer 会<strong>缓存 join 序列中除了最后一个表的所有表的记录</strong>，再通过最后一个表将结果序列化到文件系统。这一实现有助于在 reduce 端减少内存的使用量。实践中，应该<strong>把最大的那个表写在最后</strong>（否则会因为缓存浪费大量内存）。例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> a.val, b.val, c.val <span class="keyword">FROM</span> a</div><div class="line">    <span class="keyword">JOIN</span> b <span class="keyword">ON</span> (a.key = b.key1) <span class="keyword">JOIN</span> c <span class="keyword">ON</span> (c.key = b.key1)</div></pre></td></tr></table></figure>
 <p>所有表都使用同一个 join key（使用 1 次 map/reduce 任务计算）。Reduce 端会缓存 a 表和 b 表的记录，然后每次取得一个 c 表的记录就计算一次 join 结果，类似的还有：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> a.val, b.val, c.val <span class="keyword">FROM</span> a</div><div class="line">    <span class="keyword">JOIN</span> b <span class="keyword">ON</span> (a.key = b.key1) <span class="keyword">JOIN</span> c <span class="keyword">ON</span> (c.key = b.key2)</div></pre></td></tr></table></figure>
 <p>这里用了 2 次 map/reduce 任务。第一次缓存 a 表，用 b 表序列化；第二次缓存第一次 map/reduce 任务的结果，然后用 c 表序列化。</p>
@@ -485,20 +485,17 @@
 </ul>
 </li>
 </ol>
-<pre><code>    <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> a <span class="keyword">inner</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.id=b.id;</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">| a.id  | a.name  | b.id  | b.name  |</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">| 2     | b       | 2     | bb      |</div><div class="line">| 3     | c       | 3     | cc      |</div><div class="line">| 7     | y       | 7     | yy      |</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div></pre></td></tr></table></figure>
-
-- left join
-
-    <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> a <span class="keyword">left</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.id=b.id;</div><div class="line">        +<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">        | a.id  | a.name  | b.id  | b.name  |</div><div class="line">        +<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">        | 1     | a       | NULL  | NULL    |</div><div class="line">        | 2     | b       | 2     | bb      |</div><div class="line">        | 3     | c       | 3     | cc      |</div><div class="line">        | 4     | d       | NULL  | NULL    |</div><div class="line">        | 7     | y       | 7     | yy      |</div><div class="line">        | 8     | u       | NULL  | NULL    |</div><div class="line">        +<span class="comment">-------+---------+-------+---------+--+</span></div></pre></td></tr></table></figure>
-
-- right join
-
-    `select * from a right join b on a.id=b.id;`
-
-- outer join
-
-    <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> a <span class="keyword">full</span> <span class="keyword">outer</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.id=b.id;</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">| a.id  | a.name  | b.id  | b.name  |</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">| 1     | a       | NULL  | NULL    |</div><div class="line">| 2     | b       | 2     | bb      |</div><div class="line">| 3     | c       | 3     | cc      |</div><div class="line">| 4     | d       | NULL  | NULL    |</div><div class="line">| 7     | y       | 7     | yy      |</div><div class="line">| 8     | u       | NULL  | NULL    |</div><div class="line">| NULL  | NULL    | 9     | pp      |</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div></pre></td></tr></table></figure>
+<pre><code><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> a <span class="keyword">inner</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.id=b.id;</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">| a.id  | a.name  | b.id  | b.name  |</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">| 2     | b       | 2     | bb      |</div><div class="line">| 3     | c       | 3     | cc      |</div><div class="line">| 7     | y       | 7     | yy      |</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div></pre></td></tr></table></figure>
 </code></pre><ul>
+<li><p>left join</p>
+   <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> a <span class="keyword">left</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.id=b.id;</div><div class="line">        +<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">        | a.id  | a.name  | b.id  | b.name  |</div><div class="line">        +<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">        | 1     | a       | NULL  | NULL    |</div><div class="line">        | 2     | b       | 2     | bb      |</div><div class="line">        | 3     | c       | 3     | cc      |</div><div class="line">        | 4     | d       | NULL  | NULL    |</div><div class="line">        | 7     | y       | 7     | yy      |</div><div class="line">        | 8     | u       | NULL  | NULL    |</div><div class="line">        +<span class="comment">-------+---------+-------+---------+--+</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>right join</p>
+<p>   <code>select * from a right join b on a.id=b.id;</code></p>
+</li>
+<li><p>outer join</p>
+   <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> a <span class="keyword">full</span> <span class="keyword">outer</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.id=b.id;</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">| a.id  | a.name  | b.id  | b.name  |</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div><div class="line">| 1     | a       | NULL  | NULL    |</div><div class="line">| 2     | b       | 2     | bb      |</div><div class="line">| 3     | c       | 3     | cc      |</div><div class="line">| 4     | d       | NULL  | NULL    |</div><div class="line">| 7     | y       | 7     | yy      |</div><div class="line">| 8     | u       | NULL  | NULL    |</div><div class="line">| NULL  | NULL    | 9     | pp      |</div><div class="line">+<span class="comment">-------+---------+-------+---------+--+</span></div></pre></td></tr></table></figure>
+</li>
 <li><p>left semi join</p>
    <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> a <span class="keyword">left</span> semi <span class="keyword">join</span> b <span class="keyword">on</span> a.id = b.id;</div><div class="line">+<span class="comment">-------+---------+--+</span></div><div class="line">| a.id  | a.name  |</div><div class="line">+<span class="comment">-------+---------+--+</span></div><div class="line">| 2     | b       |</div><div class="line">| 3     | c       |</div><div class="line">| 7     | y       |</div><div class="line">+<span class="comment">-------+---------+--+</span></div></pre></td></tr></table></figure>
 </li>
@@ -922,10 +919,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
@@ -934,7 +927,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -946,18 +955,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
               </li>
              
@@ -966,23 +963,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Flask</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -990,7 +975,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1002,6 +995,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
@@ -1010,11 +1007,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1022,7 +1019,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1034,19 +1031,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
             
             <div class="clearfix"></div>
