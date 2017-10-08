@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://seawaylee.github.io">
-  <title>大数据架构辅助系统（一）- Azkaban学习笔记 | SeawayLee</title>
+  <title>大数据架构辅助系统（二）- Azkaban学习笔记 | SeawayLee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1 工作流调度器1.1 为什么需要工作流调度系统 一个完整的数据分析系统通常都是由大量任务单元组成： shell脚本程序 java程序 mapreduce程序 hive脚本等、   各任务单元之间存在时间先后及前后依赖关系 为了很好地组织起这样的复杂执行计划，需要一个工作流调度系统来调度执行  例如，我们可能有这样一个需求，某个业务系统每天产生20G原始数据，我们每天都要对其进行处理，处理步骤如下">
 <meta name="keywords" content="大数据">
 <meta property="og:type" content="article">
-<meta property="og:title" content="大数据架构辅助系统（一）- Azkaban学习笔记">
+<meta property="og:title" content="大数据架构辅助系统（二）- Azkaban学习笔记">
 <meta property="og:url" content="https://seawaylee.github.io/2017/10/08/大数据/辅助系统/Azkaban/index.html">
 <meta property="og:site_name" content="SeawayLee">
 <meta property="og:description" content="1 工作流调度器1.1 为什么需要工作流调度系统 一个完整的数据分析系统通常都是由大量任务单元组成： shell脚本程序 java程序 mapreduce程序 hive脚本等、   各任务单元之间存在时间先后及前后依赖关系 为了很好地组织起这样的复杂执行计划，需要一个工作流调度系统来调度执行  例如，我们可能有这样一个需求，某个业务系统每天产生20G原始数据，我们每天都要对其进行处理，处理步骤如下">
@@ -22,9 +22,9 @@
 <meta property="og:image" content="https://seawaylee.github.io/2017/10/08/大数据/辅助系统/Azkaban/15074469334556.jpg">
 <meta property="og:image" content="https://seawaylee.github.io/2017/10/08/大数据/辅助系统/Azkaban/15074470375415.jpg">
 <meta property="og:image" content="https://seawaylee.github.io/2017/10/08/大数据/辅助系统/Azkaban/15074479436571.jpg">
-<meta property="og:updated_time" content="2017-10-08T11:25:56.000Z">
+<meta property="og:updated_time" content="2017-10-08T11:28:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="大数据架构辅助系统（一）- Azkaban学习笔记">
+<meta name="twitter:title" content="大数据架构辅助系统（二）- Azkaban学习笔记">
 <meta name="twitter:description" content="1 工作流调度器1.1 为什么需要工作流调度系统 一个完整的数据分析系统通常都是由大量任务单元组成： shell脚本程序 java程序 mapreduce程序 hive脚本等、   各任务单元之间存在时间先后及前后依赖关系 为了很好地组织起这样的复杂执行计划，需要一个工作流调度系统来调度执行  例如，我们可能有这样一个需求，某个业务系统每天产生20G原始数据，我们每天都要对其进行处理，处理步骤如下">
 <meta name="twitter:image" content="https://seawaylee.github.io/2017/10/08/大数据/辅助系统/Azkaban/15072764100819.jpg">
   
@@ -177,7 +177,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      大数据架构辅助系统（一）- Azkaban学习笔记
+      大数据架构辅助系统（二）- Azkaban学习笔记
     </h1>
   
 
@@ -484,7 +484,7 @@
  
   <section id="comments">
 <!--高速版，加载速度快，使用前需测试页面的兼容性-->
-<div id="SOHUCS" sid="大数据架构辅助系统（一）- Azkaban学习笔记"></div>
+<div id="SOHUCS" sid="大数据架构辅助系统（二）- Azkaban学习笔记"></div>
 <script>
   (function(){
     var appid = 'cyt3IkjC7',
@@ -615,10 +615,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -627,7 +623,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -639,23 +643,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Celery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -663,7 +651,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -671,7 +663,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+                <a href="javascript:void(0)" class="js-tag color2">Celery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -679,15 +675,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -699,15 +699,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -719,19 +723,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
             
             <div class="clearfix"></div>
