@@ -162,6 +162,69 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JavaWeb/Maven_SSH_Oracle项目搭建全流程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/27/JavaWeb/Maven_SSH_Oracle项目搭建全流程/">Maven_SSH_Oracle项目搭建全流程</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/27/JavaWeb/Maven_SSH_Oracle项目搭建全流程/" class="archive-article-date">
+  	<time datetime="2017-06-27T15:02:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="系统搭建"><a href="#系统搭建" class="headerlink" title="系统搭建"></a>系统搭建</h1><p><strong>github:</strong> <a href="https://github.com/seawaylee/maven-ssh-quickstart" target="_blank" rel="external">https://github.com/seawaylee/maven-ssh-quickstart</a></p>
+<h1 id="1-SSH框架搭建"><a href="#1-SSH框架搭建" class="headerlink" title="1 SSH框架搭建"></a>1 SSH框架搭建</h1><h2 id="1-1-SVN创建项目"><a href="#1-1-SVN创建项目" class="headerlink" title="1.1 SVN创建项目"></a>1.1 SVN创建项目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cd /svn</div><div class="line">sudo svnadmin create nwrd2017    # 创建下面</div><div class="line">sudo chown -R www-data:www-data /svn  # 修改权限</div><div class="line">cd /svn/auth</div><div class="line">sudo vim dav_svn.authz  # 为项目配置用户及权限</div><div class="line">sudo htpasswd dav_svn.passwd $&#123;username&#125;  # 为新用户设置密码</div><div class="line">sudo service apache2 restart   # 重启项目</div></pre></td></tr></table></figure>
+<p>访问 <code>https://${SVN_IP}/svn/${project_name}</code> 查看项目结构</p>
+        
+          <a class="article-more-a" href="/2017/06/27/JavaWeb/Maven_SSH_Oracle项目搭建全流程/#more">阅读全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JavaWeb</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+ 
+
+
+
+  
     <article id="post-爬虫/python/Scrapy学习笔记（一）- 快速入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -825,76 +888,9 @@
 
 
   
-    <article id="post-Java基础/JVM/JVM学习笔记（基础知识）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/">JVM学习笔记（一）- 基础知识</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/" class="archive-article-date">
-  	<time datetime="2017-04-19T12:39:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-Java内存模型"><a href="#1-Java内存模型" class="headerlink" title="1 Java内存模型"></a>1 Java内存模型</h1><h2 id="1-1-内存模型图解"><a href="#1-1-内存模型图解" class="headerlink" title="1.1 内存模型图解"></a>1.1 内存模型图解</h2><p>Java虚拟机在执行Java程序的过程中，会把它所管理的内存划分为若干个不同的数据区。<br>这些区域有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而存在，有的区域则依赖用户线程的启动和结束而建立和销毁，<br>我们可以将这些区域统称为Java运行时数据区域。</p>
-<p>如下图是一个内存模型的关系图（详情见图：内存划分.png）：</p>
-<p><img src="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/Java内存模型.png" alt=""></p>
-<p>如上图所示，Java虚拟机运行时数据区域被分为五个区域：<strong>堆(Heap)、栈(Stack)、本地方法栈(Native Stack)、方法区(Method Area)、程序计数器(Program Count Register)</strong>。</p>
-        
-          <a class="article-more-a" href="/2017/04/19/Java基础/JVM/JVM学习笔记（基础知识）/#more">阅读全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
- 
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -1008,6 +1004,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
@@ -1020,19 +1020,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1041,6 +1029,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1060,7 +1056,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">高并发</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1068,11 +1064,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+                <a href="javascript:void(0)" class="js-tag color4">高并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1084,10 +1084,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
@@ -1096,7 +1092,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1104,11 +1100,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flume</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1120,19 +1112,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
             
             <div class="clearfix"></div>
