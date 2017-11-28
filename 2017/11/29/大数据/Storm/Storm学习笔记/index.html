@@ -6,28 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://seawaylee.github.io">
-  <title>Storm学习笔记（一）- Storm快速入门 | SeawayLee</title>
+  <title>Storm学习笔记 | SeawayLee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1 概述1.1 离线计算、流式计算、实时计算 概述什么是离线计算？  离线计算：批量获取数据、批量传输数据、周期性批量计算数据、展示数据 代表技术：Sqoop批量导入数据、HDFS批量存储数据、MapReduce批量计算数据、Hive批量计算数据、Azkaban任务调度  什么是流式计算？  流式计算：数据实时产生、实时传输、实时计算、实时展示 代表数据：Flume实时获取数据、Kafka实时数据">
 <meta name="keywords" content="大数据,Storm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Storm学习笔记（一）- Storm快速入门">
-<meta property="og:url" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）- Storm快速入门/index.html">
+<meta property="og:title" content="Storm学习笔记">
+<meta property="og:url" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/index.html">
 <meta property="og:site_name" content="SeawayLee">
 <meta property="og:description" content="1 概述1.1 离线计算、流式计算、实时计算 概述什么是离线计算？  离线计算：批量获取数据、批量传输数据、周期性批量计算数据、展示数据 代表技术：Sqoop批量导入数据、HDFS批量存储数据、MapReduce批量计算数据、Hive批量计算数据、Azkaban任务调度  什么是流式计算？  流式计算：数据实时产生、实时传输、实时计算、实时展示 代表数据：Flume实时获取数据、Kafka实时数据">
-<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）-%20Storm快速入门/15118787232094.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）-%20Storm快速入门/15118782566404.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）-%20Storm快速入门/15118783786966.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）-%20Storm快速入门/15118785708213.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）-%20Storm快速入门/15118851356834.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）-%20Storm快速入门/15118849400727.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）-%20Storm快速入门/15118850264899.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）-%20Storm快速入门/15118883711684.jpg">
-<meta property="og:updated_time" content="2017-11-28T17:08:12.000Z">
+<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118787232094.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118782566404.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118783786966.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118785708213.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118904613344.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118851356834.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118849400727.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118850264899.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118883711684.jpg">
+<meta property="og:updated_time" content="2017-11-28T17:39:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Storm学习笔记（一）- Storm快速入门">
+<meta name="twitter:title" content="Storm学习笔记">
 <meta name="twitter:description" content="1 概述1.1 离线计算、流式计算、实时计算 概述什么是离线计算？  离线计算：批量获取数据、批量传输数据、周期性批量计算数据、展示数据 代表技术：Sqoop批量导入数据、HDFS批量存储数据、MapReduce批量计算数据、Hive批量计算数据、Azkaban任务调度  什么是流式计算？  流式计算：数据实时产生、实时传输、实时计算、实时展示 代表数据：Flume实时获取数据、Kafka实时数据">
-<meta name="twitter:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）-%20Storm快速入门/15118787232094.jpg">
+<meta name="twitter:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118787232094.jpg">
   
   
     <link rel="icon" href="/logo.jpeg">
@@ -171,19 +172,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-大数据/Storm/Storm学习笔记（一）- Storm快速入门" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-大数据/Storm/Storm学习笔记" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Storm学习笔记（一）- Storm快速入门
+      Storm学习笔记
     </h1>
   
 
         
-        <a href="/2017/11/29/大数据/Storm/Storm学习笔记（一）- Storm快速入门/" class="archive-article-date">
+        <a href="/2017/11/29/大数据/Storm/Storm学习笔记/" class="archive-article-date">
   	<time datetime="2017-11-28T17:05:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-29</time>
 </a>
         
@@ -203,14 +204,13 @@
 <li>总结：将源源不断产生的数据实时收集并实时计算</li>
 </ul>
 <p><strong>流式计算一般架构图</strong></p>
-<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记（一）- Storm快速入门/15118787232094.jpg" alt=""></p>
+<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118787232094.jpg" alt="">/</p>
 <p><strong>离线计算与实时计算最大的区别？</strong></p>
 <ul>
 <li>收集</li>
 <li>计算</li>
 <li>展示</li>
 </ul>
-<a id="more"></a>
 <h3 id="1-2-Storm概述"><a href="#1-2-Storm概述" class="headerlink" title="1.2 Storm概述"></a>1.2 Storm概述</h3><ul>
 <li>Storm用来实时处理数据</li>
 <li>使用场景<ul>
@@ -236,21 +236,52 @@
 <li>Storm的数据通过网络传输进来；Hadoop的数据保存在磁盘中。</li>
 <li>Storm与Hadoop的编程模型相似</li>
 </ul>
-<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记（一）- Storm快速入门/15118782566404.jpg" alt=""></p>
-<h2 id="2-Storm核心组件"><a href="#2-Storm核心组件" class="headerlink" title="2 Storm核心组件"></a>2 Storm核心组件</h2><h3 id="2-1-组件简介"><a href="#2-1-组件简介" class="headerlink" title="2.1 组件简介"></a>2.1 组件简介</h3><p><img src="/2017/11/29/大数据/Storm/Storm学习笔记（一）- Storm快速入门/15118783786966.jpg" alt=""></p>
+<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118782566404.jpg" alt=""></p>
+<a id="more"></a>
+<h2 id="2-Storm核心组件"><a href="#2-Storm核心组件" class="headerlink" title="2 Storm核心组件"></a>2 Storm核心组件</h2><h3 id="2-1-组件简介"><a href="#2-1-组件简介" class="headerlink" title="2.1 组件简介"></a>2.1 组件简介</h3><p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118783786966.jpg" alt=""></p>
 <ul>
 <li>Nimbus：负责<strong>资源分配</strong>和<strong>任务调度</strong></li>
 <li>Supervisor：负责接受Nimbus分配的任务，启动和停止属于<strong>自己管理的worker进程</strong>。</li>
 <li>Worker：运行具体<strong>处理逻辑的进程</strong>。只有两种类型，<strong>Spout和Bolt</strong>。</li>
 <li>Task：Worker中每一个Spout/Bolt的线程成为一个Task。不同的S/B的Task可能会共享一个物理线程，该线程成为Executor。</li>
 </ul>
-<h3 id="2-2-编程模型"><a href="#2-2-编程模型" class="headerlink" title="2.2 编程模型"></a>2.2 编程模型</h3><p><img src="/2017/11/29/大数据/Storm/Storm学习笔记（一）- Storm快速入门/15118785708213.jpg" alt=""></p>
+<h3 id="2-2-编程模型"><a href="#2-2-编程模型" class="headerlink" title="2.2 编程模型"></a>2.2 编程模型</h3><p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118785708213.jpg" alt=""></p>
 <ul>
 <li>Topology：Storm中运行的一个实时应用程序的名称。</li>
 <li>Spout：在一个Topology中<strong>获取源数据流</strong>的组件。</li>
 <li>Bolt：接受数据然后<strong>执行处理逻辑</strong>的组件。</li>
 <li>Tuple：一次<strong>消息传递的基本单元</strong>，理解为一组消息就是是一个Tuple。</li>
 <li>Stream：表示数据流向。</li>
+</ul>
+<h3 id="2-3-Storm并发机制"><a href="#2-3-Storm并发机制" class="headerlink" title="2.3 Storm并发机制"></a>2.3 Storm并发机制</h3><h4 id="2-3-1-概念"><a href="#2-3-1-概念" class="headerlink" title="2.3.1 概念"></a>2.3.1 概念</h4><ul>
+<li>Workers (JVMs): 在一个物理节点上可以运行<strong>一个或多个独立的JVM进程</strong>。一个Topology可以包含一个或多个worker(并行的跑在不同的物理机上), 所以worker process就是执行一个topology的子集, 并且worker只能对应于一个topology</li>
+<li>Executors (threads): <strong>在一个worker JVM进程中运行着多个Java线程。一个executor线程可以执行一个或多个tasks。</strong>但一般默认每个executor只执行一个task。一个worker可以包含一个或多个executor, 每个component (spout或bolt)至少对应于一个executor, 所以可以说executor执行一个compenent的子集, 同时一个executor只能对应于一个component。 </li>
+<li>Tasks(bolt/spout instances)：Task就是具体的处理逻辑对象，每一个Spout和Bolt会被当作很多task在整个集群里面执行。<strong>每一个task对应到一个线程</strong>，而stream grouping则是定义怎么从一堆task发射tuple到另外一堆task。你可以调用<strong>TopologyBuilder.setSpout和TopBuilder.setBolt来设置并行度 — 也就是有多少个task。 </strong></li>
+</ul>
+<h4 id="2-3-2-配置并行度"><a href="#2-3-2-配置并行度" class="headerlink" title="2.3.2 配置并行度"></a>2.3.2 配置并行度</h4><ul>
+<li>对于并发度的配置, 在storm里面可以在多个地方进行配置, 优先级为：<ul>
+<li>defaults.yaml &lt; storm.yaml &lt; topology-specific configuration &lt; internal component-specific configuration &lt; external component-specific configuration </li>
+</ul>
+</li>
+<li>worker processes的数目, 可以通过配置文件和代码中配置, worker就是执行进程, 所以考虑并发的效果, <strong>数目至少应该大亍machines的数目</strong> </li>
+<li>executor的数目, <strong>component的并发线程数</strong>，只能在代码中配置(通过setBolt和setSpout的参数), 例如, setBolt(“green-bolt”, new GreenBolt(), 2) </li>
+<li>tasks的数目, 可以不配置, <strong>默认和executor1:1</strong>, 也可以通过setNumTasks()配置 </li>
+<li>Topology的worker数通过config设置，即执行该topology的worker（java）进程数。它可以通过 storm rebalance 命令任意调整。 </li>
+</ul>
+<p><strong>代码配置</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Config conf = newConfig();</div><div class="line">conf.setNumWorkers(<span class="number">2</span>); <span class="comment">//用2个worker</span></div><div class="line">topologyBuilder.setSpout(<span class="string">"blue-spout"</span>, newBlueSpout(), <span class="number">2</span>); <span class="comment">//设置2个并发度</span></div><div class="line">topologyBuilder.setBolt(<span class="string">"green-bolt"</span>, newGreenBolt(), <span class="number">2</span>).setNumTasks(<span class="number">4</span>).shuffleGrouping(<span class="string">"blue-spout"</span>); <span class="comment">//设置2个并发度，4个任务</span></div><div class="line">topologyBuilder.setBolt(<span class="string">"yellow-bolt"</span>, newYellowBolt(), <span class="number">6</span>).shuffleGrouping(<span class="string">"green-bolt"</span>); <span class="comment">//设置6个并发度</span></div><div class="line">StormSubmitter.submitTopology(<span class="string">"mytopology"</span>, conf, topologyBuilder.createTopology());</div></pre></td></tr></table></figure>
+<p><strong>图解</strong></p>
+<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118904613344.jpg" alt=""></p>
+<p><strong>代码配置对应的策略</strong></p>
+<ul>
+<li>3个组件的并发度加起来是10，就是说拓扑一共有10个executor</li>
+<li>一共有2个worker，每个worker产生10 / 2 = 5条线程</li>
+<li>绿色的bolt配置成2个executor和4个task。为此每个executor为这个bolt运行2个task。</li>
+</ul>
+<p><strong>动态的改变并行度</strong></p>
+<ul>
+<li>Storm支持在不 restart topology 的情况下, 动态的改变(增减) worker processes 的数目和 executors 的数目, 称为rebalancing. 通过Storm web UI，或者通过storm rebalance命令实现： </li>
+<li>storm rebalance mytopology -n 5 -e blue-spout=3 -e yellow-bolt=10</li>
 </ul>
 <h2 id="3-部署和测试"><a href="#3-部署和测试" class="headerlink" title="3 部署和测试"></a>3 部署和测试</h2><h3 id="3-1-安装、部署"><a href="#3-1-安装、部署" class="headerlink" title="3.1 安装、部署"></a>3.1 安装、部署</h3><h4 id="3-1-1-单机伪分布式部署"><a href="#3-1-1-单机伪分布式部署" class="headerlink" title="3.1.1 单机伪分布式部署"></a>3.1.1 单机伪分布式部署</h4><ol>
 <li>下载storm-1.1.1压缩包</li>
@@ -266,7 +297,7 @@
 <li><code>nohup strom supervisor</code> 在其他节点上启动supervisor服务（单机就直接在host上启动就ok）</li>
 </ol>
 <h4 id="3-1-3-查看集群"><a href="#3-1-3-查看集群" class="headerlink" title="3.1.3 查看集群"></a>3.1.3 查看集群</h4><p><strong>访问 <a href="http://nimbus.host:8080" target="_blank" rel="external">http://nimbus.host:8080</a></strong></p>
-<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记（一）- Storm快速入门/15118851356834.jpg" alt=""></p>
+<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118851356834.jpg" alt=""></p>
 <p><strong>查看Storm日志</strong></p>
 <ul>
 <li>nimbus: <em>$STORM_HOME/logs/nimbus.log</em></li>
@@ -300,11 +331,11 @@
 </li>
 </ul>
 <h5 id="3-2-2-运行WordCount-Topology"><a href="#3-2-2-运行WordCount-Topology" class="headerlink" title="3.2.2 运行WordCount-Topology"></a>3.2.2 运行WordCount-Topology</h5><p><code>$ storm jar storm-starter.jar org.apache.storm.starter.WordCountTopology theirWordCount</code></p>
-<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记（一）- Storm快速入门/15118849400727.jpg" alt=""></p>
+<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118849400727.jpg" alt=""></p>
 <p><strong>运行后集群状态</strong></p>
-<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记（一）- Storm快速入门/15118850264899.jpg" alt=""></p>
+<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118850264899.jpg" alt=""></p>
 <h2 id="4-第一个Storm程序"><a href="#4-第一个Storm程序" class="headerlink" title="4 第一个Storm程序"></a>4 第一个Storm程序</h2><h3 id="4-1-WordCount"><a href="#4-1-WordCount" class="headerlink" title="4.1 WordCount"></a>4.1 WordCount</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> storm.word_count;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.storm.Config;</div><div class="line"><span class="keyword">import</span> org.apache.storm.LocalCluster;</div><div class="line"><span class="keyword">import</span> org.apache.storm.spout.SpoutOutputCollector;</div><div class="line"><span class="keyword">import</span> org.apache.storm.task.OutputCollector;</div><div class="line"><span class="keyword">import</span> org.apache.storm.task.TopologyContext;</div><div class="line"><span class="keyword">import</span> org.apache.storm.topology.OutputFieldsDeclarer;</div><div class="line"><span class="keyword">import</span> org.apache.storm.topology.TopologyBuilder;</div><div class="line"><span class="keyword">import</span> org.apache.storm.topology.base.BaseRichBolt;</div><div class="line"><span class="keyword">import</span> org.apache.storm.topology.base.BaseRichSpout;</div><div class="line"><span class="keyword">import</span> org.apache.storm.tuple.Fields;</div><div class="line"><span class="keyword">import</span> org.apache.storm.tuple.Tuple;</div><div class="line"><span class="keyword">import</span> org.apache.storm.tuple.Values;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"><span class="keyword">import</span> java.util.Random;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * <span class="doctag">@author</span> NikoBelic</span></div><div class="line"><span class="comment"> * <span class="doctag">@create</span> 2017/11/29 00:26</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WordCountTopology</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MySpout</span> <span class="keyword">extends</span> <span class="title">BaseRichSpout</span></span></div><div class="line"><span class="class">    </span>&#123;</div><div class="line"></div><div class="line">        SpoutOutputCollector collector;</div><div class="line">        String[] sourceData = <span class="keyword">new</span> String[]&#123;</div><div class="line">                <span class="string">"Nowadays, going to gym after work is most people’s choice, because they need to be keep fit."</span>,</div><div class="line">                <span class="string">"The young blue and white collar sit in their offices all the daytime and they lack of exercise,"</span>,</div><div class="line">                <span class="string">"most of them are in the sub-health state."</span>,</div><div class="line">                <span class="string">"They realize the importance of taking exercise and more gyms have been opened to meet their needs."</span>,</div><div class="line">                <span class="string">"In my opinion, we can not only exercise our body, but also to have fun."</span>,</div><div class="line">                <span class="string">"The gym provides people a place to make friends."</span>,</div><div class="line">                <span class="string">"They can find someone who has the same interest with them, and then just talk to them."</span>,</div><div class="line">                <span class="string">"They can forget about the annoyance and just relax themselves."</span>,</div><div class="line">                <span class="string">"Some girls like to do yoga while some boys like to play badmiton."</span>,</div><div class="line">                <span class="string">"They can choose whatever they like, which is good for keeping good mood."</span></div><div class="line"></div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line"><span class="comment">         * 初始化方法</span></div><div class="line"><span class="comment">         *</span></div><div class="line"><span class="comment">         * <span class="doctag">@Author</span> SeawayLee</span></div><div class="line"><span class="comment">         * <span class="doctag">@Date</span> 2017/11/29 00:41</span></div><div class="line"><span class="comment">         */</span></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">(Map map, TopologyContext topologyContext, SpoutOutputCollector spoutOutputCollector)</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            <span class="keyword">this</span>.collector = spoutOutputCollector;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line"><span class="comment">         * Storm框架持续无限调用此方法</span></div><div class="line"><span class="comment">         *</span></div><div class="line"><span class="comment">         * <span class="doctag">@Author</span> SeawayLee</span></div><div class="line"><span class="comment">         * <span class="doctag">@Date</span> 2017/11/29 00:42</span></div><div class="line"><span class="comment">         */</span></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">nextTuple</span><span class="params">()</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            collector.emit(<span class="keyword">new</span> Values(sourceData[<span class="keyword">new</span> Random().nextInt(sourceData.length)]));</div><div class="line">            <span class="keyword">try</span></div><div class="line">            &#123;</div><div class="line">                Thread.sleep(<span class="number">1000</span>);</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e)</div><div class="line">            &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line"><span class="comment">         * 定义emit出去的value的field名称</span></div><div class="line"><span class="comment">         *</span></div><div class="line"><span class="comment">         * <span class="doctag">@Author</span> SeawayLee</span></div><div class="line"><span class="comment">         * <span class="doctag">@Date</span> 2017/11/29 00:48</span></div><div class="line"><span class="comment">         */</span></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">declareOutputFields</span><span class="params">(OutputFieldsDeclarer outputFieldsDeclarer)</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            outputFieldsDeclarer.declare(<span class="keyword">new</span> Fields(<span class="string">"sentence"</span>));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MySplitBolt</span> <span class="keyword">extends</span> <span class="title">BaseRichBolt</span></span></div><div class="line"><span class="class">    </span>&#123;</div><div class="line"></div><div class="line">        OutputCollector collector;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line"><span class="comment">         * 初始化方法</span></div><div class="line"><span class="comment">         *</span></div><div class="line"><span class="comment">         * <span class="doctag">@Author</span> SeawayLee</span></div><div class="line"><span class="comment">         * <span class="doctag">@Date</span> 2017/11/29 00:46</span></div><div class="line"><span class="comment">         */</span></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">prepare</span><span class="params">(Map map, TopologyContext topologyContext, OutputCollector outputCollector)</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            <span class="keyword">this</span>.collector = outputCollector;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line"><span class="comment">         * 被Storm框架持续无限调用此方法</span></div><div class="line"><span class="comment">         *</span></div><div class="line"><span class="comment">         * <span class="doctag">@Author</span> SeawayLee</span></div><div class="line"><span class="comment">         * <span class="doctag">@Date</span> 2017/11/29 00:46</span></div><div class="line"><span class="comment">         */</span></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(Tuple tuple)</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            String line = tuple.getString(<span class="number">0</span>);</div><div class="line">            String[] words = line.split(<span class="string">" "</span>);</div><div class="line">            <span class="keyword">for</span> (String word : words)</div><div class="line">            &#123;</div><div class="line">                collector.emit(<span class="keyword">new</span> Values(word, <span class="number">1</span>));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line"><span class="comment">         * 定义emit出去的value的field名称</span></div><div class="line"><span class="comment">         *</span></div><div class="line"><span class="comment">         * <span class="doctag">@Author</span> SeawayLee</span></div><div class="line"><span class="comment">         * <span class="doctag">@Date</span> 2017/11/29 00:49</span></div><div class="line"><span class="comment">         */</span></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">declareOutputFields</span><span class="params">(OutputFieldsDeclarer outputFieldsDeclarer)</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            outputFieldsDeclarer.declare(<span class="keyword">new</span> Fields(<span class="string">"word"</span>, <span class="string">"num"</span>));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyCountBold</span> <span class="keyword">extends</span> <span class="title">BaseRichBolt</span></span></div><div class="line"><span class="class">    </span>&#123;</div><div class="line">        OutputCollector collector;</div><div class="line">        Map&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">prepare</span><span class="params">(Map map, TopologyContext topologyContext, OutputCollector outputCollector)</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            <span class="keyword">this</span>.collector = outputCollector;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(Tuple tuple)</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            String word = tuple.getString(<span class="number">0</span>);</div><div class="line">            Integer count = tuple.getInteger(<span class="number">1</span>);</div><div class="line">            System.out.println(Thread.currentThread().getId() + <span class="string">"   word:"</span> + word);</div><div class="line">            map.put(word, map.containsKey(word) ? map.get(word) + count : count);</div><div class="line">            System.out.println(<span class="string">"count:"</span> + map);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">declareOutputFields</span><span class="params">(OutputFieldsDeclarer outputFieldsDeclarer)</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            <span class="comment">// 不输出</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">// 1. 准备Topology</span></div><div class="line">        TopologyBuilder topologyBuilder = <span class="keyword">new</span> TopologyBuilder();</div><div class="line">        topologyBuilder.setSpout(<span class="string">"mySpout"</span>, <span class="keyword">new</span> MySpout(), <span class="number">2</span>);</div><div class="line">        topologyBuilder.setBolt(<span class="string">"splitBolt"</span>, <span class="keyword">new</span> MySplitBolt(), <span class="number">2</span>).shuffleGrouping(<span class="string">"mySpout"</span>);</div><div class="line">        topologyBuilder.setBolt(<span class="string">"countBolt"</span>, <span class="keyword">new</span> MyCountBold(), <span class="number">4</span>).fieldsGrouping(<span class="string">"splitBolt"</span>, <span class="keyword">new</span> Fields(<span class="string">"word"</span>));</div><div class="line"></div><div class="line">        <span class="comment">// 2. 创建Config，指定当前Topology需要的Worker数量</span></div><div class="line">        Config config = <span class="keyword">new</span> Config();</div><div class="line">        config.setNumWorkers(<span class="number">2</span>);</div><div class="line"></div><div class="line">        <span class="comment">// 3. 提交任务   本地模式 和 集群模式</span></div><div class="line">        LocalCluster localCluster = <span class="keyword">new</span> LocalCluster();</div><div class="line">        localCluster.submitTopology(<span class="string">"myWordCount"</span>, config, topologyBuilder.createTopology());</div><div class="line">        <span class="comment">//StormSubmitter.submitTopology("myWordCount", config, topologyBuilder.createTopology());</span></div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记（一）- Storm快速入门/15118883711684.jpg" alt=""></p>
+<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118883711684.jpg" alt=""></p>
 <p><strong>注意：我们必须使用FieldsGrouping才能正确的统计出每个单词的总数，将hash(word)值相同的单词分配到同一个CountBolt。</strong></p>
 <h3 id="4-2-StreamGrouping详解"><a href="#4-2-StreamGrouping详解" class="headerlink" title="4.2 StreamGrouping详解"></a>4.2 StreamGrouping详解</h3><p><strong>Storm里面有7种类型的stream grouping</strong></p>
 <ul>
@@ -422,7 +453,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）- Storm快速入门/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -477,7 +508,7 @@
 <script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
 var gitment = new Gitment({
-  id: "https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）- Storm快速入门/",
+  id: "https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/",
   owner: 'seawaylee',
   repo: 'blog_comments',
   oauth: {
@@ -605,15 +636,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -653,11 +684,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -673,15 +704,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NIO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -705,7 +736,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -713,7 +744,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">

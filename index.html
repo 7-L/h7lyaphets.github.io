@@ -162,19 +162,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-大数据/Storm/Storm学习笔记（一）- Storm快速入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-大数据/Storm/Storm学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/29/大数据/Storm/Storm学习笔记（一）- Storm快速入门/">Storm学习笔记（一）- Storm快速入门</a>
+      <a class="article-title" href="/2017/11/29/大数据/Storm/Storm学习笔记/">Storm学习笔记</a>
     </h1>
   
 
         
-        <a href="/2017/11/29/大数据/Storm/Storm学习笔记（一）- Storm快速入门/" class="archive-article-date">
+        <a href="/2017/11/29/大数据/Storm/Storm学习笔记/" class="archive-article-date">
   	<time datetime="2017-11-28T17:05:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-29</time>
 </a>
         
@@ -194,15 +194,41 @@
 <li>总结：将源源不断产生的数据实时收集并实时计算</li>
 </ul>
 <p><strong>流式计算一般架构图</strong></p>
-<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记（一）- Storm快速入门/15118787232094.jpg" alt=""></p>
+<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118787232094.jpg" alt="">/</p>
 <p><strong>离线计算与实时计算最大的区别？</strong></p>
 <ul>
 <li>收集</li>
 <li>计算</li>
 <li>展示</li>
 </ul>
+<h3 id="1-2-Storm概述"><a href="#1-2-Storm概述" class="headerlink" title="1.2 Storm概述"></a>1.2 Storm概述</h3><ul>
+<li>Storm用来实时处理数据</li>
+<li>使用场景<ul>
+<li>日志分析</li>
+<li>管道系统</li>
+<li>消息转化器</li>
+</ul>
+</li>
+<li>特点<ul>
+<li>低延迟</li>
+<li>高可用</li>
+<li>分布式</li>
+<li>可扩展</li>
+<li>数据不丢失</li>
+<li>简单易用的接口</li>
+</ul>
+</li>
+</ul>
+<p><strong>Storm与Hadoop对比</strong></p>
+<ul>
+<li>Storm用于实时计算，Hadoop用于离线计算。</li>
+<li>Storm处理的数据保存在内存中，源源不断；Hadoop处理的数据保存在文件系统中，一批一批。</li>
+<li>Storm的数据通过网络传输进来；Hadoop的数据保存在磁盘中。</li>
+<li>Storm与Hadoop的编程模型相似</li>
+</ul>
+<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118782566404.jpg" alt=""></p>
         
-          <a class="article-more-a" href="/2017/11/29/大数据/Storm/Storm学习笔记（一）- Storm快速入门/#more">阅读全文 >></a>
+          <a class="article-more-a" href="/2017/11/29/大数据/Storm/Storm学习笔记/#more">阅读全文 >></a>
         
       
 
@@ -1124,15 +1150,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1172,11 +1198,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1192,15 +1218,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NIO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1224,7 +1250,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1232,7 +1258,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
