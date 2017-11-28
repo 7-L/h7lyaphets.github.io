@@ -162,6 +162,83 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JavaWeb/Spring/Spring_1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/09/JavaWeb/Spring/Spring_1/">SpringInAction读书笔记(一) Spring之旅</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/09/JavaWeb/Spring/Spring_1/" class="archive-article-date">
+  	<time datetime="2017-03-09T14:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本章简要介绍一下Spring的核心模块：依赖注入、切面。并介绍一下Spring的模块组件，对Spring有一个简要的了解。在后续章节将详细学习Spring的DI、AOP等核心组件。</p>
+<h2 id="1-依赖注入（DI）"><a href="#1-依赖注入（DI）" class="headerlink" title="1.依赖注入（DI）"></a>1.依赖注入（DI）</h2><p>传统的代码编写方式，例如一个Student类中创建了Arm、Leg、Body等对象，那么我们需要创建Student对象时，他就会按照类中写死的那样去创建固定类型的Arm（麒麟臂）、Leg（飞毛腿）、Body（大胸肌）这些对象，如果我们想动态的给这个Student换零件儿的话就要重写或新增一个其他类型的Student。但是有了<strong>依赖注入</strong>，我们可以在创建Student对象时动态的给他注入各种类型的子对象。这样就降低了<strong>代码耦合度</strong>，这也是依赖注入所带来的最大收益。</p>
+        
+          <a class="article-more-a" href="/2017/03/09/JavaWeb/Spring/Spring_1/#more">阅读全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JavaWeb</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Oracle/Oracle_1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -682,19 +759,19 @@
 
 
   
-    <article id="post-高并发/Ngxin学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-JavaWeb/Maven命令小记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/09/高并发/Ngxin学习笔记/">Ngxin学习笔记</a>
+      <a class="article-title" href="/2017/03/09/JavaWeb/Maven命令小记/">Maven命令小记</a>
     </h1>
   
 
         
-        <a href="/2017/03/09/高并发/Ngxin学习笔记/" class="archive-article-date">
+        <a href="/2017/03/09/JavaWeb/Maven命令小记/" class="archive-article-date">
   	<time datetime="2017-03-09T12:21:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-09</time>
 </a>
         
@@ -702,9 +779,49 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-什么是Nginx"><a href="#1-什么是Nginx" class="headerlink" title="1 什么是Nginx"></a>1 什么是Nginx</h2><p>Nginx (“engine x”) 是一个高性能的HTTP和反向代理服务器，也是一个IMAP/POP3/SMTP服务器。其特点是占有内存少，并发能力强，事实上nginx的并发能力确实在同类型的网页服务器中表现较好，中国大陆使用nginx网站用户有：百度、京东、新浪、网易、腾讯、淘宝等。</p>
+        <h2 id="1-基本命令"><a href="#1-基本命令" class="headerlink" title="1 基本命令"></a>1 基本命令</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>阶段</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mvn clean</td>
+<td>清理</td>
+<td>清理输出的class文件</td>
+</tr>
+<tr>
+<td>mvn compile</td>
+<td>编译</td>
+<td>将java代码编译成class文件</td>
+</tr>
+<tr>
+<td>mvn test</td>
+<td>测试</td>
+<td>test下的单元测试代码一次性测试</td>
+</tr>
+<tr>
+<td>mvn package</td>
+<td>打包</td>
+<td>java项目生成jar、web项目生成war</td>
+</tr>
+<tr>
+<td>mvn install</td>
+<td>安装</td>
+<td>将maven打包成jar或war发布到本地仓库</td>
+</tr>
+<tr>
+<td>mvn tomcat:run</td>
+<td>部署</td>
+<td>以tomcat为容器启动项目</td>
+</tr>
+</tbody>
+</table>
         
-          <a class="article-more-a" href="/2017/03/09/高并发/Ngxin学习笔记/#more">阅读全文 >></a>
+          <a class="article-more-a" href="/2017/03/09/JavaWeb/Maven命令小记/#more">阅读全文 >></a>
         
       
 
@@ -718,7 +835,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">高并发</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JavaWeb</a>
         		</li>
       		
 		</ul>
@@ -833,19 +950,19 @@
 
 
   
-    <article id="post-JavaWeb/Maven命令小记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-高并发/Ngxin学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/09/JavaWeb/Maven命令小记/">Maven命令小记</a>
+      <a class="article-title" href="/2017/03/09/高并发/Ngxin学习笔记/">Ngxin学习笔记</a>
     </h1>
   
 
         
-        <a href="/2017/03/09/JavaWeb/Maven命令小记/" class="archive-article-date">
+        <a href="/2017/03/09/高并发/Ngxin学习笔记/" class="archive-article-date">
   	<time datetime="2017-03-09T12:21:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-09</time>
 </a>
         
@@ -853,49 +970,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-基本命令"><a href="#1-基本命令" class="headerlink" title="1 基本命令"></a>1 基本命令</h2><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>阶段</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>mvn clean</td>
-<td>清理</td>
-<td>清理输出的class文件</td>
-</tr>
-<tr>
-<td>mvn compile</td>
-<td>编译</td>
-<td>将java代码编译成class文件</td>
-</tr>
-<tr>
-<td>mvn test</td>
-<td>测试</td>
-<td>test下的单元测试代码一次性测试</td>
-</tr>
-<tr>
-<td>mvn package</td>
-<td>打包</td>
-<td>java项目生成jar、web项目生成war</td>
-</tr>
-<tr>
-<td>mvn install</td>
-<td>安装</td>
-<td>将maven打包成jar或war发布到本地仓库</td>
-</tr>
-<tr>
-<td>mvn tomcat:run</td>
-<td>部署</td>
-<td>以tomcat为容器启动项目</td>
-</tr>
-</tbody>
-</table>
+        <h2 id="1-什么是Nginx"><a href="#1-什么是Nginx" class="headerlink" title="1 什么是Nginx"></a>1 什么是Nginx</h2><p>Nginx (“engine x”) 是一个高性能的HTTP和反向代理服务器，也是一个IMAP/POP3/SMTP服务器。其特点是占有内存少，并发能力强，事实上nginx的并发能力确实在同类型的网页服务器中表现较好，中国大陆使用nginx网站用户有：百度、京东、新浪、网易、腾讯、淘宝等。</p>
         
-          <a class="article-more-a" href="/2017/03/09/JavaWeb/Maven命令小记/#more">阅读全文 >></a>
+          <a class="article-more-a" href="/2017/03/09/高并发/Ngxin学习笔记/#more">阅读全文 >></a>
         
       
 
@@ -909,84 +986,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JavaWeb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-搜索/ElasticSearch学习笔记-概览" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/09/搜索/ElasticSearch学习笔记-概览/">ElasticSearch学习笔记（一）- 快速入门</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/09/搜索/ElasticSearch学习笔记-概览/" class="archive-article-date">
-  	<time datetime="2017-03-09T03:59:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h2><p>Elasticsearch也使用Java开发并使用Lucene作为其核心来实现所有索引和搜索的功能，但是它的目的是通过简单的RESTful API来隐藏Lucene的复杂性，从而让全文搜索变得简单。<br>不过，Elasticsearch不仅仅是Lucene和全文搜索，我们还能这样去描述它：</p>
-<ul>
-<li>分布式的实时文件存储，每个字段都被索引并可被搜索</li>
-<li>分布式的实时分析搜索引擎</li>
-<li>可以扩展到上百台服务器，处理PB级结构化或非结构化数据</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/03/09/搜索/ElasticSearch学习笔记-概览/#more">阅读全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">搜索</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">高并发</a>
         		</li>
       		
 		</ul>
@@ -1140,15 +1140,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1164,15 +1164,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color5">PythonWeb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1184,15 +1188,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1200,11 +1196,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">高并发</a>
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">面经</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">高并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1216,15 +1224,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1240,15 +1240,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Storm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1260,19 +1264,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
             
             <div class="clearfix"></div>
