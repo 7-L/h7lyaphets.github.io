@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="https://seawaylee.github.io">
   <title>Storm学习笔记（一）- Storm快速入门 | SeawayLee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Storm学习笔记（一）1 概述1.1 离线计算、流式计算、实时计算 概述什么是离线计算？  离线计算：批量获取数据、批量传输数据、周期性批量计算数据、展示数据 代表技术：Sqoop批量导入数据、HDFS批量存储数据、MapReduce批量计算数据、Hive批量计算数据、Azkaban任务调度  什么是流式计算？  流式计算：数据实时产生、实时传输、实时计算、实时展示 代表数据：Flume实时获取">
+  <meta name="description" content="1 概述1.1 离线计算、流式计算、实时计算 概述什么是离线计算？  离线计算：批量获取数据、批量传输数据、周期性批量计算数据、展示数据 代表技术：Sqoop批量导入数据、HDFS批量存储数据、MapReduce批量计算数据、Hive批量计算数据、Azkaban任务调度  什么是流式计算？  流式计算：数据实时产生、实时传输、实时计算、实时展示 代表数据：Flume实时获取数据、Kafka实时数据">
 <meta name="keywords" content="大数据,Storm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Storm学习笔记（一）- Storm快速入门">
 <meta property="og:url" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）- Storm快速入门/index.html">
 <meta property="og:site_name" content="SeawayLee">
-<meta property="og:description" content="Storm学习笔记（一）1 概述1.1 离线计算、流式计算、实时计算 概述什么是离线计算？  离线计算：批量获取数据、批量传输数据、周期性批量计算数据、展示数据 代表技术：Sqoop批量导入数据、HDFS批量存储数据、MapReduce批量计算数据、Hive批量计算数据、Azkaban任务调度  什么是流式计算？  流式计算：数据实时产生、实时传输、实时计算、实时展示 代表数据：Flume实时获取">
+<meta property="og:description" content="1 概述1.1 离线计算、流式计算、实时计算 概述什么是离线计算？  离线计算：批量获取数据、批量传输数据、周期性批量计算数据、展示数据 代表技术：Sqoop批量导入数据、HDFS批量存储数据、MapReduce批量计算数据、Hive批量计算数据、Azkaban任务调度  什么是流式计算？  流式计算：数据实时产生、实时传输、实时计算、实时展示 代表数据：Flume实时获取数据、Kafka实时数据">
 <meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）-%20Storm快速入门/15118787232094.jpg">
 <meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）-%20Storm快速入门/15118782566404.jpg">
 <meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）-%20Storm快速入门/15118783786966.jpg">
@@ -23,10 +23,10 @@
 <meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）-%20Storm快速入门/15118849400727.jpg">
 <meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）-%20Storm快速入门/15118850264899.jpg">
 <meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）-%20Storm快速入门/15118883711684.jpg">
-<meta property="og:updated_time" content="2017-11-28T17:07:19.000Z">
+<meta property="og:updated_time" content="2017-11-28T17:08:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Storm学习笔记（一）- Storm快速入门">
-<meta name="twitter:description" content="Storm学习笔记（一）1 概述1.1 离线计算、流式计算、实时计算 概述什么是离线计算？  离线计算：批量获取数据、批量传输数据、周期性批量计算数据、展示数据 代表技术：Sqoop批量导入数据、HDFS批量存储数据、MapReduce批量计算数据、Hive批量计算数据、Azkaban任务调度  什么是流式计算？  流式计算：数据实时产生、实时传输、实时计算、实时展示 代表数据：Flume实时获取">
+<meta name="twitter:description" content="1 概述1.1 离线计算、流式计算、实时计算 概述什么是离线计算？  离线计算：批量获取数据、批量传输数据、周期性批量计算数据、展示数据 代表技术：Sqoop批量导入数据、HDFS批量存储数据、MapReduce批量计算数据、Hive批量计算数据、Azkaban任务调度  什么是流式计算？  流式计算：数据实时产生、实时传输、实时计算、实时展示 代表数据：Flume实时获取数据、Kafka实时数据">
 <meta name="twitter:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记（一）-%20Storm快速入门/15118787232094.jpg">
   
   
@@ -191,7 +191,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Storm学习笔记（一）"><a href="#Storm学习笔记（一）" class="headerlink" title="Storm学习笔记（一）"></a>Storm学习笔记（一）</h1><h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1 概述"></a>1 概述</h2><h3 id="1-1-离线计算、流式计算、实时计算-概述"><a href="#1-1-离线计算、流式计算、实时计算-概述" class="headerlink" title="1.1 离线计算、流式计算、实时计算 概述"></a>1.1 离线计算、流式计算、实时计算 概述</h3><p><strong>什么是离线计算？</strong></p>
+        <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1 概述"></a>1 概述</h2><h3 id="1-1-离线计算、流式计算、实时计算-概述"><a href="#1-1-离线计算、流式计算、实时计算-概述" class="headerlink" title="1.1 离线计算、流式计算、实时计算 概述"></a>1.1 离线计算、流式计算、实时计算 概述</h3><p><strong>什么是离线计算？</strong></p>
 <ul>
 <li>离线计算：批量获取数据、批量传输数据、<strong>周期性</strong>批量计算数据、展示数据</li>
 <li>代表技术：Sqoop批量导入数据、HDFS批量存储数据、MapReduce批量计算数据、Hive批量计算数据、Azkaban任务调度</li>
@@ -605,15 +605,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -653,11 +653,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
