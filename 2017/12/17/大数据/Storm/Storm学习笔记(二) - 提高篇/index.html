@@ -15,18 +15,18 @@
 <meta property="og:url" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/index.html">
 <meta property="og:site_name" content="SeawayLee">
 <meta property="og:description" content="在基础篇中学习了以下内容  Storm概述 Storm核心组件 及 并发机制 Storm集群的部署和测试 Storm的WordCount程序  本文主要学习以下内容  Storm框架通信机制（Worker内部通信有外部通信） Storm组件本地目录树 Storm ZooKeeper 目录树 Storm任务提交的过程">
-<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134411043477/15134826177130.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134411043477/15134877769104.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134411043477/15134932501917.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134411043477/15134936856884.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134411043477/15134938201737.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134411043477/15134939660539.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134411043477/15134939939920.jpg">
-<meta property="og:updated_time" content="2017-12-17T07:34:51.000Z">
+<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134826177130.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134877769104.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134932501917.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134936856884.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134938201737.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134939660539.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134939939920.jpg">
+<meta property="og:updated_time" content="2017-12-17T07:36:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Storm学习笔记(二) - 提高篇">
 <meta name="twitter:description" content="在基础篇中学习了以下内容  Storm概述 Storm核心组件 及 并发机制 Storm集群的部署和测试 Storm的WordCount程序  本文主要学习以下内容  Storm框架通信机制（Worker内部通信有外部通信） Storm组件本地目录树 Storm ZooKeeper 目录树 Storm任务提交的过程">
-<meta name="twitter:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134411043477/15134826177130.jpg">
+<meta name="twitter:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134826177130.jpg">
   
   
     <link rel="icon" href="/logo.jpeg">
@@ -220,7 +220,7 @@
 <li>每个executor有单独的线程分别来处理spout/bolt的业务逻辑，业务逻辑输出的中间数据会存放在<strong>outgoing-queue</strong>中，当executor的outgoing-queue中的<strong>tuple达到一定的阀值</strong>，executor的发送线程将批量获取outgoing-queue中的tuple,并发送到<strong>transfer-queue</strong>中。</li>
 <li>每个worker进程控制一个或多个<strong>executor线程</strong>，用户可在代码中进行配置。其实就是我们在代码中设置的<strong>并发度</strong>个数。</li>
 </ul>
-<p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134411043477/15134826177130.jpg" alt=""></p>
+<p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134826177130.jpg" alt=""></p>
 <h3 id="1-1-2-Worker进程间通信分析"><a href="#1-1-2-Worker进程间通信分析" class="headerlink" title="1.1.2 Worker进程间通信分析"></a>1.1.2 Worker进程间通信分析</h3><ul>
 <li>Worker接受线程通过网络接受数据，并<strong>根据Tuple中包含的taskId，匹配到对应的executor</strong>；然后根据executor找到对应的incoming-queue，<strong>将数据存发送到incoming-queue队列中</strong>。</li>
 <li>业务逻辑执行线程<strong>消费incoming-queue的数据</strong>，通过调用Bolt的<strong>execute(xxxx)</strong>方法，将Tuple作为参数传输给用户自定义的方法</li>
@@ -228,7 +228,7 @@
 <li><strong>Worker发送线程消费transfer-queue中数据</strong>，计算Tuple的目的地，连接不同的<strong>node+port</strong>将数据通过网络传输的方式传送给另一个的Worker。</li>
 <li>另一个worker执行以上步骤1的操作。</li>
 </ul>
-<p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134411043477/15134877769104.jpg" alt=""></p>
+<p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134877769104.jpg" alt=""></p>
 <h3 id="1-1-3-Worker进程间通信技术（Netty、ZeroMQ）"><a href="#1-1-3-Worker进程间通信技术（Netty、ZeroMQ）" class="headerlink" title="1.1.3 Worker进程间通信技术（Netty、ZeroMQ）"></a>1.1.3 Worker进程间通信技术（Netty、ZeroMQ）</h3><p><strong>Netty</strong></p>
 <p>Netty是一个NIO client-server(客户端服务器)框架，使用Netty可以快速开发网络应用，例如服务器和客户端协议。Netty提供了一种新的方式来使开发网络应用程序，这种新的方式使得它很容易使用和有很强的扩展性。Netty的内部实现时很复杂的，但是Netty提供了简单易用的api从网络处理代码中解耦业务逻辑。<strong>Netty是完全基于NIO实现的，所以整个Netty都是异步的。</strong></p>
 <p><strong>ZeroMQ</strong></p>
@@ -256,16 +256,16 @@
 <li><strong>Sequence</strong> 通过顺序<strong>递增的序号</strong>来编号管理通过其进行交换的数据（事件），对数据(事件)的处理过程总是沿着序号逐个递增处理。</li>
 <li><strong>RingBuffer</strong> 底层是个<strong>数组</strong>，<strong>次序计算器</strong>是一个<strong>64bit long</strong> 整数型，平滑增长。</li>
 </ol>
-<p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134411043477/15134932501917.jpg" alt=""></p>
+<p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134932501917.jpg" alt=""></p>
 <ol>
 <li>接受数据并写入到脚标31的位置，之后会沿着序号一直写入，但是不会绕过消费者所在的脚标。</li>
 <li>Joumaler和replicator同时读到24的位置，他们可以批量读取数据到30</li>
 <li>消费逻辑线程读到了14的位置，但是没法继续读下去，因为他的sequence暂停在15的位置上，需要等到他的sequence给他序号。如果sequence能正常工作，就能读取到30的数据。</li>
 </ol>
-<h1 id="2-Storm组件本地目录树"><a href="#2-Storm组件本地目录树" class="headerlink" title="2 Storm组件本地目录树"></a>2 Storm组件本地目录树</h1><p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134411043477/15134936856884.jpg" alt=""></p>
-<h1 id="3-Storm-ZooKeeper目录树"><a href="#3-Storm-ZooKeeper目录树" class="headerlink" title="3 Storm ZooKeeper目录树"></a>3 Storm ZooKeeper目录树</h1><p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134411043477/15134938201737.jpg" alt=""></p>
-<h1 id="4-Storm任务提交的过程"><a href="#4-Storm任务提交的过程" class="headerlink" title="4 Storm任务提交的过程"></a>4 Storm任务提交的过程</h1><p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134411043477/15134939660539.jpg" alt=""></p>
-<p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134411043477/15134939939920.jpg" alt=""></p>
+<h1 id="2-Storm组件本地目录树"><a href="#2-Storm组件本地目录树" class="headerlink" title="2 Storm组件本地目录树"></a>2 Storm组件本地目录树</h1><p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134936856884.jpg" alt=""></p>
+<h1 id="3-Storm-ZooKeeper目录树"><a href="#3-Storm-ZooKeeper目录树" class="headerlink" title="3 Storm ZooKeeper目录树"></a>3 Storm ZooKeeper目录树</h1><p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134938201737.jpg" alt=""></p>
+<h1 id="4-Storm任务提交的过程"><a href="#4-Storm任务提交的过程" class="headerlink" title="4 Storm任务提交的过程"></a>4 Storm任务提交的过程</h1><p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134939660539.jpg" alt=""></p>
+<p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134939939920.jpg" alt=""></p>
 <h1 id="5-Storm消息容错机制"><a href="#5-Storm消息容错机制" class="headerlink" title="5 Storm消息容错机制"></a>5 Storm消息容错机制</h1><ol>
 <li>在storm中，可靠的信息处理机制是<strong>从spout开始</strong>的。</li>
 <li>一个提供了可靠的处理机制的<strong>spout需要记录他发射出去的tuple</strong>，当下游bolt处理tuple或者子tuple失败时spout能够<strong>重新发射</strong>。 </li>
@@ -627,6 +627,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
@@ -635,15 +639,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -659,11 +659,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color1">Storm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Storm</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -679,11 +679,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指Offer</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
