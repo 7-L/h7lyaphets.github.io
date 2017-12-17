@@ -162,6 +162,80 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JavaWeb/Http中的Content-Type讲解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/29/JavaWeb/Http中的Content-Type讲解/">Http请求中Content-Type讲解以及在Spring MVC中的应用</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/29/JavaWeb/Http中的Content-Type讲解/" class="archive-article-date">
+  	<time datetime="2017-03-29T13:33:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><blockquote>
+<p>在Http请求中，我们每天都在使用Content-type来指定不同格式的请求信息，但是却很少有人去全面了解content-type中允许的值有多少，<br>这里将讲解Content-Type的可用值，以及在spring MVC中如何使用它们来映射请求信息。</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2017/03/29/JavaWeb/Http中的Content-Type讲解/#more">阅读全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JavaWeb</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-工具/SecureCRT" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -897,93 +971,6 @@
 
 
   
-    <article id="post-面试/剑指Offer/Q_4_空格字符替换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/14/面试/剑指Offer/Q_4_空格字符替换/">剑指Offer_4_替换空格</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/14/面试/剑指Offer/Q_4_空格字符替换/" class="archive-article-date">
-  	<time datetime="2017-03-14T12:57:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>题目描述</strong></p>
-<blockquote>
-<p>请实现一个函数，把字符串中的每个空格替换成 %20 。例如输入”We are happy”，则输出”We%20are%20happy”<br>不能用java的一些api，完全用C语言的方式完成本题，不然会被鄙视。</p>
-</blockquote>
-<p><strong>解题思路</strong><br>虽然我们可以使用遍历的方式，创建一个新的空数组来完成这道题，时间复杂度也只是O(n)，但是浪费了很多空间。<br>虽然我们可以正序遍历数组，每碰到一个空格，就将后边的所有元素向后移动，这样虽然不用开辟冗余的空间，但是时间复杂度较高，<br>最后一部分元素需要被移动 N*空格数 次。</p>
-<p><strong>如果我们采用倒序的方式遍历和移动数组，那么时间复杂的和空间复杂度都是最低的。</strong></p>
-<ol>
-<li>先遍历一次字符串，统计空格出现的次数，每出现一个空格，对改数组额外开辟2位。</li>
-<li>从字符串的后面开始复制和替换。<ul>
-<li>指针P1指向原始字符串末尾，指针P2指向开辟空间后字符串末尾</li>
-<li>P1向前移动，逐个把字符复制到P2，直到碰到空格为止</li>
-<li>碰到空格后，P1向前移动一位，P2向前移动三位的同时将%20填充</li>
-<li>当P2追赶上P1时，结束复制，表示所有空格已经替换完毕</li>
-</ul>
-</li>
-</ol>
-        
-          <a class="article-more-a" href="/2017/03/14/面试/剑指Offer/Q_4_空格字符替换/#more">阅读全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指Offer</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -1146,11 +1133,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
+                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1206,7 +1193,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1214,7 +1201,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -6,29 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://seawaylee.github.io">
-  <title>Storm学习笔记 | SeawayLee</title>
+  <title>Storm学习笔记(二) - 提高篇 | SeawayLee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1 概述1.1 离线计算、流式计算、实时计算 概述什么是离线计算？  离线计算：批量获取数据、批量传输数据、周期性批量计算数据、展示数据 代表技术：Sqoop批量导入数据、HDFS批量存储数据、MapReduce批量计算数据、Hive批量计算数据、Azkaban任务调度  什么是流式计算？  流式计算：数据实时产生、实时传输、实时计算、实时展示 代表数据：Flume实时获取数据、Kafka实时数据">
+  <meta name="description" content="在基础篇中学习了以下内容  Storm概述 Storm核心组件 及 并发机制 Storm集群的部署和测试 Storm的WordCount程序  本文主要学习以下内容  Storm框架通信机制（Worker内部通信有外部通信） Storm组件本地目录树 Storm ZooKeeper 目录树 Storm任务提交的过程">
 <meta name="keywords" content="大数据,Storm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Storm学习笔记">
-<meta property="og:url" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/index.html">
+<meta property="og:title" content="Storm学习笔记(二) - 提高篇">
+<meta property="og:url" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/index.html">
 <meta property="og:site_name" content="SeawayLee">
-<meta property="og:description" content="1 概述1.1 离线计算、流式计算、实时计算 概述什么是离线计算？  离线计算：批量获取数据、批量传输数据、周期性批量计算数据、展示数据 代表技术：Sqoop批量导入数据、HDFS批量存储数据、MapReduce批量计算数据、Hive批量计算数据、Azkaban任务调度  什么是流式计算？  流式计算：数据实时产生、实时传输、实时计算、实时展示 代表数据：Flume实时获取数据、Kafka实时数据">
-<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118787232094.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118782566404.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118783786966.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118785708213.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118904613344.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118851356834.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118849400727.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118850264899.jpg">
-<meta property="og:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118883711684.jpg">
-<meta property="og:updated_time" content="2017-11-28T17:39:21.000Z">
+<meta property="og:description" content="在基础篇中学习了以下内容  Storm概述 Storm核心组件 及 并发机制 Storm集群的部署和测试 Storm的WordCount程序  本文主要学习以下内容  Storm框架通信机制（Worker内部通信有外部通信） Storm组件本地目录树 Storm ZooKeeper 目录树 Storm任务提交的过程">
+<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134411043477/15134826177130.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134411043477/15134877769104.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134411043477/15134932501917.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134411043477/15134936856884.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134411043477/15134938201737.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134411043477/15134939660539.jpg">
+<meta property="og:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134411043477/15134939939920.jpg">
+<meta property="og:updated_time" content="2017-12-17T07:34:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Storm学习笔记">
-<meta name="twitter:description" content="1 概述1.1 离线计算、流式计算、实时计算 概述什么是离线计算？  离线计算：批量获取数据、批量传输数据、周期性批量计算数据、展示数据 代表技术：Sqoop批量导入数据、HDFS批量存储数据、MapReduce批量计算数据、Hive批量计算数据、Azkaban任务调度  什么是流式计算？  流式计算：数据实时产生、实时传输、实时计算、实时展示 代表数据：Flume实时获取数据、Kafka实时数据">
-<meta name="twitter:image" content="https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/15118787232094.jpg">
+<meta name="twitter:title" content="Storm学习笔记(二) - 提高篇">
+<meta name="twitter:description" content="在基础篇中学习了以下内容  Storm概述 Storm核心组件 及 并发机制 Storm集群的部署和测试 Storm的WordCount程序  本文主要学习以下内容  Storm框架通信机制（Worker内部通信有外部通信） Storm组件本地目录树 Storm ZooKeeper 目录树 Storm任务提交的过程">
+<meta name="twitter:image" content="https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二)%20-%20提高篇/15134411043477/15134826177130.jpg">
   
   
     <link rel="icon" href="/logo.jpeg">
@@ -172,183 +170,108 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-大数据/Storm/Storm学习笔记" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-大数据/Storm/Storm学习笔记(二) - 提高篇" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Storm学习笔记
+      Storm学习笔记(二) - 提高篇
     </h1>
   
 
         
-        <a href="/2017/11/29/大数据/Storm/Storm学习笔记/" class="archive-article-date">
-  	<time datetime="2017-11-28T17:05:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-29</time>
+        <a href="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/" class="archive-article-date">
+  	<time datetime="2017-12-17T07:33:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1 概述"></a>1 概述</h2><h3 id="1-1-离线计算、流式计算、实时计算-概述"><a href="#1-1-离线计算、流式计算、实时计算-概述" class="headerlink" title="1.1 离线计算、流式计算、实时计算 概述"></a>1.1 离线计算、流式计算、实时计算 概述</h3><p><strong>什么是离线计算？</strong></p>
-<ul>
-<li>离线计算：批量获取数据、批量传输数据、<strong>周期性</strong>批量计算数据、展示数据</li>
-<li>代表技术：Sqoop批量导入数据、HDFS批量存储数据、MapReduce批量计算数据、Hive批量计算数据、Azkaban任务调度</li>
-</ul>
-<p><strong>什么是流式计算？</strong></p>
-<ul>
-<li>流式计算：数据<strong>实时产生、实时传输、实时计算、实时展示</strong></li>
-<li>代表数据：Flume实时获取数据、Kafka实时数据存储、Storm/JStrom实时数据计算、Redis实时结果缓存、持久化存储（Mysql）</li>
-<li>总结：将源源不断产生的数据实时收集并实时计算</li>
-</ul>
-<p><strong>流式计算一般架构图</strong></p>
-<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118787232094.jpg" alt="">/</p>
-<p><strong>离线计算与实时计算最大的区别？</strong></p>
-<ul>
-<li>收集</li>
-<li>计算</li>
-<li>展示</li>
-</ul>
-<h3 id="1-2-Storm概述"><a href="#1-2-Storm概述" class="headerlink" title="1.2 Storm概述"></a>1.2 Storm概述</h3><ul>
-<li>Storm用来实时处理数据</li>
-<li>使用场景<ul>
-<li>日志分析</li>
-<li>管道系统</li>
-<li>消息转化器</li>
-</ul>
-</li>
-<li>特点<ul>
-<li>低延迟</li>
-<li>高可用</li>
-<li>分布式</li>
-<li>可扩展</li>
-<li>数据不丢失</li>
-<li>简单易用的接口</li>
-</ul>
-</li>
-</ul>
-<p><strong>Storm与Hadoop对比</strong></p>
-<ul>
-<li>Storm用于实时计算，Hadoop用于离线计算。</li>
-<li>Storm处理的数据保存在内存中，源源不断；Hadoop处理的数据保存在文件系统中，一批一批。</li>
-<li>Storm的数据通过网络传输进来；Hadoop的数据保存在磁盘中。</li>
-<li>Storm与Hadoop的编程模型相似</li>
-</ul>
-<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118782566404.jpg" alt=""></p>
+        <p><strong>在基础篇中学习了以下内容</strong></p>
+<ol>
+<li>Storm概述</li>
+<li>Storm核心组件 及 并发机制</li>
+<li>Storm集群的部署和测试</li>
+<li>Storm的WordCount程序</li>
+</ol>
+<p><strong>本文主要学习以下内容</strong></p>
+<ol>
+<li>Storm框架通信机制（Worker内部通信有外部通信）</li>
+<li>Storm组件本地目录树</li>
+<li>Storm ZooKeeper 目录树</li>
+<li>Storm任务提交的过程</li>
+</ol>
 <a id="more"></a>
-<h2 id="2-Storm核心组件"><a href="#2-Storm核心组件" class="headerlink" title="2 Storm核心组件"></a>2 Storm核心组件</h2><h3 id="2-1-组件简介"><a href="#2-1-组件简介" class="headerlink" title="2.1 组件简介"></a>2.1 组件简介</h3><p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118783786966.jpg" alt=""></p>
+<h1 id="1-Storm通信机制"><a href="#1-Storm通信机制" class="headerlink" title="1 Storm通信机制"></a>1 Storm通信机制</h1><ul>
+<li>Worker之间通信: 通常需要通过网络跨节点通信，0.9以后的Storm使用Netty作为进程间通信的消息框架。</li>
+<li>Worker进程内部通信: 不同Worker的Thread通信通常使用Disruptor来完成。</li>
+<li>Topology之间的通信: Storm不负责，需要自己实现，例如使用Kafka。</li>
+</ul>
+<h2 id="1-1-Worker进程间通信"><a href="#1-1-Worker进程间通信" class="headerlink" title="1.1 Worker进程间通信"></a>1.1 Worker进程间通信</h2><h3 id="1-1-1-Worker进程间通信概述"><a href="#1-1-1-Worker进程间通信概述" class="headerlink" title="1.1.1 Worker进程间通信概述"></a>1.1.1 Worker进程间通信概述</h3><ul>
+<li>对于worker进程来说，为了管理流入和传出的消息，<strong>每个worker进程</strong>有一个独立的<strong>接收线程</strong>(对配置的TCP端口supervisor.slots.ports进行监听)</li>
+<li>对应Worker接收线程，<strong>每个worker存在一个独立的发送线程</strong>，它负责从worker的transfer-queue中读取消息，并通过网络发送给其他worker</li>
+</ul>
 <ul>
-<li>Nimbus：负责<strong>资源分配</strong>和<strong>任务调度</strong></li>
-<li>Supervisor：负责接受Nimbus分配的任务，启动和停止属于<strong>自己管理的worker进程</strong>。</li>
-<li>Worker：运行具体<strong>处理逻辑的进程</strong>。只有两种类型，<strong>Spout和Bolt</strong>。</li>
-<li>Task：Worker中每一个Spout/Bolt的线程成为一个Task。不同的S/B的Task可能会共享一个物理线程，该线程成为Executor。</li>
+<li>每个<strong>executor</strong>有自己的<strong>incoming-queue和outgoing-queue</strong>。</li>
+<li><strong>Worker接收线程</strong>将收到的消息通过<strong>task编号</strong>传递给对应的<strong>executor(一个或多个)的incoming-queues</strong>;</li>
+<li>每个executor有单独的线程分别来处理spout/bolt的业务逻辑，业务逻辑输出的中间数据会存放在<strong>outgoing-queue</strong>中，当executor的outgoing-queue中的<strong>tuple达到一定的阀值</strong>，executor的发送线程将批量获取outgoing-queue中的tuple,并发送到<strong>transfer-queue</strong>中。</li>
+<li>每个worker进程控制一个或多个<strong>executor线程</strong>，用户可在代码中进行配置。其实就是我们在代码中设置的<strong>并发度</strong>个数。</li>
 </ul>
-<h3 id="2-2-编程模型"><a href="#2-2-编程模型" class="headerlink" title="2.2 编程模型"></a>2.2 编程模型</h3><p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118785708213.jpg" alt=""></p>
-<ul>
-<li>Topology：Storm中运行的一个实时应用程序的名称。</li>
-<li>Spout：在一个Topology中<strong>获取源数据流</strong>的组件。</li>
-<li>Bolt：接受数据然后<strong>执行处理逻辑</strong>的组件。</li>
-<li>Tuple：一次<strong>消息传递的基本单元</strong>，理解为一组消息就是是一个Tuple。</li>
-<li>Stream：表示数据流向。</li>
+<p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134411043477/15134826177130.jpg" alt=""></p>
+<h3 id="1-1-2-Worker进程间通信分析"><a href="#1-1-2-Worker进程间通信分析" class="headerlink" title="1.1.2 Worker进程间通信分析"></a>1.1.2 Worker进程间通信分析</h3><ul>
+<li>Worker接受线程通过网络接受数据，并<strong>根据Tuple中包含的taskId，匹配到对应的executor</strong>；然后根据executor找到对应的incoming-queue，<strong>将数据存发送到incoming-queue队列中</strong>。</li>
+<li>业务逻辑执行线程<strong>消费incoming-queue的数据</strong>，通过调用Bolt的<strong>execute(xxxx)</strong>方法，将Tuple作为参数传输给用户自定义的方法</li>
+<li>业务逻辑执行完毕之后，<strong>将计算的中间数据发送给outgoing-queue队列</strong>，当outgoing-queue中的tuple达到一定的<strong>阀值</strong>，executor的<strong>发送线程</strong>将批量获取outgoing-queue中的tuple,并发送到Worker的transfer-queue中</li>
+<li><strong>Worker发送线程消费transfer-queue中数据</strong>，计算Tuple的目的地，连接不同的<strong>node+port</strong>将数据通过网络传输的方式传送给另一个的Worker。</li>
+<li>另一个worker执行以上步骤1的操作。</li>
 </ul>
-<h3 id="2-3-Storm并发机制"><a href="#2-3-Storm并发机制" class="headerlink" title="2.3 Storm并发机制"></a>2.3 Storm并发机制</h3><h4 id="2-3-1-概念"><a href="#2-3-1-概念" class="headerlink" title="2.3.1 概念"></a>2.3.1 概念</h4><ul>
-<li>Workers (JVMs): 在一个物理节点上可以运行<strong>一个或多个独立的JVM进程</strong>。一个Topology可以包含一个或多个worker(并行的跑在不同的物理机上), 所以worker process就是执行一个topology的子集, 并且worker只能对应于一个topology</li>
-<li>Executors (threads): <strong>在一个worker JVM进程中运行着多个Java线程。一个executor线程可以执行一个或多个tasks。</strong>但一般默认每个executor只执行一个task。一个worker可以包含一个或多个executor, 每个component (spout或bolt)至少对应于一个executor, 所以可以说executor执行一个compenent的子集, 同时一个executor只能对应于一个component。 </li>
-<li>Tasks(bolt/spout instances)：Task就是具体的处理逻辑对象，每一个Spout和Bolt会被当作很多task在整个集群里面执行。<strong>每一个task对应到一个线程</strong>，而stream grouping则是定义怎么从一堆task发射tuple到另外一堆task。你可以调用<strong>TopologyBuilder.setSpout和TopBuilder.setBolt来设置并行度 — 也就是有多少个task。 </strong></li>
-</ul>
-<h4 id="2-3-2-配置并行度"><a href="#2-3-2-配置并行度" class="headerlink" title="2.3.2 配置并行度"></a>2.3.2 配置并行度</h4><ul>
-<li>对于并发度的配置, 在storm里面可以在多个地方进行配置, 优先级为：<ul>
-<li>defaults.yaml &lt; storm.yaml &lt; topology-specific configuration &lt; internal component-specific configuration &lt; external component-specific configuration </li>
-</ul>
-</li>
-<li>worker processes的数目, 可以通过配置文件和代码中配置, worker就是执行进程, 所以考虑并发的效果, <strong>数目至少应该大亍machines的数目</strong> </li>
-<li>executor的数目, <strong>component的并发线程数</strong>，只能在代码中配置(通过setBolt和setSpout的参数), 例如, setBolt(“green-bolt”, new GreenBolt(), 2) </li>
-<li>tasks的数目, 可以不配置, <strong>默认和executor1:1</strong>, 也可以通过setNumTasks()配置 </li>
-<li>Topology的worker数通过config设置，即执行该topology的worker（java）进程数。它可以通过 storm rebalance 命令任意调整。 </li>
-</ul>
-<p><strong>代码配置</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Config conf = newConfig();</div><div class="line">conf.setNumWorkers(<span class="number">2</span>); <span class="comment">//用2个worker</span></div><div class="line">topologyBuilder.setSpout(<span class="string">"blue-spout"</span>, newBlueSpout(), <span class="number">2</span>); <span class="comment">//设置2个并发度</span></div><div class="line">topologyBuilder.setBolt(<span class="string">"green-bolt"</span>, newGreenBolt(), <span class="number">2</span>).setNumTasks(<span class="number">4</span>).shuffleGrouping(<span class="string">"blue-spout"</span>); <span class="comment">//设置2个并发度，4个任务</span></div><div class="line">topologyBuilder.setBolt(<span class="string">"yellow-bolt"</span>, newYellowBolt(), <span class="number">6</span>).shuffleGrouping(<span class="string">"green-bolt"</span>); <span class="comment">//设置6个并发度</span></div><div class="line">StormSubmitter.submitTopology(<span class="string">"mytopology"</span>, conf, topologyBuilder.createTopology());</div></pre></td></tr></table></figure>
-<p><strong>图解</strong></p>
-<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118904613344.jpg" alt=""></p>
-<p><strong>代码配置对应的策略</strong></p>
-<ul>
-<li>3个组件的并发度加起来是10，就是说拓扑一共有10个executor</li>
-<li>一共有2个worker，每个worker产生10 / 2 = 5条线程</li>
-<li>绿色的bolt配置成2个executor和4个task。为此每个executor为这个bolt运行2个task。</li>
-</ul>
-<p><strong>动态的改变并行度</strong></p>
-<ul>
-<li>Storm支持在不 restart topology 的情况下, 动态的改变(增减) worker processes 的数目和 executors 的数目, 称为rebalancing. 通过Storm web UI，或者通过storm rebalance命令实现： </li>
-<li>storm rebalance mytopology -n 5 -e blue-spout=3 -e yellow-bolt=10</li>
-</ul>
-<h2 id="3-部署和测试"><a href="#3-部署和测试" class="headerlink" title="3 部署和测试"></a>3 部署和测试</h2><h3 id="3-1-安装、部署"><a href="#3-1-安装、部署" class="headerlink" title="3.1 安装、部署"></a>3.1 安装、部署</h3><h4 id="3-1-1-单机伪分布式部署"><a href="#3-1-1-单机伪分布式部署" class="headerlink" title="3.1.1 单机伪分布式部署"></a>3.1.1 单机伪分布式部署</h4><ol>
-<li>下载storm-1.1.1压缩包</li>
-<li>解压、配置环境变量</li>
-<li>修改配置文件</li>
+<p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134411043477/15134877769104.jpg" alt=""></p>
+<h3 id="1-1-3-Worker进程间通信技术（Netty、ZeroMQ）"><a href="#1-1-3-Worker进程间通信技术（Netty、ZeroMQ）" class="headerlink" title="1.1.3 Worker进程间通信技术（Netty、ZeroMQ）"></a>1.1.3 Worker进程间通信技术（Netty、ZeroMQ）</h3><p><strong>Netty</strong></p>
+<p>Netty是一个NIO client-server(客户端服务器)框架，使用Netty可以快速开发网络应用，例如服务器和客户端协议。Netty提供了一种新的方式来使开发网络应用程序，这种新的方式使得它很容易使用和有很强的扩展性。Netty的内部实现时很复杂的，但是Netty提供了简单易用的api从网络处理代码中解耦业务逻辑。<strong>Netty是完全基于NIO实现的，所以整个Netty都是异步的。</strong></p>
+<p><strong>ZeroMQ</strong></p>
+<p>ZeroMQ是一种基于<strong>消息队列的多线程网络库</strong>，其对套接字类型、连接处理、帧、甚至路由的底层细节进行抽象，提供跨越多种传输协议的套接字。ZeroMQ是网络通信中新的一层，介于应用层和传输层之间（按照TCP/IP划分），其是一个可伸缩层，可并行运行，分散在分布式系统间。<br>ZeroMQ定位为：一个简单好用的传输层，像框架一样的一个socket library，他使得Socket编程更加简单、简洁和性能更高。是一个消息处理队列库，可在多个线程、内核和主机盒之间弹性伸缩。ZMQ的明确目标是“成为标准网络协议栈的一部分，之后进入Linux内核”。</p>
+<h2 id="1-2-Worker内部通信技术（Distruptor）"><a href="#1-2-Worker内部通信技术（Distruptor）" class="headerlink" title="1.2 Worker内部通信技术（Distruptor）"></a>1.2 Worker内部通信技术（Distruptor）</h2><h3 id="1-2-1-Disruptor是什么"><a href="#1-2-1-Disruptor是什么" class="headerlink" title="1.2.1 Disruptor是什么"></a>1.2.1 Disruptor是什么</h3><ol>
+<li>简单理解：Disruptor是一个Queue。Disruptor是实现了“队列”的功能，而且<strong>是一个有界队列</strong>。而队列的应用场景自然就是“生产者-消费者”模型。</li>
+<li>在JDK中Queue有很多实现类，包括不限于ArrayBlockingQueue、LinkBlockingQueue，这两个底层的数据结构分别是数组和链表。数组查询快，链表增删快，能够适应大多数应用场景。</li>
+<li>但是ArrayBlockingQueue、LinkBlockingQueue都是线程安全的。涉及到线程安全，就会有synchronized、lock等关键字，这就意味着CPU会打架。 </li>
+<li>Disruptor是<strong>一种线程之间信息无锁的交换方式</strong>（使用CAS（Compare And Swap/Set）操作）。</li>
 </ol>
-<p><em>storm.yaml</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#指定storm使用的zk集群</div><div class="line">storm.zookeeper.servers:</div><div class="line">     - &quot;127.0.0.1&quot;</div><div class="line">#指定storm本地状态保存地址</div><div class="line">storm.local.dir: &quot;~/app/storm-1.1.1/workdir&quot;</div><div class="line">#指定storm集群中的nimbus节点所在的服务器</div><div class="line">nimbus.host: &quot;127.0.0.1&quot;</div><div class="line">#指定nimbus启动JVM最大可用内存大小</div><div class="line">nimbus.childopts: &quot;-Xmx1024m&quot;</div><div class="line">#指定supervisor启动JVM最大可用内存大小</div><div class="line">supervisor.childopts: &quot;-Xmx1024m&quot;</div><div class="line">#指定supervisor节点上，每个worker启动JVM最大可用内存大小</div><div class="line">worker.childopts: &quot;-Xmx768m&quot;</div><div class="line">#指定ui启动JVM最大可用内存大小，ui服务一般与nimbus同在一个节点上。</div><div class="line">ui.childopts: &quot;-Xmx768m&quot;</div><div class="line">#指定supervisor节点上，启动worker时对应的端口号，每个端口对应槽，每个槽位对应一个worker</div><div class="line">supervisor.slots.ports:</div><div class="line">    - 6700</div><div class="line">    - 6701</div><div class="line">    - 6702</div><div class="line">    - 6703</div></pre></td></tr></table></figure>
-<h4 id="3-1-2-启动集群"><a href="#3-1-2-启动集群" class="headerlink" title="3.1.2 启动集群"></a>3.1.2 启动集群</h4><ol>
-<li><code>zhServer.sh start</code>  先启动ZooKeeper</li>
-<li><code>nohup storm nimbus &amp;</code> 在nimbus.host机器上启动nimbus服务</li>
-<li><code>nohup storm ui &amp;</code> 在nimbus.host机器上启动UI服务</li>
-<li><code>nohup strom supervisor</code> 在其他节点上启动supervisor服务（单机就直接在host上启动就ok）</li>
+<h3 id="1-2-2-Disruptor主要特点"><a href="#1-2-2-Disruptor主要特点" class="headerlink" title="1.2.2 Disruptor主要特点"></a>1.2.2 Disruptor主要特点</h3><ol>
+<li><strong>没有竞争=没有锁</strong>=非常快。</li>
+<li>所有访问者都记录自己的序号的实现方式，允许<strong>多个生产者与多个消费者共享相同的数据结构</strong>。</li>
+<li>在每个对象中都能跟踪序列号（ring buffer，claim Strategy，生产者和消费者），加上神奇的cache line padding，就意味着没有为伪共享和非预期的竞争。</li>
 </ol>
-<h4 id="3-1-3-查看集群"><a href="#3-1-3-查看集群" class="headerlink" title="3.1.3 查看集群"></a>3.1.3 查看集群</h4><p><strong>访问 <a href="http://nimbus.host:8080" target="_blank" rel="external">http://nimbus.host:8080</a></strong></p>
-<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118851356834.jpg" alt=""></p>
-<p><strong>查看Storm日志</strong></p>
-<ul>
-<li>nimbus: <em>$STORM_HOME/logs/nimbus.log</em></li>
-<li>ui: <em>$STORM_HOME/logs/ui.log</em></li>
-<li>supervisor: <em>$STORM_HOME/logs/supervisor.log</em></li>
-<li>worker(在某台supervisor上): <em>$STORM_HOME/logs/workers-artifacts/wordcount-1-1511791820（Task名称）/6700(Worker所在端口号)/worker.log</em></li>
-</ul>
-<h3 id="3-2-测试集群"><a href="#3-2-测试集群" class="headerlink" title="3.2 测试集群"></a>3.2 测试集群</h3><h4 id="3-2-1-Storm集群常用命令"><a href="#3-2-1-Storm集群常用命令" class="headerlink" title="3.2.1 Storm集群常用命令"></a>3.2.1 Storm集群常用命令</h4><p><strong>有许多简单且有用的命令可以用来管理拓扑，它们可以提交、杀死、禁用、再平衡拓扑（Topology）。</strong></p>
-<ul>
-<li>提交任务命令格式：storm jar 【jar路径】 【拓扑包名.拓扑类名】 【拓扑名称】<ul>
-<li>bin/storm jar examples/storm-starter/storm-starter-topologies-0.9.6.jar storm.starter.WordCountTopology wordcount</li>
-</ul>
-</li>
-<li>杀死任务命令格式：storm kill 【拓扑名称】 -w 10（执行kill命令时可以通过-w [等待秒数]指定拓扑停用以后的等待时间）<ul>
-<li>storm kill topology-name -w 10</li>
-</ul>
-</li>
-<li>停用任务命令格式：storm deactivte  【拓扑名称】<ul>
-<li>storm deactivte topology-name</li>
-<li>我们能够挂起或停用运行中的拓扑。当停用拓扑时，所有已分发的元组都会得到处理，但是spouts的nextTuple方法不会被调用。销毁一个拓扑，可以使用kill命令。它会以一种安全的方式销毁一个拓扑，首先停用拓扑，在等待拓扑消息的时间段内允许拓扑完成当前的数据流。</li>
-</ul>
-</li>
-<li>启用任务命令格式：storm activate【拓扑名称】<ul>
-<li>storm activate topology-name</li>
-</ul>
-</li>
-<li>重新部署任务命令格式：storm rebalance  【拓扑名称】<ul>
-<li>storm rebalance topology-name</li>
-<li>再平衡使你重分配集群任务。这是个很强大的命令。比如，你向一个运行中的集群增加了节点。再平衡命令将会停用拓扑，然后在相应超时时间之后重分配工人，并重启拓扑。</li>
-</ul>
-</li>
-</ul>
-<h5 id="3-2-2-运行WordCount-Topology"><a href="#3-2-2-运行WordCount-Topology" class="headerlink" title="3.2.2 运行WordCount-Topology"></a>3.2.2 运行WordCount-Topology</h5><p><code>$ storm jar storm-starter.jar org.apache.storm.starter.WordCountTopology theirWordCount</code></p>
-<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118849400727.jpg" alt=""></p>
-<p><strong>运行后集群状态</strong></p>
-<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118850264899.jpg" alt=""></p>
-<h2 id="4-第一个Storm程序"><a href="#4-第一个Storm程序" class="headerlink" title="4 第一个Storm程序"></a>4 第一个Storm程序</h2><h3 id="4-1-WordCount"><a href="#4-1-WordCount" class="headerlink" title="4.1 WordCount"></a>4.1 WordCount</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> storm.word_count;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.storm.Config;</div><div class="line"><span class="keyword">import</span> org.apache.storm.LocalCluster;</div><div class="line"><span class="keyword">import</span> org.apache.storm.spout.SpoutOutputCollector;</div><div class="line"><span class="keyword">import</span> org.apache.storm.task.OutputCollector;</div><div class="line"><span class="keyword">import</span> org.apache.storm.task.TopologyContext;</div><div class="line"><span class="keyword">import</span> org.apache.storm.topology.OutputFieldsDeclarer;</div><div class="line"><span class="keyword">import</span> org.apache.storm.topology.TopologyBuilder;</div><div class="line"><span class="keyword">import</span> org.apache.storm.topology.base.BaseRichBolt;</div><div class="line"><span class="keyword">import</span> org.apache.storm.topology.base.BaseRichSpout;</div><div class="line"><span class="keyword">import</span> org.apache.storm.tuple.Fields;</div><div class="line"><span class="keyword">import</span> org.apache.storm.tuple.Tuple;</div><div class="line"><span class="keyword">import</span> org.apache.storm.tuple.Values;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"><span class="keyword">import</span> java.util.Random;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * <span class="doctag">@author</span> NikoBelic</span></div><div class="line"><span class="comment"> * <span class="doctag">@create</span> 2017/11/29 00:26</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WordCountTopology</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MySpout</span> <span class="keyword">extends</span> <span class="title">BaseRichSpout</span></span></div><div class="line"><span class="class">    </span>&#123;</div><div class="line"></div><div class="line">        SpoutOutputCollector collector;</div><div class="line">        String[] sourceData = <span class="keyword">new</span> String[]&#123;</div><div class="line">                <span class="string">"Nowadays, going to gym after work is most people’s choice, because they need to be keep fit."</span>,</div><div class="line">                <span class="string">"The young blue and white collar sit in their offices all the daytime and they lack of exercise,"</span>,</div><div class="line">                <span class="string">"most of them are in the sub-health state."</span>,</div><div class="line">                <span class="string">"They realize the importance of taking exercise and more gyms have been opened to meet their needs."</span>,</div><div class="line">                <span class="string">"In my opinion, we can not only exercise our body, but also to have fun."</span>,</div><div class="line">                <span class="string">"The gym provides people a place to make friends."</span>,</div><div class="line">                <span class="string">"They can find someone who has the same interest with them, and then just talk to them."</span>,</div><div class="line">                <span class="string">"They can forget about the annoyance and just relax themselves."</span>,</div><div class="line">                <span class="string">"Some girls like to do yoga while some boys like to play badmiton."</span>,</div><div class="line">                <span class="string">"They can choose whatever they like, which is good for keeping good mood."</span></div><div class="line"></div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line"><span class="comment">         * 初始化方法</span></div><div class="line"><span class="comment">         *</span></div><div class="line"><span class="comment">         * <span class="doctag">@Author</span> SeawayLee</span></div><div class="line"><span class="comment">         * <span class="doctag">@Date</span> 2017/11/29 00:41</span></div><div class="line"><span class="comment">         */</span></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">(Map map, TopologyContext topologyContext, SpoutOutputCollector spoutOutputCollector)</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            <span class="keyword">this</span>.collector = spoutOutputCollector;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line"><span class="comment">         * Storm框架持续无限调用此方法</span></div><div class="line"><span class="comment">         *</span></div><div class="line"><span class="comment">         * <span class="doctag">@Author</span> SeawayLee</span></div><div class="line"><span class="comment">         * <span class="doctag">@Date</span> 2017/11/29 00:42</span></div><div class="line"><span class="comment">         */</span></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">nextTuple</span><span class="params">()</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            collector.emit(<span class="keyword">new</span> Values(sourceData[<span class="keyword">new</span> Random().nextInt(sourceData.length)]));</div><div class="line">            <span class="keyword">try</span></div><div class="line">            &#123;</div><div class="line">                Thread.sleep(<span class="number">1000</span>);</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e)</div><div class="line">            &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line"><span class="comment">         * 定义emit出去的value的field名称</span></div><div class="line"><span class="comment">         *</span></div><div class="line"><span class="comment">         * <span class="doctag">@Author</span> SeawayLee</span></div><div class="line"><span class="comment">         * <span class="doctag">@Date</span> 2017/11/29 00:48</span></div><div class="line"><span class="comment">         */</span></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">declareOutputFields</span><span class="params">(OutputFieldsDeclarer outputFieldsDeclarer)</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            outputFieldsDeclarer.declare(<span class="keyword">new</span> Fields(<span class="string">"sentence"</span>));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MySplitBolt</span> <span class="keyword">extends</span> <span class="title">BaseRichBolt</span></span></div><div class="line"><span class="class">    </span>&#123;</div><div class="line"></div><div class="line">        OutputCollector collector;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line"><span class="comment">         * 初始化方法</span></div><div class="line"><span class="comment">         *</span></div><div class="line"><span class="comment">         * <span class="doctag">@Author</span> SeawayLee</span></div><div class="line"><span class="comment">         * <span class="doctag">@Date</span> 2017/11/29 00:46</span></div><div class="line"><span class="comment">         */</span></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">prepare</span><span class="params">(Map map, TopologyContext topologyContext, OutputCollector outputCollector)</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            <span class="keyword">this</span>.collector = outputCollector;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line"><span class="comment">         * 被Storm框架持续无限调用此方法</span></div><div class="line"><span class="comment">         *</span></div><div class="line"><span class="comment">         * <span class="doctag">@Author</span> SeawayLee</span></div><div class="line"><span class="comment">         * <span class="doctag">@Date</span> 2017/11/29 00:46</span></div><div class="line"><span class="comment">         */</span></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(Tuple tuple)</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            String line = tuple.getString(<span class="number">0</span>);</div><div class="line">            String[] words = line.split(<span class="string">" "</span>);</div><div class="line">            <span class="keyword">for</span> (String word : words)</div><div class="line">            &#123;</div><div class="line">                collector.emit(<span class="keyword">new</span> Values(word, <span class="number">1</span>));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line"><span class="comment">         * 定义emit出去的value的field名称</span></div><div class="line"><span class="comment">         *</span></div><div class="line"><span class="comment">         * <span class="doctag">@Author</span> SeawayLee</span></div><div class="line"><span class="comment">         * <span class="doctag">@Date</span> 2017/11/29 00:49</span></div><div class="line"><span class="comment">         */</span></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">declareOutputFields</span><span class="params">(OutputFieldsDeclarer outputFieldsDeclarer)</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            outputFieldsDeclarer.declare(<span class="keyword">new</span> Fields(<span class="string">"word"</span>, <span class="string">"num"</span>));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyCountBold</span> <span class="keyword">extends</span> <span class="title">BaseRichBolt</span></span></div><div class="line"><span class="class">    </span>&#123;</div><div class="line">        OutputCollector collector;</div><div class="line">        Map&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">prepare</span><span class="params">(Map map, TopologyContext topologyContext, OutputCollector outputCollector)</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            <span class="keyword">this</span>.collector = outputCollector;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(Tuple tuple)</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            String word = tuple.getString(<span class="number">0</span>);</div><div class="line">            Integer count = tuple.getInteger(<span class="number">1</span>);</div><div class="line">            System.out.println(Thread.currentThread().getId() + <span class="string">"   word:"</span> + word);</div><div class="line">            map.put(word, map.containsKey(word) ? map.get(word) + count : count);</div><div class="line">            System.out.println(<span class="string">"count:"</span> + map);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">declareOutputFields</span><span class="params">(OutputFieldsDeclarer outputFieldsDeclarer)</span></span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            <span class="comment">// 不输出</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">// 1. 准备Topology</span></div><div class="line">        TopologyBuilder topologyBuilder = <span class="keyword">new</span> TopologyBuilder();</div><div class="line">        topologyBuilder.setSpout(<span class="string">"mySpout"</span>, <span class="keyword">new</span> MySpout(), <span class="number">2</span>);</div><div class="line">        topologyBuilder.setBolt(<span class="string">"splitBolt"</span>, <span class="keyword">new</span> MySplitBolt(), <span class="number">2</span>).shuffleGrouping(<span class="string">"mySpout"</span>);</div><div class="line">        topologyBuilder.setBolt(<span class="string">"countBolt"</span>, <span class="keyword">new</span> MyCountBold(), <span class="number">4</span>).fieldsGrouping(<span class="string">"splitBolt"</span>, <span class="keyword">new</span> Fields(<span class="string">"word"</span>));</div><div class="line"></div><div class="line">        <span class="comment">// 2. 创建Config，指定当前Topology需要的Worker数量</span></div><div class="line">        Config config = <span class="keyword">new</span> Config();</div><div class="line">        config.setNumWorkers(<span class="number">2</span>);</div><div class="line"></div><div class="line">        <span class="comment">// 3. 提交任务   本地模式 和 集群模式</span></div><div class="line">        LocalCluster localCluster = <span class="keyword">new</span> LocalCluster();</div><div class="line">        localCluster.submitTopology(<span class="string">"myWordCount"</span>, config, topologyBuilder.createTopology());</div><div class="line">        <span class="comment">//StormSubmitter.submitTopology("myWordCount", config, topologyBuilder.createTopology());</span></div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118883711684.jpg" alt=""></p>
-<p><strong>注意：我们必须使用FieldsGrouping才能正确的统计出每个单词的总数，将hash(word)值相同的单词分配到同一个CountBolt。</strong></p>
-<h3 id="4-2-StreamGrouping详解"><a href="#4-2-StreamGrouping详解" class="headerlink" title="4.2 StreamGrouping详解"></a>4.2 StreamGrouping详解</h3><p><strong>Storm里面有7种类型的stream grouping</strong></p>
-<ul>
-<li><strong>Shuffle Grouping</strong>: 随机分组， <strong>随机派发stream里面的tuple</strong>，保证每个bolt接收到的tuple数目大致相同。</li>
-<li><strong>Fields Grouping</strong>：按字段分组，比如按userid来分组，<strong>具有同样userid的tuple会被分到相同的Bolts里的一个task</strong>，而不同的userid则会被分配到不同的bolts里的task。</li>
-</ul>
-<ul>
-<li><strong>All Grouping</strong>：<strong>广播发送</strong>，对于每一个tuple，所有的bolts都会收到。</li>
-<li><strong>Global Grouping</strong>：全局分组， 这个tuple被分配到storm中的一个bolt的其中一个task。再具体一点就是分配给id值最低的那个task。</li>
-<li><strong>Non Grouping</strong>：不分组，这stream grouping个分组的意思是说stream不关心到底谁会收到它的tuple。目前这种分组<strong>和Shuffle grouping是一样的效果</strong>， 有一点不同的是storm会把这个bolt放到这个bolt的订阅者同一个线程里面去执行。</li>
-<li><strong>Direct Grouping</strong>： 直接分组， 这是一种比较特别的分组方法，用这种分组意味着消息的发送者指定由消息接收者的哪个task处理这个消息。只有被声明为Direct Stream的消息流可以声明这种分组方法。而且这种消息tuple必须使用emitDirect方法来发射。消息处理者可以通过TopologyContext来获取处理它的消息的task的id （OutputCollector.emit方法也会返回task的id）。</li>
-<li><strong>Local or shuffle grouping</strong>：如果目标bolt有一个或者多个task在<strong>同一个工作进程中</strong>，tuple将会被随机发生给这些tasks。否则，和普通的Shuffle Grouping行为一致。</li>
-</ul>
+<h3 id="1-2-3-Disruptor核心技术点"><a href="#1-2-3-Disruptor核心技术点" class="headerlink" title="1.2.3 Disruptor核心技术点"></a>1.2.3 Disruptor核心技术点</h3><ol>
+<li>Disruptor可以看成一个<strong>事件监听或消息机制</strong>，在队列中一边<strong>生产者</strong>放入消息，另外一边<strong>消费者</strong>并行取出处理.</li>
+<li>底层是单个数据结构：一个<strong>ring buffer</strong>。</li>
+<li>每个生产者和消费者都有一个<strong>次序计算器</strong>，以显示当前<strong>缓冲</strong>工作方式。</li>
+<li>每个生产者消费者能够<strong>操作自己的次序计数器</strong>、能够<strong>读取对方的计数器</strong>，生产者能够读取消费者的计算器确保其在没有锁的情况下是可写的。</li>
+</ol>
+<p><strong>核心组件</strong></p>
+<ol>
+<li><strong>Ring Buffer</strong> 环形的<strong>缓冲区</strong>，负责对通过 Disruptor 进行<strong>交换的数据（事件）进行存储和更新</strong>。</li>
+<li><strong>Sequence</strong> 通过顺序<strong>递增的序号</strong>来编号管理通过其进行交换的数据（事件），对数据(事件)的处理过程总是沿着序号逐个递增处理。</li>
+<li><strong>RingBuffer</strong> 底层是个<strong>数组</strong>，<strong>次序计算器</strong>是一个<strong>64bit long</strong> 整数型，平滑增长。</li>
+</ol>
+<p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134411043477/15134932501917.jpg" alt=""></p>
+<ol>
+<li>接受数据并写入到脚标31的位置，之后会沿着序号一直写入，但是不会绕过消费者所在的脚标。</li>
+<li>Joumaler和replicator同时读到24的位置，他们可以批量读取数据到30</li>
+<li>消费逻辑线程读到了14的位置，但是没法继续读下去，因为他的sequence暂停在15的位置上，需要等到他的sequence给他序号。如果sequence能正常工作，就能读取到30的数据。</li>
+</ol>
+<h1 id="2-Storm组件本地目录树"><a href="#2-Storm组件本地目录树" class="headerlink" title="2 Storm组件本地目录树"></a>2 Storm组件本地目录树</h1><p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134411043477/15134936856884.jpg" alt=""></p>
+<h1 id="3-Storm-ZooKeeper目录树"><a href="#3-Storm-ZooKeeper目录树" class="headerlink" title="3 Storm ZooKeeper目录树"></a>3 Storm ZooKeeper目录树</h1><p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134411043477/15134938201737.jpg" alt=""></p>
+<h1 id="4-Storm任务提交的过程"><a href="#4-Storm任务提交的过程" class="headerlink" title="4 Storm任务提交的过程"></a>4 Storm任务提交的过程</h1><p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134411043477/15134939660539.jpg" alt=""></p>
+<p><img src="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/15134411043477/15134939939920.jpg" alt=""></p>
+<h1 id="5-Storm消息容错机制"><a href="#5-Storm消息容错机制" class="headerlink" title="5 Storm消息容错机制"></a>5 Storm消息容错机制</h1><ol>
+<li>在storm中，可靠的信息处理机制是<strong>从spout开始</strong>的。</li>
+<li>一个提供了可靠的处理机制的<strong>spout需要记录他发射出去的tuple</strong>，当下游bolt处理tuple或者子tuple失败时spout能够<strong>重新发射</strong>。 </li>
+<li>Storm通过调用<strong>Spout的nextTuple()发送一个tuple</strong>。为实现可靠的消息处理，首先要给<strong>每个发出的tuple带上唯一的ID</strong>，并且将ID作为参数传递给SpoutOutputCollector的emit()方法：collector.emit(new Values(“value1”,”value2”), msgId); messageid就是用来标示唯一的tuple的，而rootid是随机生成的</li>
+<li>给每个tuple指定ID告诉Storm系统，<strong>无论处理成功还是失败，spout都要接收tuple树上所有节点返回的通知</strong>。如果处理成功，spout的ack()方法将会对编号是msgId的消息应答确认；如果处理失败或者超时，会调用fail()方法。 </li>
+</ol>
 
       
 
@@ -453,7 +376,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -468,8 +391,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2017/11/21/大数据/HBase/HBase学习笔记（一）- 快速入门/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">HBase学习笔记（一）- 快速入门</div>
+    <a href="/2017/11/29/大数据/Storm/Storm学习笔记(一) - 基础篇/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Storm学习笔记(一) - 基础篇</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -508,7 +431,7 @@
 <script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
 var gitment = new Gitment({
-  id: "https://seawaylee.github.io/2017/11/29/大数据/Storm/Storm学习笔记/",
+  id: "https://seawaylee.github.io/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/",
   owner: 'seawaylee',
   repo: 'blog_comments',
   oauth: {
@@ -676,11 +599,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
+                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -736,7 +659,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -744,7 +667,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">

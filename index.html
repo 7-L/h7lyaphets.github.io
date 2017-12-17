@@ -162,19 +162,108 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-大数据/Storm/Storm学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-大数据/Storm/Storm学习笔记(二) - 提高篇" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/29/大数据/Storm/Storm学习笔记/">Storm学习笔记</a>
+      <a class="article-title" href="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/">Storm学习笔记(二) - 提高篇</a>
     </h1>
   
 
         
-        <a href="/2017/11/29/大数据/Storm/Storm学习笔记/" class="archive-article-date">
+        <a href="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/" class="archive-article-date">
+  	<time datetime="2017-12-17T07:33:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>在基础篇中学习了以下内容</strong></p>
+<ol>
+<li>Storm概述</li>
+<li>Storm核心组件 及 并发机制</li>
+<li>Storm集群的部署和测试</li>
+<li>Storm的WordCount程序</li>
+</ol>
+<p><strong>本文主要学习以下内容</strong></p>
+<ol>
+<li>Storm框架通信机制（Worker内部通信有外部通信）</li>
+<li>Storm组件本地目录树</li>
+<li>Storm ZooKeeper 目录树</li>
+<li>Storm任务提交的过程</li>
+</ol>
+        
+          <a class="article-more-a" href="/2017/12/17/大数据/Storm/Storm学习笔记(二) - 提高篇/#more">阅读全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Storm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-大数据/Storm/Storm学习笔记(一) - 基础篇" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/29/大数据/Storm/Storm学习笔记(一) - 基础篇/">Storm学习笔记(一) - 基础篇</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/29/大数据/Storm/Storm学习笔记(一) - 基础篇/" class="archive-article-date">
   	<time datetime="2017-11-28T17:05:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-29</time>
 </a>
         
@@ -194,7 +283,7 @@
 <li>总结：将源源不断产生的数据实时收集并实时计算</li>
 </ul>
 <p><strong>流式计算一般架构图</strong></p>
-<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118787232094.jpg" alt="">/</p>
+<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记(一) - 基础篇/15118787232094.jpg" alt="">/</p>
 <p><strong>离线计算与实时计算最大的区别？</strong></p>
 <ul>
 <li>收集</li>
@@ -226,9 +315,9 @@
 <li>Storm的数据通过网络传输进来；Hadoop的数据保存在磁盘中。</li>
 <li>Storm与Hadoop的编程模型相似</li>
 </ul>
-<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记/15118782566404.jpg" alt=""></p>
+<p><img src="/2017/11/29/大数据/Storm/Storm学习笔记(一) - 基础篇/15118782566404.jpg" alt=""></p>
         
-          <a class="article-more-a" href="/2017/11/29/大数据/Storm/Storm学习笔记/#more">阅读全文 >></a>
+          <a class="article-more-a" href="/2017/11/29/大数据/Storm/Storm学习笔记(一) - 基础篇/#more">阅读全文 >></a>
         
       
 
@@ -931,103 +1020,6 @@
 
 
   
-    <article id="post-面试/算法/C4-栈和队列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/08/面试/算法/C4-栈和队列/">C4-栈和队列</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/08/面试/算法/C4-栈和队列/" class="archive-article-date">
-  	<time datetime="2017-08-07T18:39:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h1><h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1 概念"></a>1 概念</h2><p><strong>栈和队列的基本性质</strong></p>
-<ol>
-<li>栈：先进后出</li>
-<li>队列：先进先出</li>
-<li>栈和队列在实现结构上可以有数组和链表两种形式<ul>
-<li>数组结构容易实现</li>
-<li>链表结构复杂，因为有很多指针操作</li>
-</ul>
-</li>
-</ol>
-<p><strong>栈结构的基本操作</strong></p>
-<ol>
-<li>pop操作</li>
-<li>top或peek操作</li>
-<li>push操作</li>
-<li>size操作</li>
-</ol>
-<p><strong>队列基本操作</strong></p>
-<p>与栈不同的是，push操作为在队头加入元素，而pop操作是从队列尾部弹出一个元素。</p>
-<p><strong>其他</strong></p>
-<ol>
-<li>栈和队列的基本操作，都是时间复杂度为O(1)的。</li>
-<li>双端队列的首尾都可以亚茹和弹出元素</li>
-<li>优先级队列根绝元素的优先级值，决定元素的弹出顺序</li>
-<li>优先级队列的结构为堆结构，并不是线性结构</li>
-</ol>
-        
-          <a class="article-more-a" href="/2017/08/08/面试/算法/C4-栈和队列/#more">阅读全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1190,11 +1182,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
+                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1250,7 +1242,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1258,7 +1250,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">
