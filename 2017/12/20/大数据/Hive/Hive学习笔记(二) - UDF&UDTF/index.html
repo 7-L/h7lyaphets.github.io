@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="https://seawaylee.github.io">
   <title>Hive学习笔记(二) - UDF&amp;UDTF | SeawayLee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Hive学习笔记(二) - UDF&amp;amp;UDTF 编写指南 UDF - 输入单列、输出单行单列 UDTF - 输入单列、输出多行多列">
+  <meta name="description" content="UDF - 输入单列、输出单行单列 UDTF - 输入单列、输出多行多列">
 <meta name="keywords" content="大数据,Hive">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hive学习笔记(二) - UDF&amp;UDTF">
 <meta property="og:url" content="https://seawaylee.github.io/2017/12/20/大数据/Hive/Hive学习笔记(二) - UDF&UDTF/index.html">
 <meta property="og:site_name" content="SeawayLee">
-<meta property="og:description" content="Hive学习笔记(二) - UDF&amp;amp;UDTF 编写指南 UDF - 输入单列、输出单行单列 UDTF - 输入单列、输出多行多列">
-<meta property="og:updated_time" content="2017-12-20T10:13:44.000Z">
+<meta property="og:description" content="UDF - 输入单列、输出单行单列 UDTF - 输入单列、输出多行多列">
+<meta property="og:updated_time" content="2017-12-20T10:20:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive学习笔记(二) - UDF&amp;UDTF">
-<meta name="twitter:description" content="Hive学习笔记(二) - UDF&amp;amp;UDTF 编写指南 UDF - 输入单列、输出单行单列 UDTF - 输入单列、输出多行多列">
+<meta name="twitter:description" content="UDF - 输入单列、输出单行单列 UDTF - 输入单列、输出多行多列">
   
   
     <link rel="icon" href="/logo.jpeg">
@@ -182,9 +182,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Hive学习笔记-二-UDF-amp-UDTF-编写指南"><a href="#Hive学习笔记-二-UDF-amp-UDTF-编写指南" class="headerlink" title="Hive学习笔记(二) - UDF&amp;UDTF 编写指南"></a>Hive学习笔记(二) - UDF&amp;UDTF 编写指南</h1><ul>
-<li>UDF - 输入单列、输出单行单列</li>
-<li>UDTF - 输入单列、输出多行多列</li>
+        <ul>
+<li><strong>UDF - 输入单列、输出单行单列</strong></li>
+<li><strong>UDTF - 输入单列、输出多行多列</strong></li>
 </ul>
 <a id="more"></a>
 <h2 id="1-UDF"><a href="#1-UDF" class="headerlink" title="1 UDF"></a>1 UDF</h2><h3 id="1-1-准备数据"><a href="#1-1-准备数据" class="headerlink" title="1.1 准备数据"></a>1.1 准备数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2017-12-20 11:15:37     test.ireader.user.act   &#123;&quot;app_platform&quot;:&quot;554&quot;,&quot;channel_id&quot;:&quot;554&quot;,&quot;inner_version&quot;:&quot;554&quot;,&quot;model&quot;:&quot;554&quot;,&quot;user_id&quot;:&quot;i481781463&quot;&#125;    &#123;&quot;act&quot;:[&quot;UrlFree&quot;],&quot;act_id&quot;:[&quot;673&quot;],&quot;act_level&quot;:[&quot;None&quot;],&quot;act_num&quot;:&quot;1&quot;,&quot;res_pos&quot;:[&quot;1&quot;],&quot;res_type&quot;:&quot;ClientPopup&quot;,&quot;user_need&quot;:[&quot;FindBook&quot;,&quot;MoneyRunningOut&quot;],&quot;user_status&quot;:&quot;ReadLocalBook&quot;&#125;</div><div class="line">2017-12-20 11:15:38     test.ireader.user.act   &#123;&quot;app_platform&quot;:&quot;554&quot;,&quot;channel_id&quot;:&quot;554&quot;,&quot;inner_version&quot;:&quot;554&quot;,&quot;model&quot;:&quot;554&quot;,&quot;user_id&quot;:&quot;i1078924274&quot;&#125;   &#123;&quot;act&quot;:[&quot;UrlFree&quot;],&quot;act_id&quot;:[&quot;673&quot;],&quot;act_level&quot;:[&quot;None&quot;],&quot;act_num&quot;:&quot;1&quot;,&quot;res_pos&quot;:[&quot;1&quot;],&quot;res_type&quot;:&quot;ClientPopup&quot;,&quot;user_need&quot;:[&quot;FindBook&quot;,&quot;NoMoneyToRead&quot;],&quot;user_status&quot;:&quot;Unread&quot;&#125;</div><div class="line">2017-12-20 11:15:39     test.ireader.user.act   &#123;&quot;app_platform&quot;:&quot;554&quot;,&quot;channel_id&quot;:&quot;554&quot;,&quot;inner_version&quot;:&quot;554&quot;,&quot;model&quot;:&quot;554&quot;,&quot;user_id&quot;:&quot;i43843095&quot;&#125;     &#123;&quot;act&quot;:[],&quot;act_id&quot;:[],&quot;act_level&quot;:[],&quot;act_num&quot;:&quot;0&quot;,&quot;res_pos&quot;:[],&quot;res_type&quot;:&quot;None&quot;,&quot;user_need&quot;:[&quot;Other&quot;],&quot;user_status&quot;:&quot;Other&quot;&#125;</div></pre></td></tr></table></figure>
@@ -496,6 +496,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
               </li>
              
@@ -504,15 +508,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -528,11 +528,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
+                <a href="javascript:void(0)" class="js-tag color4">Python基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -556,15 +556,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NIO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -580,11 +580,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -592,11 +592,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">Storm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Storm</a>
+                <a href="javascript:void(0)" class="js-tag color1">大数据基础</a>
               </li>
              
               <li class="article-tag-list-item">
