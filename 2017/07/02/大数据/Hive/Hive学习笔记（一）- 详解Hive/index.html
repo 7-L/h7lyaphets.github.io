@@ -17,7 +17,7 @@
 <meta property="og:description" content="1 Hive基础知识1.1 简介什么是HiveHive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供类SQL查询功能。 为什么使用Hive  直接使用Hadoop所面临的问题  学习成本高 一般项目周期要求短 MapReduce实现复杂的查询呢逻辑开发难度较大   为什么要使用Hive  操作接口采用类SQL语法，可以快速开发 避免编写MR，减少学习成本 扩">
 <meta property="og:image" content="https://seawaylee.github.io/2017/07/02/大数据/Hive/Hive学习笔记（一）-%20详解Hive/14983216998950.jpg">
 <meta property="og:image" content="https://seawaylee.github.io/2017/07/02/大数据/Hive/Hive学习笔记（一）-%20详解Hive/14986658358207.jpg">
-<meta property="og:updated_time" content="2017-12-20T07:24:30.000Z">
+<meta property="og:updated_time" content="2017-12-20T07:27:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive学习笔记（一）- 详解Hive">
 <meta name="twitter:description" content="1 Hive基础知识1.1 简介什么是HiveHive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供类SQL查询功能。 为什么使用Hive  直接使用Hadoop所面临的问题  学习成本高 一般项目周期要求短 MapReduce实现复杂的查询呢逻辑开发难度较大   为什么要使用Hive  操作接口采用类SQL语法，可以快速开发 避免编写MR，减少学习成本 扩">
@@ -610,7 +610,7 @@
 </ul>
 </li>
 <li>创建临时函数与开发好的java class关联<ul>
-<li><code>Hive&gt;create temporary function toprovince as &#39;cn.itcast.bigdata.udf.ToProvince&#39;;</code></li>
+<li><code>Hive&gt;create temporary function strip as &#39;cn.itcast.bigdata.udf.Strip&#39;;</code></li>
 </ul>
 </li>
 <li>即可在hql中使用自定义的函数strip <ul>
@@ -978,10 +978,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mac工具</a>
               </li>
              
@@ -1034,6 +1030,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
@@ -1062,11 +1062,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
+                <a href="javascript:void(0)" class="js-tag color1">Storm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1074,7 +1070,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Storm</a>
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
               <li class="article-tag-list-item">
